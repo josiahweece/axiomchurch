@@ -1,13 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Titan+One&display=swap");
 :root {
-  --night: #0b1113;
-  --paper: #f0eee5;
-  --brown: #3b302a;
-  --orange: #f04b23;
-  --lime: #d9ff57;
-  --muted: #6f6860;
-  --line: rgba(59, 48, 42, 0.18);
-  --display: "Titan One", sans-serif;
+  --red: #f05f56;
+  --red-deep: #c51c11;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --paper: #ffffff;
+  --band: #f5f5f5;
+  --line: #e8e8e8;
+  --display: "Archivo", sans-serif;
   --body: "DM Sans", sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -20,7 +19,7 @@ html {
 body {
   margin: 0;
   background: var(--paper);
-  color: var(--brown);
+  color: var(--ink);
   font-family: var(--body);
   line-height: 1.5;
   overflow-x: hidden;
@@ -47,7 +46,7 @@ select {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--night);
+  background: var(--ink);
   color: var(--paper);
   border-bottom: 1px solid #313638;
 }
@@ -91,7 +90,7 @@ select {
   fill: var(--paper);
 }
 .logo .cut {
-  fill: var(--night);
+  fill: var(--ink);
 }
 .menu {
   display: flex;
@@ -106,7 +105,6 @@ select {
 .menu a:hover,
 .menu a.active {
   opacity: 1;
-  color: var(--lime);
 }
 .pill {
   display: inline-flex;
@@ -125,9 +123,9 @@ select {
   transform: translateY(-2px);
 }
 .pill.fill {
-  background: var(--orange);
-  border-color: var(--orange);
-  color: white;
+  background: var(--red-deep);
+  border-color: var(--red-deep);
+  color: #ffffff;
 }
 .menu-toggle {
   display: none;
@@ -139,7 +137,7 @@ select {
 .hero {
   position: relative;
   min-height: calc(100svh - 112px);
-  background: var(--night);
+  background: var(--ink);
   color: var(--paper);
   display: grid;
   align-items: end;
@@ -162,11 +160,11 @@ select {
   background:
     linear-gradient(
       90deg,
-      rgba(11, 17, 19, 0.94),
-      rgba(11, 17, 19, 0.5) 60%,
-      rgba(11, 17, 19, 0.1)
+      rgba(26, 26, 26, 0.94),
+      rgba(26, 26, 26, 0.5) 60%,
+      rgba(26, 26, 26, 0.1)
     ),
-    linear-gradient(0deg, rgba(11, 17, 19, 0.8), transparent 55%);
+    linear-gradient(0deg, rgba(26, 26, 26, 0.8), transparent 55%);
 }
 .hero-copy {
   position: relative;
@@ -185,14 +183,14 @@ select {
   content: "";
   width: 10px;
   height: 10px;
-  background: var(--orange);
+  background: var(--red);
   transform: rotate(45deg);
 }
 h1,
 h2,
 .display {
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.025em;
   line-height: 0.88;
@@ -233,8 +231,8 @@ h1 {
   font-size: 15px;
 }
 .ticker {
-  background: var(--orange);
-  color: white;
+  background: var(--red);
+  color: var(--ink);
   overflow: hidden;
   padding: 14px 0;
   font-weight: 700;
@@ -258,15 +256,17 @@ h1 {
   padding: clamp(78px, 10vw, 140px) 0;
 }
 .section.dark {
-  background: var(--night);
+  background: var(--ink);
   color: var(--paper);
 }
 .section.white {
-  background: #faf9f4;
+  background: var(--band);
 }
-.section.orange {
-  background: var(--orange);
-  color: white;
+.section.cta {
+  background: var(--paper);
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+  padding: clamp(104px, 13vw, 180px) 0;
 }
 .section-head {
   display: grid;
@@ -321,7 +321,7 @@ h1 {
 .panel .num {
   font-family: var(--display);
   font-size: 44px;
-  color: var(--orange);
+  color: var(--red-deep);
 }
 .panel h3 {
   font-size: 22px;
@@ -333,6 +333,10 @@ h1 {
 }
 .dark .panel p {
   color: #9da2a1;
+}
+/* --red-deep is only 2.94:1 on --ink; the lighter --red clears large-text AA there. */
+.dark .panel .num {
+  color: var(--red);
 }
 .photo-split {
   display: grid;
@@ -367,23 +371,22 @@ h1 {
 }
 .statement em {
   font-style: normal;
-  color: var(--lime);
 }
 .poster {
   aspect-ratio: 4/5;
   border-radius: 26px;
   padding: 28px;
-  background: var(--brown);
+  background: var(--ink);
   color: var(--paper);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .poster:nth-child(2n) {
-  background: var(--orange);
+  background: var(--red-deep);
 }
 .poster:nth-child(3n) {
-  background: var(--night);
+  background: var(--ink);
 }
 .poster h3 {
   font-family: var(--display);
@@ -401,7 +404,7 @@ h1 {
   align-self: flex-end;
 }
 .page-hero {
-  background: var(--night);
+  background: var(--ink);
   color: var(--paper);
   padding: clamp(85px, 12vw, 160px) 0;
 }
@@ -442,7 +445,7 @@ h1 {
 .belief b {
   font-family: var(--display);
   font-size: 26px;
-  color: var(--orange);
+  color: var(--red-deep);
 }
 .team img {
   aspect-ratio: 4/5;
@@ -455,7 +458,7 @@ h1 {
 }
 .team p {
   margin: 0;
-  color: var(--orange);
+  color: var(--red-deep);
   font-weight: 700;
 }
 .faq {
@@ -507,7 +510,7 @@ h1 {
   min-height: 140px;
 }
 .footer {
-  background: var(--night);
+  background: var(--ink);
   color: var(--paper);
   padding: 70px 0 25px;
 }
@@ -526,7 +529,6 @@ h1 {
   text-transform: uppercase;
   font-size: 11px;
   letter-spacing: 0.14em;
-  color: var(--lime);
 }
 .footer ul {
   list-style: none;
@@ -572,7 +574,7 @@ h1 {
   .menu {
     position: fixed;
     inset: 72px 0 auto;
-    background: var(--night);
+    background: var(--ink);
     padding: 24px;
     display: none;
     flex-direction: column;
@@ -651,21 +653,21 @@ h1 {
    =========================================================================== */
 .header {
   background: var(--paper);
-  color: var(--brown);
+  color: var(--ink);
   border-bottom-color: var(--line);
 }
 .logo,
 .menu a {
-  color: var(--brown);
+  color: var(--ink);
 }
 .logo b {
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.01em;
 }
 .menu a:hover,
 .menu a.active {
-  color: var(--orange);
+  color: var(--red-deep);
 }
 .logo svg {
   display: none;
@@ -688,7 +690,7 @@ h1 {
   content: "";
   position: absolute;
   inset: 7px;
-  background: var(--brown);
+  background: var(--ink);
   -webkit-mask: url("../assets/images/axiom-logo-dark.png") center/contain no-repeat;
   mask: url("../assets/images/axiom-logo-dark.png") center/contain no-repeat;
 }
@@ -702,7 +704,7 @@ h1 {
   inset: 3px;
 }
 .menu-toggle {
-  color: var(--brown);
+  color: var(--ink);
 }
 @media (max-width: 900px) {
   .logo-image {
