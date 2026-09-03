@@ -37,6 +37,7 @@ input,
 textarea,
 select {
   font: inherit;
+  color: inherit;
 }
 .wrap {
   width: min(100% - 40px, 1240px);
@@ -131,7 +132,7 @@ select {
   display: none;
   background: 0;
   border: 0;
-  color: white;
+  color: var(--paper);
   font-size: 26px;
 }
 .hero {
@@ -331,9 +332,6 @@ h1 {
 .panel p {
   color: var(--muted);
   margin: 0;
-}
-.dark .panel p {
-  color: color-mix(in srgb, var(--paper) 58%, var(--ink));
 }
 /* --red-deep is only 2.94:1 on --ink; the lighter --red clears large-text AA there. */
 .dark .panel .num {
@@ -542,7 +540,7 @@ h1 {
   color: color-mix(in srgb, var(--paper) 65%, var(--ink));
 }
 .footer a:hover {
-  color: white;
+  color: var(--paper);
 }
 .footer-bottom {
   border-top: 1px solid color-mix(in srgb, var(--paper) 12%, var(--ink));
