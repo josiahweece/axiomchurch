@@ -2,6 +2,7 @@
   --red: #f05f56;
   --red-deep: #c51c11;
   --ink: #1a1a1a;
+  --ink-deep: #101010;
   --muted: #5a5a5a;
   --paper: #ffffff;
   --band: #f5f5f5;
@@ -784,306 +785,592 @@ h1 {
 
 /* ===========================================================================
    HOMEPAGE (index.html only)
-   Everything below is scoped under .home / .home-page so it cannot reach any
-   other page. Colours come only from the seven :root tokens -- no literals.
+   Ported from REFERENCE-homepage.html. Every selector is scoped under .home
+   (which sits on <main>) because the reference reuses class names this repo
+   already owns -- .wrap, .hero, .nav, .arrow -- and .wrap in particular is
+   shared by the other eight pages and by the header and footer that
+   js/main.js injects.
+
+   Colours resolve from the :root tokens. The reference's #0A0A0A scrims are
+   expressed as --ink-deep (#101010) at the same alphas. Two literals are kept
+   deliberately, exactly as the reference had them: the #DEDEDE hairline in
+   the grey section and #a81710 on .btn:hover.
+
+   Image URLs here are relative to this stylesheet (../assets/images/...).
+   The slide URLs that JS assigns are relative to the document
+   (assets/images/...). Those two prefixes are not interchangeable.
    =========================================================================== */
-.home-page {
-  /* height of the sticky mobile CTA, reused to pad the footer clear of it */
-  --home-bar-h: 76px;
+.home {
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
 }
+.home img {
+  max-width: 100%;
+}
+/* this repo's base h1/h2 rule uppercases; the reference's headings do not */
 .home h1,
 .home h2 {
+  text-transform: none;
+}
+.home .wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+/* clearance for the sticky bar, mirroring the reference's body padding */
+.home-page {
+  padding-bottom: 88px;
+}
+
+/* ---------- HERO ---------- */
+.home .hero {
+  position: relative;
+  min-height: 90svh;
+  display: flex;
+  align-items: flex-end;
+  background: var(--ink-deep);
+  overflow: hidden;
+}
+.home .hero .slide {
+  position: absolute;
+  inset: 0;
+  background-image: var(--img);
+  background-size: cover;
+  background-position: 50% 12%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.home .hero .slide.on {
+  opacity: 1;
+}
+.home .hero .s1 {
+  --img: url("../assets/images/h1-p.jpg");
+}
+@media (min-width: 860px) {
+  .home .hero .s1 {
+    --img: url("../assets/images/h1-d.jpg");
+  }
+}
+.home .hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    var(--ink-deep) 0%,
+    color-mix(in srgb, var(--ink-deep) 98%, transparent) 16%,
+    color-mix(in srgb, var(--ink-deep) 86%, transparent) 28%,
+    color-mix(in srgb, var(--ink-deep) 55%, transparent) 42%,
+    color-mix(in srgb, var(--ink-deep) 24%, transparent) 58%,
+    color-mix(in srgb, var(--ink-deep) 6%, transparent) 74%,
+    color-mix(in srgb, var(--ink-deep) 0%, transparent) 88%
+  );
+}
+.home .hero-in {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px 52px;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+.home .hero h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.9rem, 10.5vw, 5.75rem);
+  line-height: 0.93;
+  letter-spacing: -0.035em;
+  color: var(--paper);
+  margin: 0 0 18px;
+  text-wrap: balance;
+  max-width: 14ch;
+}
+.home .hero h1 em {
+  font-style: normal;
+  color: var(--red);
+}
+.home .hero p.sub {
+  color: color-mix(in srgb, var(--paper) 90%, transparent);
+  font-size: clamp(1.05rem, 3.4vw, 1.35rem);
+  line-height: 1.4;
+  margin: 0 0 22px;
+  max-width: 34ch;
+}
+.home .hero .meta {
   font-family: var(--display);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  text-transform: none;
-  line-height: 1.05;
-  margin: 0;
-}
-.home p {
-  margin: 0;
-}
-.home-sec {
-  padding: clamp(56px, 7vw, 104px) 0;
-}
-.home-img {
-  width: 100%;
-  height: auto;
-  border-radius: 16px;
-}
-/* The source files are tall portraits. They are cropped by the box, never
-   re-encoded, and object-position keeps each subject inside the frame:
-   the baby in kids-dad sits near the top edge, so that one favours the top. */
-.home-portrait {
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-}
-.home-times-img {
-  object-position: center 45%;
-}
-.home-like-img {
-  object-position: center 32%;
-}
-.home-kids-img {
-  object-position: center 18%;
-}
-
-/* 1. Hero ------------------------------------------------------------------ */
-.home-hero {
-  padding: clamp(22px, 3vw, 60px) 0 clamp(40px, 5vw, 80px);
-}
-.home-hero-grid {
-  display: grid;
-  gap: clamp(24px, 3.5vw, 52px);
-  align-items: center;
-}
-.home-hero h1 {
-  font-size: clamp(32px, 5.4vw, 68px);
-  max-width: 19ch;
-}
-.home-hero-sub {
-  margin-top: clamp(14px, 1.6vw, 20px);
-  max-width: 48ch;
-  color: var(--muted);
-  font-size: clamp(16px, 1.35vw, 19px);
-  line-height: 1.5;
-}
-.home-hero-meta {
-  margin-top: 12px;
-  color: var(--ink);
-  font-size: clamp(14px, 1.1vw, 16px);
-  font-weight: 600;
-}
-.home-hero-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  margin-top: clamp(20px, 2.4vw, 28px);
-}
-.home-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  padding: 14px 30px;
-  border-radius: 999px;
-  background: var(--red-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: clamp(0.72rem, 2.5vw, 0.82rem);
   color: var(--paper);
-  font-family: var(--body);
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.2;
-  text-align: center;
-  transition: background-color 0.2s var(--ease);
+  margin: 0 0 24px;
+  padding-top: 18px;
+  border-top: 3px solid var(--red);
+  display: inline-block;
 }
-.home-btn:hover,
-.home-btn:focus-visible {
-  background: var(--ink);
-}
-.home-textlink {
-  color: var(--muted);
-  font-size: 14px;
-}
-.home-textlink:hover,
-.home-textlink:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* 2. Times and location ---------------------------------------------------- */
-.home-times {
-  padding-top: clamp(28px, 3.5vw, 52px);
-}
-.home-times-grid {
-  display: grid;
-  gap: clamp(24px, 3.5vw, 48px);
-  align-items: start;
-}
-.home-times h2 {
-  font-size: clamp(28px, 3.6vw, 46px);
-}
-.home-times-addr {
-  margin-top: 14px;
-  color: var(--ink);
-  font-size: clamp(16px, 1.3vw, 19px);
-  line-height: 1.5;
-}
-.home-times-addr a {
-  color: var(--red-deep);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.home-times-addr a:hover,
-.home-times-addr a:focus-visible {
-  color: var(--ink);
-}
-.home-times-note {
-  margin-top: 14px;
-  max-width: 52ch;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.55;
-}
-
-/* 3. What it's actually like ------------------------------------------------ */
-.home-like-grid {
-  display: grid;
-  gap: clamp(28px, 4vw, 56px);
-  align-items: center;
-}
-.home-like-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.home-like-list li {
-  color: var(--ink);
-  font-size: clamp(19px, 1.95vw, 27px);
-  font-weight: 500;
-  line-height: 1.32;
-}
-.home-like-list li + li {
-  margin-top: clamp(26px, 3.2vw, 46px);
-}
-
-/* 4. Rhythm band ----------------------------------------------------------- */
-.home-band {
-  background: var(--band);
-}
-.home-band-inner {
+.home .cta-row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
   align-items: center;
-  gap: 8px clamp(12px, 3vw, 48px);
-  padding: clamp(20px, 2.4vw, 32px) 0;
-  color: var(--ink);
+  gap: 18px 24px;
+}
+.home .btn {
+  display: inline-block;
+  background: var(--red-deep);
+  color: var(--paper);
   font-family: var(--display);
   font-weight: 700;
+  font-size: 1.05rem;
+  padding: 17px 34px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease;
+}
+.home .btn:hover {
+  background: #a81710;
+  transform: translateY(-1px);
+}
+.home .textlink {
+  color: var(--paper);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--paper) 50%, transparent);
+}
+.home .textlink:hover {
+  text-decoration-color: var(--paper);
+}
+
+/* ---------- TIMES ---------- */
+.home .times {
+  padding-block: clamp(56px, 10vw, 104px);
+}
+.home .times .big {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 10vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin: 0;
+  text-wrap: balance;
+}
+.home .times .big em {
+  font-style: normal;
+  color: var(--red);
+}
+.home .times .where {
+  margin: 26px 0 0;
+  font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+  max-width: 40ch;
+}
+.home .times .where a {
+  color: var(--red-deep);
+  text-underline-offset: 4px;
+}
+.home .times .note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 2.4vw, 1.1rem);
+  max-width: 44ch;
+}
+
+/* ---------- FOUR LINES ---------- */
+.home .truth {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  background: var(--band);
+}
+.home .truth-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+.home .truth-list {
+  padding: clamp(36px, 7vw, 72px) 20px;
+}
+.home .truth-list p {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.45rem, 5.2vw, 2.15rem);
+  line-height: 1.18;
   letter-spacing: -0.02em;
-  font-size: clamp(15px, 1.9vw, 26px);
+  margin: 0;
+  padding: 26px 0;
+  border-bottom: 1px solid #dedede;
+  text-wrap: balance;
+}
+.home .truth-list p:first-child {
+  padding-top: 0;
+}
+.home .truth-list p:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+@media (hover: hover) {
+  .home .truth-list p {
+    transition:
+      padding-left 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+      border-color 0.3s ease;
+  }
+  .home .truth-list p:hover {
+    padding-left: 16px;
+    border-bottom-color: var(--red);
+  }
+  .home .truth-list.anim p {
+    transition:
+      opacity 0.55s ease,
+      transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+      padding-left 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+      border-color 0.3s ease;
+  }
+}
+/* staggered reveal -- only applied once JS confirms it can run, so the four
+   lines stay visible if JS never runs */
+.home .truth-list.anim p {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.home .truth-list.anim.in p {
+  opacity: 1;
+  transform: none;
+}
+.home .truth-list.anim.in p:nth-child(1) {
+  transition-delay: 0s;
+}
+.home .truth-list.anim.in p:nth-child(2) {
+  transition-delay: 0.11s;
+}
+.home .truth-list.anim.in p:nth-child(3) {
+  transition-delay: 0.22s;
+}
+.home .truth-list.anim.in p:nth-child(4) {
+  transition-delay: 0.33s;
+}
+
+/* ---------- INK BAND ---------- */
+.home .band {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink-deep) url("../assets/images/band.jpg") center 42% / cover no-repeat;
+  color: var(--paper);
+  padding-block: clamp(76px, 13vw, 150px);
+}
+.home .band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--ink-deep) 52%, transparent);
+}
+.home .band-in {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(20px, 5vw, 64px);
+  justify-content: center;
   text-align: center;
 }
+.home .band span {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 7.4vw, 4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.home .band span:nth-child(3) {
+  color: var(--red);
+}
 
-/* 5. Kids ------------------------------------------------------------------ */
-.home-kids-top {
+/* ---------- KIDS ---------- */
+.home .kids {
+  padding-block: clamp(56px, 10vw, 104px);
+}
+.home .kids h2 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(2.1rem, 8vw, 4.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  margin: 0 0 clamp(32px, 6vw, 56px);
+  max-width: 16ch;
+  text-wrap: balance;
+}
+.home .kids-grid {
   display: grid;
-  gap: clamp(24px, 3.5vw, 48px);
-  align-items: center;
+  grid-template-columns: 1fr;
+  gap: clamp(28px, 5vw, 48px);
 }
-.home-kids h2 {
-  font-size: clamp(30px, 4.3vw, 58px);
-  max-width: 20ch;
+.home .kids-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  object-position: 50% 45%;
 }
-.home-kids-list {
-  display: grid;
-  gap: clamp(26px, 3vw, 40px);
-  list-style: none;
-  margin: clamp(40px, 5vw, 72px) 0 0;
-  padding: 0;
+.home .kid {
+  border-top: 3px solid var(--ink);
+  padding-top: 16px;
 }
-.home-kids-list li {
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.55;
-}
-.home-kids-list strong {
+.home .kid b {
   display: block;
-  margin-bottom: 8px;
-  color: var(--ink);
   font-family: var(--display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  font-size: clamp(19px, 1.8vw, 23px);
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.015em;
+  margin-bottom: 7px;
 }
-
-/* 7. Next steps ------------------------------------------------------------ */
-.home-next-grid {
-  display: grid;
-  gap: clamp(16px, 2vw, 22px);
-}
-.home-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: clamp(22px, 2.4vw, 30px);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--paper);
-  transition:
-    border-color 0.2s var(--ease),
-    transform 0.2s var(--ease);
-}
-.home-card:hover,
-.home-card:focus-visible {
-  border-color: var(--red);
-  transform: translateY(-3px);
-}
-.home-card-title {
-  color: var(--ink);
-  font-family: var(--display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  font-size: clamp(19px, 1.8vw, 23px);
-}
-.home-card-body {
+.home .kid span {
   color: var(--muted);
-  font-size: 16px;
-  line-height: 1.55;
+  display: block;
+  font-size: 1.02rem;
+  line-height: 1.5;
 }
 
-/* Desktop columns ---------------------------------------------------------- */
-@media (min-width: 900px) {
-  .home-hero-grid {
-    grid-template-columns: 1.08fr 0.92fr;
-  }
-  .home-times-grid {
-    grid-template-columns: 1fr 0.55fr;
-  }
-  .home-like-grid {
-    grid-template-columns: 0.5fr 1fr;
-  }
-  .home-kids-top {
-    grid-template-columns: 1fr 0.46fr;
-  }
-  .home-kids-list,
-  .home-next-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+/* ---------- NEXT STEPS ---------- */
+.home .next {
+  background: var(--ink-deep);
+  color: var(--paper);
+  padding-block: clamp(60px, 10vw, 112px);
+}
+.home .next-in {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+.home .next .eyebrow {
+  color: var(--red);
+  font-size: clamp(1.05rem, 3.4vw, 1.5rem);
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  margin-bottom: clamp(28px, 5vw, 48px);
+}
+.home .next .step {
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 14%, transparent);
+}
+.home .next .step:first-of-type {
+  border-top: 1px solid color-mix(in srgb, var(--paper) 14%, transparent);
+}
+.home .next .step-t {
+  color: var(--paper);
+}
+.home .next .step-d {
+  color: color-mix(in srgb, var(--paper) 62%, transparent);
+}
+.home .next .arrow {
+  color: var(--red);
+}
+.home .next .step:hover .step-t {
+  color: var(--red);
+}
+.home .eyebrow {
+  font-family: var(--display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin: 0 0 clamp(24px, 4vw, 40px);
+}
+.home .step {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+}
+.home .step:first-of-type {
+  border-top: 1px solid var(--line);
+}
+.home .step:hover .step-t {
+  color: var(--red-deep);
+}
+.home .step-t {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.45rem, 5vw, 2.25rem);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 0 0 6px;
+  transition: color 0.16s ease;
+}
+.home .step-d {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: 0;
+  max-width: 46ch;
+  line-height: 1.45;
+}
+.home .arrow {
+  font-family: var(--display);
+  font-weight: 800;
+  color: var(--red-deep);
+  font-size: 1.5rem;
+  flex: none;
+  line-height: 1;
 }
 
-/* 8. Sticky mobile CTA ----------------------------------------------------- */
-.home-stickycta {
-  display: none;
+/* ---------- STICKY ---------- */
+.home .sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+  transform: translateY(105%);
+  transition: transform 0.25s ease;
 }
-@media (max-width: 767px) {
-  .home-stickycta {
-    display: block;
-    position: fixed;
-    z-index: 60;
+.home .sticky.on {
+  transform: translateY(0);
+}
+.home .sticky a {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+/* ---------- 860px: the only breakpoint ---------- */
+@media (min-width: 860px) {
+  .home-page {
+    padding-bottom: 0;
+  }
+  /* SPLIT HERO -- copy gets its own solid column, photo gets its own.
+     Nothing overlaps, so no photo can ever be covered. */
+  .home .hero {
+    display: grid;
+    grid-template-columns: 43% 57%;
+    align-items: stretch;
+    min-height: 76svh;
+    background: var(--ink-deep);
+  }
+  /* the whole hero carries a blurred wash of the current photo, so the left
+     column takes its colour from whatever is showing */
+  .home .hero .slide {
+    inset: 0;
+    background-image: none;
+  }
+  .home .hero .slide::before {
+    content: "";
+    position: absolute;
+    inset: -70px;
+    background-image: var(--img);
+    background-size: cover;
+    background-position: 50% 30%;
+    filter: blur(48px) saturate(0.85) brightness(0.52);
+  }
+  /* the sharp photo fades in over that wash -- no hard seam anywhere */
+  .home .hero .slide::after {
+    content: "";
+    position: absolute;
+    left: 41%;
     right: 0;
+    top: 0;
     bottom: 0;
+    background-image: var(--img);
+    background-size: cover;
+    background-position: 50% 30%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, var(--ink-deep) 20%);
+    mask-image: linear-gradient(to right, transparent 0%, var(--ink-deep) 20%);
+  }
+  /* these two sit high in their crops -- bring the subject down a little */
+  .home .hero .slide[data-img="h5"]::after {
+    background-position: 50% 12%;
+  }
+  .home .hero .slide[data-img="h6"]::after {
+    background-position: 50% 14%;
+  }
+  /* the neon sign sits on a dark hedge -- lift its wash and nudge the photo right */
+  .home .hero .slide[data-img="h3"]::before {
+    filter: blur(48px) saturate(0.9) brightness(0.86);
+  }
+  .home .hero .slide[data-img="h3"]::after {
+    background-position: 20% 26%;
+  }
+  /* the toddler room is bright white -- let its wash stay light instead of
+     crushing it dark. The copy's own scrim still carries the text contrast. */
+  .home .hero .slide[data-img="h4"]::before {
+    filter: blur(48px) saturate(0.55) brightness(1.18);
+  }
+  .home .hero::after {
     left: 0;
-    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-    border-top: 1px solid var(--line);
-    background: var(--paper);
-    visibility: hidden;
-    transform: translateY(110%);
-    transition:
-      transform 0.28s var(--ease),
-      visibility 0.28s;
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--ink-deep) 80%, transparent) 0%,
+      color-mix(in srgb, var(--ink-deep) 75%, transparent) 28%,
+      color-mix(in srgb, var(--ink-deep) 56%, transparent) 42%,
+      color-mix(in srgb, var(--ink-deep) 18%, transparent) 53%,
+      color-mix(in srgb, var(--ink-deep) 0%, transparent) 64%
+    );
   }
-  .home-stickycta.is-visible {
-    visibility: visible;
-    transform: none;
-  }
-  .home-btn-block {
+  .home .hero-in {
+    grid-column: 1;
+    position: relative;
+    z-index: 2;
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    max-width: none;
+    margin: 0;
+    width: auto;
+    padding: clamp(44px, 5vw, 72px) clamp(34px, 3.6vw, 60px);
   }
-  /* keep the bar off the footer's own content */
-  .home-page .footer {
-    padding-bottom: calc(25px + var(--home-bar-h) + env(safe-area-inset-bottom));
+  .home .hero h1 {
+    font-size: clamp(2.6rem, 4.6vw, 4.4rem);
+    max-width: 13ch;
+    margin-bottom: 20px;
+  }
+  .home .hero p.sub {
+    max-width: 32ch;
+    font-size: clamp(1.02rem, 1.25vw, 1.2rem);
+  }
+  .home .hero .meta {
+    font-size: 0.78rem;
+  }
+  .home .truth {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+  .home .truth-img {
+    height: 100%;
+    aspect-ratio: auto;
+    min-height: 560px;
+  }
+  .home .truth-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 64px;
+  }
+  .home .kids-grid {
+    grid-template-columns: 5fr 7fr;
+    align-items: start;
+    gap: 64px;
+  }
+  .home .kids-img {
+    aspect-ratio: 4/5;
+    position: sticky;
+    top: 32px;
+  }
+  .home .kids-col {
+    display: grid;
+    gap: 40px;
+  }
+  .home .sticky {
+    display: none;
   }
 }

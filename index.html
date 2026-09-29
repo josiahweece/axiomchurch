@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
@@ -19,122 +19,126 @@
   <body class="home-page">
     <div data-header></div>
     <main class="home">
-      <section class="home-hero">
-        <div class="wrap home-hero-grid">
-          <div class="home-hero-copy">
-            <h1>A place you can stop pretending.</h1>
-            <p class="home-hero-sub">
-              No relationship with Jesus? Bad relationship with the Church? This is for you.
-            </p>
-            <p class="home-hero-meta">Sundays at 10am · Camacho Elementary, Leander</p>
-            <div class="home-hero-actions">
-              <a class="home-btn" href="visit.html">Plan a Visit</a>
-              <a class="home-textlink" href="messages.html">or watch a message first</a>
+      <header class="hero">
+        <div
+          class="slide s1 on"
+          role="img"
+          aria-label="People with hands raised during a Sunday gathering"
+        ></div>
+        <div
+          class="slide"
+          data-img="h5"
+          role="img"
+          aria-label="A boy laughing while playing with a parachute in Axiom Kids"
+        ></div>
+        <div
+          class="slide"
+          data-img="h6"
+          role="img"
+          aria-label="A man on stage during a Sunday gathering"
+        ></div>
+        <div
+          class="slide"
+          data-img="h2"
+          role="img"
+          aria-label="Two greeters at the New Here table"
+        ></div>
+        <div
+          class="slide"
+          data-img="h4"
+          role="img"
+          aria-label="A toddler with his hand raised in the kids room"
+        ></div>
+        <div
+          class="slide"
+          data-img="h3"
+          role="img"
+          aria-label="Axiom Church volunteers together under the neon sign"
+        ></div>
+        <div
+          class="slide"
+          data-img="h7"
+          role="img"
+          aria-label="The worship team leading a song"
+        ></div>
+        <div class="hero-in">
+          <p class="meta">Sundays at 10am &middot; Camacho Elementary, Leander</p>
+          <h1>A place you can stop <em>pretending.</em></h1>
+          <p class="sub">
+            No relationship with Jesus? Bad relationship with the Church? Come check us out.
+          </p>
+          <div class="cta-row">
+            <a class="btn" href="visit.html">Plan a Visit</a>
+            <a class="textlink" href="messages.html">or watch online first</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="times wrap">
+        <h2 class="big">Sundays at <em>10am</em></h2>
+        <p class="where">
+          Camacho Elementary —
+          <a
+            href="https://www.google.com/maps/dir/?api=1&amp;destination=501+Municipal+Dr%2C+Leander%2C+TX+78641"
+            target="_blank"
+            rel="noopener noreferrer"
+            >501 Municipal Dr, Leander, TX 78641</a
+          >
+        </p>
+        <p class="note">
+          Someone will be there to point you to guest parking, and someone else will walk you in
+          from there.
+        </p>
+      </section>
+
+      <section class="truth">
+        <img
+          class="truth-img"
+          src="assets/images/provider.jpg"
+          alt="A man standing in the hallway before a service"
+        />
+        <div class="truth-list">
+          <p>The music's loud enough that nobody will hear you sing.</p>
+          <p>No crap coffee.</p>
+          <p>A lot of us have tattoos. Including people on the stage.</p>
+          <p>You don't have to know anything to follow along.</p>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="band-in wrap">
+          <span>Show up.</span><span>Find a seat.</span><span>Try it out.</span>
+        </div>
+      </section>
+
+      <section class="kids wrap">
+        <h2>Your kids will beg to come back.</h2>
+        <div class="kids-grid">
+          <img
+            class="kids-img"
+            src="assets/images/kids-walk.jpg"
+            alt="A mom and her son walking toward the kids area"
+          />
+          <div class="kids-col">
+            <div class="kid">
+              <b>Have fun.</b
+              ><span>Games, friends their own age, and an environment built for them.</span>
+            </div>
+            <div class="kid">
+              <b>Stay safe.</b
+              ><span
+                >Every volunteer is background checked. You get a tag, your kid gets the same tag,
+                and nobody else can pick them up.</span
+              >
+            </div>
+            <div class="kid">
+              <b>Meet Jesus.</b
+              ><span
+                >Worship with other kids their age and a Bible teaching that actually makes sense to
+                them.</span
+              >
             </div>
           </div>
-          <img
-            class="home-img home-hero-img"
-            src="assets/images/room-1200.jpg"
-            srcset="assets/images/room-1200.jpg 1200w, assets/images/room-2000.jpg 2000w"
-            sizes="(min-width: 900px) 44vw, calc(100vw - 28px)"
-            width="1200"
-            height="801"
-            fetchpriority="high"
-            loading="eager"
-            alt="People talking together before a Sunday service"
-          />
-        </div>
-      </section>
-
-      <section class="home-sec home-times">
-        <div class="wrap home-times-grid">
-          <div class="home-times-copy">
-            <h2>Sundays at 10am</h2>
-            <p class="home-times-addr">
-              Camacho Elementary —
-              <a
-                href="https://www.google.com/maps/dir/?api=1&amp;destination=501+Municipal+Dr%2C+Leander%2C+TX+78641"
-                target="_blank"
-                rel="noopener noreferrer"
-                >501 Municipal Dr, Leander, TX 78641</a
-              >
-            </p>
-            <p class="home-times-note">
-              Someone will be in the lot to point you to guest parking, and someone else will walk
-              you in from there.
-            </p>
-          </div>
-          <img
-            class="home-img home-portrait home-times-img"
-            src="assets/images/welcome-1200.jpg"
-            srcset="assets/images/welcome-1200.jpg 1200w, assets/images/welcome-2000.jpg 2000w"
-            sizes="(min-width: 900px) 34vw, calc(100vw - 28px)"
-            width="1200"
-            height="1800"
-            loading="lazy"
-            alt="A child running ahead to meet a greeter at the door"
-          />
-        </div>
-      </section>
-
-      <section class="home-sec home-like">
-        <div class="wrap home-like-grid">
-          <img
-            class="home-img home-portrait home-like-img"
-            src="assets/images/provider-1200.jpg"
-            srcset="assets/images/provider-1200.jpg 1200w, assets/images/provider-2000.jpg 2000w"
-            sizes="(min-width: 900px) 32vw, calc(100vw - 28px)"
-            width="1200"
-            height="1792"
-            loading="lazy"
-            alt="A man standing in the hallway before a service"
-          />
-          <ul class="home-like-list">
-            <li>The music's loud enough that nobody will hear you sing.</li>
-            <li>No crap coffee.</li>
-            <li>A lot of us have tattoos. Including the guy preaching.</li>
-            <li>You don't have to know anything to follow along.</li>
-          </ul>
-        </div>
-      </section>
-
-      <div class="home-band">
-        <div class="wrap home-band-inner">
-          <span>Show up.</span>
-          <span>Sit wherever.</span>
-          <span>Come back.</span>
-        </div>
-      </div>
-
-      <section class="home-sec home-kids">
-        <div class="wrap">
-          <div class="home-kids-top">
-            <h2>Your kids will beg to come back.</h2>
-            <img
-              class="home-img home-portrait home-kids-img"
-              src="assets/images/kids-dad-1200.jpg"
-              srcset="assets/images/kids-dad-1200.jpg 1200w, assets/images/kids-dad-2000.jpg 2000w"
-              sizes="(min-width: 900px) 30vw, calc(100vw - 28px)"
-              width="1200"
-              height="1797"
-              loading="lazy"
-              alt="A dad lifting his baby at Axiom Kids"
-            />
-          </div>
-          <ul class="home-kids-list">
-            <li>
-              <strong>Have fun.</strong> Games, friends their own age, and an environment built for
-              them.
-            </li>
-            <li>
-              <strong>Stay safe.</strong> Every volunteer is background checked. You get a tag, your
-              kid gets the same tag, and nobody else can pick them up.
-            </li>
-            <li>
-              <strong>Meet Jesus.</strong> Worship with other kids their age and a Bible teaching
-              that actually makes sense to them.
-            </li>
-          </ul>
         </div>
       </section>
 
@@ -143,40 +147,95 @@
            stand-in image.
            <section id="proof"></section> -->
 
-      <section class="home-sec home-next">
-        <div class="wrap home-next-grid">
-          <a class="home-card" href="messages.html">
-            <span class="home-card-title">Watch a message</span>
-            <span class="home-card-body">See what a Sunday's actually like.</span>
+      <section class="next">
+        <div class="next-in">
+          <p class="eyebrow">Next steps</p>
+          <a class="step" href="messages.html">
+            <div>
+              <p class="step-t">Watch a message</p>
+              <p class="step-d">See what a Sunday's actually like.</p>
+            </div>
+            <span class="arrow">&rarr;</span>
           </a>
-          <a class="home-card" href="visit.html">
-            <span class="home-card-title">Plan a Visit</span>
-            <span class="home-card-body">Tell us you're coming and we'll be looking for you.</span>
+          <a class="step" href="visit.html">
+            <div>
+              <p class="step-t">Plan a Visit</p>
+              <p class="step-d">Tell us you're coming and we'll be looking for you.</p>
+            </div>
+            <span class="arrow">&rarr;</span>
           </a>
           <!-- TODO: replace #rally-point with the Planning Center form URL. -->
-          <a class="home-card" href="#rally-point">
-            <span class="home-card-title">Rally Point</span>
-            <span class="home-card-body"
-              >Free food, free childcare, and nobody's going to ask you for money.</span
-            >
+          <a class="step" href="#rally-point">
+            <div>
+              <p class="step-t">Rally Point</p>
+              <p class="step-d">
+                Everyone's first step at Axiom. Free food, free childcare, and nobody's going to ask
+                you for money.
+              </p>
+            </div>
+            <span class="arrow">&rarr;</span>
           </a>
         </div>
       </section>
+
+      <div class="sticky" id="sticky"><a class="btn" href="visit.html">Plan a Visit</a></div>
     </main>
-    <div class="home-stickycta" data-sticky-cta>
-      <a class="home-btn home-btn-block" href="visit.html">Plan a Visit</a>
-    </div>
     <div data-footer></div>
     <script src="js/main.js"></script>
     <script>
-      // Reveal the sticky mobile CTA only once the hero has scrolled out of view.
-      (() => {
-        const hero = document.querySelector(".home-hero");
-        const bar = document.querySelector("[data-sticky-cta]");
-        if (!hero || !bar) return;
-        new IntersectionObserver(([e]) => bar.classList.toggle("is-visible", !e.isIntersecting), {
-          threshold: 0,
-        }).observe(hero);
+      (function () {
+        var hero = document.querySelector(".hero"),
+          bar = document.getElementById("sticky");
+        if (hero && bar && "IntersectionObserver" in window) {
+          new IntersectionObserver(
+            function (e) {
+              bar.classList.toggle("on", !e[0].isIntersecting);
+            },
+            { threshold: 0 },
+          ).observe(hero);
+        } else if (bar) {
+          bar.classList.add("on");
+        }
+
+        var slides = document.querySelectorAll(".hero .slide"),
+          i = 0;
+        var still = window.matchMedia("(prefers-reduced-motion: reduce)");
+        var wide = window.matchMedia("(min-width:860px)").matches ? "d" : "p";
+        function load() {
+          for (var n = 1; n < slides.length; n++) {
+            var k = slides[n].getAttribute("data-img");
+            // This URL is resolved against css/style.css, not the document,
+            // because that stylesheet is where background-image: var(--img)
+            // consumes it -- hence ../, matching the .s1 rule in the CSS.
+            if (k)
+              slides[n].style.setProperty(
+                "--img",
+                'url("../assets/images/' + k + "-" + wide + '.jpg")',
+              );
+          }
+        }
+        if (document.readyState === "complete") load();
+        else window.addEventListener("load", load);
+
+        var list = document.querySelector(".truth-list");
+        if (list && !still.matches && "IntersectionObserver" in window) {
+          list.classList.add("anim");
+          new IntersectionObserver(
+            function (e, o) {
+              if (e[0].isIntersecting) {
+                list.classList.add("in");
+                o.disconnect();
+              }
+            },
+            { threshold: 0.25 },
+          ).observe(list);
+        }
+        if (slides.length < 2 || still.matches) return;
+        setInterval(function () {
+          slides[i].classList.remove("on");
+          i = (i + 1) % slides.length;
+          slides[i].classList.add("on");
+        }, 5500);
       })();
     </script>
   </body>
