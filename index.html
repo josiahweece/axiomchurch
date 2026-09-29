@@ -201,21 +201,40 @@
           i = 0;
         var still = window.matchMedia("(prefers-reduced-motion: reduce)");
         var wide = window.matchMedia("(min-width:860px)").matches ? "d" : "p";
+        var probes = []; // one Image per slide, so the diagnostic can count what actually loaded
+
+        // Assign --img to slides 2-7. Idempotent: a slide that already has its
+        // value is skipped, so running this on DOMContentLoaded, on a timer and
+        // on load is harmless and never rewrites a style mid-crossfade.
+        // The URL is resolved against css/style.css, where background-image:
+        // var(--img) consumes it -- hence ../, matching the .s1 rule in the CSS.
         function load() {
-          for (var n = 1; n < slides.length; n++) {
+          for (var n = 0; n < slides.length; n++) {
             var k = slides[n].getAttribute("data-img");
-            // This URL is resolved against css/style.css, not the document,
-            // because that stylesheet is where background-image: var(--img)
-            // consumes it -- hence ../, matching the .s1 rule in the CSS.
-            if (k)
+            if (k && !slides[n].style.getPropertyValue("--img")) {
               slides[n].style.setProperty(
                 "--img",
                 'url("../assets/images/' + k + "-" + wide + '.jpg")',
               );
+            }
+            if (!probes[n]) {
+              var v =
+                slides[n].style.getPropertyValue("--img") ||
+                getComputedStyle(slides[n]).getPropertyValue("--img");
+              var m = /url\("?([^")]+)"?\)/.exec(v);
+              if (m) {
+                probes[n] = new Image();
+                probes[n].src = "assets/images/" + m[1].split("/").pop();
+              }
+            }
           }
         }
         if (document.readyState === "complete") load();
-        else window.addEventListener("load", load);
+        else {
+          document.addEventListener("DOMContentLoaded", load);
+          window.setTimeout(load, 1500);
+          window.addEventListener("load", load);
+        }
 
         var list = document.querySelector(".truth-list");
         if (list && !still.matches && "IntersectionObserver" in window) {
@@ -230,12 +249,56 @@
             { threshold: 0.25 },
           ).observe(list);
         }
-        if (slides.length < 2 || still.matches) return;
-        setInterval(function () {
-          slides[i].classList.remove("on");
-          i = (i + 1) % slides.length;
-          slides[i].classList.add("on");
-        }, 5500);
+
+        var timer = null,
+          ticks = 0;
+        if (slides.length > 1 && !still.matches) {
+          timer = setInterval(function () {
+            ticks++;
+            slides[i].classList.remove("on");
+            i = (i + 1) % slides.length;
+            slides[i].classList.add("on");
+          }, 4500);
+        }
+
+        // Diagnostic overlay, only with ?heroDebug=1 in the URL. Nothing is
+        // created or logged otherwise.
+        if (new URLSearchParams(location.search).get("heroDebug") === "1") {
+          var box = document.createElement("pre");
+          box.id = "heroDebug";
+          box.style.cssText =
+            "position:fixed;left:8px;bottom:8px;z-index:99;margin:0;padding:8px 10px;font:12px/1.4 monospace;background:#000;color:#fff;opacity:.9;border-radius:4px;";
+          document.body.appendChild(box);
+          setInterval(function () {
+            var on = -1,
+              ok = 0;
+            for (var n = 0; n < slides.length; n++) {
+              if (slides[n].classList.contains("on")) on = n;
+              if (probes[n] && probes[n].complete && probes[n].naturalWidth > 0) ok++;
+            }
+            box.textContent =
+              "reduced-motion: " +
+              still.matches +
+              "\n" +
+              "interval: " +
+              (timer ? "yes" : "no") +
+              "  ticks: " +
+              ticks +
+              "\n" +
+              "slide .on: " +
+              on +
+              " of " +
+              slides.length +
+              "\n" +
+              "images loaded: " +
+              ok +
+              " / " +
+              slides.length +
+              "  (" +
+              wide +
+              ")";
+          }, 500);
+        }
       })();
     </script>
   </body>
