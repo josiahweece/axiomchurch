@@ -781,3 +781,309 @@ h1 {
 .hero .service-bar {
   grid-template-columns: repeat(2, 1fr);
 }
+
+/* ===========================================================================
+   HOMEPAGE (index.html only)
+   Everything below is scoped under .home / .home-page so it cannot reach any
+   other page. Colours come only from the seven :root tokens -- no literals.
+   =========================================================================== */
+.home-page {
+  /* height of the sticky mobile CTA, reused to pad the footer clear of it */
+  --home-bar-h: 76px;
+}
+.home h1,
+.home h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  line-height: 1.05;
+  margin: 0;
+}
+.home p {
+  margin: 0;
+}
+.home-sec {
+  padding: clamp(56px, 7vw, 104px) 0;
+}
+.home-img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+/* The source files are tall portraits. They are cropped by the box, never
+   re-encoded, and object-position keeps each subject inside the frame:
+   the baby in kids-dad sits near the top edge, so that one favours the top. */
+.home-portrait {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.home-times-img {
+  object-position: center 45%;
+}
+.home-like-img {
+  object-position: center 32%;
+}
+.home-kids-img {
+  object-position: center 18%;
+}
+
+/* 1. Hero ------------------------------------------------------------------ */
+.home-hero {
+  padding: clamp(22px, 3vw, 60px) 0 clamp(40px, 5vw, 80px);
+}
+.home-hero-grid {
+  display: grid;
+  gap: clamp(24px, 3.5vw, 52px);
+  align-items: center;
+}
+.home-hero h1 {
+  font-size: clamp(32px, 5.4vw, 68px);
+  max-width: 19ch;
+}
+.home-hero-sub {
+  margin-top: clamp(14px, 1.6vw, 20px);
+  max-width: 48ch;
+  color: var(--muted);
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.5;
+}
+.home-hero-meta {
+  margin-top: 12px;
+  color: var(--ink);
+  font-size: clamp(14px, 1.1vw, 16px);
+  font-weight: 600;
+}
+.home-hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: clamp(20px, 2.4vw, 28px);
+}
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  background: var(--red-deep);
+  color: var(--paper);
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+  text-align: center;
+  transition: background-color 0.2s var(--ease);
+}
+.home-btn:hover,
+.home-btn:focus-visible {
+  background: var(--ink);
+}
+.home-textlink {
+  color: var(--muted);
+  font-size: 14px;
+}
+.home-textlink:hover,
+.home-textlink:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 2. Times and location ---------------------------------------------------- */
+.home-times {
+  padding-top: clamp(28px, 3.5vw, 52px);
+}
+.home-times-grid {
+  display: grid;
+  gap: clamp(24px, 3.5vw, 48px);
+  align-items: start;
+}
+.home-times h2 {
+  font-size: clamp(28px, 3.6vw, 46px);
+}
+.home-times-addr {
+  margin-top: 14px;
+  color: var(--ink);
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.5;
+}
+.home-times-addr a {
+  color: var(--red-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.home-times-addr a:hover,
+.home-times-addr a:focus-visible {
+  color: var(--ink);
+}
+.home-times-note {
+  margin-top: 14px;
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* 3. What it's actually like ------------------------------------------------ */
+.home-like-grid {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+.home-like-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.home-like-list li {
+  color: var(--ink);
+  font-size: clamp(19px, 1.95vw, 27px);
+  font-weight: 500;
+  line-height: 1.32;
+}
+.home-like-list li + li {
+  margin-top: clamp(26px, 3.2vw, 46px);
+}
+
+/* 4. Rhythm band ----------------------------------------------------------- */
+.home-band {
+  background: var(--band);
+}
+.home-band-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 8px clamp(12px, 3vw, 48px);
+  padding: clamp(20px, 2.4vw, 32px) 0;
+  color: var(--ink);
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: clamp(15px, 1.9vw, 26px);
+  text-align: center;
+}
+
+/* 5. Kids ------------------------------------------------------------------ */
+.home-kids-top {
+  display: grid;
+  gap: clamp(24px, 3.5vw, 48px);
+  align-items: center;
+}
+.home-kids h2 {
+  font-size: clamp(30px, 4.3vw, 58px);
+  max-width: 20ch;
+}
+.home-kids-list {
+  display: grid;
+  gap: clamp(26px, 3vw, 40px);
+  list-style: none;
+  margin: clamp(40px, 5vw, 72px) 0 0;
+  padding: 0;
+}
+.home-kids-list li {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+.home-kids-list strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: clamp(19px, 1.8vw, 23px);
+}
+
+/* 7. Next steps ------------------------------------------------------------ */
+.home-next-grid {
+  display: grid;
+  gap: clamp(16px, 2vw, 22px);
+}
+.home-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(22px, 2.4vw, 30px);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--paper);
+  transition:
+    border-color 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+.home-card:hover,
+.home-card:focus-visible {
+  border-color: var(--red);
+  transform: translateY(-3px);
+}
+.home-card-title {
+  color: var(--ink);
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: clamp(19px, 1.8vw, 23px);
+}
+.home-card-body {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* Desktop columns ---------------------------------------------------------- */
+@media (min-width: 900px) {
+  .home-hero-grid {
+    grid-template-columns: 1.08fr 0.92fr;
+  }
+  .home-times-grid {
+    grid-template-columns: 1fr 0.55fr;
+  }
+  .home-like-grid {
+    grid-template-columns: 0.5fr 1fr;
+  }
+  .home-kids-top {
+    grid-template-columns: 1fr 0.46fr;
+  }
+  .home-kids-list,
+  .home-next-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 8. Sticky mobile CTA ----------------------------------------------------- */
+.home-stickycta {
+  display: none;
+}
+@media (max-width: 767px) {
+  .home-stickycta {
+    display: block;
+    position: fixed;
+    z-index: 60;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+    visibility: hidden;
+    transform: translateY(110%);
+    transition:
+      transform 0.28s var(--ease),
+      visibility 0.28s;
+  }
+  .home-stickycta.is-visible {
+    visibility: visible;
+    transform: none;
+  }
+  .home-btn-block {
+    display: flex;
+    width: 100%;
+  }
+  /* keep the bar off the footer's own content */
+  .home-page .footer {
+    padding-bottom: calc(25px + var(--home-bar-h) + env(safe-area-inset-bottom));
+  }
+}

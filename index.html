@@ -16,90 +16,168 @@
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body class="home-page">
     <div data-header></div>
-    <main>
-      <section class="hero">
-        <div class="hero-media hero-slideshow" aria-hidden="true">
-          <img class="active" src="assets/images/community-purpose.jpg" alt="" /><img
-            src="assets/images/community-welcome.jpg"
-            alt=""
-          /><img src="assets/images/sunday.jpg" alt="" />
-        </div>
-        <div class="hero-copy wrap">
-          <h2 class="hero-welcome">Welcome to</h2>
-          <h1>Axiom Church</h1>
-          <h2 class="hero-time">Join us Sundays at 10a</h2>
-          <p>No relationship with Jesus? Bad relationship with the Church? This is for you.</p>
-          <div class="actions">
-            <a class="pill fill" href="visit.html">Plan a visit</a
-            ><a class="pill" href="contact.html">Learn more</a>
+    <main class="home">
+      <section class="home-hero">
+        <div class="wrap home-hero-grid">
+          <div class="home-hero-copy">
+            <h1>A place you can stop pretending.</h1>
+            <p class="home-hero-sub">
+              No relationship with Jesus? Bad relationship with the Church? This is for you.
+            </p>
+            <p class="home-hero-meta">Sundays at 10am · Camacho Elementary, Leander</p>
+            <div class="home-hero-actions">
+              <a class="home-btn" href="visit.html">Plan a Visit</a>
+              <a class="home-textlink" href="messages.html">or watch a message first</a>
+            </div>
           </div>
-          <div class="service-bar">
-            <div><small>Location</small><strong>Camacho Elementary</strong></div>
-            <div><small>Address</small><strong>501 Municipal Dr, Leander, TX 78641</strong></div>
-          </div>
+          <img
+            class="home-img home-hero-img"
+            src="assets/images/room-1200.jpg"
+            srcset="assets/images/room-1200.jpg 1200w, assets/images/room-2000.jpg 2000w"
+            sizes="(min-width: 900px) 44vw, calc(100vw - 28px)"
+            width="1200"
+            height="801"
+            fetchpriority="high"
+            loading="eager"
+            alt="People talking together before a Sunday service"
+          />
         </div>
       </section>
-      <div class="ticker">
-        <div>
-          <span>Belong before you believe</span> ◆ <span>No crap coffee</span> ◆
-          <span>Your kids will beg to come back</span> ◆ <span>Truth and grace</span> ◆
-          <span>Real people with real problems</span> ◆ <span>Your story matters to us</span> ◆
+
+      <section class="home-sec home-times">
+        <div class="wrap home-times-grid">
+          <div class="home-times-copy">
+            <h2>Sundays at 10am</h2>
+            <p class="home-times-addr">
+              Camacho Elementary —
+              <a
+                href="https://www.google.com/maps/dir/?api=1&amp;destination=501+Municipal+Dr%2C+Leander%2C+TX+78641"
+                target="_blank"
+                rel="noopener noreferrer"
+                >501 Municipal Dr, Leander, TX 78641</a
+              >
+            </p>
+            <p class="home-times-note">
+              Someone will be in the lot to point you to guest parking, and someone else will walk
+              you in from there.
+            </p>
+          </div>
+          <img
+            class="home-img home-portrait home-times-img"
+            src="assets/images/welcome-1200.jpg"
+            srcset="assets/images/welcome-1200.jpg 1200w, assets/images/welcome-2000.jpg 2000w"
+            sizes="(min-width: 900px) 34vw, calc(100vw - 28px)"
+            width="1200"
+            height="1800"
+            loading="lazy"
+            alt="A child running ahead to meet a greeter at the door"
+          />
+        </div>
+      </section>
+
+      <section class="home-sec home-like">
+        <div class="wrap home-like-grid">
+          <img
+            class="home-img home-portrait home-like-img"
+            src="assets/images/provider-1200.jpg"
+            srcset="assets/images/provider-1200.jpg 1200w, assets/images/provider-2000.jpg 2000w"
+            sizes="(min-width: 900px) 32vw, calc(100vw - 28px)"
+            width="1200"
+            height="1792"
+            loading="lazy"
+            alt="A man standing in the hallway before a service"
+          />
+          <ul class="home-like-list">
+            <li>The music's loud enough that nobody will hear you sing.</li>
+            <li>No crap coffee.</li>
+            <li>A lot of us have tattoos. Including the guy preaching.</li>
+            <li>You don't have to know anything to follow along.</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="home-band">
+        <div class="wrap home-band-inner">
+          <span>Show up.</span>
+          <span>Sit wherever.</span>
+          <span>Come back.</span>
         </div>
       </div>
-      <section class="section band">
-        <div class="wrap" data-reveal>
-          <div class="section-head">
-            <span class="kicker">What to expect</span>
-            <div>
-              <h2>Messy people welcome.</h2>
-              <p>Messy church full of messy people. Men becoming better men. Truth AND Grace.</p>
-            </div>
+
+      <section class="home-sec home-kids">
+        <div class="wrap">
+          <div class="home-kids-top">
+            <h2>Your kids will beg to come back.</h2>
+            <img
+              class="home-img home-portrait home-kids-img"
+              src="assets/images/kids-dad-1200.jpg"
+              srcset="assets/images/kids-dad-1200.jpg 1200w, assets/images/kids-dad-2000.jpg 2000w"
+              sizes="(min-width: 900px) 30vw, calc(100vw - 28px)"
+              width="1200"
+              height="1797"
+              loading="lazy"
+              alt="A dad lifting his baby at Axiom Kids"
+            />
           </div>
+          <ul class="home-kids-list">
+            <li>
+              <strong>Have fun.</strong> Games, friends their own age, and an environment built for
+              them.
+            </li>
+            <li>
+              <strong>Stay safe.</strong> Every volunteer is background checked. You get a tag, your
+              kid gets the same tag, and nobody else can pick them up.
+            </li>
+            <li>
+              <strong>Meet Jesus.</strong> Worship with other kids their age and a Bible teaching
+              that actually makes sense to them.
+            </li>
+          </ul>
         </div>
       </section>
-      <section class="photo-split" data-reveal>
-        <img src="assets/images/weece-family.jpg" alt="The Weece family" />
-        <div class="photo-copy">
-          <span class="kicker">Meet our pastor</span>
-          <h2>Hey, we're the Weeces.</h2>
-          <p>
-            We moved to Leander in August 2024 to start a brand new church to help people find
-            greater levels of community and purpose for their lives.
-          </p>
-          <p>
-            We want Axiom Church to be a place where anyone can belong even before they believe and
-            have a real and authentic relationship with Jesus. We cannot wait to meet you and hear
-            your story!
-          </p>
-          <p><strong>Josiah Weece</strong><br />Lead Pastor</p>
-        </div>
-      </section>
-      <section class="section dark">
-        <div class="wrap" data-reveal>
-          <div class="section-head">
-            <span class="kicker">Recent messages</span>
-            <div>
-              <h2>Keep up with Axiom.</h2>
-              <p>Keep up with our most recent messages by downloading the Axiom Church App.</p>
-              <div class="actions">
-                <a class="pill fill" href="https://www.youtube.com/@AxiomChurchTX"
-                  >Watch messages</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="section cta">
-        <div class="wrap" data-reveal>
-          <p class="statement">Join us Sunday at <em>10 AM.</em></p>
-          <div class="actions"><a class="pill" href="visit.html">Plan a visit</a></div>
+
+      <!-- TODO: proof section. A 60-90 second testimony video goes here.
+           Renders nothing until we have the real footage - no stock video, no
+           stand-in image.
+           <section id="proof"></section> -->
+
+      <section class="home-sec home-next">
+        <div class="wrap home-next-grid">
+          <a class="home-card" href="messages.html">
+            <span class="home-card-title">Watch a message</span>
+            <span class="home-card-body">See what a Sunday's actually like.</span>
+          </a>
+          <a class="home-card" href="visit.html">
+            <span class="home-card-title">Plan a Visit</span>
+            <span class="home-card-body">Tell us you're coming and we'll be looking for you.</span>
+          </a>
+          <!-- TODO: replace #rally-point with the Planning Center form URL. -->
+          <a class="home-card" href="#rally-point">
+            <span class="home-card-title">Rally Point</span>
+            <span class="home-card-body"
+              >Free food, free childcare, and nobody's going to ask you for money.</span
+            >
+          </a>
         </div>
       </section>
     </main>
+    <div class="home-stickycta" data-sticky-cta>
+      <a class="home-btn home-btn-block" href="visit.html">Plan a Visit</a>
+    </div>
     <div data-footer></div>
     <script src="js/main.js"></script>
+    <script>
+      // Reveal the sticky mobile CTA only once the hero has scrolled out of view.
+      (() => {
+        const hero = document.querySelector(".home-hero");
+        const bar = document.querySelector("[data-sticky-cta]");
+        if (!hero || !bar) return;
+        new IntersectionObserver(([e]) => bar.classList.toggle("is-visible", !e.isIntersecting), {
+          threshold: 0,
+        }).observe(hero);
+      })();
+    </script>
   </body>
 </html>
