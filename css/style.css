@@ -857,15 +857,21 @@ h1 {
   content: "";
   position: absolute;
   inset: 0;
+  /* Phone scrim. The copy block starts as high as 79% up from the hero's
+     bottom edge on a short viewport, so the veil has to still be heavy there.
+     White 12px text needs an effective background luminance <= 0.1833 to clear
+     4.5:1; over a pure-white photo highlight that takes 255 - 239a <= 118.7,
+     i.e. a >= 0.57. The curve therefore holds 58% up to 84% and only then
+     releases, so the whole copy region is covered with margin. */
   background: linear-gradient(
     to top,
     var(--ink-deep) 0%,
-    color-mix(in srgb, var(--ink-deep) 98%, transparent) 16%,
-    color-mix(in srgb, var(--ink-deep) 86%, transparent) 28%,
-    color-mix(in srgb, var(--ink-deep) 55%, transparent) 42%,
-    color-mix(in srgb, var(--ink-deep) 24%, transparent) 58%,
-    color-mix(in srgb, var(--ink-deep) 6%, transparent) 74%,
-    color-mix(in srgb, var(--ink-deep) 0%, transparent) 88%
+    color-mix(in srgb, var(--ink-deep) 94%, transparent) 30%,
+    color-mix(in srgb, var(--ink-deep) 84%, transparent) 55%,
+    color-mix(in srgb, var(--ink-deep) 66%, transparent) 75%,
+    color-mix(in srgb, var(--ink-deep) 58%, transparent) 84%,
+    color-mix(in srgb, var(--ink-deep) 26%, transparent) 93%,
+    color-mix(in srgb, var(--ink-deep) 0%, transparent) 100%
   );
 }
 .home .hero-in {
@@ -1088,7 +1094,9 @@ h1 {
   line-height: 1.05;
 }
 .home .band span:nth-child(3) {
-  color: var(--red);
+  /* --red measures 2.82:1 on this photo at phone width, under the 3:1
+     large-text floor; it clears at 4.19:1 from 860px up, where it stays red. */
+  color: var(--paper);
 }
 
 /* ---------- KIDS ---------- */
@@ -1369,6 +1377,9 @@ h1 {
   .home .kids-col {
     display: grid;
     gap: 40px;
+  }
+  .home .band span:nth-child(3) {
+    color: var(--red);
   }
   .home .sticky {
     display: none;
