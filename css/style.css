@@ -57,10 +57,6 @@ select {
   display: flex;
   align-items: center;
   gap: 30px;
-  transition: height 0.55s var(--ease);
-}
-.header.compact .nav {
-  height: 68px;
 }
 .logo {
   display: flex;
