@@ -1279,7 +1279,7 @@ h1 {
     background-image: var(--img);
     background-size: cover;
     background-position: 50% 30%;
-    filter: blur(48px) saturate(0.85) brightness(0.52);
+    filter: blur(34px) saturate(0.85) brightness(0.52);
   }
   /* the sharp photo fades in over that wash -- no hard seam anywhere */
   .home .hero .slide::after {
@@ -1304,7 +1304,7 @@ h1 {
   }
   /* the neon sign sits on a dark hedge -- lift its wash and nudge the photo right */
   .home .hero .slide[data-img="h3"]::before {
-    filter: blur(48px) saturate(0.9) brightness(0.86);
+    filter: blur(34px) saturate(0.9) brightness(0.86);
   }
   .home .hero .slide[data-img="h3"]::after {
     background-position: 20% 26%;
@@ -1312,7 +1312,7 @@ h1 {
   /* the toddler room is bright white -- let its wash stay light instead of
      crushing it dark. The copy's own scrim still carries the text contrast. */
   .home .hero .slide[data-img="h4"]::before {
-    filter: blur(48px) saturate(0.55) brightness(1.18);
+    filter: blur(34px) saturate(0.55) brightness(1.18);
   }
   .home .hero::after {
     left: 0;
@@ -1371,8 +1371,6 @@ h1 {
   }
   .home .kids-img {
     aspect-ratio: 4/5;
-    position: sticky;
-    top: 32px;
   }
   .home .kids-col {
     display: grid;
