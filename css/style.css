@@ -853,7 +853,8 @@ h1 {
   position: absolute;
   top: calc(100% + 8px);
   left: -14px;
-  min-width: 232px;
+  width: max-content;
+  min-width: 148px;
   padding: 5px;
   background: var(--paper);
   border: 1px solid var(--line);
@@ -866,7 +867,7 @@ h1 {
 }
 .menu .panel a {
   display: block;
-  padding: 9px 12px;
+  padding: 8px 11px;
   border-radius: 8px;
   font-size: 15px;
   opacity: 1;
@@ -915,6 +916,7 @@ h1 {
   }
   .menu .panel {
     position: static;
+    width: auto;
     min-width: 0;
     padding: 2px 0 8px 14px;
     background: none;
