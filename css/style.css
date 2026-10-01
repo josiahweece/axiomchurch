@@ -851,6 +851,9 @@ h1 {
 .menu .panel {
   display: none;
   position: absolute;
+  min-height: 0;
+  justify-content: flex-start;
+  transition: none;
   top: calc(100% + 8px);
   left: -14px;
   width: max-content;
