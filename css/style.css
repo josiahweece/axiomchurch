@@ -1540,6 +1540,11 @@ h1 {
    Plan a Visit page (visit.html). All rules are scoped under main.visit.
    =========================================================================== */
 /* tokens used only by the visit page */
+/* match the approved prototype: sentence-case headings, plain kicker, 1160px column */
+.visit h1,.visit h2,.visit .fold-btn,.visit summary{text-transform:none}
+.visit .kicker{padding-left:0}
+.visit .kicker::before{display:none}
+.visit .wrap{width:min(100% - 40px,1120px);margin-inline:auto;padding-inline:0}
 :root{--red-hover:#A81710;--field:#DEDEDE}
 
 /* Layout: a practical guide built around one action. The form CTA is in the
@@ -1553,7 +1558,6 @@ h1 {
 
 /* PHOTO STRIP — a quiet, wide crop above the hero. Muted so the red owns the page. */
 .visit .strip-photo{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;filter:sepia(.18) saturate(1.45) contrast(1.06) brightness(1.03)}
-@media (min-width:900px){.visit .strip-photo{max-height:340px;object-position:50% 30%}}
 
 /* PAGE HEAD — solid red band, white type. Carries the first CTA. */
 .visit .visit-hero{background:var(--red-deep);color:#fff}
@@ -1671,7 +1675,7 @@ h1 {
 
 /* PHOTO BAND — full-bleed, between the details card and the form */
 .visit .band-photo{width:100%;height:auto;aspect-ratio:3/1;object-fit:cover;object-position:50% 0}
-@media (min-width:900px){.band-photo{aspect-ratio:3/1;max-height:460px}}
+@media (min-width:900px){.visit .band-photo{aspect-ratio:3/1;max-height:460px}}
 
 /* FORM HANDOFF */
 .visit .formwrap{background:var(--ink-deep);color:#fff;padding-block:clamp(48px,7vw,88px)}
