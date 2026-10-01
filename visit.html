@@ -19,7 +19,11 @@
   <body>
     <div data-header></div>
     <main class="visit">
-<img class="strip-photo" src="assets/images/visit-doors.jpg" srcset="assets/images/visit-doors.jpg 1600w, assets/images/visit-doors-2x.jpg 2880w" sizes="100vw" alt="Two greeters waving from the front doors at Camacho Elementary" width="1600" height="900" fetchpriority="high">
+<div class="herosplit">
+<picture class="strip-pic">
+  <source media="(min-width:900px)" srcset="assets/images/visit-doors-split.jpg 1400w, assets/images/visit-doors-split-2x.jpg 2400w" sizes="50vw">
+  <img class="strip-photo" src="assets/images/visit-doors.jpg" srcset="assets/images/visit-doors.jpg 1600w, assets/images/visit-doors-2x.jpg 2880w" sizes="100vw" alt="Two greeters waving from the front doors at Camacho Elementary" width="1600" height="900" fetchpriority="high">
+</picture>
 
 <section class="visit-hero">
   <header class="head wrap">
@@ -37,6 +41,7 @@
     </ul>
   </header>
 </section>
+</div>
 
 <div class="wrap">
   <div class="shell">

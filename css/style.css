@@ -853,7 +853,6 @@ h1 {
   position: absolute;
   min-height: 0;
   justify-content: flex-start;
-  transition: none;
   top: calc(100% + 8px);
   left: -14px;
   width: max-content;
@@ -1563,7 +1562,18 @@ h1 {
 
 /* PHOTO STRIP — a quiet, wide crop above the hero. Muted so the red owns the page. */
 .visit .strip-photo{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;filter:sepia(.18) saturate(1.45) contrast(1.06) brightness(1.03)}
-@media (min-width:900px){.visit .strip-photo{max-height:400px;object-position:50% 0}}
+/* split hero on desktop: copy left, photo right, equal height */
+.visit .herosplit{display:grid;grid-template-columns:1fr}
+@media (min-width:900px){
+  .visit .herosplit{grid-template-columns:1fr 1fr;align-items:stretch}
+  .visit .herosplit .strip-pic{order:2;display:block;min-height:0}
+  .visit .herosplit .strip-photo{height:100%;max-height:none;aspect-ratio:auto;object-position:50% 50%}
+  .visit .herosplit .visit-hero{order:1;display:flex;align-items:center}
+  .visit .herosplit .head{width:100%;max-width:none;padding:clamp(48px,6vw,88px) clamp(32px,5vw,80px) clamp(48px,6vw,88px) max(32px,calc((100vw - 1120px)/2))}
+  .visit .herosplit .head h1{font-size:clamp(2.6rem,3.8vw,3.6rem)}
+  .visit .herosplit .head-cta{flex-direction:column;align-items:flex-start;gap:10px}
+  .visit .herosplit .btn{white-space:nowrap}
+}
 
 /* PAGE HEAD — solid red band, white type. Carries the first CTA. */
 .visit .visit-hero{background:var(--red-deep);color:#fff}
