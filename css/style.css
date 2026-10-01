@@ -1560,7 +1560,7 @@ h1 {
 
 /* PHOTO STRIP — a quiet, wide crop above the hero. Muted so the red owns the page. */
 .visit .strip-photo{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;filter:sepia(.18) saturate(1.45) contrast(1.06) brightness(1.03)}
-@media (min-width:900px){.visit .strip-photo{max-height:400px;object-position:50% 28%}}
+@media (min-width:900px){.visit .strip-photo{max-height:400px;object-position:50% 0}}
 
 /* PAGE HEAD — solid red band, white type. Carries the first CTA. */
 .visit .visit-hero{background:var(--red-deep);color:#fff}
