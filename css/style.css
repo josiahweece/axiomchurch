@@ -627,11 +627,32 @@ h1 {
   .form .wide {
     grid-column: auto;
   }
+  /* Mobile footer: statement full-width, Explore + Connect side by side,
+     Sunday full-width. Stacking all four ran the footer past 1000px. */
+  .footer {
+    padding: 46px 0 24px;
+  }
   .footer-main {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 24px;
+  }
+  .footer-main > :first-child,
+  .footer-main > :last-child {
+    grid-column: 1 / -1;
+  }
+  /* .footer .footer-main h3 outranks the appended .footer h3 { font-size: 30px }
+     at the end of the file, which a plain .footer h3 here would lose to. */
+  .footer .footer-main h3 {
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+  .footer ul {
+    line-height: 1.9;
   }
   .footer-bottom {
     display: block;
+    margin-top: 30px;
+    padding-top: 16px;
   }
   .poster {
     aspect-ratio: 1/1;
