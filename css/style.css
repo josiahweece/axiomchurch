@@ -851,10 +851,10 @@ h1 {
 .menu .panel {
   display: none;
   position: absolute;
-  top: calc(100% + 16px);
+  top: calc(100% + 8px);
   left: -14px;
   min-width: 232px;
-  padding: 8px;
+  padding: 5px;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -866,7 +866,7 @@ h1 {
 }
 .menu .panel a {
   display: block;
-  padding: 10px 12px;
+  padding: 9px 12px;
   border-radius: 8px;
   font-size: 15px;
   opacity: 1;
