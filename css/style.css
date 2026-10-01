@@ -804,6 +804,137 @@ h1 {
 }
 
 /* ===========================================================================
+   HEADER NAV: three click-to-open groups, two links, the CTA. Desktop panels
+   drop down under their trigger; inside the phone drawer the same groups are
+   accordions. Placed after the merged header overrides so these win on order.
+   =========================================================================== */
+.menu .group {
+  position: relative;
+}
+.menu .trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: var(--ink);
+  opacity: 0.72;
+  cursor: pointer;
+}
+.menu .trigger:hover,
+.menu .trigger.active,
+.menu .group.open > .trigger {
+  opacity: 1;
+  color: var(--red-deep);
+}
+/* The rotation lives on the element, not the ::before, so the global
+   reduced-motion rule (* { transition: none }) can switch it off. */
+.menu .chev {
+  display: block;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s var(--ease);
+}
+.menu .chev::before {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+}
+.menu .group.open > .trigger .chev {
+  transform: translateY(2px) rotate(225deg);
+}
+.menu .panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 16px);
+  left: -14px;
+  min-width: 232px;
+  padding: 8px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--ink) 14%, transparent);
+  z-index: 60;
+}
+.menu .group.open > .panel {
+  display: block;
+}
+.menu .panel a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  opacity: 1;
+  color: var(--ink);
+}
+.menu .panel a:hover,
+.menu .panel a.active {
+  background: var(--band);
+  color: var(--red-deep);
+}
+.menu .trigger:focus-visible,
+.menu a:focus-visible,
+.nav .pill:focus-visible,
+.menu-toggle:focus-visible,
+.logo:focus-visible {
+  outline: 2px solid var(--red-deep);
+  outline-offset: 3px;
+}
+.menu .menu-cta {
+  display: none;
+  opacity: 1; /* .menu a dims links to .72; the drawer button must stay solid */
+}
+@media (max-width: 900px) {
+  .menu {
+    gap: 0;
+    align-items: stretch;
+    padding: 6px 24px 24px;
+    max-height: calc(100svh - 72px);
+    overflow-y: auto;
+  }
+  .menu .group,
+  .menu .link {
+    width: 100%;
+  }
+  .menu .trigger,
+  .menu .link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+    opacity: 1;
+    color: var(--ink);
+  }
+  .menu .panel {
+    position: static;
+    min-width: 0;
+    padding: 2px 0 8px 14px;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .menu .panel a {
+    padding: 11px 0;
+    border-radius: 0;
+    font-size: 16px;
+  }
+  .menu .menu-cta {
+    display: flex;
+    width: 100%;
+    margin-top: 18px;
+  }
+}
+
+/* ===========================================================================
    HOMEPAGE (index.html only)
    Ported from REFERENCE-homepage.html. Every selector is scoped under .home
    (which sits on <main>) because the reference reuses class names this repo
