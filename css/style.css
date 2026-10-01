@@ -1690,7 +1690,18 @@ h1 {
 
 /* PHOTO BAND — full-bleed, between the details card and the form */
 .visit .band-photo{width:100%;height:auto;aspect-ratio:3/1;object-fit:cover;object-position:50% 0}
-@media (min-width:900px){.visit .band-photo{aspect-ratio:3/1;max-height:460px}}
+@media (min-width:900px){
+  .visit .band-photo{aspect-ratio:3/1;max-height:460px}
+  /* desktop: photo dissolves into the black form block below it */
+  .visit .fadeband{display:grid;background:var(--ink-deep)}
+  .visit .fadeband .band-photo,.visit .fadeband::after{grid-area:1/1}
+  .visit .fadeband::after{content:"";display:block;width:100%;height:100%;pointer-events:none;
+    background:linear-gradient(to bottom,
+      rgba(16,16,16,0) 18%,rgba(16,16,16,.12) 38%,rgba(16,16,16,.35) 56%,
+      rgba(16,16,16,.62) 72%,rgba(16,16,16,.86) 86%,rgba(16,16,16,.97) 95%,
+      var(--ink-deep) 100%)}
+  .visit .fadeband + .formwrap{padding-top:clamp(16px,3vw,36px)}
+}
 
 /* FORM HANDOFF */
 .visit .formwrap{background:var(--ink-deep);color:#fff;padding-block:clamp(48px,7vw,88px)}
