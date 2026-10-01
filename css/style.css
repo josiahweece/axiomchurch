@@ -1902,3 +1902,7 @@ h1 {
 @media (prefers-reduced-motion:reduce){
   .kidspage *{transition:none!important;animation:none!important}
 }
+
+/* Header runs edge to edge on wide screens, so the logo and the Plan a Visit
+   button sit near the window edges instead of inside the 1240px content box. */
+.header .nav.wrap{width:auto;max-width:none;margin:0;padding-inline:clamp(14px,2.2vw,32px)}
