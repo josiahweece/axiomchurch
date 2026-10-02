@@ -1906,3 +1906,11 @@ h1 {
 /* Header runs edge to edge on wide screens, so the logo and the Plan a Visit
    button sit near the window edges instead of inside the 1240px content box. */
 .header .nav.wrap{width:auto;max-width:none;margin:0;padding-inline:clamp(14px,2.2vw,32px)}
+
+/* Kids page: hairlines between the three big-word rows on desktop, so each
+   row reads as its own block instead of floating in one white field. */
+@media (min-width:900px){
+  .kidspage .three{gap:0;padding-block:clamp(24px,3vw,44px)}
+  .kidspage .row{padding-block:clamp(48px,5.5vw,84px)}
+  .kidspage .row + .row{border-top:1px solid var(--line)}
+}
