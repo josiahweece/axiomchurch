@@ -1931,3 +1931,9 @@ h1 {
   .kidspage .handoff img{aspect-ratio:auto;max-height:340px}
   .kidspage .handoff-copy{padding:36px clamp(32px,5vw,72px)}
 }
+
+/* Kids page, phone: hairline above the footer, so the last section and the
+   footer don't run together now that the gap between them is shorter. */
+@media (max-width:899px){
+  main.kidspage ~ [data-footer] .footer{border-top:1px solid var(--line)}
+}
