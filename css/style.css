@@ -1922,3 +1922,12 @@ h1 {
 @media (max-width:899px){
   main.kidspage ~ [data-footer] .footer,main.visit ~ [data-footer] .footer{padding-bottom:108px}
 }
+
+/* Kids page: shorter black form band. */
+.kidspage .handoff img{aspect-ratio:2/1}
+.kidspage .handoff-copy{padding:26px 20px 30px}
+.kidspage .formwrap .lede{margin-bottom:18px}
+@media (min-width:900px){
+  .kidspage .handoff img{aspect-ratio:auto;max-height:340px}
+  .kidspage .handoff-copy{padding:36px clamp(32px,5vw,72px)}
+}
