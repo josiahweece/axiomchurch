@@ -1997,4 +1997,4 @@ h1 {
 
 /* Messages page: tagline under the band headline, and the framing of its photo. */
 .msgpage .room p.tag{color:var(--on-stage);font-family:var(--display);font-weight:800;font-size:clamp(1.15rem,2.6vw,1.4rem);letter-spacing:-.015em;line-height:1.2;margin:0 0 8px}
-.msgpage .room img{object-position:60% 30%}
+.msgpage .room img{object-position:50% 32%}
