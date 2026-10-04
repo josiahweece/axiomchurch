@@ -1937,3 +1937,60 @@ h1 {
 @media (max-width:899px){
   main.kidspage ~ [data-footer] .footer{border-top:1px solid var(--line)}
 }
+
+/* ==========================================================================
+   Messages page (messages.html). All rules are scoped under main.msgpage.
+   Lights down: near-black ground, one large player, a most-watched row,
+   then a photo of the room and one button.
+   ========================================================================== */
+.msgpage{background:var(--stage);color:var(--on-stage);font-family:var(--body);font-size:17px;line-height:1.55; --stage:#0D0D0D;--stage-rule:#2B2B2B;--on-stage:#FFFFFF;--on-stage-soft:#B4B4B4;--glow:rgba(240,95,86,.22)}
+.msgpage img{max-width:100%}
+.msgpage h1,.msgpage h2{text-transform:none}
+.msgpage .wrap{width:min(100% - 40px,1160px);margin-inline:auto;padding-inline:0}
+.msgpage .btn{display:inline-block;background:var(--red);color:var(--ink-deep);font-family:var(--display);font-weight:700; font-size:1.02rem;padding:15px 30px;border-radius:2px;text-decoration:none;text-align:center;transition:background .18s ease}
+.msgpage .btn:hover{background:#E8524A}
+.msgpage .btn:focus-visible{outline:3px solid var(--on-stage);outline-offset:3px}
+.msgpage .textlink{color:var(--on-stage);font-weight:700;text-decoration:underline;text-decoration-color:var(--red); text-decoration-thickness:2px;text-underline-offset:5px}
+.msgpage .textlink:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+.msgpage .stage{padding-block:clamp(34px,6vw,72px) clamp(40px,6vw,80px)}
+.msgpage .m-kicker{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.14em; font-size:.74rem;color:var(--red);margin:0 0 14px}
+.msgpage .stage h1{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,8.6vw,4.6rem); line-height:.94;letter-spacing:-.04em;margin:0 0 16px;max-width:13ch;text-wrap:balance}
+.msgpage .stage .lede{font-size:clamp(1.05rem,2.5vw,1.22rem);color:var(--on-stage-soft);margin:0 0 clamp(26px,4vw,40px);max-width:46ch}
+.msgpage .player{position:relative;aspect-ratio:16/9;width:100%;max-width:100%;background:#000;border-radius:4px;overflow:hidden; box-shadow:0 0 0 1px var(--stage-rule),0 44px 120px -20px var(--glow)}
+.msgpage .player iframe,.msgpage .player img{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+.msgpage .under{display:flex;flex-wrap:wrap;gap:14px 32px;align-items:baseline;justify-content:space-between; margin-top:22px;padding-top:20px;border-top:1px solid var(--stage-rule)}
+.msgpage .under p{margin:0;color:var(--on-stage-soft);min-width:0}
+.msgpage .under p b{color:var(--on-stage);font-family:var(--display);font-weight:800}
+.msgpage .more{display:flex;flex-wrap:wrap;gap:12px 28px}
+.msgpage .shelf-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin-top:clamp(40px,6vw,64px);margin-bottom:16px}
+.msgpage .shelf-head h2{font-family:var(--display);font-weight:900;font-size:clamp(1.5rem,4.4vw,2.1rem);line-height:1;letter-spacing:-.03em;margin:0}
+.msgpage .shelf-head p{margin:0;color:var(--on-stage-soft);font-size:.98rem}
+.msgpage .shelf{list-style:none;margin:0 -20px 0 0;padding:4px 20px 14px 4px;display:flex;gap:16px;overflow-x:auto; scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--stage-rule) transparent;-webkit-overflow-scrolling:touch}
+.msgpage .shelf:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+.msgpage .shelf li{flex:none;width:min(72vw,300px);scroll-snap-align:start}
+.msgpage .mcard{all:unset;box-sizing:border-box;display:block;width:100%;cursor:pointer}
+.msgpage .mcard:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+.msgpage .thumb{position:relative;display:block;aspect-ratio:16/9;border-radius:4px;overflow:hidden;background:#000; box-shadow:0 0 0 1px var(--stage-rule)}
+.msgpage .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease,opacity .2s ease}
+.msgpage .mcard:hover .thumb img{transform:scale(1.04)}
+.msgpage .mini{position:absolute;left:10px;bottom:10px;width:34px;height:34px;border-radius:50%;background:var(--red);display:grid;place-items:center}
+.msgpage .mini::after{content:"";margin-left:3px;border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent var(--ink-deep)}
+.msgpage .mcard.on .thumb{box-shadow:0 0 0 3px var(--red)}
+.msgpage .mcard .t{display:block;margin-top:12px;font-family:var(--display);font-weight:800;font-size:1.04rem;line-height:1.2;letter-spacing:-.01em;color:var(--on-stage)}
+.msgpage .mcard .d{display:block;margin-top:4px;color:var(--on-stage-soft);font-size:.9rem}
+.msgpage .room{position:relative;background:var(--ink-deep);overflow:hidden}
+.msgpage .room img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 30%}
+.msgpage .room-copy{padding:34px 20px 44px}
+.msgpage .room h2{font-family:var(--display);font-weight:900;font-size:clamp(2rem,6.6vw,3.4rem); line-height:.98;letter-spacing:-.035em;margin:0 0 12px;max-width:14ch;text-wrap:balance}
+.msgpage .room p{color:var(--on-stage-soft);margin:0 0 24px;max-width:38ch}
+.msgpage .room-cta{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center}
+@media (min-width:900px){
+  .msgpage .stage h1{max-width:none}
+  .msgpage .room{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center}
+  .msgpage .room img{aspect-ratio:auto;height:100%;max-height:460px}
+  .msgpage .room-copy{padding:56px clamp(32px,5vw,72px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .msgpage *{transition:none!important;animation:none!important}
+}
+.msgpage [hidden]{display:none!important}

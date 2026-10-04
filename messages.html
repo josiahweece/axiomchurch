@@ -4,85 +4,111 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Messages | Axiom Church</title>
+    <meta
+      name="description"
+      content="Watch the latest message from Axiom Church in Leander, TX. See what a Sunday sounds like before you come."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div data-header></div>
-    <main>
-      <header class="page-hero">
-        <div class="wrap">
-          <span class="kicker">Media</span>
-          <h1>Messages for real life.</h1>
-          <p>Catch up on recent teaching and explore past series.</p>
+    <main class="msgpage">
+      <section class="stage wrap">
+        <p class="m-kicker">Messages</p>
+        <h1>Watch one before you come.</h1>
+        <p class="lede">This is what a Sunday sounds like. A Bible teaching you can use on Tuesday. You don't have to know anything to follow along.</p>
+
+        <!-- The player loads the channel's newest full-length upload on its own.
+             UULF + the channel ID is YouTube's "all long-form uploads, newest first" list. -->
+        <div class="player" id="player">
+          <iframe
+            id="playerFrame"
+            src="https://www.youtube-nocookie.com/embed/videoseries?list=UULFpioqNfyWu7BqiqG4RqcRfA&rel=0"
+            title="The latest message from Axiom Church"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
         </div>
-      </header>
-      <section class="section">
-        <div class="wrap">
-          <div class="section-head">
-            <span class="kicker">Most recent</span>
-            <div>
-              <h2>The Worst Cliffhanger in the Bible</h2>
-              <p>
-                Josiah Weece · June 7, 2026. Jonah’s final chapter exposes the gap between doing the
-                will of God and having the heart of God.
-              </p>
-              <div class="actions">
-                <a class="pill fill" href="https://www.youtube.com/@AxiomChurchTX"
-                  >Watch on YouTube</a
-                >
-              </div>
-            </div>
+
+        <div class="under">
+          <p><b>The latest message.</b> Straight from Sunday.</p>
+          <div class="more">
+            <a class="textlink" href="https://www.youtube.com/@AxiomChurchTX/videos" target="_blank" rel="noopener">Every message &rarr;</a>
+            <a class="textlink" href="https://www.youtube.com/@AxiomChurchTX/playlists" target="_blank" rel="noopener">Browse by series &rarr;</a>
           </div>
+        </div>
+
+        <!-- Most watched. Hidden until /api/popular answers; stays hidden if it fails. -->
+        <div id="popular" hidden>
+          <div class="shelf-head">
+            <h2>Most watched.</h2>
+            <p>Tap one and it plays up top.</p>
+          </div>
+          <ul class="shelf" id="shelf" tabindex="0" aria-label="Most watched messages. Scroll sideways for more."></ul>
         </div>
       </section>
-      <section class="section dark">
-        <div class="wrap">
-          <div class="section-head">
-            <span class="kicker">Media library</span>
-            <div><h2>Explore a series.</h2></div>
-          </div>
-          <div class="grid three">
-            <article class="poster">
-              <small>Series</small>
-              <h3>Jonah</h3>
-              <span class="arrow">→</span>
-            </article>
-            <article class="poster">
-              <small>Series</small>
-              <h3>Fight For Your Family</h3>
-              <span class="arrow">→</span>
-            </article>
-            <article class="poster">
-              <small>Series</small>
-              <h3>Anchors</h3>
-              <span class="arrow">→</span>
-            </article>
-            <article class="poster">
-              <small>Series</small>
-              <h3>Relationship Status</h3>
-              <span class="arrow">→</span>
-            </article>
-            <article class="poster">
-              <small>Series</small>
-              <h3>Regret Proof Your Life</h3>
-              <span class="arrow">→</span>
-            </article>
-            <article class="poster">
-              <small>Series</small>
-              <h3>Truth AND Grace</h3>
-              <span class="arrow">→</span>
-            </article>
+
+      <section class="room">
+        <img src="assets/images/h1-d.jpg" alt="People with their hands up, laughing, in the room on a Sunday" loading="lazy" width="2800" height="1575" />
+        <div class="room-copy">
+          <h2>Online is fine. In the room is better.</h2>
+          <p>Sundays at 10am. Camacho Elementary, Leander.</p>
+          <div class="room-cta">
+            <a class="btn" href="visit.html">Plan a Visit</a>
+            <a class="textlink" href="kids.html">Got kids? &rarr;</a>
           </div>
         </div>
       </section>
     </main>
     <div data-footer></div>
     <script src="js/main.js"></script>
+    <script>
+      /* Most watched row. Asks /api/popular for the list, builds one card per video,
+         and plays a card in the big player when it is tapped. */
+      (function () {
+        var box = document.getElementById('popular'),
+          shelf = document.getElementById('shelf'),
+          frame = document.getElementById('playerFrame'),
+          player = document.getElementById('player');
+        if (!box || !shelf || !frame || !window.fetch) return;
+        fetch('/api/popular')
+          .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+          .then(function (data) {
+            var list = (data && data.videos) || [];
+            if (!list.length) return;
+            list.forEach(function (v) {
+              if (!/^[\w-]{6,20}$/.test(v.id)) return;
+              var li = document.createElement('li'),
+                b = document.createElement('button'),
+                th = document.createElement('span'),
+                img = document.createElement('img'),
+                mini = document.createElement('span'),
+                t = document.createElement('span');
+              b.type = 'button'; b.className = 'mcard';
+              th.className = 'thumb'; mini.className = 'mini'; mini.setAttribute('aria-hidden', 'true');
+              img.src = 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg';
+              img.alt = ''; img.loading = 'lazy'; img.width = 480; img.height = 360;
+              t.className = 't'; t.textContent = v.title || 'Watch this message';
+              th.appendChild(img); th.appendChild(mini); b.appendChild(th); b.appendChild(t);
+              b.addEventListener('click', function () {
+                var on = shelf.querySelector('.mcard.on'); if (on) on.classList.remove('on');
+                b.classList.add('on');
+                frame.src = 'https://www.youtube-nocookie.com/embed/' + v.id + '?autoplay=1&rel=0';
+                player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              });
+              li.appendChild(b); shelf.appendChild(li);
+            });
+            if (shelf.children.length) box.hidden = false;
+          })
+          .catch(function () {});
+      })();
+    </script>
   </body>
 </html>
