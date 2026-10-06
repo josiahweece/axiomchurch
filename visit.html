@@ -37,7 +37,7 @@
   <header class="head wrap">
     <p class="kicker">Plan a visit</p>
     <h1>What to expect.</h1>
-    <p class="lede">Sunday's easier when we know you're coming. Someone meets you by name. Your kids' tags are already printed.</p>
+    <p class="lede">Sunday's easier when we know you're coming. Someone meets you by name. Your kids are already registered.</p>
     <div class="head-cta">
       <a class="btn" href="https://axiomchurch.churchcenter.com/people/forms/1302721" target="_blank" rel="noopener">Let us know you're coming</a>
       <span class="micro">Thirty seconds. We won't add you to a list.</span>
@@ -94,6 +94,15 @@
         </div></div></div>
       </section>
 
+      <section class="vproof" aria-labelledby="vproof-h">
+        <p class="kick">Mari&rsquo;s story</p>
+        <h2 id="vproof-h">She found Jesus here.</h2>
+        <button class="yt" type="button" data-id="sN4IMnzM7Ds" aria-label="Play Mari&rsquo;s story">
+          <img src="https://i.ytimg.com/vi/sN4IMnzM7Ds/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/sN4IMnzM7Ds/hqdefault.jpg'" alt="" loading="lazy" />
+          <span class="yt-play" aria-hidden="true"></span>
+        </button>
+      </section>
+
 <div class="sticky"><a class="btn" href="https://axiomchurch.churchcenter.com/people/forms/1302721" target="_blank" rel="noopener">Let us know you're coming</a></div>
     </main>
 
@@ -132,5 +141,19 @@
     </main>
     <div data-footer></div>
     <script src="js/main.js"></script>
+    <script>
+      // Mari's story: swap the thumbnail for the real player on tap.
+      document.querySelectorAll('.yt').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var f = document.createElement('iframe');
+          f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0';
+          f.title = "Mari's story";
+          f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+          f.allowFullscreen = true;
+          f.className = 'yt-frame';
+          b.replaceWith(f);
+        });
+      });
+    </script>
   </body>
 </html>

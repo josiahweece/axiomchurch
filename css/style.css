@@ -3051,3 +3051,14 @@ h1 {
 @media (min-width:860px){.home .proof-in{grid-template-columns:minmax(0,4fr) minmax(0,7fr)}}
 @media (prefers-reduced-motion:reduce){.home .yt img{transition:none}}
 
+/* ---------- Plan a Visit: Mari's story ---------- */
+.visit .vproof{padding-block:clamp(30px,4vw,44px);border-top:1px solid var(--line)}
+.visit .vproof .kick{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--red-deep);margin:0 0 10px}
+.visit .vproof h2{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,4.4vw,2.05rem);line-height:1.08;letter-spacing:-.025em;margin:0 0 18px}
+.visit .yt,.visit .yt-frame{position:relative;display:block;width:100%;max-width:100%;aspect-ratio:16/9;border:0;padding:0;border-radius:2px;overflow:hidden;background:var(--ink-deep)}
+.visit .yt{cursor:pointer}
+.visit .yt img{width:100%;height:100%;object-fit:cover}
+.visit .yt-play{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:var(--red-deep);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.visit .yt-play::before{content:"";position:absolute;left:27px;top:21px;border-style:solid;border-width:13px 0 13px 20px;border-color:transparent transparent transparent #fff}
+.visit .yt:focus-visible{outline:3px solid var(--red-deep);outline-offset:3px}
+
