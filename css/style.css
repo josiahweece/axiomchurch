@@ -3062,3 +3062,10 @@ h1 {
 .visit .yt-play::before{content:"";position:absolute;left:27px;top:21px;border-style:solid;border-width:13px 0 13px 20px;border-color:transparent transparent transparent #fff}
 .visit .yt:focus-visible{outline:3px solid var(--red-deep);outline-offset:3px}
 
+/* Plan a Visit: the site-wide ".faq div{display:none}" was hiding every answer */
+.visit .faq details .a{display:none}
+.visit .faq details[open] .a{display:block}
+/* What We Believe: keep the numbered belief buttons inside the wheel so they
+   never float above the phone menu */
+.beliefpage .wheel{isolation:isolate;z-index:0}
+
