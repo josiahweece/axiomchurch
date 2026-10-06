@@ -56,6 +56,7 @@
       <h3 class="tee" id="bt"></h3>
       <p class="btag" id="btag"></p>
       <p class="bd" id="bd"></p>
+      <p class="bwhen" id="bwhen" hidden></p>
       <p class="bcta"><a class="btn" id="bb" href="#"></a> <span class="need" id="bneed">Link needed</span></p>
       <button class="tomap" id="tomap" type="button">&uarr; Back to the map</button>
     </div>
@@ -89,7 +90,7 @@
     c.appendChild(a);c.appendChild(again);body.appendChild(t);body.appendChild(d);body.appendChild(c);
   }
   /* the battle plan */
-  var INFO={"rally-point": {"k": "Step 1", "t": "Rally Point", "g": "Everyone’s first step.", "d": "We feed you. We watch your kids. You meet some people. Find your people, find your purpose.", "b": "Sign up for Rally Point", "h": "https://axiomchurch.churchcenter.com/registrations/events/3899280", "n": 0}, "base-camp": {"k": "Step 2", "t": "Base Camp", "g": "Find your fit.", "d": "The step after Rally Point. You take a quick online assessment on how you’re wired. Then we spend a night talking through it, sharing real stories, and helping you find where you fit.", "b": "Sign up for Base Camp", "h": "mailto:josiah.weece@axiomchurch.com?subject=Sign%20me%20up%20for%20Base%20Camp", "n": 0}, "baptism": {"k": "Step 3 · Live on mission", "t": "Get baptized", "g": "", "d": "Go public with your faith in Jesus.", "b": "I want to get baptized", "h": "mailto:josiah.weece@axiomchurch.com?subject=I%20want%20to%20get%20baptized", "n": 0}, "serve": {"k": "Step 3 · Live on mission", "t": "Get on a team", "g": "", "d": "Don’t fill a spot. Find a purpose.", "b": "Find a team", "h": "mailto:josiah.weece@axiomchurch.com?subject=I%20want%20to%20join%20a%20team", "n": 0}, "groups": {"k": "Step 3 · Live on mission", "t": "Get in a group", "g": "", "d": "Find the people you would actually call.", "b": "Find a group", "h": "mailto:josiah.weece@axiomchurch.com?subject=I%20want%20to%20get%20in%20a%20group", "n": 0}, "give": {"k": "Step 3 · Live on mission", "t": "Give to the mission", "g": "", "d": "Help remove the next obstacle for someone.", "b": "Give", "h": "give.html", "n": 0}},ORDER=['rally-point','base-camp','baptism','serve','groups','give'];
+  var INFO={"rally-point": {"k": "Step 1", "t": "Rally Point", "g": "Everyone’s first step.", "d": "We feed you. We watch your kids. You meet some people. Find your people, find your purpose.", "b": "Sign up for Rally Point", "h": "https://axiomchurch.churchcenter.com/registrations/events", "n": 0}, "base-camp": {"k": "Step 2", "t": "Base Camp", "g": "Find your fit.", "d": "The step after Rally Point. You take a quick online assessment on how you’re wired. Then we spend a night talking through it, sharing real stories, and helping you find where you fit.", "b": "Sign up for Base Camp", "h": "mailto:josiah.weece@axiomchurch.com?subject=Sign%20me%20up%20for%20Base%20Camp", "n": 0}, "baptism": {"k": "Step 3 · Live on mission", "t": "Get baptized", "g": "", "d": "Go public with your faith in Jesus.", "b": "I want to get baptized", "h": "https://axiomchurch.churchcenter.com/people/forms/882949", "n": 0}, "serve": {"k": "Step 3 · Live on mission", "t": "Get on a team", "g": "", "d": "Don’t fill a spot. Find a purpose.", "b": "Find a team", "h": "https://axiomchurch.churchcenter.com/people/forms/810097", "n": 0}, "groups": {"k": "Step 3 · Live on mission", "t": "Get in a group", "g": "", "d": "Find the people you would actually call.", "b": "Find a group", "h": "mailto:josiah.weece@axiomchurch.com?subject=I%20want%20to%20get%20in%20a%20group", "n": 0}, "give": {"k": "Step 3 · Live on mission", "t": "Give to the mission", "g": "", "d": "Help remove the next obstacle for someone.", "b": "Give", "h": "give.html", "n": 0}},ORDER=['rally-point','base-camp','baptism','serve','groups','give'];
   var map=document.getElementById('map'),svg=document.getElementById('lines'),here=document.getElementById('here'),
       nodes={};[].forEach.call(document.querySelectorAll('.node'),function(n){nodes[n.dataset.id]=n;});
   var wideQ=matchMedia('(min-width:900px)'),sel='rally-point',mine=-1;
@@ -120,7 +121,7 @@
     if(!INFO[id])return; sel=id; var o=INFO[id];
     Object.keys(nodes).forEach(function(k2){nodes[k2].classList.toggle('sel',k2===id);nodes[k2].setAttribute('aria-pressed',k2===id?'true':'false');});
     document.getElementById('bk').textContent=o.k; document.getElementById('bt').textContent=o.t; document.getElementById('btag').textContent=o.g;
-    document.getElementById('bd').textContent=o.d; var bb=document.getElementById('bb'); bb.textContent=o.b; bb.href=o.h; document.getElementById('bneed').hidden=!o.n;
+    document.getElementById('bd').textContent=o.d; var bb=document.getElementById('bb'); bb.textContent=o.b; bb.href=o.h; var bw=document.getElementById('bwhen'); bw.textContent=o.w||''; bw.hidden=!o.w; document.getElementById('bneed').hidden=!o.n;
     var br=document.getElementById('brief'); [].forEach.call(br.children,function(c){c.style.animation='none';void c.offsetWidth;c.style.animation='';});
   }
   function status(i){ /* i = index of your next step in ORDER, -1 = clear, ORDER.length = everything taken */
@@ -136,6 +137,19 @@
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
   select(location.hash&&INFO[location.hash.slice(1)]?location.hash.slice(1):'rally-point'); draw();
   window.addEventListener('hashchange',function(){reveal(location.hash.slice(1));});
+  /* live sign-up links: the next upcoming Rally Point, Base Camp and Rooted from Church Center.
+     If this fails for any reason, the links already on the page stay as they are. */
+  if(window.fetch)fetch('/api/steps').then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d||!d.steps)return;
+    [['rally','rally-point',null],['base','base-camp',null],['rooted','groups','Sign up for Rooted']].forEach(function(m){
+      var e=d.steps[m[0]],o=INFO[m[1]];
+      if(!e||!o||!/^https:\/\/axiomchurch\.churchcenter\.com\/registrations\/events\/\d+$/.test(e.url))return;
+      o.h=e.url; if(m[2])o.b=m[2];
+      var t=e.starts_at&&new Date(e.starts_at);
+      if(t&&!isNaN(t))try{o.w='Next one: '+t.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',timeZone:'America/Chicago'});}catch(_){}
+    });
+    select(sel);
+  }).catch(function(){});
   document.addEventListener('click',function(e){var a2=e.target.closest('a[href^="#"]');if(a2&&a2.getAttribute('href').length>1)reveal(a2.getAttribute('href').slice(1));});
   back.addEventListener('click',function(){var onResult=!!body.querySelector('.rtitle');status(-1);ask(onResult?at:Math.max(0,at-1));});
   ask(0);
