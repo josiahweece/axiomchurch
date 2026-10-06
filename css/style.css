@@ -3033,3 +3033,5 @@ h1 {
 .praypage:not(.contactpage) .pask .pcheck input{accent-color:var(--p-dark)}
 .praypage:not(.contactpage) .pask .pstatus.err{color:var(--p-dark)}
 .praypage:not(.contactpage) .pask .pform input:focus-visible,.praypage:not(.contactpage) .pask .pform textarea:focus-visible{outline-color:var(--p-dark)}
+.contactpage .pask .p-wrap{padding-block:clamp(48px,7vw,88px)}
+.contactpage .pnote.cor{margin-top:36px}
