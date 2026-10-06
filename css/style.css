@@ -3069,3 +3069,12 @@ h1 {
    never float above the phone menu */
 .beliefpage .wheel{isolation:isolate;z-index:0}
 
+/* Join a Team, phone: arrows sit right under the timeline, above the scene,
+   so you can step through Sunday without scrolling down to find them */
+@media (max-width:899px){
+  .teampage .sunday-in{display:flex;flex-direction:column}
+  .teampage .sunday-in>.snav{order:1;margin:0 0 22px}
+  .teampage .sunday-in>.scene{order:2}
+  .teampage .snav .shint{display:none}
+}
+
