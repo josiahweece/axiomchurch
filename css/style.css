@@ -2864,4 +2864,19 @@ h1 {
   .givepage .gsplit .rsrc{color:color-mix(in srgb,var(--g-deep) 70%,#fff)}
   .givepage .ghero-photo img{object-position:50% 22%}
 }
+/* desktop: split hero (copy left, whole photo right) and tighter stats/form panels */
+@media (min-width:960px){
+  .givepage .ghero{display:grid;grid-template-columns:minmax(0,11fr) minmax(0,9fr);min-height:min(78vh,760px)}
+  .givepage .ghero-photo{position:relative;inset:auto;grid-column:2;grid-row:1}
+  .givepage .ghero-photo img{position:absolute;inset:0;object-position:50% 38%}
+  .givepage .ghero-photo::after{background:linear-gradient(to right,var(--g-dark) 0%,rgba(16,16,16,0) 18%)}
+  .givepage .ghero-in{grid-column:1;grid-row:1;align-self:center;width:100%;max-width:none;margin:0;
+    padding-block:72px;padding-left:max(20px,calc((100vw - 1160px)/2 + 20px));padding-right:48px}
+  .givepage .ghero h1{font-size:clamp(4rem,7vw,6.6rem)}
+
+  .givepage .gsplit{grid-template-columns:1fr 1fr}
+  .givepage .gsplit>.gring{justify-content:flex-end}
+  .givepage .gsplit>.gbox{justify-content:flex-start}
+  .givepage .gsplit .gring-in,.givepage .gsplit .gbox-in{width:100%;max-width:560px;margin:0;padding:56px 48px}
+}
 @media (prefers-reduced-motion:reduce){.givepage *{transition:none!important}}
