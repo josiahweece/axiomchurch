@@ -153,10 +153,11 @@
     if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();show((at+N-1)%N);tips[at].focus();}
   });
   /* drag to turn it by hand */
-  wheel.addEventListener('pointerdown',function(e){if(e.target.closest('.tip'))return;drag={x:e.clientX,y:e.clientY};goal=null;wheel.classList.add('dragging');try{wheel.setPointerCapture(e.pointerId);}catch(_){}});
-  wheel.addEventListener('pointermove',function(e){if(!drag)return;var dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;
+  wheel.addEventListener('pointerdown',function(e){if(e.target.closest('.tip'))return;drag={x:e.clientX,y:e.clientY,sx:e.clientX,touch:e.pointerType==='touch'};goal=null;wheel.classList.add('dragging');try{wheel.setPointerCapture(e.pointerId);}catch(_){}});
+  wheel.addEventListener('pointermove',function(e){if(!drag||drag.touch)return;var dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;
     q=norm(mul(mul(axis(0,1,0,dx*.008),axis(1,0,0,-dy*.008)),q));});
-  ['pointerup','pointercancel','lostpointercapture'].forEach(function(n){wheel.addEventListener(n,function(){drag=null;wheel.classList.remove('dragging');});});
+  /* on a phone a swipe steps to the next or previous belief instead of spinning freely */
+  ['pointerup','pointercancel','lostpointercapture'].forEach(function(n){wheel.addEventListener(n,function(e){if(drag&&drag.touch&&n==='pointerup'){var dx=e.clientX-drag.sx;if(Math.abs(dx)>35)show(dx<0?(at+1)%N:(at+N-1)%N);}drag=null;wheel.classList.remove('dragging');});});
   if('IntersectionObserver' in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting;}).observe(wheel);
   window.addEventListener('resize',size);
   (wide.addEventListener?wide.addEventListener.bind(wide,'change'):wide.addListener.bind(wide))(function(){size();if(at>=0)aim(at,true);});
