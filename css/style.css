@@ -2613,7 +2613,7 @@ h1 {
 .teampage .sunday{position:relative;overflow:hidden;background:var(--sky,#101010);color:var(--fg,#fff);transition:background-color .7s ease,color .5s ease;scroll-margin-top:70px;
   --fg:#fff;--soft:rgba(255,255,255,.72);--rule:rgba(255,255,255,.28);--card:rgba(255,255,255,.08);--accent:var(--red)}
 .teampage .sunday.light{--fg:var(--ink-deep);--soft:rgba(16,16,16,.74);--rule:rgba(16,16,16,.3);--card:rgba(255,255,255,.62);--accent:var(--ink-deep)}
-.teampage .sunday-in{position:relative;z-index:1;padding-block:clamp(44px,7vw,92px)}
+.teampage .sunday-in{position:relative;z-index:1;padding-block:clamp(36px,5vw,64px)}
 .teampage .sunday .tm-kicker{color:var(--accent);transition:color .5s ease}
 .teampage .sunday h2.sec{max-width:20ch}
 .teampage .sun{position:absolute;left:calc(6% + var(--sx,0)*88%);top:calc(70% - var(--sy,0)*58%);width:clamp(120px,22vw,300px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);
@@ -2630,7 +2630,7 @@ h1 {
 .teampage .tick span{font-family:var(--display);font-weight:800;font-size:.72rem;letter-spacing:.02em;color:var(--soft);transition:color .5s ease}
 .teampage .tick.on span{color:var(--fg)}
 .teampage .tick:focus-visible i{outline:3px solid var(--fg);outline-offset:4px}
-.teampage .scene{display:grid;grid-template-columns:1fr;gap:18px;min-height:30rem;align-content:start}
+.teampage .scene{display:grid;grid-template-columns:1fr;gap:18px;align-content:start}
 .teampage .scene>*{animation:tm-qin .4s ease both}
 .teampage .clock{display:flex;align-items:baseline;gap:10px}
 .teampage .ct{font-size:clamp(5.4rem,22vw,11rem);line-height:.8}
@@ -2772,7 +2772,7 @@ h1 {
   .teampage .say{padding-top:clamp(44px,6vw,80px)}
   .teampage .opts{grid-template-columns:repeat(3,1fr)}
   .teampage .optb{padding:34px 16px}
-  .teampage .scene{grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:18px clamp(32px,5vw,72px);min-height:25rem}
+  .teampage .scene{grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:18px clamp(32px,5vw,72px)}
   .teampage .clock{grid-column:1;flex-wrap:wrap}.teampage .said{grid-column:1}.teampage .sphoto{grid-column:1;max-width:420px}
   .teampage .ct{font-size:clamp(5rem,8.4vw,8.6rem)}
   .teampage .crew{grid-column:2;grid-row:1/span 3;grid-template-columns:1fr 1fr;align-content:start;margin:0}
