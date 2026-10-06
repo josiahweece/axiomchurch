@@ -1,8 +1,8 @@
 // /api/steps
-// Finds the next upcoming Rally Point, Base Camp and Rooted on the church's
+// Finds the next upcoming Rally Point, Base Camp, Rooted and baptism on the church's
 // Church Center events page and returns a sign-up link for each:
 //   { "steps": { "rally": { "url": "...", "name": "...", "starts_at": "..." } | null,
-//                "base":  { ... } | null, "rooted": { ... } | null } }
+//                "base":  { ... } | null, "rooted": { ... } | null, "baptism": { ... } | null } }
 // No key is needed: Church Center hands any visitor a short-lived guest
 // token, the same one its own events page uses. Vercel caches the answer for
 // an hour, so Church Center is asked about once an hour however many people
@@ -10,7 +10,7 @@
 
 const SITE = 'https://axiomchurch.churchcenter.com';
 const API = 'https://api.churchcenter.com/registrations/v2/events';
-const WANT = { rally: /rally\s*point/i, base: /base\s*camp/i, rooted: /rooted/i };
+const WANT = { rally: /rally\s*point/i, base: /base\s*camp/i, rooted: /rooted/i, baptism: /baptis/i };
 
 module.exports = async (req, res) => {
   try {

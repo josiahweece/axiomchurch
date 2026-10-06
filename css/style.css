@@ -2451,3 +2451,117 @@ h1 {
 .nextpage .come .btn{background:var(--red);color:var(--ink-deep)}
 .nextpage .come .btn:focus-visible{outline-color:var(--paper)}
 .nextpage .come .textlink{color:var(--on-dark);text-decoration-color:var(--on-dark)}
+
+
+/* ===========================================================================
+   GET BAPTIZED (baptism.html). Scoped under main.baptpage.
+   Photo hero with the sign-up button, one big number, a strip of baptism
+   photos, three steps, a single "I have questions." toggle that unfurls the
+   questions, and the button again. The "when" line fills in from /api/steps.
+   =========================================================================== */
+.baptpage{--tee:#FFFFFF;--tee-deep:#F5F5F5;--tee-line:#DCDCDC;--on-dark:#FFFFFF;--on-dark-dim:#5E5E5E;--on-dark-soft:#B9B9B9;--dark-rule:#2E2E2E;--on-red-soft:#FFE1DE;
+  --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.baptpage h1,.baptpage h2{text-transform:none;letter-spacing:normal;line-height:1.1;max-width:none;margin:0}
+.baptpage .bp-wrap{width:100%;max-width:1160px;margin-inline:auto;padding-inline:20px}
+.baptpage img{max-width:100%}
+/* the shirt lettering: Archivo at its narrowest width, uppercase */
+.baptpage .tee{font-family:var(--display);font-weight:900;font-stretch:62%;font-variation-settings:"wdth" 62;text-transform:uppercase;letter-spacing:-.005em;line-height:.9}
+.baptpage .btn{display:inline-block;background:var(--red);color:var(--ink-deep);font-family:var(--display);font-weight:700;
+  font-size:1.02rem;padding:15px 30px;border-radius:2px;text-decoration:none;text-align:center;transition:background .18s ease}
+.baptpage .btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.baptpage .bp-kicker{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;color:var(--red-deep);margin:0 0 14px}
+.baptpage .textlink{font-weight:700;text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:5px}
+.baptpage h2.sec{font-family:var(--display);font-weight:900;font-size:clamp(1.8rem,5.4vw,2.8rem);line-height:1;letter-spacing:-.035em;margin:0 0 22px}
+.baptpage .refs{display:flex;flex-wrap:wrap;gap:6px 8px;margin:18px 0 0;padding:0;list-style:none}
+.baptpage .refs li{font-family:var(--display);font-weight:700;font-size:.74rem;letter-spacing:.04em;border:1.5px solid currentColor;border-radius:99px;padding:3px 10px;opacity:.75}
+
+
+
+/* Layout: one decision, asked plainly. A dark photo hero with the sign-up
+   button in the first screen, a single big number, three steps, then the
+   questions people actually ask, and the button again. */
+.baptpage .bhero{position:relative;background:var(--ink-deep);color:var(--on-dark);overflow:hidden}
+.baptpage .bshot{position:relative;display:block}
+.baptpage .bshot img{display:block;width:100%;height:auto;aspect-ratio:8/7;object-fit:cover;object-position:50% 30%}
+.baptpage .bshot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,16,16,0) 35%,rgba(16,16,16,.8) 80%,var(--ink-deep) 100%)}
+.baptpage .bhero-in{position:relative;z-index:1;margin-top:-70px;padding-bottom:clamp(40px,6vw,72px)}
+.baptpage .bhero .bp-kicker{color:var(--red)}
+.baptpage .bhero h1{margin:0 0 14px;font-size:clamp(3.9rem,17vw,9rem)}
+.baptpage .bhero h1 em{font-style:normal;color:var(--red)}
+.baptpage .blede{margin:0 0 26px;font-size:clamp(1.12rem,2.6vw,1.4rem);max-width:30ch;color:var(--on-dark)}
+.baptpage .bp-cta{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center}
+.baptpage .bhero .btn:focus-visible{outline-color:var(--on-dark)}
+.baptpage .bhero .textlink{color:var(--on-dark);text-decoration-color:var(--on-dark)}
+
+.baptpage .count{background:var(--red);color:var(--ink-deep)}
+.baptpage .count-in{padding-block:clamp(36px,6vw,72px);display:grid;grid-template-columns:1fr;gap:6px;align-items:end}
+.baptpage .count b{font-family:var(--display);font-weight:900;font-stretch:62%;font-variation-settings:"wdth" 62;font-size:clamp(8rem,34vw,17rem);line-height:.78;letter-spacing:-.02em}
+.baptpage .count p{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,4.4vw,2.4rem);line-height:1.1;letter-spacing:-.03em;max-width:18ch}
+
+.baptpage .moments{background:var(--ink-deep)}
+.baptpage .mrow{list-style:none;margin:0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.baptpage .mrow::-webkit-scrollbar{display:none}
+.baptpage .mrow li{scroll-snap-align:start}
+.baptpage .mrow img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+.baptpage .how{background:var(--paper)}
+.baptpage .how-in{padding-block:clamp(48px,7vw,96px)}
+.baptpage .hsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:0}
+.baptpage .hsteps li{display:grid;grid-template-columns:auto 1fr;column-gap:20px;padding:22px 0;border-top:3px solid var(--ink)}
+.baptpage .hsteps li:last-child{border-bottom:3px solid var(--ink)}
+.baptpage .hn{font-family:var(--display);font-weight:900;font-stretch:62%;font-variation-settings:"wdth" 62;font-size:clamp(4rem,12vw,6.4rem);line-height:.8;color:var(--red-deep);min-width:.6em}
+.baptpage .hsteps h3{margin:0 0 6px;font-family:var(--display);font-weight:900;font-size:clamp(1.4rem,4vw,1.9rem);letter-spacing:-.03em;line-height:1.05}
+.baptpage .hsteps p{margin:0;max-width:44ch}
+.baptpage .when{margin:28px 0 0;padding:18px 20px;background:var(--tee-deep);border-left:5px solid var(--red-deep);max-width:640px}
+.baptpage .when .textlink{display:inline-block;margin-top:6px}
+.baptpage .when b{display:block;font-family:var(--display);font-weight:800;font-size:1.15rem;margin-bottom:4px}
+
+.baptpage .bfaq{background:var(--ink-deep);color:var(--on-dark)}
+.baptpage .bfaq-in{padding-block:clamp(36px,5vw,64px)}
+.baptpage .bfaq .bp-kicker{color:var(--red)}
+.baptpage .allq>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.baptpage .allq>summary::-webkit-details-marker{display:none}
+.baptpage .allq>summary .tee{font-size:clamp(3rem,11vw,6rem)}
+.baptpage .allq>summary::after{content:"";flex:none;width:clamp(44px,7vw,64px);height:clamp(44px,7vw,64px);border-radius:50%;background:var(--red) center/46% no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23101010' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M12 4v16M4 12h16'/%3E%3C/svg%3E");transition:transform .35s ease}
+.baptpage .allq[open]>summary::after{transform:rotate(45deg)}
+.baptpage .allq>summary:focus-visible{outline:3px solid var(--red);outline-offset:6px}
+.baptpage .allq-in{padding-top:clamp(20px,3vw,32px)}
+.baptpage .allq[open] .allq-in>*{animation:bp-unfurl .45s cubic-bezier(.2,.7,.2,1) both}
+.baptpage .allq[open] .allq-in>*:nth-child(2){animation-delay:.05s}.baptpage .allq[open] .allq-in>*:nth-child(3){animation-delay:.1s}.baptpage .allq[open] .allq-in>*:nth-child(4){animation-delay:.15s}
+.baptpage .allq[open] .allq-in>*:nth-child(5){animation-delay:.2s}.baptpage .allq[open] .allq-in>*:nth-child(6){animation-delay:.25s}.baptpage .allq[open] .allq-in>*:nth-child(7){animation-delay:.3s}
+@keyframes bp-unfurl{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+.baptpage .qa{border-top:2px solid var(--on-dark)}
+.baptpage .qa:last-of-type{border-bottom:2px solid var(--on-dark)}
+.baptpage .qa summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 0;font-family:var(--display);font-weight:800;font-size:clamp(1.15rem,3.2vw,1.55rem);letter-spacing:-.02em;line-height:1.15}
+.baptpage .qa summary::-webkit-details-marker{display:none}
+.baptpage .qa summary::after{content:"+";font-weight:700;font-size:1.8rem;line-height:1;flex:none;color:var(--red)}
+.baptpage .qa[open] summary::after{content:"\2212"}
+.baptpage .qa summary:focus-visible{outline:3px solid var(--red);outline-offset:4px}
+.baptpage .qa .ans{padding:0 0 22px;max-width:60ch;color:var(--on-dark)}
+.baptpage .qa .ans p{margin:0 0 10px}
+.baptpage .bfaq .more{margin:26px 0 0}
+.baptpage .bfaq .more .textlink{color:var(--on-dark);text-decoration-color:var(--red)}
+.baptpage .qa .refs li{opacity:1;color:var(--on-dark-soft);border-color:var(--on-dark-dim)}
+
+.baptpage .ready{background:var(--ink-deep);color:var(--on-dark);border-top:1px solid var(--dark-rule)}
+.baptpage .ready-in{padding-block:clamp(40px,7vw,96px);display:grid;grid-template-columns:1fr;gap:26px;align-items:center}
+.baptpage .rphoto{display:block;width:100%;height:auto;aspect-ratio:4/4.4;object-fit:cover;object-position:50% 20%;border-radius:4px}
+.baptpage .ready h2{margin:0 0 12px;font-size:clamp(3.6rem,14vw,7.4rem)}
+.baptpage .ready p{margin:0 0 26px;font-size:1.15rem;max-width:38ch}
+.baptpage .ready .btn{background:var(--red);color:var(--ink-deep)}
+.baptpage .ready .btn:focus-visible{outline-color:var(--on-dark)}
+
+@media (min-width:900px){
+  .baptpage .bshot{position:absolute;top:0;bottom:0;right:0;width:54%}
+  .baptpage .bshot img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto}
+  .baptpage .bshot::after{background:linear-gradient(90deg,var(--ink-deep) 0%,rgba(16,16,16,.75) 22%,rgba(16,16,16,0) 55%)}
+  .baptpage .bhero-in{margin-top:0;padding-block:clamp(64px,8vw,120px)}
+  .baptpage .bhero-copy{width:min(56%,640px)}
+  .baptpage .bhero h1{font-size:clamp(6rem,10.5vw,9.6rem)}
+  .baptpage .mrow{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);overflow:visible}
+  .baptpage .ready-in{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(36px,5vw,80px)}
+  .baptpage .count-in{grid-template-columns:auto 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+  .baptpage .hsteps{grid-template-columns:repeat(3,1fr);gap:0 clamp(24px,3vw,48px)}
+  .baptpage .hsteps li{grid-template-columns:1fr;border-bottom:3px solid var(--ink);row-gap:14px;align-content:start}
+}
+@media (prefers-reduced-motion:reduce){.baptpage *{transition:none!important;animation:none!important}}
