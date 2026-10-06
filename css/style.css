@@ -2879,4 +2879,15 @@ h1 {
   .givepage .gsplit>.gbox{justify-content:flex-start}
   .givepage .gsplit .gring-in,.givepage .gsplit .gbox-in{width:100%;max-width:560px;margin:0;padding:56px 48px}
 }
+/* desktop: one side gutter for every Give section, much narrower than the 1160 column */
+@media (min-width:960px){
+  .givepage{--gx:clamp(28px,5vw,88px)}
+  .givepage .gv-wrap{max-width:none;padding-inline:var(--gx)}
+  .givepage .ghero-in{padding-left:var(--gx);padding-right:56px}
+  .givepage .gsplit .gring-in,.givepage .gsplit .gbox-in{max-width:none;padding-block:64px}
+  .givepage .gsplit .gring-in{padding-left:var(--gx);padding-right:clamp(28px,3.5vw,56px)}
+  .givepage .gsplit .gbox-in{padding-left:clamp(28px,3.5vw,56px);padding-right:var(--gx)}
+  .givepage .gsplit .gform{max-width:none}
+  .givepage .gsplit .rc figcaption{max-width:44ch}
+}
 @media (prefers-reduced-motion:reduce){.givepage *{transition:none!important}}
