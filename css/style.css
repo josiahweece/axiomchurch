@@ -1688,26 +1688,22 @@ h1 {
 .visit .faq details[open] summary::after{content:"–"}
 .visit .faq .a{padding:0 0 20px;color:var(--muted);max-width:56ch}
 
-/* PHOTO BAND — full-bleed, between the details card and the form */
-.visit .band-photo{width:100%;height:auto;aspect-ratio:3/1;object-fit:cover;object-position:50% 0}
-@media (min-width:900px){
-  .visit .band-photo{aspect-ratio:3/1;max-height:460px}
-  /* desktop: photo dissolves into the black form block below it */
-  .visit .fadeband{display:grid;background:var(--ink-deep)}
-  .visit .fadeband .band-photo,.visit .fadeband::after{grid-area:1/1}
-  .visit .fadeband::after{content:"";display:block;width:100%;height:100%;pointer-events:none;
-    background:linear-gradient(to bottom,
-      rgba(16,16,16,0) 18%,rgba(16,16,16,.12) 38%,rgba(16,16,16,.35) 56%,
-      rgba(16,16,16,.62) 72%,rgba(16,16,16,.86) 86%,rgba(16,16,16,.97) 95%,
-      var(--ink-deep) 100%)}
-  .visit .fadeband + .formwrap{padding-top:clamp(16px,3vw,36px)}
-}
-
-/* FORM HANDOFF */
-.visit .formwrap{background:var(--ink-deep);color:#fff;padding-block:clamp(48px,7vw,88px)}
+/* FORM HANDOFF — the invitation sits on top of the photo. A dark fade under
+   the words keeps them readable; the rest of the picture stays clear. */
+.visit .formwrap{position:relative;overflow:hidden;background:var(--ink-deep);color:#fff}
+.visit .formwrap .band-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 0}
+.visit .formwrap::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(16,16,16,.95) 0%,rgba(16,16,16,.86) 36%,rgba(16,16,16,.3) 60%,rgba(16,16,16,0) 76%)}
+.visit .formwrap .wrap{position:relative;z-index:1;min-height:580px;display:flex;align-items:flex-end;padding-block:36px 40px}
 .visit .formwrap h2{font-family:var(--display);font-weight:900;font-size:clamp(1.9rem,6vw,3rem);
   line-height:1;letter-spacing:-.035em;margin:0 0 10px;max-width:18ch;text-wrap:balance}
-.visit .formwrap .lede{color:rgba(255,255,255,.72);margin:0 0 30px;max-width:44ch}
+.visit .formwrap .lede{color:rgba(255,255,255,.86);margin:0 0 24px;max-width:44ch}
+@media (min-width:900px){
+  .visit .formwrap .band-photo{object-position:50% 12%}
+  .visit .formwrap::after{background:linear-gradient(90deg,rgba(16,16,16,.92) 0%,rgba(16,16,16,.84) 26%,rgba(16,16,16,.35) 42%,rgba(16,16,16,0) 56%)}
+  .visit .formwrap .wrap{min-height:clamp(440px,36vw,540px);align-items:center;padding-block:56px}
+  .visit .formwrap .handoff{max-width:440px}
+}
 .visit .handoff{max-width:560px}
 .visit .gets{list-style:none;margin:0 0 28px;padding:0;border-top:1px solid var(--field)}
 .visit .gets li{padding:12px 0 12px 26px;position:relative;border-bottom:1px solid var(--field)}
@@ -1716,7 +1712,7 @@ h1 {
 .visit .handoff .btn{font-size:1.05rem;padding:17px 34px;background:#fff;color:var(--ink-deep)}
 .visit .handoff .btn:hover{background:#E8E8E8}
 .visit .form-note{color:var(--muted);font-size:.92rem;margin:12px 0 0;max-width:44ch}
-.visit .formwrap .form-note{color:rgba(255,255,255,.66)}
+.visit .formwrap .form-note{color:rgba(255,255,255,.8)}
 
 
 /* secondary paths — low commitment, for the researcher */
