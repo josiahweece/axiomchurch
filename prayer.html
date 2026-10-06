@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Prayer | Axiom Church</title>
+    <meta property="og:site_name" content="Axiom Church" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Prayer | Axiom Church" />
+    <meta property="og:description" content="Post a prayer request and people at Axiom Church will pray for you. Or send it just to the prayer team." />
+    <meta property="og:image" content="https://axiomchurch-lac.vercel.app/assets/images/share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="description" content="Post a prayer request and people at Axiom Church will pray for you. Or send it just to the prayer team." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Archivo is loaded with its width axis here: the tall condensed headings on this page use it. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div data-header></div>
+        <main class="praypage">
+<section class="phero"><div class="phero-photo"><img src="assets/images/prayer-hero.jpg" alt="A man in a white T-shirt leaning forward in his chair, head bowed in prayer during a Sunday service"></div><div class="p-wrap phero-in">
+  <p class="p-kicker">Need prayer?</p>
+  <h1 class="tee">Your story <em>matters.</em></h1>
+  <p class="plede">Post a request and people at Axiom will pray for you. Or send it just to the prayer team.</p>
+  <a class="pbtn" href="#ask">Ask for prayer</a>
+</div></section>
+
+<section class="pwall"><div class="p-wrap">
+  <div class="pwall-head">
+    <h2 class="psec">Prayer wall</h2>
+    <div class="ptabs" role="tablist" aria-label="Filter requests">
+      <button type="button" role="tab" aria-selected="true" data-f="all">All</button>
+      <button type="button" role="tab" aria-selected="false" data-f="answered">Answered</button>
+    </div>
+  </div>
+  <div id="wall" class="pgrid" aria-live="polite"></div>
+  <p class="pempty" id="wallEmpty" hidden></p>
+</div></section>
+
+<section class="pask" id="ask"><div class="p-wrap pask-in">
+  <div>
+    <h2 class="psec">Ask for prayer.</h2>
+    <p class="pnote">Someone on the prayer team reads every request before it goes on the wall. Keep other people&rsquo;s names and details out of it.</p>
+  </div>
+  <img class="pask-img" src="assets/images/prayer-hug.jpg" alt="Three women hugging and smiling after a Sunday service" loading="lazy">
+  <form id="askForm" class="pform" novalidate>
+    <label for="pName">First name <span>(optional)</span></label>
+    <input id="pName" name="name" type="text" maxlength="30" autocomplete="given-name" placeholder="Leave blank to post as Anonymous">
+    <label for="pText">What can we pray for?</label>
+    <textarea id="pText" name="text" maxlength="500" rows="5" required></textarea>
+    <div class="pmeta"><span id="pLeft">500</span> characters left</div>
+    <label class="pcheck" for="pPriv"><input id="pPriv" name="private" type="checkbox"> Just for the prayer team. Don&rsquo;t post it.</label>
+    <label for="pEmail">Email <span>(optional, if you want someone to follow up)</span></label>
+    <input id="pEmail" name="email" type="email" autocomplete="email">
+    <div style="position:absolute;left:-9999px" aria-hidden="true"><label for="pWeb">Website</label><input id="pWeb" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+    <button class="pbtn" type="submit">Send request</button>
+    <p class="pstatus" id="pStatus" role="status"></p>
+  </form>
+</div></section>
+    </main>
+    <div data-footer></div>
+    <script src="js/main.js"></script>
+    <script>
+      // Prayer wall: reads approved requests from /api/prayer and sends new ones there.
+      (function () {
+        var posts = [], filter = 'all', mine = {};
+        try { mine = JSON.parse(localStorage.getItem('axiomPrayed') || '{}'); } catch (e) {}
+        var wall = document.getElementById('wall'), empty = document.getElementById('wallEmpty');
+        function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+        function ago(t) {
+          var m = Math.round((Date.now() - t) / 6e4);
+          if (m < 1) return 'just now'; if (m < 60) return m + 'm ago';
+          var h = Math.round(m / 60); if (h < 24) return h + 'h ago';
+          var d = Math.round(h / 24); return d === 1 ? 'yesterday' : d + ' days ago';
+        }
+        function render() {
+          var list = posts.filter(function (p) { return filter === 'all' || p.answered; });
+          wall.innerHTML = list.map(function (p) {
+            var on = !!mine[p.id];
+            return '<article class="pcard' + (p.answered ? ' ans' : '') + '">' + (p.answered ? '<span class="pc-badge">Answered</span>' : '') +
+              '<div class="pc-top"><b>' + esc(p.name || 'Anonymous') + '</b><time>' + ago(p.t) + '</time></div>' +
+              '<p class="pc-text">' + esc(p.text) + '</p><div class="pc-foot">' +
+              '<button type="button" class="pray" data-id="' + p.id + '" aria-pressed="' + on + '" aria-label="' + (on ? 'You prayed for this' : 'I prayed for this') + ', ' + p.prayed + ' prayed">' +
+              '<span class="hands" aria-hidden="true">&#128591;</span><span>' + (on ? 'Prayed' : 'I prayed') + '</span><span class="n">' + p.prayed + '</span></button></div></article>';
+          }).join('');
+          empty.hidden = list.length > 0;
+          empty.textContent = filter === 'answered' ? 'No answered prayers yet. Give it time.' : 'No requests on the wall yet. Be the first.';
+        }
+        function load() {
+          fetch('/api/prayer').then(function (r) { return r.json(); }).then(function (j) { posts = j.posts || []; render(); })
+            .catch(function () { empty.hidden = false; empty.textContent = "The wall didn't load. Refresh to try again."; });
+        }
+        document.querySelectorAll('.ptabs button').forEach(function (b) {
+          b.addEventListener('click', function () {
+            filter = b.dataset.f;
+            document.querySelectorAll('.ptabs button').forEach(function (x) { x.setAttribute('aria-selected', x === b); });
+            render();
+          });
+        });
+        wall.addEventListener('click', function (e) {
+          var b = e.target.closest('.pray'); if (!b) return;
+          var id = b.dataset.id, p = posts.find(function (x) { return String(x.id) === id; }); if (!p) return;
+          var undo = !!mine[id];
+          if (undo) { delete mine[id]; p.prayed = Math.max(0, p.prayed - 1); } else { mine[id] = 1; p.prayed++; }
+          try { localStorage.setItem('axiomPrayed', JSON.stringify(mine)); } catch (err) {}
+          render();
+          fetch('/api/prayer', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'pray', id: id, undo: undo }) })
+            .then(function (r) { return r.json(); }).then(function (j) { if (typeof j.prayed === 'number') { p.prayed = j.prayed; render(); } }).catch(function () {});
+        });
+        var t = document.getElementById('pText'), left = document.getElementById('pLeft');
+        t.addEventListener('input', function () { left.textContent = 500 - t.value.length; });
+        var form = document.getElementById('askForm'), st = document.getElementById('pStatus');
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var text = t.value.trim(), email = document.getElementById('pEmail').value.trim(), priv = document.getElementById('pPriv').checked;
+          if (text.length < 3) { st.className = 'pstatus err'; st.textContent = 'Tell us what to pray for first.'; t.focus(); return; }
+          if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { st.className = 'pstatus err'; st.textContent = "That email doesn't look right. Fix it or leave it blank."; return; }
+          var btn = form.querySelector('button[type=submit]'); btn.disabled = true; st.className = 'pstatus'; st.textContent = 'Sending...';
+          fetch('/api/prayer', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+            action: 'submit', name: document.getElementById('pName').value, text: text, email: email, private: priv, website: document.getElementById('pWeb').value }) })
+            .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+            .then(function (x) {
+              if (!x.ok) throw new Error(x.j.error || 'fail');
+              form.reset(); left.textContent = 500;
+              st.textContent = priv ? 'Sent. Only the prayer team will see this.' : 'Sent. Someone will read it, then it goes on the wall.';
+            })
+            .catch(function (err) { st.className = 'pstatus err'; st.textContent = err.message && err.message !== 'fail' ? err.message : "That didn't send. Try again in a minute."; })
+            .then(function () { btn.disabled = false; });
+        });
+        load();
+      })();
+    </script>
+  </body>
+</html>

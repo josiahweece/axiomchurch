@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Prayer Team | Axiom Church</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:site_name" content="Axiom Church" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Prayer | Axiom Church" />
+    <meta property="og:description" content="Post a prayer request and people at Axiom Church will pray for you. Or send it just to the prayer team." />
+    <meta property="og:image" content="https://axiomchurch-lac.vercel.app/assets/images/share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="description" content="Post a prayer request and people at Axiom Church will pray for you. Or send it just to the prayer team." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Archivo is loaded with its width axis here: the tall condensed headings on this page use it. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div data-header></div>
+        <main class="praypage">
+<section class="pmod"><div class="p-wrap">
+  <div id="login" hidden>
+    <h1 class="psec">Prayer team</h1>
+    <p class="pnote">Sign in with the prayer team password.</p>
+    <form id="loginForm" class="tlogin">
+      <label for="tPw"><b>Password</b></label>
+      <input id="tPw" type="password" autocomplete="current-password" required>
+      <button class="pbtn" type="submit">Sign in</button>
+      <p class="pstatus" id="lStatus" role="status"></p>
+    </form>
+  </div>
+  <div id="board" hidden>
+    <div class="tbar"><h1 class="psec">Prayer team</h1><button type="button" class="tlink" id="logout">Sign out</button></div>
+    <div class="pmod-head"><h2 class="psec">Waiting for review</h2><span class="pcount" id="qCount">0</span></div>
+    <p class="pnote">Nothing here is public yet. Approve to post it on the wall.</p>
+    <div id="queue" class="plist"></div>
+    <div class="pmod-head"><h2 class="psec">Just for the prayer team</h2><span class="pcount" id="privCount">0</span></div>
+    <p class="pnote">Private requests. These never go on the wall.</p>
+    <div id="private" class="plist"></div>
+    <div class="pmod-head"><h2 class="psec">On the wall</h2><span class="pcount" id="liveCount">0</span></div>
+    <p class="pnote">Mark a prayer answered, or take it down.</p>
+    <div id="live" class="plist"></div>
+  </div>
+</div></section>
+    </main>
+    <div data-footer></div>
+    <script src="js/main.js"></script>
+    <script>
+      // Prayer team board. The server checks the password and keeps you signed in for 30 days.
+      (function () {
+        var login = document.getElementById('login'), board = document.getElementById('board');
+        function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+        function when(t) { return new Date(t).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); }
+        function card(p, kind) {
+          var b = function (act, label, go) { return '<button type="button" class="mbtn' + (go ? ' go' : '') + '" data-act="' + act + '" data-id="' + p.id + '">' + label + '</button>'; };
+          var acts = kind === 'pending' ? b('approve', 'Approve', 1) + ' ' + b('decline', 'Decline')
+            : kind === 'private' ? b('handled', 'Mark handled')
+            : b(p.answered ? 'unanswer' : 'answer', p.answered ? 'Undo answered' : 'Mark answered') + ' ' + b('remove', 'Take down');
+          return '<article class="pcard' + (p.answered ? ' ans' : '') + '">' + (p.answered ? '<span class="pc-badge">Answered</span>' : '') +
+            '<div class="pc-top"><b>' + esc(p.name || 'Anonymous') + '</b><time>' + when(p.t) + '</time></div>' +
+            '<p class="pc-text">' + esc(p.text) + '</p>' +
+            (p.email ? '<span class="pc-email">Wants follow-up: <a href="mailto:' + esc(p.email) + '">' + esc(p.email) + '</a></span>' : '') +
+            (kind === 'live' ? '<span class="pc-email">' + p.prayed + ' prayed</span>' : '') +
+            '<div class="pc-foot"><span>' + acts + '</span></div></article>';
+        }
+        function fill(id, list, kind, none) {
+          document.getElementById(id).innerHTML = list.length ? list.map(function (p) { return card(p, kind); }).join('') : '<p class="pempty">' + none + '</p>';
+        }
+        function load() {
+          fetch('/api/prayer?team=1', { credentials: 'same-origin' }).then(function (r) {
+            if (r.status === 401) { login.hidden = false; board.hidden = true; return null; }
+            return r.json();
+          }).then(function (j) {
+            if (!j) return;
+            if (j.error) { login.hidden = false; document.getElementById('lStatus').textContent = j.error; return; }
+            login.hidden = true; board.hidden = false;
+            fill('queue', j.pending, 'pending', 'All caught up.');
+            fill('private', j.private, 'private', 'None right now.');
+            fill('live', j.live, 'live', 'Nothing on the wall yet.');
+            document.getElementById('qCount').textContent = j.pending.length;
+            document.getElementById('privCount').textContent = j.private.length;
+            document.getElementById('liveCount').textContent = j.live.length;
+          }).catch(function () { login.hidden = false; document.getElementById('lStatus').textContent = "Couldn't reach the server. Refresh to try again."; });
+        }
+        function post(body) {
+          return fetch('/api/prayer', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+            .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); });
+        }
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+          e.preventDefault();
+          var st = document.getElementById('lStatus'); st.className = 'pstatus'; st.textContent = 'Signing in...';
+          post({ action: 'login', password: document.getElementById('tPw').value }).then(function (x) {
+            if (!x.ok) { st.className = 'pstatus err'; st.textContent = x.j.error || "That didn't work."; return; }
+            st.textContent = ''; document.getElementById('tPw').value = ''; load();
+          });
+        });
+        document.getElementById('logout').addEventListener('click', function () { post({ action: 'logout' }).then(function () { load(); }); });
+        board.addEventListener('click', function (e) {
+          var m = e.target.closest('.mbtn'); if (!m) return;
+          var act = m.dataset.act;
+          if ((act === 'decline' || act === 'remove') && !m.dataset.sure) { m.dataset.sure = '1'; m.textContent = 'Tap again to confirm'; return; }
+          m.disabled = true;
+          post({ action: act, id: m.dataset.id }).then(function (x) {
+            if (!x.ok && x.j.error === 'Sign in first.') { load(); return; }
+            load();
+          });
+        });
+        load();
+      })();
+    </script>
+  </body>
+</html>
