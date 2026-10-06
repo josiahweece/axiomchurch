@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>What Is My Next Step? | Axiom Church</title>
+    <meta
+      name="description"
+      content="Everyone has a next step. Answer a few quick questions and find yours at Axiom Church in Leander, TX: Rally Point, Base Camp, baptism, teams, groups and giving."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Archivo is loaded with its width axis here: the tall condensed headings on this page use it. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div data-header></div>
+    <main class="nextpage">
+<section class="nhero">
+  <div class="nshot"><img src="assets/images/next-hero.jpg" alt="Two women in white jackets hugging and laughing in front of the Next Steps banner" width="1400" height="900"></div>
+  <div class="nhero-in n-wrap">
+  <div class="nlead">
+    <h1 class="tee">Everyone has a next step. <em>What is yours?</em></h1>
+    <div class="quiz" id="quiz">
+    <div class="qtop"><p class="n-kicker" id="qkick">Takes under a minute</p><div class="dots" id="dots" aria-hidden="true"></div></div>
+    <div class="qbody" id="qbody" aria-live="polite"></div>
+    <div class="qfoot"><button class="qback" id="qback" type="button" hidden>&larr; Back</button></div>
+  </div>
+  </div>
+</div></section>
+
+<section class="pathway" id="plan"><div class="pathway-in n-wrap">
+  <p class="n-kicker">The battle plan</p>
+  <h2 class="sec">Three steps. Take ground.</h2>
+  <div class="war">
+    <div class="map" id="map">
+      <svg id="lines" aria-hidden="true"><defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="context-stroke"/></marker>
+      </defs></svg>
+      <span class="grid-tag tl">AXIOM // NEXT STEPS</span><span class="grid-tag br">LEANDER, TX</span>
+      <span class="front" id="mission"><b>Step 3</b> Live on mission</span>
+      <button class="node" type="button" id="rally-point" data-id="rally-point" style="--x:10;--y:80;--px:15;--py:9" aria-pressed="false"><span class="mk">1</span><span class="lbl">Rally Point</span></button>
+      <button class="node" type="button" id="base-camp" data-id="base-camp" style="--x:30;--y:48;--px:15;--py:30" aria-pressed="false"><span class="mk">2</span><span class="lbl">Base Camp</span></button>
+      <button class="node obj" type="button" id="baptism" data-id="baptism" style="--x:62;--y:15;--px:47;--py:50" aria-pressed="false"><span class="mk">3</span><span class="lbl">Get baptized</span></button>
+      <button class="node obj" type="button" id="serve" data-id="serve" style="--x:62;--y:37;--px:47;--py:63" aria-pressed="false"><span class="mk">3</span><span class="lbl">Get on a team</span></button>
+      <button class="node obj" type="button" id="groups" data-id="groups" style="--x:62;--y:59;--px:47;--py:76" aria-pressed="false"><span class="mk">3</span><span class="lbl">Get in a group</span></button>
+      <button class="node obj" type="button" id="give" data-id="give" style="--x:62;--y:81;--px:47;--py:89" aria-pressed="false"><span class="mk">3</span><span class="lbl">Give to the mission</span></button>
+      <span class="here" id="here" hidden>You are here</span>
+    </div>
+    <div class="brief" id="brief" aria-live="polite">
+      <p class="bk" id="bk"></p>
+      <h3 class="tee" id="bt"></h3>
+      <p class="btag" id="btag"></p>
+      <p class="bd" id="bd"></p>
+      <p class="bcta"><a class="btn" id="bb" href="#"></a> <span class="need" id="bneed">Link needed</span></p>
+      <button class="tomap" id="tomap" type="button">&uarr; Back to the map</button>
+    </div>
+  </div>
+</div></section>
+    </main>
+    <div data-footer></div>
+    <script src="js/main.js"></script>
+    <script>
+(function(){
+  var Q=[{"q": "Been to a Sunday at Axiom yet?", "t": "Come see a Sunday", "d": "Sundays at 10am at Camacho Elementary. That is the whole first step.", "b": "Plan a Visit", "h": "visit.html", "a": ""}, {"q": "Been to Rally Point?", "t": "Rally Point", "d": "Everyone’s first step. We feed you, we watch your kids, and you meet some people.", "b": "Sign up for Rally Point", "h": "#plan", "a": "rally-point"}, {"q": "Been to Base Camp?", "t": "Base Camp", "d": "The step after Rally Point. A quick assessment, one night, and you start finding where you fit.", "b": "Sign up for Base Camp", "h": "#plan", "a": "base-camp"}, {"q": "Have you been baptized?", "t": "Get baptized", "d": "Go public with your faith in Jesus.", "b": "I want to get baptized", "h": "#plan", "a": "baptism"}, {"q": "Are you serving on a team at Axiom?", "t": "Get on a team", "d": "Don’t fill a spot. Find a purpose.", "b": "Find a team", "h": "#plan", "a": "serve"}, {"q": "Are you in a group at Axiom?", "t": "Get in a group", "d": "Find the people you would actually call.", "b": "Find a group", "h": "#plan", "a": "groups"}, {"q": "Do you financially support the mission of Axiom Church?", "t": "Give to the mission", "d": "Help remove the next obstacle for someone.", "b": "Give", "h": "give.html", "a": "give"}],
+      DONE={t:"Bring someone",d:"You are living on mission. Your next step is to bring someone along with you on the mission. Send them this.",b:"Share Plan a Visit",h:"visit.html",a:""};
+  var body=document.getElementById('qbody'),dots=document.getElementById('dots'),back=document.getElementById('qback'),kick=document.getElementById('qkick'),at=0;
+  Q.forEach(function(){dots.appendChild(document.createElement('i'));});
+  function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt)e.textContent=txt;return e;}
+  function paint(i,done){[].forEach.call(dots.children,function(d,k){d.className=k<i||done?'done':(k===i?'now':'');});}
+  function ask(i){
+    at=i; body.innerHTML=''; paint(i,false); back.hidden=i===0; kick.textContent='Takes under a minute';
+    var q=el('p','qq',Q[i].q),w=el('div','qbtns'),y=el('button','qb','Yes'),n=el('button','qb alt','Not yet');
+    y.type=n.type='button';
+    y.addEventListener('click',function(){i+1<Q.length?ask(i+1):result(DONE,true);});
+    n.addEventListener('click',function(){result(Q[i],false);});
+    w.appendChild(y);w.appendChild(n);body.appendChild(q);body.appendChild(w);
+  }
+  function result(r,all){
+    body.innerHTML=''; paint(at,all); back.hidden=false; kick.textContent='Your next step';
+    status(-1);
+    if(all)status(ORDER.length); else if(r.a){status(ORDER.indexOf(r.a));select(r.a);} else status(-1);
+    var t=el('h2','rtitle tee',r.t),d=el('p','rtext',r.d),c=el('div','rcta'),a=el('a','btn',r.b),again=el('button','qagain','Start over');
+    a.href=r.h; again.type='button'; again.addEventListener('click',function(){status(-1);ask(0);});
+    c.appendChild(a);c.appendChild(again);body.appendChild(t);body.appendChild(d);body.appendChild(c);
+  }
+  /* the battle plan */
+  var INFO={"rally-point": {"k": "Step 1", "t": "Rally Point", "g": "Everyone’s first step.", "d": "We feed you. We watch your kids. You meet some people. Find your people, find your purpose.", "b": "Sign up for Rally Point", "h": "mailto:josiah.weece@axiomchurch.com?subject=Sign%20me%20up%20for%20Rally%20Point", "n": 0}, "base-camp": {"k": "Step 2", "t": "Base Camp", "g": "Find your fit.", "d": "The step after Rally Point. You take a quick online assessment on how you’re wired. Then we spend a night talking through it, sharing real stories, and helping you find where you fit.", "b": "Sign up for Base Camp", "h": "mailto:josiah.weece@axiomchurch.com?subject=Sign%20me%20up%20for%20Base%20Camp", "n": 0}, "baptism": {"k": "Step 3 · Live on mission", "t": "Get baptized", "g": "", "d": "Go public with your faith in Jesus.", "b": "I want to get baptized", "h": "mailto:josiah.weece@axiomchurch.com?subject=I%20want%20to%20get%20baptized", "n": 0}, "serve": {"k": "Step 3 · Live on mission", "t": "Get on a team", "g": "", "d": "Don’t fill a spot. Find a purpose.", "b": "Find a team", "h": "mailto:josiah.weece@axiomchurch.com?subject=I%20want%20to%20join%20a%20team", "n": 0}, "groups": {"k": "Step 3 · Live on mission", "t": "Get in a group", "g": "", "d": "Find the people you would actually call.", "b": "Find a group", "h": "mailto:josiah.weece@axiomchurch.com?subject=I%20want%20to%20get%20in%20a%20group", "n": 0}, "give": {"k": "Step 3 · Live on mission", "t": "Give to the mission", "g": "", "d": "Help remove the next obstacle for someone.", "b": "Give", "h": "give.html", "n": 0}},ORDER=['rally-point','base-camp','baptism','serve','groups','give'];
+  var map=document.getElementById('map'),svg=document.getElementById('lines'),here=document.getElementById('here'),
+      nodes={};[].forEach.call(document.querySelectorAll('.node'),function(n){nodes[n.dataset.id]=n;});
+  var wideQ=matchMedia('(min-width:900px)'),sel='rally-point',mine=-1;
+  function pt(id){var n=nodes[id],w=map.clientWidth,h=map.clientHeight,k=wideQ.matches;return [parseFloat(n.style.getPropertyValue(k?'--x':'--px'))/100*w,parseFloat(n.style.getPropertyValue(k?'--y':'--py'))/100*h];}
+  function draw(){
+    var w=map.clientWidth,h=map.clientHeight,k=wideQ.matches,NS='http://www.w3.org/2000/svg';
+    [].slice.call(svg.querySelectorAll('path')).forEach(function(p){if(!p.closest('defs'))p.remove();});
+    svg.setAttribute('viewBox','0 0 '+w+' '+h);
+    function path(d,cls,arrow){var p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('class',cls);if(arrow)p.setAttribute('marker-end','url(#ah)');svg.appendChild(p);return p;}
+    /* topography: contour rings around a few hills, the same every time */
+    [[.22,.2,.34,1.3],[.8,.3,.3,2.1],[.42,.86,.38,.4],[.92,.9,.22,3.0]].forEach(function(H){
+      for(var r=1;r<=6;r++){var d='',R=H[2]*Math.min(w,h)*r/6*1.25;
+        for(var a=0;a<=72;a++){var t=a/72*6.2832,wob=1+.13*Math.sin(3*t+H[3])+.07*Math.sin(5*t+H[3]*2+r*.6)+.04*Math.sin(9*t+r);
+          d+=(a?'L':'M')+(H[0]*w+Math.cos(t)*R*wob).toFixed(1)+' '+(H[1]*h+Math.sin(t)*R*wob*.8).toFixed(1);}
+        path(d+'Z','topo'+(r%3===0?' idx':''));}
+    });
+    path(k?('M'+w*.46+' '+h*.1+' L'+w*.46+' '+h*.97):('M'+w*.04+' '+h*.41+' L'+w*.96+' '+h*.41),'frontline');
+    function adv(a,b,i){var A=pt(a),B=pt(b),dx=B[0]-A[0],dy=B[1]-A[1],L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L,
+        s=[A[0]+ux*34,A[1]+uy*34],e=[B[0]-ux*33,B[1]-uy*33],sg=i<0?1:(k?(dy<0?-1:1):1),bend=i<0?.2:(k?.1:.05+.055*i),
+        c=[(s[0]+e[0])/2-uy*L*bend*sg,(s[1]+e[1])/2+ux*L*bend*sg];
+      var cls='adv'+(mine>=0&&ORDER.indexOf(b)<mine?' taken':'')+(ORDER.indexOf(b)===mine?' live':'');
+      path('M'+s[0].toFixed(1)+' '+s[1].toFixed(1)+' Q'+c[0].toFixed(1)+' '+c[1].toFixed(1)+' '+e[0].toFixed(1)+' '+e[1].toFixed(1),cls,true);}
+    adv('rally-point','base-camp',-1);
+    ['baptism','serve','groups','give'].forEach(function(id,i){adv('base-camp',id,i);});
+    if(mine>=0&&mine<ORDER.length){var p=pt(ORDER[mine]);here.style.left=p[0]+'px';here.style.top=p[1]+'px';here.classList.toggle('side',mine>1);here.hidden=false;}else here.hidden=true;
+  }
+  function select(id){
+    if(!INFO[id])return; sel=id; var o=INFO[id];
+    Object.keys(nodes).forEach(function(k2){nodes[k2].classList.toggle('sel',k2===id);nodes[k2].setAttribute('aria-pressed',k2===id?'true':'false');});
+    document.getElementById('bk').textContent=o.k; document.getElementById('bt').textContent=o.t; document.getElementById('btag').textContent=o.g;
+    document.getElementById('bd').textContent=o.d; var bb=document.getElementById('bb'); bb.textContent=o.b; bb.href=o.h; document.getElementById('bneed').hidden=!o.n;
+    var br=document.getElementById('brief'); [].forEach.call(br.children,function(c){c.style.animation='none';void c.offsetWidth;c.style.animation='';});
+  }
+  function status(i){ /* i = index of your next step in ORDER, -1 = clear, ORDER.length = everything taken */
+    mine=i; ORDER.forEach(function(id,k2){nodes[id].classList.toggle('taken',i>=0&&k2<i);nodes[id].classList.toggle('target',k2===i);}); draw();
+  }
+  function reveal(id){ if(id==='mission'||id==='plan')return; if(INFO[id])select(id); }
+  var briefEl=document.getElementById('brief'),toMap=document.getElementById('tomap');
+  function glide(el){el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
+  Object.keys(nodes).forEach(function(id){nodes[id].addEventListener('click',function(){select(id);if(!wideQ.matches)glide(briefEl);});});
+  toMap.addEventListener('click',function(){glide(map);});
+  window.addEventListener('resize',draw);
+  (wideQ.addEventListener?wideQ.addEventListener.bind(wideQ,'change'):wideQ.addListener.bind(wideQ))(draw);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
+  select(location.hash&&INFO[location.hash.slice(1)]?location.hash.slice(1):'rally-point'); draw();
+  window.addEventListener('hashchange',function(){reveal(location.hash.slice(1));});
+  document.addEventListener('click',function(e){var a2=e.target.closest('a[href^="#"]');if(a2&&a2.getAttribute('href').length>1)reveal(a2.getAttribute('href').slice(1));});
+  back.addEventListener('click',function(){var onResult=!!body.querySelector('.rtitle');status(-1);ask(onResult?at:Math.max(0,at-1));});
+  ask(0);
+})();
+</script>
+  </body>
+</html>
