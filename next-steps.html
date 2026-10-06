@@ -35,7 +35,7 @@
 
 <section class="pathway" id="plan"><div class="pathway-in n-wrap">
   <p class="n-kicker">The battle plan</p>
-  <h2 class="sec">Three steps. Take ground.</h2>
+  <h2 class="sec">Three steps. Get Mission Ready.</h2>
   <div class="war">
     <div class="map" id="map">
       <svg id="lines" aria-hidden="true"><defs>
@@ -58,6 +58,7 @@
       <p class="bd" id="bd"></p>
       <p class="bwhen" id="bwhen" hidden></p>
       <p class="bcta"><a class="btn" id="bb" href="#"></a> <span class="need" id="bneed">Link needed</span></p>
+      <div class="bnav"><button class="arw" id="bprev" type="button" aria-label="Previous step">&larr;</button><span class="bpos" id="bpos"></span><button class="arw" id="bnext" type="button" aria-label="Next step">&rarr;</button></div>
       <button class="tomap" id="tomap" type="button">&uarr; Back to the map</button>
     </div>
   </div>
@@ -121,7 +122,7 @@
     if(!INFO[id])return; sel=id; var o=INFO[id];
     Object.keys(nodes).forEach(function(k2){nodes[k2].classList.toggle('sel',k2===id);nodes[k2].setAttribute('aria-pressed',k2===id?'true':'false');});
     document.getElementById('bk').textContent=o.k; document.getElementById('bt').textContent=o.t; document.getElementById('btag').textContent=o.g;
-    document.getElementById('bd').textContent=o.d; var bb=document.getElementById('bb'); bb.textContent=o.b; bb.href=o.h; var bw=document.getElementById('bwhen'); bw.textContent=o.w||''; bw.hidden=!o.w; document.getElementById('bneed').hidden=!o.n;
+    document.getElementById('bd').textContent=o.d; var bb=document.getElementById('bb'); bb.textContent=o.b; bb.href=o.h; document.getElementById('bpos').textContent=(ORDER.indexOf(id)+1)+' / '+ORDER.length; var bw=document.getElementById('bwhen'); bw.textContent=o.w||''; bw.hidden=!o.w; document.getElementById('bneed').hidden=!o.n;
     var br=document.getElementById('brief'); [].forEach.call(br.children,function(c){c.style.animation='none';void c.offsetWidth;c.style.animation='';});
   }
   function status(i){ /* i = index of your next step in ORDER, -1 = clear, ORDER.length = everything taken */
@@ -132,6 +133,8 @@
   function glide(el){el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
   Object.keys(nodes).forEach(function(id){nodes[id].addEventListener('click',function(){select(id);if(!wideQ.matches)glide(briefEl);});});
   toMap.addEventListener('click',function(){glide(map);});
+  document.getElementById('bnext').addEventListener('click',function(){select(ORDER[(ORDER.indexOf(sel)+1)%ORDER.length]);});
+  document.getElementById('bprev').addEventListener('click',function(){select(ORDER[(ORDER.indexOf(sel)+ORDER.length-1)%ORDER.length]);});
   window.addEventListener('resize',draw);
   (wideQ.addEventListener?wideQ.addEventListener.bind(wideQ,'change'):wideQ.addListener.bind(wideQ))(draw);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);

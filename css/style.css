@@ -2435,3 +2435,8 @@ h1 {
 @media (min-width:900px){.nextpage .brief h3{font-size:clamp(2.4rem,3.6vw,3.6rem)}}
 .nextpage .bwhen{margin:0 0 14px;font-family:var(--display);font-weight:800;font-size:1rem;color:var(--on-dark)}
 .nextpage .bwhen[hidden]{display:none}
+.nextpage .bnav{display:flex;align-items:center;gap:12px;margin-top:22px}
+.nextpage .arw{all:unset;box-sizing:border-box;cursor:pointer;width:48px;height:48px;border-radius:50%;border:2px solid var(--on-dark);color:var(--on-dark);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.25rem;line-height:1;transition:background .2s ease,color .2s ease}
+.nextpage .arw:hover{background:var(--on-dark);color:var(--ink-deep)}
+.nextpage .arw:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.nextpage .bpos{font-family:var(--display);font-weight:800;font-size:.85rem;letter-spacing:.12em;color:var(--on-dark-soft);min-width:3.2em;text-align:center}
