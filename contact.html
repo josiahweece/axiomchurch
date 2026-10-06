@@ -31,49 +31,14 @@
   <p class="plede">Questions about Sunday, serving, or anything else? A real person will write you back.</p>
 </div></section>
 
-<section class="pask"><div class="p-wrap pask-in">
-  <div>
-    <h2 class="psec">Send a message.</h2>
-    <p class="pnote">It goes straight to Josiah&rsquo;s inbox. Or reach him directly:</p>
-    <p class="cdirect"><a class="textlink" href="mailto:josiah.weece@axiomchurch.com">josiah.weece@axiomchurch.com</a><br><a class="textlink" href="tel:5122655718">512-265-5718</a></p>
-  </div>
-  <form id="contactForm" class="pform" novalidate>
-    <label for="cName">Name</label>
-    <input id="cName" name="name" type="text" maxlength="80" autocomplete="name" required>
-    <label for="cEmail">Email</label>
-    <input id="cEmail" name="email" type="email" maxlength="120" autocomplete="email" required>
-    <label for="cPhone">Phone <span>(optional)</span></label>
-    <input id="cPhone" name="phone" type="tel" maxlength="30" autocomplete="tel">
-    <label for="cMsg">Message</label>
-    <textarea id="cMsg" name="message" maxlength="4000" rows="6" required></textarea>
-    <div style="position:absolute;left:-9999px" aria-hidden="true"><label for="cWeb">Website</label><input id="cWeb" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-    <button class="pbtn" type="submit">Send message</button>
-    <p class="pstatus" id="cStatus" role="status"></p>
-  </form>
+<section class="pask"><div class="p-wrap">
+  <h2 class="psec">Reach Josiah directly.</h2>
+  <p class="pnote">A real person reads every one of these.</p>
+  <p class="cdirect"><a class="textlink" href="mailto:josiah.weece@axiomchurch.com">josiah.weece@axiomchurch.com</a><br><a class="textlink" href="tel:5122655718">512-265-5718</a></p>
+  <!-- Contact form goes here: Josiah is adding a Church Center form. -->
 </div></section>
     </main>
     <div data-footer></div>
     <script src="js/main.js"></script>
-    <script>
-      // Contact form: sends to /api/contact, which emails Josiah.
-      (function () {
-        var form = document.getElementById('contactForm'), st = document.getElementById('cStatus');
-        function v(id) { return document.getElementById(id).value.trim(); }
-        function err(msg, id) { st.className = 'pstatus err'; st.textContent = msg; if (id) document.getElementById(id).focus(); }
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          if (!v('cName')) return err('Add your name.', 'cName');
-          if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('cEmail'))) return err('Add an email we can write back to.', 'cEmail');
-          if (v('cMsg').length < 2) return err('Write a message first.', 'cMsg');
-          var btn = form.querySelector('button[type=submit]'); btn.disabled = true; st.className = 'pstatus'; st.textContent = 'Sending...';
-          fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
-            name: v('cName'), email: v('cEmail'), phone: v('cPhone'), message: v('cMsg'), website: document.getElementById('cWeb').value }) })
-            .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-            .then(function (x) { if (!x.ok) throw new Error(x.j.error || ''); form.reset(); st.textContent = 'Sent. You\'ll hear back soon.'; })
-            .catch(function (e2) { err(e2.message || "That didn't send. Email josiah.weece@axiomchurch.com instead."); })
-            .then(function () { btn.disabled = false; });
-        });
-      })();
-    </script>
   </body>
 </html>
