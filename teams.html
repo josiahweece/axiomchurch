@@ -215,6 +215,13 @@
   track.addEventListener('pointermove',function(e){if(!dragging)return;var i=Math.max(0,Math.min(S.length-1,fromX(e.clientX)));if(i!==at)go(i);});
   ['pointerup','pointercancel'].forEach(function(n){track.addEventListener(n,function(){dragging=false;});});
   go(0);
+  /* Keep the arrows still: the scene is held at the height of its tallest hour,
+     so clicking an arrow never moves the button out from under the pointer. */
+  var scene=document.getElementById('scene'),hold;
+  function lockH(){scene.style.minHeight='';var cur=at,mx=0;for(var i=0;i<S.length;i++){go(i);mx=Math.max(mx,scene.offsetHeight);}go(cur);scene.style.minHeight=mx+'px';}
+  lockH();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(lockH);
+  addEventListener('resize',function(){clearTimeout(hold);hold=setTimeout(lockH,200);});
 })();
 </script>
   </body>

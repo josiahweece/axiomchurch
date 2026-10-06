@@ -160,7 +160,17 @@
   if('IntersectionObserver' in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting;}).observe(wheel);
   window.addEventListener('resize',size);
   (wide.addEventListener?wide.addEventListener.bind(wide,'change'):wide.addListener.bind(wide))(function(){size();if(at>=0)aim(at,true);});
-  size(); show(0); requestAnimationFrame(frame);          /* opens by swinging the first belief round to face you */
+  size(); show(0); requestAnimationFrame(frame);
+  /* Keep the arrows still: the belief panel is held at the height of its longest
+     belief, so clicking an arrow never moves the button out from under the pointer. */
+  (function(){
+    var tt=document.getElementById('btitle'),tx=document.getElementById('btext'),rf=document.getElementById('brefs'),hold;
+    function fill(i){var x=B[i];tt.textContent=x.t;tx.textContent=x.d;rf.innerHTML='';rf.hidden=!x.r.length;x.r.forEach(function(r){var li=document.createElement('li');li.textContent=r;rf.appendChild(li);});}
+    function lockH(){panel.style.minHeight='';var mx=0;for(var i=0;i<N;i++){fill(i);mx=Math.max(mx,panel.offsetHeight);}fill(at);panel.style.minHeight=mx+'px';}
+    lockH();
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(lockH);
+    addEventListener('resize',function(){clearTimeout(hold);hold=setTimeout(lockH,200);});
+  })();          /* opens by swinging the first belief round to face you */
 })();
 </script>
   </body>
