@@ -2995,7 +2995,7 @@ h1 {
 }
 /* desktop: smaller hug photo, inside the column */
 @media (min-width:1080px){
-  .praypage .pask-in>.pask-img{width:100%;max-width:380px;aspect-ratio:1/1;margin:0;align-self:start;border-radius:6px}
+  .praypage .pask-in>.pask-img{width:100%;max-width:520px;aspect-ratio:1/1;margin:0;align-self:start;border-radius:6px}
 }
 @media (prefers-reduced-motion:reduce){.praypage *{transition:none!important}}
 
