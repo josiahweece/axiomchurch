@@ -2855,4 +2855,13 @@ h1 {
   .givepage .rc{grid-template-columns:96px 1fr}
   .givepage .rsvg{width:96px}
 }
+/* desktop: white stats panel with red type, crop keeps the grandpa's head in frame */
+@media (min-width:960px){
+  .givepage .gsplit .gring{background:#fff;color:var(--g-deep)}
+  .givepage .gsplit .gring .gv-kicker{color:var(--g-deep)}
+  .givepage .gsplit .rsvg .trk{stroke:color-mix(in srgb,var(--g-deep) 16%,#fff)}
+  .givepage .gsplit .rsvg .arc{stroke:var(--g-deep)}
+  .givepage .gsplit .rsrc{color:color-mix(in srgb,var(--g-deep) 70%,#fff)}
+  .givepage .ghero-photo img{object-position:50% 22%}
+}
 @media (prefers-reduced-motion:reduce){.givepage *{transition:none!important}}
