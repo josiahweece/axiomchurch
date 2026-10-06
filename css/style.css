@@ -3019,3 +3019,17 @@ h1 {
   .footer-bottom span+span{margin-top:4px}
 }
 
+/* ---------- Contact (contact.html): borrows the prayer page's form and type ---------- */
+.contactpage .chero .phero-in{padding-block:clamp(56px,9vw,110px)}
+.contactpage .cdirect{margin:0;font-size:1.1rem;line-height:2}
+.contactpage .textlink{font-weight:700;text-decoration:underline;text-decoration-color:var(--p-red);text-decoration-thickness:2px;text-underline-offset:5px}
+.praypage .pform input[type=tel]{width:100%;border:2px solid var(--line);border-radius:12px;padding:13px 14px;font-size:1rem;background:#fff}
+
+/* prayer page: the Ask for prayer block is coral */
+.praypage:not(.contactpage) .pask{background:var(--p-red);color:var(--p-dark)}
+.praypage:not(.contactpage) .pask .pnote,.praypage:not(.contactpage) .pask .pmeta,.praypage:not(.contactpage) .pask .pform label span{color:var(--p-dark)}
+.praypage:not(.contactpage) .pask .pform input[type=text],.praypage:not(.contactpage) .pask .pform input[type=email],.praypage:not(.contactpage) .pask .pform textarea{border-color:transparent}
+.praypage:not(.contactpage) .pask .pbtn{background:var(--p-dark);color:#fff}
+.praypage:not(.contactpage) .pask .pcheck input{accent-color:var(--p-dark)}
+.praypage:not(.contactpage) .pask .pstatus.err{color:var(--p-dark)}
+.praypage:not(.contactpage) .pask .pform input:focus-visible,.praypage:not(.contactpage) .pask .pform textarea:focus-visible{outline-color:var(--p-dark)}
