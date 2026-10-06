@@ -2784,32 +2784,75 @@ h1 {
 }
 @media (prefers-reduced-motion:reduce){.teampage *{transition:none!important;animation:none!important}}
 
-/* ---------- Give (give.html) ---------- */
-.givepage h1,.givepage h2{text-transform:none;letter-spacing:normal;line-height:1.1;max-width:none;margin:0}
+/* ---------- Give (give.html) ----------
+   Mantra hero over a photo, "why give here" rings beside the Subsplash form
+   on desktop (stacked on phones), then the in-person option. */
+.givepage{--g-dark:var(--ink-deep);--g-deep:var(--red-deep);--g-red:var(--red)}
+.givepage h1,.givepage h2{text-transform:none;letter-spacing:normal;line-height:1.05;max-width:none;margin:0;text-wrap:balance}
 .givepage .gv-wrap{width:100%;max-width:1160px;margin-inline:auto;padding-inline:20px}
 .givepage .tee{font-family:var(--display);font-weight:900;font-stretch:62%;font-variation-settings:"wdth" 62;text-transform:uppercase;letter-spacing:-.005em;line-height:.9}
-.givepage .gv-kicker{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;color:var(--red);margin:0 0 14px}
-.givepage .textlink{font-weight:700;text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:5px}
-.givepage .ghero{background:var(--ink-deep);color:#fff}
-.givepage .ghero-in{display:grid;grid-template-columns:1fr;gap:28px;padding-block:clamp(36px,6vw,80px)}
-.givepage .ghero h1{font-size:clamp(3.6rem,15vw,6.4rem);margin:0 0 16px}
-.givepage .ghero h1 em{font-style:normal;color:var(--red);display:block}
-.givepage .glede{margin:0 0 18px;font-size:clamp(1.08rem,2.4vw,1.3rem);max-width:30ch}
-.givepage .gguest{margin:0;padding:14px 16px;border-left:4px solid var(--red);background:#1c1c1c;color:#d6d6d6;max-width:34ch}
-.givepage .gguest b{color:#fff}
-.givepage .gform{background:#fff;color:var(--ink);border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px #2e2e2e}
+.givepage .gv-kicker{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;margin:0 0 14px}
+.givepage .textlink{font-weight:700;text-decoration:underline;text-decoration-color:var(--g-red);text-decoration-thickness:2px;text-underline-offset:5px}
+.givepage .sec{font-family:var(--display);font-weight:900;font-size:clamp(2rem,5.6vw,3.2rem);letter-spacing:-.035em;line-height:1;margin:0 0 10px}
+
+/* hero */
+.givepage .ghero{position:relative;background:var(--g-dark);color:#fff;overflow:hidden}
+.givepage .ghero-photo{position:absolute;inset:0}
+.givepage .ghero-photo img{width:100%;height:100%;object-fit:cover;object-position:46% 48%}
+.givepage .ghero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(16,16,16,.92) 0%,rgba(16,16,16,.6) 45%,rgba(16,16,16,.2) 80%)}
+.givepage .ghero-in{position:relative;z-index:1;padding-block:clamp(110px,18vw,220px) clamp(40px,6vw,70px)}
+.givepage .ghero .gv-kicker{color:var(--g-red)}
+.givepage .ghero h1{font-size:clamp(4rem,16vw,8.5rem);margin:0 0 16px;max-width:12ch}
+.givepage .ghero h1 em{font-style:normal;color:var(--g-red)}
+.givepage .glede{color:#fff;font-size:clamp(1.15rem,2.6vw,1.45rem);font-weight:600;margin:0 0 22px;max-width:30ch}
+.givepage .gfirst{margin:0;padding:14px 16px;border-left:4px solid var(--g-red);background:#1c1c1c;color:#d6d6d6;max-width:36ch}
+.givepage .gfirst b{color:#fff}
+
+/* why give here: rings */
+.givepage .gring{background:var(--g-deep);color:#fff}
+.givepage .gring-in{padding-block:clamp(28px,5vw,48px)}
+.givepage .gring .gv-kicker{color:#fff;opacity:.8}
+.givepage .rhead{font-family:var(--display);font-weight:900;font-size:clamp(1.7rem,5vw,2.6rem);letter-spacing:-.03em;margin:0 0 24px}
+.givepage .rgrid{display:grid;grid-template-columns:1fr;gap:18px}
+.givepage .rc{margin:0;min-width:0;display:grid;grid-template-columns:84px 1fr;align-items:center;gap:16px}
+.givepage .rsvg{position:relative;width:84px;aspect-ratio:1}
+.givepage .rsvg svg{width:100%;height:100%;transform:rotate(-90deg)}
+.givepage .rsvg .trk{fill:none;stroke:rgba(255,255,255,.18);stroke-width:9}
+.givepage .rsvg .arc{fill:none;stroke:#fff;stroke-width:9;stroke-linecap:round;stroke-dasharray:var(--c);stroke-dashoffset:var(--f);transition:stroke-dashoffset 1.3s var(--ease)}
+.givepage .gring.pre .arc{stroke-dashoffset:var(--c)}
+.givepage .rsvg b{position:absolute;inset:0;display:grid;place-items:center;font-size:1.7rem;line-height:1}
+.givepage .rc figcaption{max-width:34ch;font-size:1.02rem;font-weight:500;line-height:1.4}
+.givepage .rc figcaption b{font-weight:800}
+.givepage .rsrc{margin:22px 0 0;font-size:.7rem;color:rgba(255,255,255,.7)}
+
+/* giving box */
+.givepage .gbox{background:var(--g-dark)}
+.givepage .gbox-in{padding-block:clamp(44px,7vw,80px);max-width:620px}
+.givepage .gform{background:#fff;color:var(--ink);border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px #2e2e2e,0 24px 60px -30px rgba(0,0,0,.8);min-width:0}
 .givepage .gform iframe{display:block;width:100%;border:0;transition:height .3s ease}
 .givepage .gfall{margin:0;padding:12px 16px 16px;font-size:.9rem;color:var(--muted);text-align:center;border-top:1px solid var(--line)}
-.givepage .gways-in{padding-block:clamp(44px,6vw,84px)}
-.givepage h2.sec{font-family:var(--display);font-weight:900;font-size:clamp(1.8rem,5.4vw,2.8rem);line-height:1;letter-spacing:-.035em;margin:0 0 22px}
-.givepage .gwlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr}
-.givepage .gwlist li{padding:18px 0;border-top:3px solid var(--ink)}
-.givepage .gwlist h3{margin:0 0 4px;font-family:var(--display);font-weight:900;font-size:clamp(1.3rem,3.6vw,1.7rem);letter-spacing:-.03em;line-height:1.05}
-.givepage .gwlist p{margin:0;max-width:32ch}
-.givepage .gq{margin:26px 0 0;font-size:1.05rem}
-@media (min-width:900px){
-  .givepage .ghero-in{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(36px,5vw,72px);align-items:start}
-  .givepage .gcopy{position:sticky;top:110px}
-  .givepage .gwlist{grid-template-columns:repeat(3,1fr);gap:0 32px}
+
+/* in person */
+.givepage .gperson{background:var(--g-red);color:var(--g-dark)}
+.givepage .gperson-in{padding-block:clamp(44px,6vw,72px);display:grid;gap:24px;align-items:center}
+.givepage .gp-img{width:100%;max-width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:4px}
+.givepage .gperson p{margin:0;font-size:1.1rem;max-width:44ch}
+
+@media (min-width:760px){
+  .givepage .gperson-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
 }
-@media (prefers-reduced-motion:reduce){.givepage .gform iframe{transition:none}}
+@media (min-width:900px){
+  .givepage .ghero-photo img{object-position:50% 46%}
+  .givepage .ghero-in{padding-block:clamp(200px,24vw,320px) 64px}
+}
+@media (min-width:960px){
+  .givepage .gsplit{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr)}
+  .givepage .gsplit>section{display:flex;align-items:center}
+  .givepage .gsplit .gring-in,.givepage .gsplit .gbox-in{width:100%;max-width:none;padding-block:clamp(56px,6vw,90px);padding-inline:clamp(28px,4vw,64px)}
+  .givepage .gsplit .gring-in{padding-left:max(20px,calc((100vw - 1160px)/2 + 20px))}
+  .givepage .gsplit .gbox-in{padding-right:max(20px,calc((100vw - 1160px)/2 + 20px))}
+  .givepage .gsplit .gform{max-width:560px}
+  .givepage .rc{grid-template-columns:96px 1fr}
+  .givepage .rsvg{width:96px}
+}
+@media (prefers-reduced-motion:reduce){.givepage *{transition:none!important}}

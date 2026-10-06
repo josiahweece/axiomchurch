@@ -25,28 +25,43 @@
   <body>
     <div data-header></div>
     <main class="givepage">
-<section class="ghero"><div class="ghero-in gv-wrap">
-  <div class="gcopy">
+<section class="ghero">
+  <div class="ghero-photo"><img src="assets/images/give-hero.jpg" alt="A grandfather holding his grandson&rsquo;s hand as they walk past the Axiom Kids check-in sign"></div>
+  <div class="ghero-in gv-wrap">
     <p class="gv-kicker">Give</p>
-    <h1 class="tee">Fund the <em>mission.</em></h1>
-    <p class="glede">Axiom is for people who thought they would never step foot in a church. Giving is how we keep reaching them.</p>
-    <p class="gguest"><b>New here?</b> Don&rsquo;t feel like you need to give. You&rsquo;re our guest.</p>
+    <h1 class="tee">Hands addicted to <em>generosity.</em></h1>
+    <p class="glede">Your contribution is our capacity. Thank you.</p>
+    <p class="gfirst"><b>First time here?</b> There&rsquo;s no obligation to give whatsoever. We&rsquo;re just glad you&rsquo;re here.</p>
   </div>
-  <div class="gform">
-    <!-- The giving form lives on Subsplash and is shown here in a frame. The script at the bottom of the page sizes it. -->
-    <iframe id="giveFrame" title="Give to Axiom Church" src="https://subsplash.com/u/-8D5H5R/give?embed=true" height="720" scrolling="no" allow="payment; clipboard-read; clipboard-write"></iframe>
-    <p class="gfall">Form not loading? <a class="textlink" href="https://subsplash.com/u/-8D5H5R/give" target="_blank" rel="noopener">Open it in a new tab &rarr;</a></p>
-  </div>
-</div></section>
+</section>
 
-<section class="gways"><div class="gways-in gv-wrap">
-  <h2 class="sec">Other ways to give.</h2>
-  <ul class="gwlist">
-    <li><h3>In person.</h3><p>Cash or check. Drop it in the black boxes at the back on a Sunday.</p></li>
-    <li><h3>By text.</h3><p>Text GIVE to <a class="textlink" href="sms:+19064839222?&amp;body=GIVE">(906) 483-9222</a>.</p></li>
-    <li><h3>Stock or crypto.</h3><p>Pick it at the top of the form.</p></li>
-  </ul>
-  <p class="gq">Questions about giving? <a class="textlink" href="mailto:josiah.weece@axiomchurch.com?subject=Question%20about%20giving">Ask Josiah &rarr;</a></p>
+<div class="gsplit">
+  <section class="gring" aria-labelledby="why-h"><div class="gring-in gv-wrap">
+    <p class="gv-kicker">Why give here?</p>
+    <h2 class="rhead" id="why-h">New churches reach new people.</h2>
+    <div class="rgrid">
+      <figure class="rc"><div class="rsvg"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="52"/><circle class="arc" cx="60" cy="60" r="52" style="--c:326.7;--f:0.0"/></svg><b class="tee">3&times;</b></div><figcaption>New churches baptize <b>3 times</b> as many people as established churches.</figcaption></figure>
+      <figure class="rc"><div class="rsvg"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="52"/><circle class="arc" cx="60" cy="60" r="52" style="--c:326.7;--f:189.5"/></svg><b class="tee">42%</b></div><figcaption><b>42%</b> of people at new churches had never been to church, or hadn&rsquo;t been in years.</figcaption></figure>
+      <figure class="rc"><div class="rsvg"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="52"/><circle class="arc" cx="60" cy="60" r="52" style="--c:326.7;--f:0.0"/></svg><b class="tee">2&times;</b></div><figcaption>Leander <b>doubled</b> in size from 2010 to 2020. That&rsquo;s a lot of new neighbors.</figcaption></figure>
+    </div>
+    <p class="rsrc">Sources: Stetzer &amp; Bird, <i>Viral Churches</i> (2010) &middot; LifeWay Research (2015) &middot; U.S. Census (2010, 2020)</p>
+  </div></section>
+
+  <section class="gbox" id="give"><div class="gbox-in gv-wrap">
+    <div class="gform">
+      <!-- The giving form lives on Subsplash and is shown here in a frame. The script at the bottom of the page sizes it. -->
+      <iframe id="giveFrame" title="Give to Axiom Church" src="https://subsplash.com/u/-8D5H5R/give?embed=true" height="720" scrolling="no" allow="payment; clipboard-read; clipboard-write"></iframe>
+      <p class="gfall">Already giving? Log in above to change your amount or card, make it recurring, or get your statement. Form not loading? <a class="textlink" href="https://subsplash.com/u/-8D5H5R/give" target="_blank" rel="noopener">Open it here &rarr;</a></p>
+    </div>
+  </div></section>
+</div>
+
+<section class="gperson"><div class="gperson-in gv-wrap">
+  <img class="gp-img" src="assets/images/give-kids.jpg" alt="Preschoolers coloring on the floor of an Axiom Kids room" loading="lazy">
+  <div>
+    <h2 class="sec">Rather give in person?</h2>
+    <p>Bring cash or a check to the Next Steps area in the lobby on Sunday. Or text GIVE to <a class="textlink" href="sms:+19064839222?&amp;body=GIVE">(906) 483-9222</a>.</p>
+  </div>
 </div></section>
     </main>
     <div data-footer></div>
@@ -61,6 +76,31 @@
           var h = Number(e.data.pageHeight);
           if (h > 200 && h < 6000) f.style.height = Math.ceil(h) + 'px';
         });
+      })();
+    </script>
+    <script>
+      // Rings fill and numbers count up when the page opens.
+      (function () {
+        var g = document.querySelector('.gring');
+        if (!g || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var nums = [].slice.call(g.querySelectorAll('.rsvg b')).map(function (b) {
+          var m = b.innerHTML.match(/^(\d+)(.*)$/);
+          return m ? { b: b, to: +m[1], tail: m[2] } : null;
+        }).filter(Boolean);
+        g.classList.add('pre');
+        nums.forEach(function (n) { n.b.innerHTML = '0' + n.tail; });
+        function go() {
+          setTimeout(function () {
+            g.classList.remove('pre');
+            var t0 = performance.now();
+            (function f(t) {
+              var k = Math.min(1, (t - t0) / 1300), e = 1 - Math.pow(1 - k, 3);
+              nums.forEach(function (n) { n.b.innerHTML = Math.round(n.to * e) + n.tail; });
+              if (k < 1) requestAnimationFrame(f);
+            })(t0);
+          }, 350);
+        }
+        if (document.readyState === 'complete') go(); else addEventListener('load', go, { once: true });
       })();
     </script>
   </body>
