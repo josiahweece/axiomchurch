@@ -3006,3 +3006,16 @@ h1 {
 .praypage .tbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:10px}
 .praypage .tlink{background:none;border:0;padding:0;font-weight:700;text-decoration:underline;text-decoration-color:var(--p-red);text-decoration-thickness:2px;text-underline-offset:5px;cursor:pointer}
 .praypage .pcard .pc-email a{color:inherit;font-weight:700}
+
+/* ---------- Footer matches the menu: I'm New, About, Next Steps, then Sunday ---------- */
+.footer .footer-main{grid-template-columns:minmax(0,1.6fr) repeat(4,minmax(0,1fr));gap:40px}
+@media (max-width:900px){
+  .footer .footer-main{grid-template-columns:1fr 1fr;gap:30px 24px}
+  .footer .footer-main>:first-child{grid-column:1/-1}
+  .footer .footer-main>:last-child{grid-column:auto}
+}
+@media (max-width:600px){
+  .footer-bottom span{display:block}
+  .footer-bottom span+span{margin-top:4px}
+}
+
