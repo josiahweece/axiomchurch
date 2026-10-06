@@ -13,8 +13,8 @@
 //   POST /api/prayer { action:'approve'|'decline'|'answer'|'unanswer'|'remove'|'handled', id }
 //
 // Settings in Vercel (Project > Settings > Environment Variables):
-//   KV_REST_API_URL, KV_REST_API_TOKEN  added for you when you connect Upstash
-//                                       (UPSTASH_REDIS_REST_URL / _TOKEN also work)
+//   PrayerTeam_REDIS_URL                added for you when you connected Redis in Vercel
+//                                       (REDIS_URL, or Upstash's KV_REST_API_URL + _TOKEN, also work)
 //   PRAYER_TEAM_PASSWORD                the shared password for /prayer-team
 //   RESEND_API_KEY                      sends the new-request email
 //   PRAYER_ALERT_TO                     optional, defaults to prayer@axiomchurch.com
@@ -31,7 +31,25 @@ const COOKIE = 'axiom_prayer_team';
 const THIRTY_DAYS = 30 * 24 * 3600;
 const LISTS = { pending: 'prayer:pending', private: 'prayer:private', live: 'prayer:live', handled: 'prayer:handled' };
 
+// Vercel's Redis add-on hands over one connection address (it shows up as
+// PrayerTeam_REDIS_URL or REDIS_URL). Upstash hands over a REST address and a
+// token instead. Either one works.
+const REDIS_URL = process.env.PrayerTeam_REDIS_URL || process.env.REDIS_URL;
+let redisClient = null;
+async function tcp() {
+  if (redisClient && redisClient.isOpen) return redisClient;
+  const { createClient } = require('redis');
+  redisClient = createClient({ url: REDIS_URL, socket: { connectTimeout: 5000 } });
+  redisClient.on('error', (e) => console.error('redis:', e.message));
+  await redisClient.connect();
+  return redisClient;
+}
+
 async function db(commands) {
+  if (!(DB_URL && DB_TOKEN) && REDIS_URL) {
+    const c = await tcp();
+    return Promise.all(commands.map((cmd) => c.sendCommand(cmd.map(String))));
+  }
   if (!DB_URL || !DB_TOKEN) throw Object.assign(new Error('The prayer database is not connected yet.'), { code: 503 });
   const r = await fetch(DB_URL.replace(/\/$/, '') + '/pipeline', {
     method: 'POST',
