@@ -3034,3 +3034,20 @@ h1 {
   .praypage .pask-in>div,.praypage .pask-in>.pform{grid-area:auto}
   .praypage .pask-in .pform{max-width:none}
 }
+
+/* ---------- Homepage proof: Mari's story ---------- */
+.home .proof{background:var(--band);padding-block:clamp(56px,10vw,104px)}
+.home .proof-in{width:100%;max-width:1200px;margin-inline:auto;padding-inline:20px;display:grid;gap:clamp(24px,4vw,56px);align-items:center}
+.home .proof .eyebrow{color:var(--red-deep);margin-bottom:12px}
+.home .proof h2{font-family:var(--display);font-weight:900;font-size:clamp(2.1rem,7vw,3.6rem);line-height:.95;letter-spacing:-.035em;margin:0 0 12px;text-wrap:balance}
+.home .proof-sub{margin:0;color:var(--muted);font-size:clamp(1.05rem,2.4vw,1.2rem)}
+.home .yt,.home .yt-frame{position:relative;display:block;width:100%;max-width:100%;aspect-ratio:16/9;border:0;padding:0;border-radius:4px;overflow:hidden;background:var(--ink-deep)}
+.home .yt{cursor:pointer}
+.home .yt img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.home .yt:hover img{transform:scale(1.03)}
+.home .yt-play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--red-deep);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.home .yt-play::before{content:"";position:absolute;left:31px;top:24px;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent #fff}
+.home .yt:focus-visible{outline:3px solid var(--red-deep);outline-offset:3px}
+@media (min-width:860px){.home .proof-in{grid-template-columns:minmax(0,4fr) minmax(0,7fr)}}
+@media (prefers-reduced-motion:reduce){.home .yt img{transition:none}}
+

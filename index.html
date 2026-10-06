@@ -150,10 +150,22 @@
         </div>
       </section>
 
-      <!-- TODO: proof section. A 60-90 second testimony video goes here.
-           Renders nothing until we have the real footage - no stock video, no
-           stand-in image.
-           <section id="proof"></section> -->
+      <section class="proof" id="proof" aria-labelledby="proof-h">
+        <div class="proof-in">
+          <div class="proof-copy">
+            <p class="eyebrow">Mari&rsquo;s story</p>
+            <h2 id="proof-h">She found Jesus here.</h2>
+            <p class="proof-sub">Hear it from her.</p>
+          </div>
+          <div class="proof-video">
+            <!-- Facade: the YouTube player only loads when someone taps play. -->
+            <button class="yt" type="button" data-id="sN4IMnzM7Ds" aria-label="Play Mari&rsquo;s story">
+              <img src="https://i.ytimg.com/vi/sN4IMnzM7Ds/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/sN4IMnzM7Ds/hqdefault.jpg'" alt="" loading="lazy" />
+              <span class="yt-play" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </section>
 
       <section class="next">
         <div class="next-in">
@@ -307,6 +319,20 @@
           }, 500);
         }
       })();
+    </script>
+    <script>
+      // Mari's story: swap the thumbnail for the real player on tap.
+      document.querySelectorAll('.yt').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var f = document.createElement('iframe');
+          f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0';
+          f.title = "Mari's story";
+          f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+          f.allowFullscreen = true;
+          f.className = 'yt-frame';
+          b.replaceWith(f);
+        });
+      });
     </script>
   </body>
 </html>
