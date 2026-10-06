@@ -2440,3 +2440,14 @@ h1 {
 .nextpage .arw:hover{background:var(--on-dark);color:var(--ink-deep)}
 .nextpage .arw:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 .nextpage .bpos{font-family:var(--display);font-weight:800;font-size:.85rem;letter-spacing:.12em;color:var(--on-dark-soft);min-width:3.2em;text-align:center}
+.nextpage .come{position:relative;background:var(--ink-deep);color:var(--on-dark);overflow:hidden}
+.nextpage .come>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 80%}
+.nextpage .come::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,16,16,.92) 0%,rgba(16,16,16,.5) 42%,rgba(16,16,16,.08) 75%)}
+.nextpage .come-in{position:relative;z-index:1}
+.nextpage .come-in{padding-block:clamp(120px,22vw,300px) clamp(40px,6vw,72px)}
+.nextpage .come h2{margin:0 0 14px;font-size:clamp(3.4rem,13vw,7rem)}
+.nextpage .come p{margin:0 0 26px;color:var(--on-dark-soft);font-size:1.1rem}
+.nextpage .come-cta{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
+.nextpage .come .btn{background:var(--red);color:var(--ink-deep)}
+.nextpage .come .btn:focus-visible{outline-color:var(--paper)}
+.nextpage .come .textlink{color:var(--on-dark);text-decoration-color:var(--on-dark)}
