@@ -3020,7 +3020,8 @@ h1 {
 }
 
 /* ---------- Contact (contact.html): borrows the prayer page's form and type ---------- */
-.contactpage .chero .phero-in{padding-block:clamp(56px,9vw,110px)}
+.contactpage .chero .phero-photo img{object-position:56% 30%}
+@media (min-width:960px){.contactpage .chero{grid-template-columns:minmax(0,2fr) minmax(0,3fr);min-height:520px}.contactpage .chero .phero-photo img{object-position:50% 40%}.contactpage .chero .phero-photo::after{background:linear-gradient(to right,var(--p-dark) 0%,rgba(16,16,16,0) 12%)}}
 .contactpage .cdirect{margin:0;font-size:1.1rem;line-height:2}
 .contactpage .textlink{font-weight:700;text-decoration:underline;text-decoration-color:var(--p-red);text-decoration-thickness:2px;text-underline-offset:5px}
 .praypage .pform input[type=tel]{width:100%;border:2px solid var(--line);border-radius:12px;padding:13px 14px;font-size:1rem;background:#fff}
