@@ -1691,7 +1691,7 @@ h1 {
 /* FORM HANDOFF — the invitation sits on top of the photo. A dark fade under
    the words keeps them readable; the rest of the picture stays clear. */
 .visit .formwrap{position:relative;overflow:hidden;background:var(--ink-deep);color:#fff}
-.visit .formwrap .band-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 0}
+.visit .formwrap .band-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:65% 0}
 .visit .formwrap::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(to top,rgba(16,16,16,.95) 0%,rgba(16,16,16,.86) 36%,rgba(16,16,16,.3) 60%,rgba(16,16,16,0) 76%)}
 .visit .formwrap .wrap{position:relative;z-index:1;min-height:580px;display:flex;align-items:flex-end;padding-block:36px 40px}
@@ -1699,8 +1699,8 @@ h1 {
   line-height:1;letter-spacing:-.035em;margin:0 0 10px;max-width:18ch;text-wrap:balance}
 .visit .formwrap .lede{color:rgba(255,255,255,.86);margin:0 0 24px;max-width:44ch}
 @media (min-width:900px){
-  .visit .formwrap .band-photo{object-position:50% 12%}
-  .visit .formwrap::after{background:linear-gradient(90deg,rgba(16,16,16,.92) 0%,rgba(16,16,16,.84) 26%,rgba(16,16,16,.35) 42%,rgba(16,16,16,0) 56%)}
+  .visit .formwrap .band-photo{left:10%;right:auto;object-position:50% 12%}
+  .visit .formwrap::after{background:linear-gradient(90deg,var(--ink-deep) 0%,var(--ink-deep) 10%,rgba(16,16,16,.86) 26%,rgba(16,16,16,.4) 42%,rgba(16,16,16,0) 56%)}
   .visit .formwrap .wrap{min-height:clamp(440px,36vw,540px);align-items:center;padding-block:56px}
   .visit .formwrap .handoff{max-width:440px}
 }
