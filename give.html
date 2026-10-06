@@ -7,68 +7,61 @@
     <meta property="og:site_name" content="Axiom Church" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Give | Axiom Church" />
-    <meta property="og:description" content="A brand new church in Leander, TX for people who thought they would never step foot in one. Sundays at 10am." />
+    <meta property="og:description" content="Give to Axiom Church in Leander, TX. Online, in person, or by text." />
     <meta property="og:image" content="https://axiomchurch-lac.vercel.app/assets/images/share.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="description" content="Give to Axiom Church in Leander, TX. Online, in person, or by text." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Archivo is loaded with its width axis here: the tall condensed headings on this page use it. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div data-header></div>
-    <main>
-      <header class="page-hero">
-        <div class="wrap">
-          <span class="kicker">Generosity</span>
-          <h1>Live open-handed.</h1>
-          <p>
-            God does not want your money; he wants your heart. Every gift helps Axiom make a
-            difference in our community.
-          </p>
-          <div class="actions">
-            <a class="pill fill" href="https://subsplash.com/+8d5h5r/give">Give online</a>
-          </div>
-        </div>
-      </header>
-      <section class="section">
-        <div class="wrap">
-          <div class="section-head">
-            <span class="kicker">Ways to give</span>
-            <div><h2>Simple and secure.</h2></div>
-          </div>
-          <div class="grid three">
-            <article class="panel">
-              <span class="num">01</span>
-              <div>
-                <h3>Give Online</h3>
-                <p>Give through the website or Axiom Church app.</p>
-              </div>
-            </article>
-            <article class="panel">
-              <span class="num">02</span>
-              <div>
-                <h3>Give In Person</h3>
-                <p>Use cash or check in the black boxes at the back of the Worship Center.</p>
-              </div>
-            </article>
-            <article class="panel">
-              <span class="num">03</span>
-              <div>
-                <h3>Text to Give</h3>
-                <p>Text GIVE to (906) 483-9222.</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
+    <main class="givepage">
+<section class="ghero"><div class="ghero-in gv-wrap">
+  <div class="gcopy">
+    <p class="gv-kicker">Give</p>
+    <h1 class="tee">Fund the <em>mission.</em></h1>
+    <p class="glede">Axiom is for people who thought they would never step foot in a church. Giving is how we keep reaching them.</p>
+    <p class="gguest"><b>New here?</b> Don&rsquo;t feel like you need to give. You&rsquo;re our guest.</p>
+  </div>
+  <div class="gform">
+    <!-- The giving form lives on Subsplash and is shown here in a frame. The script at the bottom of the page sizes it. -->
+    <iframe id="giveFrame" title="Give to Axiom Church" src="https://subsplash.com/u/-8D5H5R/give?embed=true" height="720" scrolling="no" allow="payment; clipboard-read; clipboard-write"></iframe>
+    <p class="gfall">Form not loading? <a class="textlink" href="https://subsplash.com/u/-8D5H5R/give" target="_blank" rel="noopener">Open it in a new tab &rarr;</a></p>
+  </div>
+</div></section>
+
+<section class="gways"><div class="gways-in gv-wrap">
+  <h2 class="sec">Other ways to give.</h2>
+  <ul class="gwlist">
+    <li><h3>In person.</h3><p>Cash or check. Drop it in the black boxes at the back on a Sunday.</p></li>
+    <li><h3>By text.</h3><p>Text GIVE to <a class="textlink" href="sms:+19064839222?&amp;body=GIVE">(906) 483-9222</a>.</p></li>
+    <li><h3>Stock or crypto.</h3><p>Pick it at the top of the form.</p></li>
+  </ul>
+  <p class="gq">Questions about giving? <a class="textlink" href="mailto:josiah.weece@axiomchurch.com?subject=Question%20about%20giving">Ask Josiah &rarr;</a></p>
+</div></section>
     </main>
     <div data-footer></div>
     <script src="js/main.js"></script>
+    <script>
+      // The form tells us how tall it is. We only listen to Subsplash.
+      (function () {
+        var f = document.getElementById('giveFrame');
+        if (!f) return;
+        window.addEventListener('message', function (e) {
+          if (e.origin !== 'https://subsplash.com' || !e.data) return;
+          var h = Number(e.data.pageHeight);
+          if (h > 200 && h < 6000) f.style.height = Math.ceil(h) + 'px';
+        });
+      })();
+    </script>
   </body>
 </html>
