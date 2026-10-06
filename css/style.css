@@ -2993,6 +2993,10 @@ h1 {
   .praypage .pask-in{--edge:calc(var(--gut) + max(0px,(100vw - 1240px)/2))}
   .praypage .pask-in>.pask-img{max-width:none;width:calc(100% + var(--edge));margin:0 0 calc(-1*var(--pb)) calc(-1*var(--edge));align-self:end}
 }
+/* desktop: smaller hug photo, inside the column */
+@media (min-width:1080px){
+  .praypage .pask-in>.pask-img{width:100%;max-width:380px;aspect-ratio:1/1;margin:0;align-self:start;border-radius:6px}
+}
 @media (prefers-reduced-motion:reduce){.praypage *{transition:none!important}}
 
 
