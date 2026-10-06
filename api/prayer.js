@@ -22,8 +22,16 @@
 
 const crypto = require('crypto');
 
-const DB_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-const DB_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+// Vercel prefixes these with whatever the database was named when it was
+// connected (PrayerTeam_REDIS_URL, KV_REST_API_URL, ...), so look by ending.
+const envEnding = (re) => {
+  const k = Object.keys(process.env).find((x) => re.test(x) && process.env[x]);
+  return k ? { name: k, value: process.env[k] } : null;
+};
+const REST_URL = envEnding(/(KV_REST_API_URL|UPSTASH_REDIS_REST_URL)$/i);
+const REST_TOKEN = envEnding(/(KV_REST_API_TOKEN|UPSTASH_REDIS_REST_TOKEN)$/i);
+const DB_URL = REST_URL && REST_URL.value;
+const DB_TOKEN = REST_TOKEN && REST_TOKEN.value;
 const PASSWORD = process.env.PRAYER_TEAM_PASSWORD || '';
 const ALERT_TO = process.env.PRAYER_ALERT_TO || 'prayer@axiomchurch.com';
 const ALERT_FROM = process.env.PRAYER_ALERT_FROM || 'Axiom Prayer <onboarding@resend.dev>';
@@ -34,7 +42,8 @@ const LISTS = { pending: 'prayer:pending', private: 'prayer:private', live: 'pra
 // Vercel's Redis add-on hands over one connection address (it shows up as
 // PrayerTeam_REDIS_URL or REDIS_URL). Upstash hands over a REST address and a
 // token instead. Either one works.
-const REDIS_URL = process.env.PrayerTeam_REDIS_URL || process.env.REDIS_URL;
+const TCP = envEnding(/(^|_)(REDIS_URL|KV_URL)$/i);
+const REDIS_URL = TCP && TCP.value;
 let redisClient = null;
 async function tcp() {
   if (redisClient && redisClient.isOpen) return redisClient;
@@ -153,6 +162,16 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   try {
     if (req.method === 'GET') {
+      if (req.query && req.query.health) {
+        // Names only, never values: shows which settings this deploy can see.
+        const out = {
+          database: DB_URL && DB_TOKEN ? 'rest:' + REST_URL.name : REDIS_URL ? 'redis:' + TCP.name : 'none found',
+          password: PASSWORD ? 'set' : 'missing',
+          email: process.env.RESEND_API_KEY ? 'set' : 'missing',
+        };
+        try { await db([['PING']]); out.reachable = true; } catch (e) { out.reachable = false; out.problem = e.message; }
+        return res.status(200).json(out);
+      }
       if (req.query && req.query.team) {
         if (!isTeam(req)) return res.status(401).json({ error: 'Sign in first.' });
         const [pending, priv, live, handled] = await Promise.all([
