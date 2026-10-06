@@ -123,18 +123,20 @@
     cx.clearRect(0,0,cv.width,cv.height);cx.globalCompositeOperation='lighter';cx.lineCap='round';
     for(var i=0;i<F.length;i++){var f=F[i],d=rot(Q,f.d),L=f.len*(still.matches?1:1+.06*Math.sin(t/900+f.ph)),a=.16+.5*(d[2]+1)/2;
       line([d[0]*.12,d[1]*.12,d[2]*.12],[d[0]*L,d[1]*L,d[2]*L],f.c,a,f.w,.15);}
-    for(var j=0;j<N;j++){var v=rot(Q,P[j]),on=j===at,al=on?1:.45+.45*(v[2]+1)/2;
+    var front=-1,fz=-2;
+    for(var j=0;j<N;j++){var v=rot(Q,P[j]),on=j===at,al=on?1:.45+.45*(v[2]+1)/2;if(v[2]>fz){fz=v[2];front=j;}
       line([v[0]*.12,v[1]*.12,v[2]*.12],v,on?[255,255,255]:[240,95,86],al,on?3.2:2,on?1:.8);
       var p=proj(v),sc=(on?1.25:.72+.33*(v[2]+1)/2)*(p[2]/1.2),el=tips[j];
       el.style.transform='translate('+p[0].toFixed(1)+'px,'+p[1].toFixed(1)+'px) scale('+sc.toFixed(3)+')';
       el.style.opacity=on?1:(.5+.5*(v[2]+1)/2).toFixed(2);el.style.zIndex=on?999:Math.round((v[2]+1)*100);}
+    if(drag&&front!==at&&fz>.8)show(front,false,true);
     /* the core */
     var c=W/2*dpr,R=S*.5*dpr,gl=cx.createRadialGradient(c,c,0,c,c,R);
     gl.addColorStop(0,'rgba(255,255,255,1)');gl.addColorStop(.16,'rgba(255,214,208,.95)');gl.addColorStop(.3,'rgba(240,95,86,.55)');gl.addColorStop(1,'rgba(197,28,17,0)');
     cx.fillStyle=gl;cx.beginPath();cx.arc(c,c,R,0,6.2832);cx.fill();
     cx.globalCompositeOperation='source-over';
   }
-  function show(i,instant){
+  function show(i,instant,keep){
     at=i; var b=B[i];
     tips.forEach(function(t,k){t.classList.toggle('on',k===i);t.setAttribute('aria-pressed',k===i?'true':'false');});
     document.getElementById('bcount').textContent=(i<9?'0':'')+(i+1)+' / '+N;
@@ -143,7 +145,7 @@
     var refs=document.getElementById('brefs'); refs.innerHTML=''; refs.hidden=!b.r.length;
     b.r.forEach(function(x){var li=document.createElement('li');li.textContent=x;refs.appendChild(li);});
     panel.classList.remove('swap'); void panel.offsetWidth; panel.classList.add('swap');
-    aim(i,instant);
+    if(!keep)aim(i,instant);
   }
   tips.forEach(function(t,i){t.addEventListener('click',function(){show(i);});});
   document.getElementById('bnext').addEventListener('click',function(){show((at+1)%N);});
@@ -154,10 +156,10 @@
   });
   /* drag to turn it by hand */
   wheel.addEventListener('pointerdown',function(e){if(e.target.closest('.tip'))return;drag={x:e.clientX,y:e.clientY,sx:e.clientX,touch:e.pointerType==='touch'};goal=null;wheel.classList.add('dragging');try{wheel.setPointerCapture(e.pointerId);}catch(_){}});
-  wheel.addEventListener('pointermove',function(e){if(!drag||drag.touch)return;var dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;
+  wheel.addEventListener('pointermove',function(e){if(!drag)return;drag.moved=true;var dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;
     q=norm(mul(mul(axis(0,1,0,dx*.008),axis(1,0,0,-dy*.008)),q));});
-  /* on a phone a swipe steps to the next or previous belief instead of spinning freely */
-  ['pointerup','pointercancel','lostpointercapture'].forEach(function(n){wheel.addEventListener(n,function(e){if(drag&&drag.touch&&n==='pointerup'){var dx=e.clientX-drag.sx;if(Math.abs(dx)>35)show(dx<0?(at+1)%N:(at+N-1)%N);}drag=null;wheel.classList.remove('dragging');});});
+  /* letting go swings the belief now facing you to the front */
+  ['pointerup','pointercancel','lostpointercapture'].forEach(function(n){wheel.addEventListener(n,function(e){if(drag&&drag.moved&&n==='pointerup')show(at);drag=null;wheel.classList.remove('dragging');});});
   if('IntersectionObserver' in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting;}).observe(wheel);
   window.addEventListener('resize',size);
   (wide.addEventListener?wide.addEventListener.bind(wide,'change'):wide.addListener.bind(wide))(function(){size();if(at>=0)aim(at,true);});
