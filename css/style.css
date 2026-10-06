@@ -3026,3 +3026,10 @@ h1 {
 .praypage .pform input[type=tel]{width:100%;border:2px solid var(--line);border-radius:12px;padding:13px 14px;font-size:1rem;background:#fff}
 .contactpage .pask .p-wrap{padding-block:clamp(48px,7vw,88px)}
 .contactpage .pnote.cor{margin-top:36px}
+
+/* prayer page: no photo now, so Ask for prayer is one centered column on desktop */
+@media (min-width:1080px){
+  .praypage .pask-in{grid-template-columns:1fr;grid-template-areas:none;grid-template-rows:auto;max-width:720px;gap:8px}
+  .praypage .pask-in>div,.praypage .pask-in>.pform{grid-area:auto}
+  .praypage .pask-in .pform{max-width:none}
+}
