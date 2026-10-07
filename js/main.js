@@ -60,3 +60,24 @@ if(reel&&track&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const n
   function close(){try{localStorage.setItem('axSaveBanner','closed');}catch(e){}bar.remove();}
   bar.querySelector('.x').addEventListener('click',close);
 })();
+
+/* Inside the home screen app there's no browser back button, so add Back and Home. */
+(function(){
+  var sa=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  if(!sa||/^\/app\b/.test(location.pathname))return;
+  var css=document.createElement('style');
+  css.textContent='.axnav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:210;display:flex;background:#101010;border-radius:999px;padding:4px;box-shadow:0 10px 28px rgba(0,0,0,.35)}'+
+   '.axnav.lift{bottom:calc(96px + env(safe-area-inset-bottom,0px))}'+
+   '.axnav a,.axnav button{display:flex;align-items:center;gap:6px;border:0;background:none;color:#fff;font:700 .78rem "Archivo",sans-serif;letter-spacing:.04em;padding:10px 16px;border-radius:999px;text-decoration:none;cursor:pointer;min-height:44px}'+
+   '.axnav a{background:#C51C11}.axnav svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}'+
+   '.axnav a:focus-visible,.axnav button:focus-visible{outline:3px solid #F05F56;outline-offset:2px}';
+  document.head.appendChild(css);
+  var nav=document.createElement('nav');nav.className='axnav';nav.setAttribute('aria-label','App');
+  nav.innerHTML='<button type="button"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Back</button>'+
+    '<a href="/app/"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>Home</a>';
+  nav.querySelector('button').addEventListener('click',function(){var r=document.referrer;if(history.length>1&&r&&r.indexOf(location.host)>-1)history.back();else location.href='/app/';});
+  document.body.appendChild(nav);
+  function lift(){var st=document.querySelector('.stickycta, main.visit .sticky, .sticky.on');nav.classList.toggle('lift',!!(st&&getComputedStyle(st).display!=='none'));}
+  lift();addEventListener('scroll',function(){requestAnimationFrame(lift);},{passive:true});
+  document.body.style.paddingBottom='72px';
+})();
