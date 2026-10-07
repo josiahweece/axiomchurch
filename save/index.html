@@ -44,6 +44,9 @@ li span{color:var(--soft);font-size:.92rem}
 .done{margin-top:26px;color:var(--soft);font-size:.9rem;line-height:1.5;border-top:1px solid var(--line);padding-top:16px}
 .done a{color:#fff;font-weight:700;text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:4px}
 @media (prefers-reduced-motion:reduce){.arrow{animation:none}}
+.ico{width:20px;height:20px;vertical-align:-4px;margin-left:4px;fill:none;stroke:#0a84ff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dots{display:inline-grid;place-items:center;min-width:34px;height:24px;padding:0 6px;margin-left:4px;border-radius:999px;background:#2c2c2e;color:#fff;font-size:.7rem;letter-spacing:1px;vertical-align:2px}
+.arrow{left:auto;right:14px;transform:none}
 </style>
   </head>
   <body>
@@ -55,11 +58,13 @@ li span{color:var(--soft);font-size:.92rem}
 
   <div id="ios" hidden>
     <ol>
-      <li><b>Tap Share</b><span>The <span class="ic">&#8593;</span> button at the bottom of your screen.</span></li>
+      <li><b>Tap <span class="dots" aria-hidden="true">&bull;&bull;&bull;</span></b><span>Bottom right, next to the web address.</span></li>
+      <li><b>Tap Share <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5v10h14V11h-1"/></svg></b><span>A square with an arrow pointing up.</span></li>
       <li><b>Tap &ldquo;Add to Home Screen&rdquo;</b><span>Scroll down the list if you don&rsquo;t see it.</span></li>
-      <li><b>Tap &ldquo;Add&rdquo;</b><span>Top right corner. Axiom shows up next to your other apps.</span></li>
+      <li><b>Tap &ldquo;Add&rdquo;</b><span>Axiom shows up next to your other apps.</span></li>
     </ol>
-    <div class="arrow" aria-hidden="true">Share is down here &darr;</div>
+    <div class="arrow" aria-hidden="true">Start here &darr;</div>
+  </div>
   </div>
 
   <div id="and" hidden>
