@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Axiom Church</title>
+    <meta name="robots" content="noindex" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+    <meta name="theme-color" content="#101010" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Axiom" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      /* The home screen app's start screen: Sunday details, this week's message, then one-tap tiles. */
+      :root{--bg:#101010;--card:#1c1c1c;--line:#2a2a2a;--soft:#a8a8a8;--red:#F05F56;--deep:#C51C11;--display:"Archivo",system-ui,sans-serif;--body:"DM Sans",system-ui,sans-serif;color-scheme:dark}
+      *{box-sizing:border-box}
+      html,body{margin:0;background:var(--bg);color:#fff;font-family:var(--body)}
+      a{color:inherit;text-decoration:none}
+      main{max-width:520px;margin:0 auto;min-height:100svh;display:flex;flex-direction:column;gap:12px;
+        padding:calc(env(safe-area-inset-top,0px) + 16px) 16px calc(env(safe-area-inset-bottom,0px) + 18px)}
+      .top{display:flex;align-items:center;gap:10px}
+      .top img{width:34px;height:34px;border-radius:9px}
+      .top b{font:800 1rem var(--display)}
+      .top a.site{margin-left:auto;font:600 .8rem var(--body);color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:7px 12px}
+      h1{font-family:var(--display);font-weight:900;font-stretch:62%;text-transform:uppercase;font-size:2.6rem;line-height:.9;margin:8px 0 2px}
+      h1 em{font-style:normal;color:var(--red)}
+      .next{background:var(--deep);border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+      .next small{display:block;font:700 .66rem var(--display);letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+      .next b{display:block;font:800 1.15rem var(--display);margin-top:2px}
+      .next span{font-size:.82rem;opacity:.92}
+      .next a{flex:none;font:700 .72rem var(--display);letter-spacing:.06em;text-transform:uppercase;background:#fff;color:var(--deep);padding:9px 13px;border-radius:999px}
+      .msg{display:flex;align-items:center;gap:12px;background:var(--red);color:#101010;border-radius:16px;padding:12px}
+      .thumb{flex:none;position:relative;width:112px;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#3a1512 center/cover no-repeat;display:grid;place-items:center}
+      .thumb::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.25)}
+      .thumb svg{position:relative;z-index:1;width:22px;height:22px;fill:#fff}
+      .msg b{display:block;font:800 1rem/1.15 var(--display)}
+      .msg div span{display:block;font-size:.8rem;color:#3a1512;margin-top:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+      .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+      .tile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;transition:background .15s}
+      .tile:active{background:#262626}
+      .tile svg{width:24px;height:24px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+      .tile b{font:800 1rem/1.1 var(--display)}
+      .tile span{display:block;font-size:.78rem;color:var(--soft);margin-top:2px}
+      a:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+      @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="top"><img src="/assets/icons/apple-touch-icon.png" alt="" /><b>Axiom Church</b><a class="site" href="/index.html">Website</a></div>
+      <h1>Good to see <em>you.</em></h1>
+
+      <div class="next">
+        <div><small>Every Sunday</small><b>10:00 AM</b><span>Camacho Elementary &middot; 501 Municipal Dr</span></div>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=501+Municipal+Dr%2C+Leander%2C+TX+78641">Directions</a>
+      </div>
+
+      <a class="msg" href="/messages.html">
+        <span class="thumb" id="thumb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+        <div><b>Watch this week&rsquo;s message</b><span id="mtitle">The latest from Sunday.</span></div>
+      </a>
+
+      <div class="tiles">
+        <a class="tile" href="/give.html"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" /></svg><div><b>Give</b><span>One tap</span></div></a>
+        <a class="tile" href="/prayer.html"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 10h14" /></svg><div><b>Prayer wall</b><span>Ask or pray</span></div></a>
+        <a class="tile" href="https://axiomchurch.churchcenter.com/registrations/events"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" /></svg><div><b>Events</b><span>What&rsquo;s coming up</span></div></a>
+        <a class="tile" href="/next-steps.html"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg><div><b>Next step</b><span>Find yours</span></div></a>
+        <a class="tile" href="/teams.html"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" /><circle cx="17" cy="9" r="2.5" /><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 20c0-2 1-4 4-4" /></svg><div><b>Join a team</b><span>Serve Sunday</span></div></a>
+        <a class="tile" href="https://www.bible.com/"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M4 21V5M11 7v6M8.5 9.5h5" /></svg><div><b>Bible</b><span>Read today</span></div></a>
+      </div>
+    </main>
+    <script>
+      // Fill the message card with the newest YouTube upload.
+      fetch('/api/latest').then(function (r) { return r.json(); }).then(function (j) {
+        if (!j || !j.id) return;
+        document.getElementById('thumb').style.backgroundImage = 'url(https://i.ytimg.com/vi/' + j.id + '/mqdefault.jpg)';
+        if (j.title) document.getElementById('mtitle').textContent = j.title;
+      }).catch(function () {});
+    </script>
+  </body>
+</html>
