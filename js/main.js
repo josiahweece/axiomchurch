@@ -17,3 +17,46 @@ if(reel&&track&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const n
 
 /* Home screen app: open to the Sunday screen (/app/), including shortcuts saved before it existed, and make the logo lead back to it. */
 (function(){var sa=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;if(!sa)return;var p=location.pathname;try{if((p==='/'||p==='/index.html')&&!sessionStorage.getItem('axApp')){sessionStorage.setItem('axApp','1');location.replace('/app/');return;}sessionStorage.setItem('axApp','1');}catch(e){}document.querySelectorAll('.logo').forEach(function(a){a.setAttribute('href','/app/');});})();
+
+/* "Keep Axiom on your phone" banner: phones only, from someone's 3rd visit, never inside the
+   saved app or on /save, /app or the prayer team page. Closing it hides it for good.
+   Add ?banner=1 to any address to see it right away. */
+(function(){
+  var p=location.pathname,force=/[?&]banner=1/.test(location.search);
+  var phone=/iPhone|iPad|iPod|Android/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  var sa=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  if(sa||!phone||/^\/(save|app)\b|prayer-team/.test(p))return;
+  var visits=0;
+  try{
+    if(localStorage.getItem('axSaveBanner')==='closed'&&!force)return;
+    visits=+(localStorage.getItem('axVisits')||0);
+    if(!sessionStorage.getItem('axCounted')){visits++;localStorage.setItem('axVisits',visits);sessionStorage.setItem('axCounted','1');}
+  }catch(e){if(!force)return;}
+  if(visits<3&&!force)return;
+  var ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||navigator.platform==='MacIntel',deferred=null;
+  var css=document.createElement('style');
+  css.textContent='.axsb{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:200;background:#fff;color:#101010;border-radius:16px;padding:12px;box-shadow:0 14px 34px rgba(0,0,0,.35);display:flex;gap:10px;align-items:center;font-family:"DM Sans",sans-serif;animation:axsb .45s cubic-bezier(.2,.8,.2,1) both}'+
+   '.axsb.lift{bottom:calc(96px + env(safe-area-inset-bottom,0px))}'+
+   '@keyframes axsb{from{transform:translateY(24px);opacity:0}}'+
+   '.axsb img{width:42px;height:42px;border-radius:10px;flex:none}'+
+   '.axsb div{flex:1;min-width:0}.axsb b{display:block;font:800 .9rem "Archivo",sans-serif}.axsb span{display:block;font-size:.78rem;color:#5a5a5a;line-height:1.3}'+
+   '.axsb a.go,.axsb button.go{flex:none;border:0;border-radius:999px;background:#C51C11;color:#fff;font:700 .72rem "Archivo",sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:10px 13px;text-decoration:none;cursor:pointer}'+
+   '.axsb .x{flex:none;align-self:flex-start;border:0;background:none;color:#888;font-size:1.1rem;line-height:1;padding:2px 4px;cursor:pointer}'+
+   '.axsb a:focus-visible,.axsb button:focus-visible{outline:3px solid #F05F56;outline-offset:2px}'+
+   '@media (min-width:900px){.axsb{display:none}}';
+  document.head.appendChild(css);
+  var bar=document.createElement('div');bar.className='axsb';bar.setAttribute('role','region');bar.setAttribute('aria-label','Add Axiom to your home screen');
+  bar.innerHTML='<img src="/assets/icons/apple-touch-icon.png" alt=""><div><b>Keep Axiom on your phone</b><span>Messages, giving and prayer in one tap.</span></div>'+
+    '<a class="go" href="/save/">How</a><button class="x" type="button" aria-label="Close">&#10005;</button>';
+  /* wait until they scroll past the top of the page, so it never covers the first screen's buttons */
+  var shown=false;function maybe(){if(shown||(scrollY<500&&!force))return;shown=true;removeEventListener('scroll',maybe);document.body.appendChild(bar);lift();addEventListener('scroll',function(){requestAnimationFrame(lift);},{passive:true});}
+  /* sit above any sticky bottom button (Plan a Visit, Join a team) whenever it's showing */
+  function lift(){var st=document.querySelector('.stickycta, main.visit .sticky, .sticky.on');bar.classList.toggle('lift',!!(st&&getComputedStyle(st).display!=='none'));}
+  addEventListener('scroll',maybe,{passive:true});maybe();
+  var go=bar.querySelector('.go');
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;
+    var b=document.createElement('button');b.className='go';b.type='button';b.textContent='Add';go.replaceWith(b);go=b;
+    b.addEventListener('click',function(){deferred.prompt();deferred.userChoice.then(function(r){if(r.outcome==='accepted')close();});});});
+  function close(){try{localStorage.setItem('axSaveBanner','closed');}catch(e){}bar.remove();}
+  bar.querySelector('.x').addEventListener('click',close);
+})();
