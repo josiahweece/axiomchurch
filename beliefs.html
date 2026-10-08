@@ -163,8 +163,8 @@
   });
   /* drag to turn it by hand */
   /* a drag can start anywhere on the wheel, numbers included; a tap on a number still picks it */
-  wheel.addEventListener('pointerdown',function(e){drag={x:e.clientX,y:e.clientY,sx:e.clientX,sy:e.clientY,id:e.pointerId,live:false};});
-  wheel.addEventListener('pointermove',function(e){if(!drag)return;if(!drag.live){if(Math.abs(e.clientX-drag.sx)+Math.abs(e.clientY-drag.sy)<8)return;drag.live=drag.moved=true;goal=null;wheel.classList.add('dragging');try{wheel.setPointerCapture(drag.id);}catch(_){}drag.x=e.clientX;drag.y=e.clientY;return;}var dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;
+  wheel.addEventListener('pointerdown',function(e){var onTip=!!e.target.closest('.tip');drag={x:e.clientX,y:e.clientY,sx:e.clientX,sy:e.clientY,id:e.pointerId,live:!onTip,moved:false};if(!onTip){goal=null;wheel.classList.add('dragging');try{wheel.setPointerCapture(e.pointerId);}catch(_){}}});
+  wheel.addEventListener('pointermove',function(e){if(!drag)return;if(drag.live&&!drag.moved&&Math.abs(e.clientX-drag.sx)+Math.abs(e.clientY-drag.sy)>=4)drag.moved=true;if(!drag.live){if(Math.abs(e.clientX-drag.sx)+Math.abs(e.clientY-drag.sy)<8)return;drag.live=drag.moved=true;goal=null;wheel.classList.add('dragging');try{wheel.setPointerCapture(drag.id);}catch(_){}drag.x=e.clientX;drag.y=e.clientY;return;}var dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;
     q=norm(mul(mul(axis(0,1,0,dx*.008),axis(1,0,0,-dy*.008)),q));});
   /* letting go swings the belief now facing you to the front */
   ['pointerup','pointercancel','lostpointercapture'].forEach(function(n){wheel.addEventListener(n,function(e){if(drag&&drag.moved&&n==='pointerup'){show(at);justDragged=true;setTimeout(function(){justDragged=false;},300);}drag=null;wheel.classList.remove('dragging');});});

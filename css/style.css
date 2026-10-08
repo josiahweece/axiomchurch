@@ -3086,6 +3086,7 @@ h1 {
 .footer .social svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* What We Believe: a bigger area to grab the wheel, and drags work starting on a number */
-.beliefpage .wheel::before{content:"";position:absolute;inset:-36px;z-index:-1}
+.beliefpage .wheel::before{content:"";position:absolute;inset:-28px 0;z-index:-1}
+@media (min-width:900px){.beliefpage .wheel::before{inset:-36px}}
 .beliefpage .tip{touch-action:pan-y}
 
