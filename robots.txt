@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /prayer-team.html
+Disallow: /api/
+
+Sitemap: https://axiomchurch.com/sitemap.xml
