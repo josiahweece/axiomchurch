@@ -33,8 +33,9 @@ function parse(xml) {
     const middle = parts.length > 2 ? parts.slice(1, -1) : [];
     const part = middle.find((p) => /^(pt|part|week)\.?\s*\d/i.test(p) || /week \d/i.test(p)) || '';
     const rest = middle.filter((p) => p !== part);
-    const name = tidy(rest.length ? rest.join(' · ') : parts[0] || title);
-    const series = rest.length ? tidy(parts[0]) + (part ? ', ' + part.replace(/^pt\.?\s*/i, 'Pt. ').replace(/\.$/, '') : '') : (part ? part : '');
+    const pt = part ? titleCase(part.replace(/^pt\.?\s*/i, 'Pt. ').replace(/\.$/, '')) : '';
+    const name = rest.length ? tidy(rest.join(' · ')) : tidy(parts[0] || title) + (pt ? ', ' + pt : '');
+    const series = rest.length ? tidy(parts[0]) + (pt ? ', ' + pt : '') : '';
     return { id, title, name, series, speaker, published, description };
   }).filter((v) => v.id && v.description);
 }

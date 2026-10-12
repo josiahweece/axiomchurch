@@ -78,10 +78,11 @@
         <div class="under">
           <p><b>The latest message.</b> Straight from Sunday.</p>
           <div class="more">
-            <a class="textlink" href="/recent-messages">Read about recent messages &rarr;</a>
             <a class="textlink" href="https://www.youtube.com/@AxiomChurchTX/videos" target="_blank" rel="noopener">See all messages &rarr;</a>
+            <button type="button" class="plus plus-inline" id="latestPlus" aria-expanded="false" aria-controls="latestMore" aria-label="More about this message" hidden><span aria-hidden="true"></span></button>
           </div>
         </div>
+        <div class="unfold" id="latestMore" hidden></div>
 
         <!-- Most watched. Hidden until /api/popular answers; stays hidden if it fails. -->
         <div id="popular" hidden>
@@ -90,6 +91,7 @@
             <p>Pick one and see what you think.</p>
           </div>
           <ul class="shelf" id="shelf" tabindex="0" aria-label="Most watched messages. Scroll sideways for more."></ul>
+          <div class="unfold" id="shelfMore" hidden></div>
         </div>
       </section>
 
@@ -109,53 +111,161 @@
     <div data-footer></div>
     <script src="js/main.js"></script>
     <script>
-      /* Point the player at the newest message. YouTube's own list can take hours to
-         catch up after an upload; /api/latest knows within minutes. If it fails, the
-         player just keeps the list it started with. */
-      fetch('/api/latest').then(function (r) { return r.json(); }).then(function (j) {
-        var frame = document.getElementById('playerFrame');
-        if (!frame || !j || !/^[\w-]{6,20}$/.test(j.id || '')) return;
-        if (frame.src.indexOf('videoseries') === -1) return; // they already picked a message
-        frame.src = 'https://www.youtube-nocookie.com/embed/' + j.id + '?list=UULFpioqNfyWu7BqiqG4RqcRfA&rel=0';
-      }).catch(function () {});
-    </script>
-    <script>
-      /* Most watched row. Asks /api/popular for the list, builds one card per video,
-         and plays a card in the big player when it is tapped. */
+      /* Messages page: the newest message in the big player, the "most watched" row,
+         and the + on each one that unfolds what the message is about (date, series,
+         speaker and the YouTube description, from /api/details).
+         Anything that fails just stays hidden; the videos still play. */
       (function () {
-        var box = document.getElementById('popular'),
+        var frame = document.getElementById('playerFrame'),
+          player = document.getElementById('player'),
+          box = document.getElementById('popular'),
           shelf = document.getElementById('shelf'),
-          frame = document.getElementById('playerFrame'),
-          player = document.getElementById('player');
-        if (!box || !shelf || !frame || !window.fetch) return;
+          shelfMore = document.getElementById('shelfMore'),
+          latestPlus = document.getElementById('latestPlus'),
+          latestMore = document.getElementById('latestMore'),
+          LIST = 'UULFpioqNfyWu7BqiqG4RqcRfA',
+          OK = /^[\w-]{6,20}$/,
+          cache = {};
+        if (!frame || !window.fetch) return;
+
+        /* "SERIES // PT. 2 // MESSAGE // SPEAKER" -> name, series, speaker */
+        var SMALL = { a: 1, an: 1, and: 1, the: 1, of: 1, 'in': 1, to: 1, 'for': 1, on: 1, is: 1, at: 1, or: 1 };
+        function titleCase(s) {
+          return s.toLowerCase().split(' ').map(function (w, i) { return i && SMALL[w] ? w : w.charAt(0).toUpperCase() + w.slice(1); }).join(' ');
+        }
+        function tidy(s) { return s === s.toUpperCase() ? titleCase(s) : s; }
+        function parts(title) {
+          var p = String(title || '').split('//').map(function (x) { return x.trim(); }).filter(Boolean);
+          var speaker = p.length > 1 ? tidy(p[p.length - 1]) : '';
+          var middle = p.length > 2 ? p.slice(1, -1) : [];
+          var part = middle.filter(function (x) { return /^(pt|part|week)\.?\s*\d/i.test(x) || /week \d/i.test(x); })[0] || '';
+          var rest = middle.filter(function (x) { return x !== part; });
+          part = part ? titleCase(part.replace(/^pt\.?\s*/i, 'Pt. ').replace(/\.$/, '')) : '';
+          if (!rest.length) return { name: tidy(p[0] || title || '') + (part ? ', ' + part : ''), series: '', speaker: speaker };
+          return { name: tidy(rest.join(' · ')), series: tidy(p[0]) + (part ? ', ' + part : ''), speaker: speaker };
+        }
+        function day(iso) {
+          var d = new Date(iso);
+          return isNaN(d) ? '' : d.toLocaleDateString('en-US', { timeZone: 'America/Chicago', month: 'long', day: 'numeric', year: 'numeric' });
+        }
+        /* Description text, minus link-only and hashtag-only lines. */
+        function paragraphs(text) {
+          return String(text || '').split(/\n\s*\n/).map(function (para) {
+            return para.split('\n').filter(function (l) {
+              l = l.trim();
+              return l && !/^(https?:\/\/\S+|(#\w+\s*)+)$/i.test(l);
+            }).join('\n').trim();
+          }).filter(Boolean);
+        }
+
+        function details(ids) {
+          ids = ids.filter(function (id) { return OK.test(id) && !(id in cache); });
+          if (!ids.length) return Promise.resolve();
+          return fetch('/api/details?ids=' + ids.join(','))
+            .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+            .then(function (j) { var v = (j && j.videos) || {}; ids.forEach(function (id) { cache[id] = v[id] || null; }); })
+            .catch(function () {});
+        }
+
+        function play(id, autoplay) {
+          frame.src = 'https://www.youtube-nocookie.com/embed/' + id + '?' + (autoplay ? 'autoplay=1&' : '') + 'rel=0';
+          player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /* Fill an unfold panel for one video. */
+        function fill(panel, id, fallbackTitle, withPlay) {
+          var v = cache[id] || {}, t = parts(v.title || fallbackTitle);
+          panel.textContent = '';
+          var meta = [day(v.date), t.series, t.speaker].filter(Boolean).join(' · ');
+          if (meta) { var m = document.createElement('p'); m.className = 'u-meta'; m.textContent = meta; panel.appendChild(m); }
+          var h = document.createElement('h3'); h.textContent = t.name || 'This message'; panel.appendChild(h);
+          var paras = paragraphs(v.description);
+          if (!paras.length) paras = ['Watch it and see what you think.'];
+          paras.forEach(function (x) { var p = document.createElement('p'); p.textContent = x; panel.appendChild(p); });
+          var row = document.createElement('div'); row.className = 'u-cta';
+          if (withPlay) {
+            var b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = 'Play this message';
+            b.addEventListener('click', function () { selectCard(id); play(id, true); });
+            row.appendChild(b);
+          }
+          var a = document.createElement('a'); a.className = 'textlink'; a.target = '_blank'; a.rel = 'noopener';
+          a.href = 'https://www.youtube.com/watch?v=' + id; a.innerHTML = 'Watch on YouTube &rarr;';
+          row.appendChild(a); panel.appendChild(row);
+        }
+
+        function setPlus(btn, open) {
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          btn.setAttribute('aria-label', open ? 'Close' : 'More about this message');
+        }
+        function toggle(btn, panel, id, title, withPlay, others) {
+          var open = btn.getAttribute('aria-expanded') !== 'true';
+          (others || []).forEach(function (o) { if (o !== btn) setPlus(o, false); });
+          setPlus(btn, open);
+          if (!open) { panel.hidden = true; return; }
+          btn.classList.add('wait');
+          details([id]).then(function () {
+            btn.classList.remove('wait');
+            if (btn.getAttribute('aria-expanded') !== 'true') return;
+            fill(panel, id, title, withPlay);
+            panel.hidden = false;
+            var r = panel.getBoundingClientRect();
+            if (r.top > window.innerHeight - 80) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+        }
+
+        /* Newest message in the big player. YouTube's own list can take hours to catch
+           up after an upload; /api/latest knows within minutes. */
+        var latest = null;
+        fetch('/api/latest').then(function (r) { return r.json(); }).then(function (j) {
+          if (!j || !OK.test(j.id || '')) return;
+          latest = j;
+          if (frame.src.indexOf('videoseries') !== -1) frame.src = 'https://www.youtube-nocookie.com/embed/' + j.id + '?list=' + LIST + '&rel=0';
+          if (latestPlus && latestMore) latestPlus.hidden = false;
+        }).catch(function () {});
+        if (latestPlus && latestMore) {
+          latestPlus.addEventListener('click', function () {
+            if (latest) toggle(latestPlus, latestMore, latest.id, latest.title, false);
+          });
+        }
+
+        /* Most watched row. */
+        var pluses = [];
+        function selectCard(id) {
+          if (!shelf) return;
+          var on = shelf.querySelector('.mcard.on'); if (on) on.classList.remove('on');
+          var c = shelf.querySelector('.mcard[data-id="' + id + '"]'); if (c) c.classList.add('on');
+        }
+        if (!box || !shelf || !shelfMore) return;
         fetch('/api/popular')
           .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
           .then(function (data) {
-            var list = (data && data.videos) || [];
-            if (!list.length) return;
+            var list = ((data && data.videos) || []).filter(function (v) { return OK.test(v.id); });
             list.forEach(function (v) {
-              if (!/^[\w-]{6,20}$/.test(v.id)) return;
               var li = document.createElement('li'),
                 b = document.createElement('button'),
                 th = document.createElement('span'),
                 img = document.createElement('img'),
                 mini = document.createElement('span'),
-                t = document.createElement('span');
-              b.type = 'button'; b.className = 'mcard';
+                t = document.createElement('span'),
+                plus = document.createElement('button'),
+                ic = document.createElement('span');
+              b.type = 'button'; b.className = 'mcard'; b.setAttribute('data-id', v.id);
               th.className = 'thumb'; mini.className = 'mini'; mini.setAttribute('aria-hidden', 'true');
               img.src = 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg';
               img.alt = ''; img.loading = 'lazy'; img.width = 480; img.height = 360;
               t.className = 't'; t.textContent = v.title || 'Watch this message';
               th.appendChild(img); th.appendChild(mini); b.appendChild(th); b.appendChild(t);
-              b.addEventListener('click', function () {
-                var on = shelf.querySelector('.mcard.on'); if (on) on.classList.remove('on');
-                b.classList.add('on');
-                frame.src = 'https://www.youtube-nocookie.com/embed/' + v.id + '?autoplay=1&rel=0';
-                player.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              });
-              li.appendChild(b); shelf.appendChild(li);
+              b.addEventListener('click', function () { selectCard(v.id); play(v.id, true); });
+              plus.type = 'button'; plus.className = 'plus';
+              plus.setAttribute('aria-controls', 'shelfMore'); setPlus(plus, false);
+              ic.setAttribute('aria-hidden', 'true'); plus.appendChild(ic);
+              plus.addEventListener('click', function () { toggle(plus, shelfMore, v.id, v.title, true, pluses); });
+              pluses.push(plus);
+              li.appendChild(b); li.appendChild(plus); shelf.appendChild(li);
             });
             if (shelf.children.length) box.hidden = false;
+            /* Warm the cache so the first + opens instantly. */
+            details(list.map(function (v) { return v.id; }));
           })
           .catch(function () {});
       })();
