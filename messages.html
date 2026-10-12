@@ -61,8 +61,9 @@
         <h1>Watch a message. Decide for yourself.</h1>
         <p class="lede">Don't take our word for it.</p>
 
-        <!-- The player loads the channel's newest full-length upload on its own.
-             UULF + the channel ID is YouTube's "all long-form uploads, newest first" list. -->
+        <!-- The player starts on YouTube's "all long-form uploads, newest first" list (UULF + the channel ID).
+             That list can lag behind a new upload, so a script at the bottom asks /api/latest
+             for the newest message and points the player straight at it. -->
         <div class="player" id="player">
           <iframe
             id="playerFrame"
@@ -106,6 +107,17 @@
     </main>
     <div data-footer></div>
     <script src="js/main.js"></script>
+    <script>
+      /* Point the player at the newest message. YouTube's own list can take hours to
+         catch up after an upload; /api/latest knows within minutes. If it fails, the
+         player just keeps the list it started with. */
+      fetch('/api/latest').then(function (r) { return r.json(); }).then(function (j) {
+        var frame = document.getElementById('playerFrame');
+        if (!frame || !j || !/^[\w-]{6,20}$/.test(j.id || '')) return;
+        if (frame.src.indexOf('videoseries') === -1) return; // they already picked a message
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + j.id + '?list=UULFpioqNfyWu7BqiqG4RqcRfA&rel=0';
+      }).catch(function () {});
+    </script>
     <script>
       /* Most watched row. Asks /api/popular for the list, builds one card per video,
          and plays a card in the big player when it is tapped. */
