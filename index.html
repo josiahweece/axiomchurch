@@ -3,6 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PBV7QDMYQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1PBV7QDMYQ');
+      // Church Center forms open off-site, so count the click that sends someone there.
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href*="churchcenter.com"]');
+        if (!a) return;
+        var m = a.href.match(/forms\/(\d+)/);
+        var forms = { '1302721': 'plan_a_visit', '810097': 'join_a_team', '1335299': 'join_a_team', '882949': 'baptism', '1308752': 'contact' };
+        var name = m && forms[m[1]];
+        if (name === 'plan_a_visit') gtag('event', 'generate_lead', { form_name: name, transport_type: 'beacon' });
+        else gtag('event', 'church_center_click', { form_name: name || 'other', link_url: a.href, transport_type: 'beacon' });
+      });
+    </script>
     <title>Axiom Church</title>
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96.png" />
@@ -17,7 +35,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Axiom Church" />
     <meta property="og:description" content="A place you can stop pretending. Join Axiom Church Sundays at 10 AM in Leander, Texas." />
-    <meta property="og:image" content="https://axiomchurch-lac.vercel.app/assets/images/share.jpg" />
+    <meta property="og:image" content="https://www.axiomchurch.com/assets/images/share.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -32,6 +50,80 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="canonical" href="https://www.axiomchurch.com/" />
+    <meta property="og:url" content="https://www.axiomchurch.com/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Church",
+        "@id": "https://www.axiomchurch.com/#church",
+        "name": "Axiom Church",
+        "url": "https://www.axiomchurch.com/",
+        "logo": "https://www.axiomchurch.com/assets/images/axiom-logo.png",
+        "image": "https://www.axiomchurch.com/assets/images/share.jpg",
+        "description": "A place you can stop pretending. A non-denominational church in Leander, Texas, meeting Sundays at 10 AM.",
+        "telephone": "+1-512-265-5718",
+        "location": {
+          "@type": "Place",
+          "name": "Camacho Elementary",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "501 Municipal Dr",
+            "addressLocality": "Leander",
+            "addressRegion": "TX",
+            "postalCode": "78641",
+            "addressCountry": "US"
+          }
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "501 Municipal Dr",
+          "addressLocality": "Leander",
+          "addressRegion": "TX",
+          "postalCode": "78641",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "https://schema.org/Sunday",
+            "opens": "10:00",
+            "closes": "11:05"
+          }
+        ],
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Leander, TX"
+          },
+          {
+            "@type": "City",
+            "name": "Cedar Park, TX"
+          },
+          {
+            "@type": "City",
+            "name": "Liberty Hill, TX"
+          },
+          {
+            "@type": "City",
+            "name": "North Austin, TX"
+          },
+          {
+            "@type": "City",
+            "name": "Round Rock, TX"
+          },
+          {
+            "@type": "City",
+            "name": "Georgetown, TX"
+          }
+        ],
+        "sameAs": [
+          "https://www.instagram.com/axiomchurchaustin/",
+          "https://www.facebook.com/axiomchurchaustin/",
+          "https://www.youtube.com/@AxiomChurchTX"
+        ]
+      }
+    </script>
   </head>
   <body class="home-page">
     <div data-header></div>

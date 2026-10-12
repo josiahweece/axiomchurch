@@ -3,6 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PBV7QDMYQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1PBV7QDMYQ');
+      // Church Center forms open off-site, so count the click that sends someone there.
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href*="churchcenter.com"]');
+        if (!a) return;
+        var m = a.href.match(/forms\/(\d+)/);
+        var forms = { '1302721': 'plan_a_visit', '810097': 'join_a_team', '1335299': 'join_a_team', '882949': 'baptism', '1308752': 'contact' };
+        var name = m && forms[m[1]];
+        if (name === 'plan_a_visit') gtag('event', 'generate_lead', { form_name: name, transport_type: 'beacon' });
+        else gtag('event', 'church_center_click', { form_name: name || 'other', link_url: a.href, transport_type: 'beacon' });
+      });
+    </script>
     <title>Prayer | Axiom Church</title>
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96.png" />
@@ -17,7 +35,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Prayer | Axiom Church" />
     <meta property="og:description" content="Post a prayer request and people at Axiom Church will pray for you. Or send it just to the prayer team." />
-    <meta property="og:image" content="https://axiomchurch-lac.vercel.app/assets/images/share.jpg" />
+    <meta property="og:image" content="https://www.axiomchurch.com/assets/images/share.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -30,6 +48,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="canonical" href="https://www.axiomchurch.com/prayer.html" />
+    <meta property="og:url" content="https://www.axiomchurch.com/prayer.html" />
   </head>
   <body>
     <div data-header></div>

@@ -3,6 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PBV7QDMYQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1PBV7QDMYQ');
+      // Church Center forms open off-site, so count the click that sends someone there.
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href*="churchcenter.com"]');
+        if (!a) return;
+        var m = a.href.match(/forms\/(\d+)/);
+        var forms = { '1302721': 'plan_a_visit', '810097': 'join_a_team', '1335299': 'join_a_team', '882949': 'baptism', '1308752': 'contact' };
+        var name = m && forms[m[1]];
+        if (name === 'plan_a_visit') gtag('event', 'generate_lead', { form_name: name, transport_type: 'beacon' });
+        else gtag('event', 'church_center_click', { form_name: name || 'other', link_url: a.href, transport_type: 'beacon' });
+      });
+    </script>
     <title>Axiom Church</title>
     <meta name="robots" content="noindex" />
     <link rel="manifest" href="/manifest.webmanifest" />

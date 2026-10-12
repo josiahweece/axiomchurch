@@ -3,4 +3,20 @@ Allow: /
 Disallow: /prayer-team.html
 Disallow: /api/
 
+# AI search and assistant crawlers are welcome. We want to be the answer
+# when someone asks for a church in Leander, Cedar Park, or nearby.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /prayer-team.html
+Disallow: /api/
+
 Sitemap: https://www.axiomchurch.com/sitemap.xml
