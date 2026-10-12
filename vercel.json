@@ -2,8 +2,133 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "axiomchurch-lac.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "axiomchurch-lac.vercel.app"
+        }
+      ],
       "destination": "https://www.axiomchurch.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/who-we-are",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact.html",
+      "permanent": true
+    },
+    {
+      "source": "/plan-a-visit",
+      "destination": "/visit.html",
+      "permanent": true
+    },
+    {
+      "source": "/plan-your-visit",
+      "destination": "/visit.html",
+      "permanent": true
+    },
+    {
+      "source": "/visit",
+      "destination": "/visit.html",
+      "permanent": true
+    },
+    {
+      "source": "/im-new",
+      "destination": "/visit.html",
+      "permanent": true
+    },
+    {
+      "source": "/new",
+      "destination": "/visit.html",
+      "permanent": true
+    },
+    {
+      "source": "/kids",
+      "destination": "/kids.html",
+      "permanent": true
+    },
+    {
+      "source": "/axiom-kids",
+      "destination": "/kids.html",
+      "permanent": true
+    },
+    {
+      "source": "/give",
+      "destination": "/give.html",
+      "permanent": true
+    },
+    {
+      "source": "/giving",
+      "destination": "/give.html",
+      "permanent": true
+    },
+    {
+      "source": "/messages",
+      "destination": "/messages.html",
+      "permanent": true
+    },
+    {
+      "source": "/sermons",
+      "destination": "/messages.html",
+      "permanent": true
+    },
+    {
+      "source": "/watch",
+      "destination": "/messages.html",
+      "permanent": true
+    },
+    {
+      "source": "/beliefs",
+      "destination": "/beliefs.html",
+      "permanent": true
+    },
+    {
+      "source": "/what-we-believe",
+      "destination": "/beliefs.html",
+      "permanent": true
+    },
+    {
+      "source": "/next-steps",
+      "destination": "/next-steps.html",
+      "permanent": true
+    },
+    {
+      "source": "/baptism",
+      "destination": "/baptism.html",
+      "permanent": true
+    },
+    {
+      "source": "/teams",
+      "destination": "/teams.html",
+      "permanent": true
+    },
+    {
+      "source": "/serve",
+      "destination": "/teams.html",
+      "permanent": true
+    },
+    {
+      "source": "/prayer",
+      "destination": "/prayer.html",
       "permanent": true
     }
   ]
