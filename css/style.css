@@ -3119,7 +3119,7 @@ h1 {
 .msgpage .plus[aria-expanded="true"] span::before,.msgpage .plus[aria-expanded="true"] span::after{background:var(--ink-deep)}
 .msgpage .plus.wait{opacity:.6}
 .msgpage .plus:focus-visible{outline:2px solid var(--red);outline-offset:3px}
-.msgpage .plus-inline{position:static;align-self:center}
+.msgpage .player .plus{top:12px;right:12px;width:40px;height:40px}
 .msgpage .more{align-items:baseline}
 .msgpage .unfold{margin-top:18px;padding:22px clamp(18px,3vw,30px) 24px;background:#161616;border-left:3px solid var(--red);border-radius:2px;max-width:820px}
 .msgpage .unfold .u-meta{margin:0 0 8px;font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--red)}
