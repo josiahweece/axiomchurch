@@ -3,6 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PBV7QDMYQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1PBV7QDMYQ');
+      // Church Center forms open off-site, so count the click that sends someone there.
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href*="churchcenter.com"]');
+        if (!a) return;
+        var m = a.href.match(/forms\/(\d+)/);
+        var forms = { '1302721': 'plan_a_visit', '810097': 'join_a_team', '1335299': 'join_a_team', '882949': 'baptism', '1308752': 'contact' };
+        var name = m && forms[m[1]];
+        if (name === 'plan_a_visit') gtag('event', 'generate_lead', { form_name: name, transport_type: 'beacon' });
+        else gtag('event', 'church_center_click', { form_name: name || 'other', link_url: a.href, transport_type: 'beacon' });
+      });
+    </script>
     <title>Plan a Visit | Axiom Church</title>
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -16,7 +34,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Plan a Visit | Axiom Church" />
     <meta property="og:description" content="What to expect on your first Sunday at Axiom Church in Leander, TX. Let us know you're coming and someone will meet you by name." />
-    <meta property="og:image" content="https://axiomchurch-lac.vercel.app/assets/images/share.jpg" />
+    <meta property="og:image" content="https://www.axiomchurch.com/assets/images/share.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -31,6 +49,80 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="canonical" href="https://www.axiomchurch.com/visit.html" />
+    <meta property="og:url" content="https://www.axiomchurch.com/visit.html" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What kind of church is this?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Non-denominational. Casual. We teach from the Bible every week, but we’re not afraid of your questions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the time commitment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "About 65 minutes. A few songs, a Bible teaching you can use on Tuesday."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I wear?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Wear what you would wear on Saturday. No dress code. Just please wear something."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I just sit in the back?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Nobody gets asked to stand up, raise a hand, or introduce themselves."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if church hurt me?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If church hurt you, we’re sorry. You don’t have to trust us yet. Sit in the back. Leave early. Come back if you want to."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "I’m LGBTQ+. Am I welcome?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Everyone is welcome. This is a place you can belong before you believe the same things we do. Read what we believe."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are you going to ask me for money?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No obligation to give as a guest. We're just glad you're here."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens after I fill out the form?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "One email from a real person before Sunday. If you have kids, they'll be pre-registered. That's it."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div data-header></div>

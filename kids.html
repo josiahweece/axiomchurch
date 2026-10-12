@@ -3,6 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PBV7QDMYQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1PBV7QDMYQ');
+      // Church Center forms open off-site, so count the click that sends someone there.
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href*="churchcenter.com"]');
+        if (!a) return;
+        var m = a.href.match(/forms\/(\d+)/);
+        var forms = { '1302721': 'plan_a_visit', '810097': 'join_a_team', '1335299': 'join_a_team', '882949': 'baptism', '1308752': 'contact' };
+        var name = m && forms[m[1]];
+        if (name === 'plan_a_visit') gtag('event', 'generate_lead', { form_name: name, transport_type: 'beacon' });
+        else gtag('event', 'church_center_click', { form_name: name || 'other', link_url: a.href, transport_type: 'beacon' });
+      });
+    </script>
     <title>Kids | Axiom Church</title>
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -16,7 +34,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Kids | Axiom Church" />
     <meta property="og:description" content="Axiom Kids is for birth through 5th grade, Sundays at 10am at Axiom Church in Leander, TX. See how drop-off works and pre-register your family." />
-    <meta property="og:image" content="https://axiomchurch-lac.vercel.app/assets/images/share.jpg" />
+    <meta property="og:image" content="https://www.axiomchurch.com/assets/images/share.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -31,6 +49,88 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="canonical" href="https://www.axiomchurch.com/kids.html" />
+    <meta property="og:url" content="https://www.axiomchurch.com/kids.html" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What ages do you take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Birth through 5th grade."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who's in the room with my kid?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Volunteers. Every one of them is background checked."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who can pick my kid up?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The person holding the matching tag. That's you. Nobody else."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are the ages split up?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Three rooms. Birth through 2. Ages 3 to 5. All of elementary together."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do they actually do in there?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Play. A lot. Then worship with kids their age and a Bible teaching that makes sense to them."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if my kid needs me during the service?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your phone number is on their name tag. If they need you, we'll reach out."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can my kid stay with me?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. But we'd love for them to try Axiom Kids. That's where they make friends and meet their leaders."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What about allergies and snacks?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Let us know their allergies and they print right on your kid's tag. The only room with snacks is the nursery, and it's only what you bring. Older nursery kids can have plain Cheerios if you say yes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "My kid has special needs. What should I know?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We don't have a separate room. We'd love to pair your kid with a buddy who helps them in class. Email Nikelle at nikelle.kirkes@axiomchurch.com before you come and we'll set it up."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div data-header></div>
