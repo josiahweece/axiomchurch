@@ -3,4 +3,4 @@ Allow: /
 Disallow: /prayer-team.html
 Disallow: /api/
 
-Sitemap: https://axiomchurch.com/sitemap.xml
+Sitemap: https://www.axiomchurch.com/sitemap.xml
