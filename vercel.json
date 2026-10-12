@@ -131,5 +131,11 @@
       "destination": "/prayer.html",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/recent-messages",
+      "destination": "/api/recent-messages"
+    }
   ]
 }

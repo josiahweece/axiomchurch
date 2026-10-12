@@ -9,6 +9,7 @@ Axiom serves Leander, Cedar Park, Liberty Hill, North Austin, Round Rock, and Ge
 - [Plan a Visit](https://www.axiomchurch.com/visit.html): what to expect on a first Sunday, and common questions
 - [Kids](https://www.axiomchurch.com/kids.html): Axiom Kids, check-in, ages, and safety
 - [Messages](https://www.axiomchurch.com/messages.html): watch a recent Sunday message
+- [Recent Messages](https://www.axiomchurch.com/recent-messages): what each recent Sunday message was about, in a few paragraphs
 
 ## About
 
