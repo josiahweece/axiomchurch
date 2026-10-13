@@ -130,7 +130,7 @@ function page(list) {
         <p style="margin-top:32px"><a class="btn" href="/visit.html">Plan a Visit</a> &nbsp; <a class="textlink" href="/messages.html">Watch the latest &rarr;</a></p>
       </section>
     </main>
-    <div data-footer></div>
+    <div data-footer><p>Axiom Church is a 501(c)(3) nonprofit church in Leander, Texas. www.axiomchurch.com</p></div>
     <script src="/js/main.js"></script>
   </body>
 </html>`;
