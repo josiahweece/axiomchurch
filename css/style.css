@@ -3127,3 +3127,17 @@ h1 {
 .msgpage .unfold p{margin:0 0 12px;color:var(--on-stage-soft);white-space:pre-line;max-width:68ch}
 .msgpage .unfold .u-cta{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;margin-top:18px}
 .msgpage .unfold .btn{border:0;cursor:pointer;font-size:.96rem;padding:12px 22px}
+
+/* Give page: questions (donor-advised funds, tax, contact). Native details, no script. */
+.givepage .gfaq{background:var(--g-dark);color:#fff}
+.givepage .gfaq-in{padding-block:clamp(44px,6vw,72px);max-width:760px}
+.givepage .gfaq .sec{margin-bottom:18px}
+.givepage .gq{border-top:1px solid rgba(255,255,255,.16)}
+.givepage .gq:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
+.givepage .gq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-family:var(--display);font-weight:800;font-size:clamp(1.05rem,2.6vw,1.25rem);letter-spacing:-.01em}
+.givepage .gq summary::-webkit-details-marker{display:none}
+.givepage .gq summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--g-red);color:var(--g-dark);font-size:1.2rem;font-weight:800;transition:transform .2s ease}
+.givepage .gq[open] summary::after{transform:rotate(45deg)}
+.givepage .gq summary:focus-visible{outline:2px solid var(--g-red);outline-offset:4px}
+.givepage .gq p{margin:0 0 22px;color:rgba(255,255,255,.78);line-height:1.6;max-width:62ch}
+.givepage .gq .textlink{color:#fff}
