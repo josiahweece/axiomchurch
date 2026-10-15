@@ -3155,3 +3155,15 @@ h1 {
 .givepage .gq summary:focus-visible{outline:2px solid var(--g-red);outline-offset:4px}
 .givepage .gq p{margin:0 0 22px;color:rgba(255,255,255,.78);line-height:1.6;max-width:62ch}
 .givepage .gq .textlink{color:#fff}
+
+/* Who we are: the other-churches list folds open and closed */
+.whopage .ofold>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.whopage .ofold>summary::-webkit-details-marker{display:none}
+.whopage .ofold>summary .lede{margin-bottom:0}
+.whopage .ofold[open]>summary{margin-bottom:26px}
+.whopage .oico{flex:none;width:40px;height:40px;border-radius:50%;background:var(--red);position:relative;margin-top:4px;transition:transform .2s ease}
+.whopage .oico::before,.whopage .oico::after{content:"";position:absolute;left:50%;top:50%;background:#fff;border-radius:1px;transform:translate(-50%,-50%)}
+.whopage .oico::before{width:16px;height:2.5px}
+.whopage .oico::after{width:2.5px;height:16px}
+.whopage .ofold[open] .oico{transform:rotate(45deg)}
+.whopage .ofold>summary:focus-visible{outline:2px solid var(--red);outline-offset:6px}
