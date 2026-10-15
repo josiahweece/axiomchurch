@@ -49,6 +49,8 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="preload" as="image" href="assets/images/h1-p.jpg" media="(max-width: 859px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="assets/images/h1-d.jpg" media="(min-width: 860px)" fetchpriority="high" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="canonical" href="https://www.axiomchurch.com/" />
     <meta property="og:url" content="https://www.axiomchurch.com/" />
@@ -330,33 +332,27 @@
         // on load is harmless and never rewrites a style mid-crossfade.
         // The URL is resolved against css/style.css, where background-image:
         // var(--img) consumes it -- hence ../, matching the .s1 rule in the CSS.
-        function load() {
-          for (var n = 0; n < slides.length; n++) {
-            var k = slides[n].getAttribute("data-img");
-            if (k && !slides[n].style.getPropertyValue("--img")) {
-              slides[n].style.setProperty(
-                "--img",
-                'url("../assets/images/' + k + "-" + wide + '.jpg")',
-              );
-            }
-            if (!probes[n]) {
-              var v =
-                slides[n].style.getPropertyValue("--img") ||
-                getComputedStyle(slides[n]).getPropertyValue("--img");
-              var m = /url\("?([^")]+)"?\)/.exec(v);
-              if (m) {
-                probes[n] = new Image();
-                probes[n].src = "assets/images/" + m[1].split("/").pop();
-              }
-            }
+        // Slides 2-7 load one at a time, after the page has finished loading,
+        // so the first photo gets the whole connection on a phone. Each slide's
+        // photo is fetched one slide ahead of when it is shown.
+        function prep(n) {
+          var el = slides[n];
+          if (!el || probes[n]) return;
+          var k = el.getAttribute("data-img");
+          if (k && !el.style.getPropertyValue("--img")) {
+            el.style.setProperty("--img", 'url("../assets/images/' + k + "-" + wide + '.jpg")');
+          }
+          var v = el.style.getPropertyValue("--img") || getComputedStyle(el).getPropertyValue("--img");
+          var m = /url\("?([^")]+)"?\)/.exec(v);
+          if (m) {
+            probes[n] = new Image();
+            probes[n].src = "assets/images/" + m[1].split("/").pop();
           }
         }
-        if (document.readyState === "complete") load();
-        else {
-          document.addEventListener("DOMContentLoaded", load);
-          window.setTimeout(load, 1500);
-          window.addEventListener("load", load);
+        function ready(n) {
+          return probes[n] && probes[n].complete && probes[n].naturalWidth > 0;
         }
+        prep(0);
 
         var list = document.querySelector(".truth-list");
         if (list && !still.matches && "IntersectionObserver" in window) {
@@ -374,14 +370,22 @@
 
         var timer = null,
           ticks = 0;
-        if (slides.length > 1 && !still.matches) {
+        function start() {
+          if (slides.length < 2 || still.matches || timer) return;
+          prep(1);
           timer = setInterval(function () {
+            var next = (i + 1) % slides.length;
+            prep(next);
+            if (!ready(next)) return; // wait for the photo instead of fading to black
             ticks++;
             slides[i].classList.remove("on");
-            i = (i + 1) % slides.length;
+            i = next;
             slides[i].classList.add("on");
+            prep((i + 1) % slides.length);
           }, 4500);
         }
+        if (document.readyState === "complete") setTimeout(start, 1500);
+        else window.addEventListener("load", function () { setTimeout(start, 1500); });
 
         // Diagnostic overlay, only with ?heroDebug=1 in the URL. Nothing is
         // created or logged otherwise.
