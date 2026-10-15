@@ -55,7 +55,7 @@
     <meta property="og:url" content="https://www.axiomchurch.com/next-steps.html" />
   </head>
   <body>
-    <div data-header></div>
+    <div data-header><header class="header"><nav class="nav wrap" aria-label="Primary"><a class="logo" href="index.html"><span class="logo-image"><img src="assets/images/axiom-logo-dark.png" alt="Axiom Church logo"></span><b>Axiom Church</b></a><div class="menu" id="menu"><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-new">I'm New<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-new"><a href="visit.html">Plan a visit</a><a href="kids.html">Kids</a></div></div><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-about">About<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-about"><a href="about.html">Who we are</a><a href="beliefs.html">What we believe</a></div></div><a class="link" href="messages.html">Messages</a><div class="group"><button class="trigger active" type="button" aria-expanded="false" aria-controls="nav-next">Next Steps<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-next"><a href="next-steps.html" class="active" aria-current="page">What is my Next Step?</a><a href="baptism.html">Get Baptized</a><a href="teams.html">Join a Team</a><a href="prayer.html">Need Prayer?</a><a href="https://axiomcares.netlify.app" target="_blank" rel="noopener">Need Help?</a><a href="https://axiomchurch.churchcenter.com/registrations/events" target="_blank" rel="noopener">Events</a></div></div><a class="link" href="give.html">Give</a><a class="pill fill menu-cta" href="visit.html">Plan a Visit</a></div><a class="pill fill" href="visit.html">Plan a Visit</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button></nav></header></div>
     <main class="nextpage">
 <section class="nhero">
   <div class="nshot"><img src="assets/images/next-hero.jpg" alt="Two women in white jackets hugging and laughing in front of the Next Steps banner" width="1400" height="900"></div>
@@ -94,7 +94,7 @@
       <p class="btag" id="btag"></p>
       <p class="bd" id="bd"></p>
       <p class="bwhen" id="bwhen" hidden></p>
-      <p class="bcta"><a class="btn" id="bb" href="#"></a> <span class="need" id="bneed">Link needed</span></p>
+      <p class="bcta"><a class="btn" id="bb" href="#"></a></p>
       <div class="bnav"><button class="arw" id="bprev" type="button" aria-label="Previous step">&larr;</button><span class="bpos" id="bpos"></span><button class="arw" id="bnext" type="button" aria-label="Next step">&rarr;</button></div>
       <button class="tomap" id="tomap" type="button">&uarr; Back to the map</button>
     </div>
@@ -109,7 +109,7 @@
   </div>
 </div></section>
     </main>
-    <div data-footer><p>Axiom Church is a 501(c)(3) nonprofit church in Leander, Texas. Sundays at 10am at Camacho Elementary, 501 Municipal Dr, Leander, TX 78641. 512-265-5718. www.axiomchurch.com</p></div>
+    <div data-footer><footer class="footer"><div class="wrap"><div class="footer-main"><div><h3>A place you can<br>stop pretending.</h3><p>A brand new church for people who thought they would never step foot in one.</p></div><div><h4>I&rsquo;m New</h4><ul><li><a href="visit.html">Plan a visit</a></li><li><a href="kids.html">Kids</a></li><li><a href="messages.html">Messages</a></li></ul></div><div><h4>About</h4><ul><li><a href="about.html">Who we are</a></li><li><a href="beliefs.html">What we believe</a></li><li><a href="give.html">Give</a></li><li><a href="contact.html">Contact</a></li></ul></div><div><h4>Next Steps</h4><ul><li><a href="next-steps.html">What is my Next Step?</a></li><li><a href="baptism.html">Get Baptized</a></li><li><a href="teams.html">Join a Team</a></li><li><a href="prayer.html">Need Prayer?</a></li><li><a href="https://axiomcares.netlify.app" target="_blank" rel="noopener">Need Help?</a></li><li><a href="https://axiomchurch.churchcenter.com/registrations/events" target="_blank" rel="noopener">Events</a></li></ul></div><div><h4>Sunday</h4><p>10:00 AM<br>Camacho Elementary<br>501 Municipal Dr<br>Leander, TX 78641</p><a href="tel:5122655718">512-265-5718</a><div class="social"><a href="https://www.instagram.com/axiomchurchaustin/" target="_blank" rel="noopener" aria-label="Axiom on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.facebook.com/axiomchurchaustin/" target="_blank" rel="noopener" aria-label="Axiom on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a><a href="https://www.youtube.com/@AxiomChurchTX" target="_blank" rel="noopener" aria-label="Axiom on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></a></div></div></div><div class="footer-bottom"><span>© 2026 Axiom Church, a 501(c)(3) nonprofit</span><span>Leander, Texas</span></div></div></footer></div>
     <script src="js/main.js"></script>
     <script>
 (function(){
@@ -167,7 +167,7 @@
     if(!INFO[id])return; sel=id; var o=INFO[id];
     Object.keys(nodes).forEach(function(k2){nodes[k2].classList.toggle('sel',k2===id);nodes[k2].setAttribute('aria-pressed',k2===id?'true':'false');});
     document.getElementById('bk').textContent=o.k; document.getElementById('bt').textContent=o.t; document.getElementById('btag').textContent=o.g;
-    document.getElementById('bd').textContent=o.d; var bb=document.getElementById('bb'); bb.textContent=o.b; bb.href=o.h; document.getElementById('bpos').textContent=(ORDER.indexOf(id)+1)+' / '+ORDER.length; var bw=document.getElementById('bwhen'); bw.textContent=o.w||''; bw.hidden=!o.w; document.getElementById('bneed').hidden=!o.n;
+    document.getElementById('bd').textContent=o.d; var bb=document.getElementById('bb'); bb.textContent=o.b; bb.href=o.h; document.getElementById('bpos').textContent=(ORDER.indexOf(id)+1)+' / '+ORDER.length; var bw=document.getElementById('bwhen'); bw.textContent=o.w||''; bw.hidden=!o.w;
     var br=document.getElementById('brief'); [].forEach.call(br.children,function(c){c.style.animation='none';void c.offsetWidth;c.style.animation='';});
   }
   function status(i){ /* i = index of your next step in ORDER, -1 = clear, ORDER.length = everything taken */
