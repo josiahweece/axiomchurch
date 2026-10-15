@@ -1739,6 +1739,19 @@ h1 {
 .visit .textlink{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:5px}
 
 
+.visit .others{background:var(--paper)}
+.visit .others-in{padding-block:clamp(44px,6vw,80px);border-top:3px solid var(--ink)}
+.visit .others h2{font-family:var(--display);font-weight:900;font-size:clamp(1.8rem,5.4vw,2.8rem);line-height:1;letter-spacing:-.035em;margin:0 0 12px;text-transform:none}
+.visit .others .lede{color:var(--muted);margin:0 0 26px;max-width:46ch}
+.visit .olist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr}
+.visit .olist li{border-top:1px solid var(--line)}
+.visit .olist li:last-child{border-bottom:1px solid var(--line)}
+.visit .olist a{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:16px 0;align-items:baseline}
+.visit .olist a:hover b{text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:4px}
+.visit .olist b{font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+.visit .olist span{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red-deep)}
+.visit .olist em{grid-column:1/-1;font-style:normal;color:var(--muted);max-width:52ch}
+@media (min-width:900px){.visit .olist{grid-template-columns:1fr 1fr;gap:0 48px}.visit .olist li:nth-last-child(2){border-bottom:1px solid var(--line)}}
 .visit .sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--paper);
   border-top:1px solid var(--line);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px))}
 .visit .sticky a{display:block;width:100%}
@@ -2168,6 +2181,7 @@ h1 {
 .whopage .come-in{padding-block:clamp(120px,22vw,300px) clamp(40px,6vw,72px)}
 .whopage .come h2{margin:0 0 14px;font-size:clamp(3.4rem,13vw,7rem)}
 .whopage .come p{margin:0 0 26px;color:var(--on-dark-soft);font-size:1.1rem}
+.whopage .notus{margin:22px 0 0;font-size:.95rem;color:var(--on-dark-soft,#b9b9b9)}.whopage .notus a{color:inherit;text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:4px}
 .whopage .come-cta{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
 .whopage .come .btn{background:var(--red);color:var(--ink-deep)}
 .whopage .come .btn:focus-visible{outline-color:var(--paper)}
