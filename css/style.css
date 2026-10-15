@@ -3167,3 +3167,6 @@ h1 {
 .whopage .oico::after{width:2.5px;height:16px}
 .whopage .ofold[open] .oico{transform:rotate(45deg)}
 .whopage .ofold>summary:focus-visible{outline:2px solid var(--red);outline-offset:6px}
+/* Who we are: close the other-churches section with the same heavy rule it opens with, then breathing room before the footer */
+.whopage .others{padding-bottom:clamp(56px,8vw,104px)}
+.whopage .others-in{border-bottom:3px solid var(--ink)}
