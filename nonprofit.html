@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PBV7QDMYQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1PBV7QDMYQ');
+      // Church Center forms open off-site, so count the click that sends someone there.
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href*="churchcenter.com"]');
+        if (!a) return;
+        var m = a.href.match(/forms\/(\d+)/);
+        var forms = { '1302721': 'plan_a_visit', '810097': 'join_a_team', '1335299': 'join_a_team', '882949': 'baptism', '1308752': 'contact' };
+        var name = m && forms[m[1]];
+        if (name === 'plan_a_visit') gtag('event', 'generate_lead', { form_name: name, transport_type: 'beacon' });
+        else gtag('event', 'church_center_click', { form_name: name || 'other', link_url: a.href, transport_type: 'beacon' });
+      });
+    </script>
+    <title>Organization Information | Axiom Church</title>
+    <meta name="robots" content="noindex" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96.png" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+    <meta name="theme-color" content="#101010" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Axiom" />
+    <meta property="og:site_name" content="Axiom Church" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Organization Information | Axiom Church" />
+    <meta property="og:description" content="Axiom Church is a 501(c)(3) nonprofit church in Leander, Texas." />
+    <meta property="og:image" content="https://www.axiomchurch.com/assets/images/share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="description" content="Axiom Church is a 501(c)(3) nonprofit church in Leander, Texas." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Archivo is loaded with its width axis here: the tall condensed headings on this page use it. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="canonical" href="https://www.axiomchurch.com/nonprofit.html" />
+    <meta property="og:url" content="https://www.axiomchurch.com/nonprofit.html" />
+    <style>
+      .orgpage{background:#fff;color:#111;font-family:'DM Sans',system-ui,sans-serif}
+      .org-wrap{max-width:760px;margin:0 auto;padding:clamp(40px,8vw,88px) 20px}
+      .org-kicker{font-family:Archivo,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;color:#e3263a;margin:0 0 10px}
+      .orgpage h1{font-family:Archivo,sans-serif;font-weight:900;font-size:clamp(2.2rem,7vw,3.4rem);letter-spacing:-.03em;line-height:1;margin:0 0 28px;text-transform:none}
+      .org{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:14px 24px;margin:0;border-top:1px solid #e5e5e5;padding-top:22px}
+      .org dt{font-weight:700}
+      .org dd{margin:0;line-height:1.55}
+      .org a,.org-more a{color:#111;font-weight:700;text-decoration-color:#e3263a;text-underline-offset:4px}
+      .org-more{margin-top:32px}
+      @media (max-width:560px){.org{grid-template-columns:1fr;gap:4px}.org dd{margin-bottom:12px}}
+    </style>
+  </head>
+  <body>
+    <div data-header><header class="header"><nav class="nav wrap" aria-label="Primary"><a class="logo" href="index.html"><span class="logo-image"><img src="assets/images/axiom-logo-dark.png" alt="Axiom Church logo"></span><b>Axiom Church</b></a><div class="menu" id="menu"><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-new">I'm New<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-new"><a href="visit.html">Plan a visit</a><a href="kids.html">Kids</a></div></div><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-about">About<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-about"><a href="about.html">Who we are</a><a href="beliefs.html">What we believe</a></div></div><a class="link" href="messages.html">Messages</a><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-next">Next Steps<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-next"><a href="next-steps.html">What is my Next Step?</a><a href="baptism.html">Get Baptized</a><a href="teams.html">Join a Team</a><a href="prayer.html">Need Prayer?</a><a href="https://axiomcares.netlify.app" target="_blank" rel="noopener">Need Help?</a><a href="https://axiomchurch.churchcenter.com/registrations/events" target="_blank" rel="noopener">Events</a></div></div><a class="link" href="give.html">Give</a><a class="pill fill menu-cta" href="visit.html">Plan a Visit</a></div><a class="pill fill" href="visit.html">Plan a Visit</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button></nav></header></div>
+    <main class="orgpage">
+      <section class="org-wrap">
+        <p class="org-kicker">Organization information</p>
+        <h1>Axiom Church</h1>
+        <dl class="org">
+          <dt>Legal name</dt><dd>Axiom Church</dd>
+          <dt>Status</dt><dd>501(c)(3) tax-exempt nonprofit organization</dd>
+          <dt>EIN</dt><dd>99-2996628</dd>
+          <dt>Mission</dt><dd>To remove every obstacle so that people can get to Jesus.</dd>
+          <dt>What we do</dt><dd>A non-denominational church in Leander, Texas, for people who thought they would never step foot in one. Sunday services, Axiom Kids for birth through 5th grade, Rally Point, Base Camp, baptism, prayer, and serving our city.</dd>
+          <dt>Lead Pastor</dt><dd>Josiah Weece</dd>
+          <dt>Sunday services</dt><dd>10am at Camacho Elementary, 501 Municipal Dr, Leander, TX 78641</dd>
+          <dt>Phone</dt><dd><a href="tel:5122655718">512-265-5718</a></dd>
+          <dt>Official website</dt><dd>www.axiomchurch.com (this site). The axiomchurch.com domain belongs to Axiom Church.</dd>
+        </dl>
+        <p class="org-more"><a href="about.html">Who we are &rarr;</a> &nbsp; <a href="give.html">Give &rarr;</a></p>
+      </section>
+    </main>
+    <div data-footer><footer class="footer"><div class="wrap"><div class="footer-main"><div><h3>A place you can<br>stop pretending.</h3><p>A brand new church for people who thought they would never step foot in one.</p></div><div><h4>I&rsquo;m New</h4><ul><li><a href="visit.html">Plan a visit</a></li><li><a href="kids.html">Kids</a></li><li><a href="messages.html">Messages</a></li></ul></div><div><h4>About</h4><ul><li><a href="about.html">Who we are</a></li><li><a href="beliefs.html">What we believe</a></li><li><a href="give.html">Give</a></li><li><a href="contact.html">Contact</a></li></ul></div><div><h4>Next Steps</h4><ul><li><a href="next-steps.html">What is my Next Step?</a></li><li><a href="baptism.html">Get Baptized</a></li><li><a href="teams.html">Join a Team</a></li><li><a href="prayer.html">Need Prayer?</a></li><li><a href="https://axiomcares.netlify.app" target="_blank" rel="noopener">Need Help?</a></li><li><a href="https://axiomchurch.churchcenter.com/registrations/events" target="_blank" rel="noopener">Events</a></li></ul></div><div><h4>Sunday</h4><p>10:00 AM<br>Camacho Elementary<br>501 Municipal Dr<br>Leander, TX 78641</p><a href="tel:5122655718">512-265-5718</a><div class="social"><a href="https://www.instagram.com/axiomchurchaustin/" target="_blank" rel="noopener" aria-label="Axiom on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.facebook.com/axiomchurchaustin/" target="_blank" rel="noopener" aria-label="Axiom on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a><a href="https://www.youtube.com/@AxiomChurchTX" target="_blank" rel="noopener" aria-label="Axiom on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></a></div></div></div><div class="footer-bottom"><span>© 2026 Axiom Church, a 501(c)(3) nonprofit</span><span>Leander, Texas</span></div></div></footer></div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
