@@ -3170,3 +3170,40 @@ h1 {
 /* Who we are: close the other-churches section with the same heavy rule it opens with, then breathing room before the footer */
 .whopage .others{padding-bottom:clamp(56px,8vw,104px)}
 .whopage .others-in{border-bottom:3px solid var(--ink)}
+
+/* ---------- Homepage: why we started, numbered plan, what Axiom is, this week ---------- */
+.home .guide{padding-block:clamp(56px,10vw,104px);border-top:1px solid var(--line)}
+.home .guide h2,.home .what h2{font-family:var(--display);font-weight:900;font-size:clamp(2.1rem,7vw,3.8rem);line-height:.95;letter-spacing:-.035em;margin:0 0 14px;max-width:17ch;text-wrap:balance}
+.home .guide .eyebrow,.home .what .eyebrow{color:var(--red-deep);margin-bottom:14px}
+.home .guide p{max-width:52ch;font-size:clamp(1.05rem,2.4vw,1.2rem);margin:0 0 14px}
+.home .guide .guide-lead{font-family:var(--display);font-weight:700;font-size:clamp(1.25rem,3.4vw,1.6rem);letter-spacing:-.015em;margin-bottom:26px}
+.home .guide .guide-sig{margin-top:26px;font-size:1rem;color:var(--muted)}
+.home .guide .guide-sig b{color:var(--ink)}
+.home .guide a,.home .what a{color:var(--red-deep);text-underline-offset:4px;font-weight:600}
+.home .next .step{justify-content:flex-start}
+.home .next .step>div{flex:1}
+.home .next .num{font-family:var(--display);font-weight:900;font-size:clamp(1.45rem,5vw,2.25rem);line-height:1.1;color:var(--red);min-width:1.4em;flex:none}
+.home .what{padding-block:clamp(56px,10vw,104px)}
+.home .what .mission{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,3.6vw,1.75rem);line-height:1.2;letter-spacing:-.015em;margin:0 0 clamp(24px,4vw,36px);max-width:34ch;border-left:4px solid var(--red);padding-left:16px}
+.home .what-cols{display:grid;gap:18px;max-width:1000px}
+.home .what-cols p{margin:0;font-size:1.05rem;line-height:1.6;color:var(--ink)}
+.home .what-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin:28px 0 0}
+.home .week{background:var(--band);padding-block:clamp(56px,9vw,96px)}
+
+.home .week .eyebrow{color:var(--red-deep);margin-bottom:22px}
+.home .week-grid{display:grid;gap:16px}
+.home .wcard{display:flex;flex-direction:column;gap:8px;background:var(--paper);border-top:3px solid var(--ink);padding:22px;color:inherit;text-decoration:none}
+.home a.wcard:hover .wt{color:var(--red-deep)}
+.home .wk{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:var(--muted)}
+.home .wt{font-family:var(--display);font-weight:800;font-size:1.4rem;line-height:1.15;letter-spacing:-.02em;transition:color .16s ease}
+.home .wd{color:var(--muted);font-size:.98rem}
+.home .wgo{margin-top:auto;padding-top:8px;font-weight:700;color:var(--red-deep)}
+.home .wlist{list-style:none;margin:0;padding:0}
+.home .wlist li{border-bottom:1px solid var(--line)}
+.home .wlist li:last-child{border-bottom:0}
+.home .wlist a{display:flex;flex-direction:column;padding:10px 0;color:inherit;text-decoration:none}
+.home .wlist a b{font-family:var(--display);font-weight:800;font-size:1.1rem;letter-spacing:-.01em}
+.home .wlist a:hover b{color:var(--red-deep)}
+.home .wlist a span{color:var(--muted);font-size:.92rem}
+.home .wlist li:last-child a{font-weight:700;color:var(--red-deep)}
+@media (min-width:860px){.home .what-cols{grid-template-columns:1fr 1fr;gap:40px}.home .week-grid{grid-template-columns:repeat(3,1fr)}}
