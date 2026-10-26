@@ -134,6 +134,10 @@
   ],
   "rewrites": [
     {
+      "source": "/church-near-:town",
+      "destination": "/church-near-:town.html"
+    },
+    {
       "source": "/messages/:slug",
       "destination": "/messages/:slug.html"
     },

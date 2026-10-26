@@ -3235,3 +3235,5 @@ h1 {
 .msgpage .recap-list .rs{color:var(--muted);max-width:60ch}
 .msgpage .recap-list a:hover b{color:var(--red-deep)}
 @media (min-width:860px){.msgpage .recap-list{grid-template-columns:repeat(3,1fr);gap:28px}}
+.footer .towns{margin:14px 0 0;font-size:.9rem;line-height:1.5;opacity:.85}
+.footer .towns a{text-decoration:underline;text-underline-offset:3px}
