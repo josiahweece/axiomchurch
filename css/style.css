@@ -3207,3 +3207,19 @@ h1 {
 .home .wlist a span{color:var(--muted);font-size:.92rem}
 .home .wlist li:last-child a{font-weight:700;color:var(--red-deep)}
 @media (min-width:860px){.home .what-cols{grid-template-columns:1fr 1fr;gap:40px}.home .week-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* ---------- Contact: know what you need; Prayer: how it works; Messages: about line ---------- */
+.contactpage .cways{background:var(--band);padding-block:clamp(48px,8vw,88px)}
+.contactpage .cway-list{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px}
+.contactpage .cway-list a{display:flex;flex-direction:column;gap:4px;background:#fff;border-top:3px solid var(--ink);padding:18px 20px;color:inherit;text-decoration:none}
+.contactpage .cway-list b{font-family:var(--display);font-weight:800;font-size:1.2rem;letter-spacing:-.015em}
+.contactpage .cway-list span{color:var(--muted)}
+.contactpage .cway-list i{font-style:normal;font-weight:700;color:var(--red-deep);margin-top:6px}
+.contactpage .cway-list a:hover b{color:var(--red-deep)}
+.contactpage .cwhere{margin:24px 0 0;max-width:60ch}
+@media (min-width:860px){.contactpage .cway-list{grid-template-columns:repeat(3,1fr)}}
+.praypage .phow{padding-block:clamp(48px,8vw,88px);border-top:1px solid var(--line)}
+.praypage .phow-list{margin:22px 0 18px;padding:0;list-style:none;counter-reset:ph;display:grid;gap:16px;max-width:62ch}
+.praypage .phow-list li{counter-increment:ph;position:relative;padding-left:44px;font-size:1.05rem;line-height:1.55}
+.praypage .phow-list li::before{content:counter(ph);position:absolute;left:0;top:-2px;font-family:var(--display);font-weight:900;font-size:1.6rem;color:var(--red-deep)}
+.msgpage .under .about-msg{margin-top:10px;max-width:60ch;opacity:.85}
