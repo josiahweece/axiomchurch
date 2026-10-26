@@ -82,3 +82,9 @@ if(reel&&track&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const n
   lift();addEventListener('scroll',function(){requestAnimationFrame(lift);},{passive:true});
   document.body.style.paddingBottom='72px';
 })();
+
+// Vercel Web Analytics: page views for every page that loads main.js.
+(()=>{
+ window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};
+ const s=document.createElement('script');s.defer=true;s.src='/_vercel/insights/script.js';document.head.appendChild(s);
+})();
