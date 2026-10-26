@@ -3223,3 +3223,15 @@ h1 {
 .praypage .phow-list li{counter-increment:ph;position:relative;padding-left:44px;font-size:1.05rem;line-height:1.55}
 .praypage .phow-list li::before{content:counter(ph);position:absolute;left:0;top:-2px;font-family:var(--display);font-weight:900;font-size:1.6rem;color:var(--red-deep)}
 .msgpage .under .about-msg{margin-top:10px;max-width:60ch;opacity:.85}
+
+/* ---------- Messages: recent messages, in short ---------- */
+.msgpage .recaps{background:#fff;color:var(--ink);padding-block:clamp(48px,8vw,96px)}
+.msgpage .recaps-in{width:100%;max-width:1200px;margin-inline:auto;padding-inline:20px}
+.msgpage .recaps h2{font-family:var(--display);font-weight:900;font-size:clamp(1.9rem,5.5vw,3rem);letter-spacing:-.035em;line-height:1;margin:0 0 24px}
+.msgpage .recap-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.msgpage .recap-list a{display:flex;flex-direction:column;gap:6px;border-top:3px solid var(--ink);padding:18px 0 4px;color:inherit;text-decoration:none}
+.msgpage .recap-list .rk{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--red-deep)}
+.msgpage .recap-list b{font-family:var(--display);font-weight:800;font-size:1.45rem;letter-spacing:-.02em}
+.msgpage .recap-list .rs{color:var(--muted);max-width:60ch}
+.msgpage .recap-list a:hover b{color:var(--red-deep)}
+@media (min-width:860px){.msgpage .recap-list{grid-template-columns:repeat(3,1fr);gap:28px}}

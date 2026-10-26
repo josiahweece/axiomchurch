@@ -18,13 +18,14 @@ function render(page) {
   new Function('document', 'location', builder)(document, location);
   return out;
 }
-const pages = fs.readdirSync(root).filter((f) => f.endsWith('.html'));
+const pages = fs.readdirSync(root).filter((f) => f.endsWith('.html'))
+  .concat(fs.existsSync(path.join(root, 'messages')) ? fs.readdirSync(path.join(root, 'messages')).filter((f) => f.endsWith('.html')).map((f) => 'messages/' + f) : []);
 let n = 0;
 for (const f of pages) {
   const file = path.join(root, f);
   let s = fs.readFileSync(file, 'utf8');
   if (!s.includes('data-header') && !s.includes('data-footer')) continue;
-  const o = render(f);
+  const o = render(f.startsWith('messages/') ? 'messages.html' : f);
   for (const k of ['header', 'footer']) {
     const open = `<div data-${k}>`;
     const i = s.indexOf(open);

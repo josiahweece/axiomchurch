@@ -64,4 +64,10 @@
     <loc>https://www.axiomchurch.com/recent-messages</loc>
     <changefreq>weekly</changefreq>
   </url>
+
+  <url>
+    <loc>https://www.axiomchurch.com/messages/in-the-world-not-of-it</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.6</priority>
+  </url>
 </urlset>

@@ -134,6 +134,10 @@
   ],
   "rewrites": [
     {
+      "source": "/messages/:slug",
+      "destination": "/messages/:slug.html"
+    },
+    {
       "source": "/recent-messages",
       "destination": "/api/recent-messages"
     }
