@@ -3246,12 +3246,12 @@ h1 {
 .whopage .yo-big{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;border-top:3px solid var(--red);padding-top:18px;margin-bottom:26px}
 .whopage .yo-big b{font-family:var(--display);font-weight:900;font-size:clamp(4rem,14vw,7rem);line-height:.9;letter-spacing:-.04em;color:var(--red)}
 .whopage .yo-big span{font-family:var(--display);font-weight:800;font-size:clamp(1.2rem,3.4vw,1.6rem);max-width:22ch}
-.whopage .yo-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:18px 20px}
+.whopage .yo-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:18px 20px}
 .whopage .yo-grid li{border-top:1px solid #333;padding-top:12px;display:flex;flex-direction:column;gap:4px}
 .whopage .yo-grid b{font-family:var(--display);font-weight:900;font-size:clamp(1.7rem,5vw,2.4rem);letter-spacing:-.03em;line-height:1}
 .whopage .yo-grid span{color:#bdbdbd;font-size:.95rem;line-height:1.35}
 .whopage .yo-next{margin:30px 0 0;max-width:56ch;font-size:1.05rem}
-@media (min-width:860px){.whopage .yo-grid{grid-template-columns:repeat(5,1fr)}}
+@media (min-width:860px){.whopage .yo-grid{grid-template-columns:repeat(3,1fr)}}
 
 /* ---------- Next steps: intro line and the steps in words ---------- */
 .nextpage .pintro{max-width:60ch;margin:-6px 0 22px;font-size:1.05rem;line-height:1.55}
