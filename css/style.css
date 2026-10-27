@@ -3237,3 +3237,31 @@ h1 {
 @media (min-width:860px){.msgpage .recap-list{grid-template-columns:repeat(3,1fr);gap:28px}}
 .footer .towns{margin:14px 0 0;font-size:.9rem;line-height:1.5;opacity:.85}
 .footer .towns a{text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- Who we are: year one ---------- */
+.whopage .yearone{background:var(--ink-deep);color:#fff;padding-block:clamp(56px,9vw,104px)}
+.whopage .yearone .w-kicker{color:var(--red)}
+.whopage .yearone h2.sec{color:#fff;max-width:18ch}
+.whopage .yo-lead{color:#bdbdbd;max-width:56ch;margin:0 0 28px;font-size:1.05rem}
+.whopage .yo-big{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;border-top:3px solid var(--red);padding-top:18px;margin-bottom:26px}
+.whopage .yo-big b{font-family:var(--display);font-weight:900;font-size:clamp(4rem,14vw,7rem);line-height:.9;letter-spacing:-.04em;color:var(--red)}
+.whopage .yo-big span{font-family:var(--display);font-weight:800;font-size:clamp(1.2rem,3.4vw,1.6rem);max-width:22ch}
+.whopage .yo-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:18px 20px}
+.whopage .yo-grid li{border-top:1px solid #333;padding-top:12px;display:flex;flex-direction:column;gap:4px}
+.whopage .yo-grid b{font-family:var(--display);font-weight:900;font-size:clamp(1.7rem,5vw,2.4rem);letter-spacing:-.03em;line-height:1}
+.whopage .yo-grid span{color:#bdbdbd;font-size:.95rem;line-height:1.35}
+.whopage .yo-next{margin:30px 0 0;max-width:56ch;font-size:1.05rem}
+@media (min-width:860px){.whopage .yo-grid{grid-template-columns:repeat(5,1fr)}}
+
+/* ---------- Next steps: intro line and the steps in words ---------- */
+.nextpage .pintro{max-width:60ch;margin:-6px 0 22px;font-size:1.05rem;line-height:1.55}
+.nextpage .inwords{margin-top:22px;border-top:1px solid var(--tee-line)}
+.nextpage .inwords summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-family:var(--display);font-weight:800;font-size:1.15rem}
+.nextpage .inwords summary::-webkit-details-marker{display:none}
+.nextpage .inwords summary span{color:var(--red-deep);font-size:1.4rem;transition:transform .2s}
+.nextpage .inwords[open] summary span{transform:rotate(45deg)}
+.nextpage .inwords .iw{padding-bottom:18px;max-width:62ch}
+.nextpage .inwords h3{font-family:var(--display);font-weight:800;font-size:1.1rem;margin:16px 0 6px}
+.nextpage .inwords p{margin:0 0 10px;line-height:1.55}
+.nextpage .inwords a{font-weight:700;color:inherit;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:4px}
+.footer .footer-bottom a{color:inherit;text-decoration:underline;text-underline-offset:3px}
