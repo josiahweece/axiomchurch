@@ -12,6 +12,10 @@
         s.async = true;
         s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1PBV7QDMYQ';
         document.head.appendChild(s);
+        var f = document.createElement('script');
+        f.async = true;
+        f.src = 'https://connect.facebook.net/en_US/fbevents.js';
+        document.head.appendChild(f);
       });
     </script>
     <script>
@@ -19,6 +23,10 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-1PBV7QDMYQ');
+      // Meta Pixel ("Axiom Pixel" in Events Manager). Queues calls until fbevents.js loads.
+      !function(w){if(w.fbq)return;var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);
+      fbq('init', '726396056685457');
+      fbq('track', 'PageView');
       // Church Center forms open off-site, so count the click that sends someone there.
       document.addEventListener('click', function (e) {
         var a = e.target.closest && e.target.closest('a[href*="churchcenter.com"]');
@@ -26,7 +34,7 @@
         var m = a.href.match(/forms\/(\d+)/);
         var forms = { '1302721': 'plan_a_visit', '810097': 'join_a_team', '1335299': 'join_a_team', '882949': 'baptism', '1308752': 'contact' };
         var name = m && forms[m[1]];
-        if (name === 'plan_a_visit') gtag('event', 'generate_lead', { form_name: name, transport_type: 'beacon' });
+        if (name === 'plan_a_visit') { gtag('event', 'generate_lead', { form_name: name, transport_type: 'beacon' }); fbq('track', 'Lead', { content_name: 'plan_a_visit' }); }
         else gtag('event', 'church_center_click', { form_name: name || 'other', link_url: a.href, transport_type: 'beacon' });
       });
     </script>
@@ -88,7 +96,8 @@
         <p>Online giving is handled by our giving provider. Your card or bank details go straight to them. We see your name, the amount and the date so we can send you a giving statement. We never see or store your full card number.</p>
 
         <h2>Analytics</h2>
-        <p>We use Google Analytics and Vercel Web Analytics to see which pages people visit, roughly where they&rsquo;re visiting from and what kind of device they use. It helps us know what&rsquo;s working on the site. We don&rsquo;t use it to show you ads.</p>
+        <p>We use Google Analytics and Vercel Web Analytics to see which pages people visit, roughly where they&rsquo;re visiting from and what kind of device they use. It helps us know what&rsquo;s working on the site.</p>
+        <p>We also use the Meta Pixel. When we run ads on Facebook or Instagram, it tells us whether someone who saw an ad later visited the site or tapped Plan a Visit, so we know which ads actually help people find us. Meta may use it to show you Axiom ads. You can change this in your Facebook or Instagram ad settings.</p>
 
         <h2>Videos</h2>
         <p>Messages play through YouTube&rsquo;s privacy-enhanced mode. YouTube&rsquo;s own privacy policy applies once you press play.</p>
