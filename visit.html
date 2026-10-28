@@ -236,10 +236,10 @@
       <section class="vproof" aria-labelledby="vproof-h">
         <p class="kick">Watch Mari&rsquo;s story</p>
         <h2 id="vproof-h">Her story mattered. So does yours.</h2>
-        <button class="yt" type="button" data-id="sN4IMnzM7Ds" aria-label="Play Mari&rsquo;s story">
+        <a class="yt" href="https://www.youtube.com/watch?v=sN4IMnzM7Ds" target="_blank" rel="noopener" data-id="sN4IMnzM7Ds" aria-label="Play Mari&rsquo;s story">
           <img src="https://i.ytimg.com/vi/sN4IMnzM7Ds/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/sN4IMnzM7Ds/hqdefault.jpg'" alt="" loading="lazy" />
           <span class="yt-play" aria-hidden="true"></span>
-        </button>
+        </a>
       </section>
 
 <div class="sticky"><a class="btn" href="https://axiomchurch.churchcenter.com/people/forms/1302721" target="_blank" rel="noopener">Let us know you're coming</a></div>
@@ -284,7 +284,8 @@
     <script>
       // Mari's story: swap the thumbnail for the real player on tap.
       document.querySelectorAll('.yt').forEach(function (b) {
-        b.addEventListener('click', function () {
+        b.addEventListener('click', function (e) {
+          e.preventDefault();
           var f = document.createElement('iframe');
           f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0';
           f.title = "Mari's story";
