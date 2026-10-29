@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#101010">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
+<style>body{margin:0}</style>
+<title>21 Days | Axiom Church</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap">
+<style>
+/* Layout: a phone-first app column. Black hero band per screen, white reading body, fixed tab bar. Red only for the one button, links, and the theme stamp. */
+:root{
+  --bg:#FFFFFF; --ink:#101010; --body:#1A1A1A; --muted:#5A5A5A; --soft:#F5F5F5; --line:#E8E8E8;
+  --accent:#C51C11; --btn:#C51C11; --btn-ink:#FFFFFF; --coral:#F05F56;
+  --hero:#101010; --hero-ink:#FFFFFF; --hero-muted:#A9A9A9; --hero-line:#2B2B2B;
+  --tab:#FFFFFF; --done:#101010; --done-ink:#FFFFFF; --card:#FFFFFF; --tint:#FDEDEC; --band:#F05F56; --band-ink:#101010;
+  --display:"Archivo","Arial Narrow","Helvetica Neue Condensed",Impact,sans-serif;
+  --sans:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0B0B0B; --ink:#FFFFFF; --body:#E9E9E9; --muted:#A3A3A3; --soft:#161616; --line:#2A2A2A;
+  --accent:#F05F56; --btn:#C51C11; --btn-ink:#FFFFFF; --coral:#F05F56;
+  --hero:#000000; --hero-ink:#FFFFFF; --hero-muted:#A9A9A9; --hero-line:#2B2B2B;
+  --tab:#101010; --done:#FFFFFF; --done-ink:#101010; --card:#141414; --tint:#2A1513; --band:#F05F56; --band-ink:#101010; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B0B0B; --ink:#FFFFFF; --body:#E9E9E9; --muted:#A3A3A3; --soft:#161616; --line:#2A2A2A;
+  --accent:#F05F56; --btn:#C51C11; --btn-ink:#FFFFFF; --coral:#F05F56;
+  --hero:#000000; --hero-ink:#FFFFFF; --hero-muted:#A9A9A9; --hero-line:#2B2B2B;
+  --tab:#101010; --done:#FFFFFF; --done-ink:#101010; --card:#141414; --tint:#2A1513; --band:#F05F56; --band-ink:#101010; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.prose,.prose *{overflow-wrap:anywhere}
+html,body{background:var(--bg)}
+body{color:var(--body);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:calc(128px + env(safe-area-inset-bottom,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--hero)}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent);font-weight:700;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+p{margin:0}
+h1,h2,h3{margin:0;text-wrap:balance}
+
+/* Top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hero);color:var(--hero-ink);border-bottom:1px solid var(--hero-line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--hero-ink);text-decoration:none}
+.brand svg{width:32px;height:32px;flex:none}
+.back{appearance:none;background:transparent;border:0;cursor:pointer;display:flex;align-items:center;gap:4px;min-height:44px;padding:0 10px 0 0;margin-left:-4px;color:var(--hero-ink);font-family:var(--display);font-weight:800;font-size:17px}
+.back svg{width:24px;height:24px;color:var(--coral)}
+.top .count{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--hero-muted);font-weight:700}
+
+/* Hero bands */
+.hero{background:var(--hero);color:var(--hero-ink)}
+.hero .wrap{padding-block:28px 32px;display:grid;gap:14px}
+.label{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.hero .label{color:var(--coral)}
+.mega{font-family:var(--display);font-weight:900;font-stretch:62%;text-transform:uppercase;line-height:.86;letter-spacing:-.01em;font-size:clamp(64px,19vw,120px)}
+.mega .hl{color:var(--coral)}
+.big{font-family:var(--display);font-weight:900;font-stretch:62%;text-transform:uppercase;line-height:.9;font-size:clamp(40px,11vw,64px)}
+.hero p{color:var(--hero-muted);max-width:52ch}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;color:var(--hero-muted);font-size:15px}
+.pill{display:inline-block;border:1.5px solid var(--coral);color:var(--coral);border-radius:999px;padding:3px 12px;font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+/* Question card on hero */
+.question{border-top:1px solid var(--hero-line);padding-top:16px;display:grid;gap:6px}
+.question q{quotes:none;font-family:var(--display);font-weight:800;font-size:22px;line-height:1.15;color:var(--hero-ink)}
+
+/* Buttons */
+.btn{appearance:none;border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 26px;border-radius:999px;background:var(--btn);color:var(--btn-ink);font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.hero .btn.ghost{color:var(--hero-ink);border-color:var(--hero-ink)}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px}
+
+/* Body sections */
+main section.block{padding-block:28px;border-bottom:1px solid var(--line);display:grid;gap:14px}
+main section.block:last-child{border-bottom:0}
+.h2{font-family:var(--display);font-weight:800;font-size:26px;line-height:1.15;color:var(--ink)}
+.prose{display:grid;gap:14px;max-width:65ch}
+.prose h3{font-family:var(--display);font-weight:800;font-size:21px;color:var(--ink);margin-top:8px}
+.prose ul,.prose ol{margin:0;padding-left:1.2em;display:grid;gap:8px}
+.prose strong{color:var(--ink)}
+.prose blockquote{margin:0;border-left:4px solid var(--accent);padding:4px 0 4px 16px;display:grid;gap:6px}
+.prose blockquote p{font-size:18px}
+
+.scripture{background:var(--soft);border-radius:14px;padding:18px;display:grid;gap:10px}
+.scripture .ref{font-family:var(--display);font-weight:800;font-size:24px;color:var(--ink)}
+.scripture .slot{border:1.5px dashed var(--line);border-radius:10px;padding:14px;color:var(--muted);font-size:15px}
+
+.prompt{font-weight:700;color:var(--ink)}
+textarea,input[type=text]{width:100%;font:inherit;font-size:16px;color:var(--body);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+textarea{min-height:120px;resize:vertical;line-height:1.5}
+textarea:focus,input:focus{border-color:var(--ink)}
+.saved{font-size:13px;color:var(--muted);min-height:1.2em}
+.saved:empty{display:none}
+.field{display:grid;gap:6px;font-weight:700;color:var(--ink);font-size:15px}
+
+/* Toggles */
+.toggles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tog{appearance:none;cursor:pointer;min-height:52px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 4px;min-width:0}
+.tog .box{width:20px;height:20px;border-radius:6px;border:2px solid currentColor;display:grid;place-items:center;flex:none}
+.tog[aria-pressed="true"]{background:var(--done);color:var(--done-ink);border-color:var(--done)}
+.tog[aria-pressed="true"] .box::after{content:"";width:10px;height:6px;border-left:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-45deg) translate(1px,-1px)}
+.tog.wide{grid-column:1/-1;justify-content:flex-start;text-transform:none;letter-spacing:0;font-family:var(--sans);font-weight:700;font-size:16px;padding:12px 16px}
+.stamp{font-family:var(--display);font-weight:900;font-stretch:62%;text-transform:uppercase;color:var(--accent);font-size:15px;letter-spacing:.12em}
+
+.kids{background:var(--soft);border-radius:14px;padding:16px 18px;display:grid;gap:6px}
+.pager{display:flex;justify-content:space-between;gap:10px;padding-block:24px}
+
+/* Day list */
+.week-head{padding-top:28px;display:grid;gap:4px}
+.week-head .tag{color:var(--muted)}
+.week-head .intro{margin-top:6px;font-size:16px}
+.dayrow{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);color:inherit;text-decoration:none;font-weight:400}
+.dayrow .n{font-family:var(--display);font-weight:900;font-stretch:62%;font-size:44px;line-height:.9;color:var(--ink);font-variant-numeric:tabular-nums}
+.dayrow .t{display:grid;gap:2px;min-width:0}
+.dayrow .t b{font-family:var(--display);font-weight:800;font-size:18px;color:var(--ink)}
+.dayrow .t span{font-size:14px;color:var(--muted)}
+.dots{display:flex;gap:4px}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--muted)}
+.dots i.on{background:var(--ink);border-color:var(--ink)}
+.dayrow.today .n{color:var(--accent)}
+
+/* Progress strip */
+.strip{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.strip a{aspect-ratio:1;border-radius:10px;border:1.5px solid var(--line);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:15px;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
+.strip a.done{background:var(--done);border-color:var(--done);color:var(--done-ink)}
+.strip a.today{border-color:var(--accent);color:var(--accent)}
+
+/* Lists of links */
+.links{display:grid}
+.links a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px}
+.links a::after{content:"→";color:var(--accent);font-family:var(--sans)}
+.checklist{display:grid}
+.check{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.cbox{appearance:none;cursor:pointer;width:30px;height:30px;border-radius:8px;border:2px solid var(--ink);background:var(--bg);display:grid;place-items:center;padding:0}
+.cbox[aria-pressed="true"]{background:var(--done);border-color:var(--done);color:var(--done-ink)}
+.cbox[aria-pressed="true"]::after{content:"";width:12px;height:7px;border-left:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(-45deg) translate(1px,-1px)}
+.check a{display:grid;gap:2px;color:var(--ink);text-decoration:none;font-weight:400;min-width:0}
+.check a b{font-family:var(--display);font-weight:800;font-size:18px}
+.check a span{font-size:14px;color:var(--muted)}
+.dates{display:grid;gap:0}
+.dates div{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.dates b{font-family:var(--display);font-weight:800;color:var(--ink)}
+
+/* Journal */
+.entry{padding:18px 0;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.entry .eh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.entry .eh b{font-family:var(--display);font-weight:900;font-stretch:62%;font-size:30px;color:var(--ink);line-height:1}
+.entry .q{font-size:14px;color:var(--muted)}
+.entry p{white-space:pre-wrap}
+.empty{padding:40px 0;display:grid;gap:12px;color:var(--muted)}
+.private{display:flex;gap:8px;align-items:flex-start;font-size:14px;color:var(--muted)}
+.private svg{width:16px;height:16px;flex:none;margin-top:3px;color:var(--accent)}
+.hero .private{color:var(--hero-muted)}
+.hero .private svg{color:var(--coral)}
+.credits{font-size:13px;color:var(--muted);display:grid;gap:8px;padding-block:24px}
+
+/* Light hero for inner pages */
+.listen{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.listen .btn{min-height:44px;padding:0 18px;font-size:14px}
+.hero.light .listen .btn.ghost{color:var(--ink);border-color:var(--ink)}
+.listen .btn svg{width:18px;height:18px}
+.listen .note{flex-basis:100%;font-size:13px;color:var(--muted)}
+.hero.light{background:var(--soft);color:var(--ink);border-bottom:1px solid var(--line)}
+.hero.light .label{color:var(--accent)}
+.hero.light .mega .hl,.hero.light .big .hl{color:var(--accent)}
+.hero.light p,.hero.light .meta{color:var(--muted)}
+.hero.light .pill{border-color:var(--accent);color:var(--accent)}
+.hero.light .private{color:var(--muted)}
+.hero.light .private svg{color:var(--accent)}
+
+/* Coral band */
+.band{background:var(--band);color:var(--band-ink)}
+.band .wrap{padding-block:24px;display:grid;gap:8px}
+.band .label{color:var(--band-ink);opacity:.8}
+.band q{quotes:none;font-family:var(--display);font-weight:800;font-size:23px;line-height:1.15}
+
+/* Step chips under day hero */
+.chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding-block:16px 4px}
+.chip{appearance:none;cursor:pointer;border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:10px 4px 8px;display:grid;justify-items:center;gap:4px;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.chip svg{width:22px;height:22px;color:var(--accent)}
+.chip.done{background:var(--done);border-color:var(--done);color:var(--done-ink)}
+.chip.done svg{color:var(--done-ink)}
+
+/* Step cards */
+.steps{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;padding-block:16px 8px}
+.step{min-width:0;background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:14px;scroll-margin-top:80px}
+.step-head{display:flex;align-items:center;gap:12px}
+.step-icon{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#FFFFFF;display:grid;place-items:center;flex:none}
+:root[data-theme="dark"] .step-icon{background:var(--btn)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .step-icon{background:var(--btn)}}
+.step-icon svg{width:22px;height:22px}
+.step-head .h2{font-size:22px}
+.step-head small{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.step.tinted{background:var(--tint);border-color:transparent}
+.step .kids{background:var(--soft)}
+
+.bb-head{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.bb-head p{color:var(--muted);margin-top:4px}
+.num{width:36px;height:36px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:17px;color:var(--ink);flex:none}
+.num.on{background:var(--done);border-color:var(--done);color:var(--done-ink)}
+.num.on:not(.star)::after{content:"";width:13px;height:7px;border-left:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(-45deg) translate(1px,-1px)}
+.num.star{background:var(--accent);border-color:var(--accent)}
+.kicker{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+details{border-top:1px solid var(--line);padding-top:10px}
+details summary{cursor:pointer;font-weight:700;color:var(--accent)}
+details ul{margin:10px 0 0;padding-left:1.2em;display:grid;gap:6px;color:var(--muted)}
+.ticks{display:grid;gap:4px}
+.tick{appearance:none;cursor:pointer;background:transparent;border:0;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;text-align:left;padding:10px 0;font:inherit;color:var(--body)}
+.tick .cbox{pointer-events:none}
+.tick[aria-pressed="true"] .cbox{background:var(--done);border-color:var(--done);color:var(--done-ink)}
+.tick[aria-pressed="true"] .cbox::after{content:"";width:12px;height:7px;border-left:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(-45deg) translate(1px,-1px)}
+.meter{height:10px;border-radius:999px;background:var(--line);overflow:hidden;max-width:360px}
+.meter i{display:block;height:100%;background:var(--accent);border-radius:999px}
+.meter-label{font-size:14px;font-weight:700;color:var(--ink)}
+.voice{display:grid;gap:10px}
+.or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.voice .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.voice audio{width:100%;min-width:0}
+.recbtn{appearance:none;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:48px;padding:8px 16px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+.recbtn svg{width:20px;height:20px;color:var(--accent)}
+.recbtn.on{background:var(--ink);color:var(--bg)}
+.recbtn.on .dot{width:12px;height:12px;border-radius:50%;background:var(--coral);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.recbtn.on .dot{animation:none}}
+.linkbtn{appearance:none;background:none;border:0;padding:0;cursor:pointer;font:inherit;font-weight:700;color:var(--accent);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.nudge{background:var(--tint);border-radius:12px;padding:12px 14px}
+/* Expand-to-write buttons */
+.addbtn{appearance:none;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:10px 16px;border-radius:14px;border:1.5px dashed var(--ink);background:transparent;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:16px;text-align:left}
+.addbtn span{width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:18px;line-height:1;flex:none}
+
+/* Guide: callout cards inside prose */
+.prose p.card{background:var(--soft);border-radius:14px;padding:14px 16px}
+.prose blockquote{background:var(--tint);border-left:0;border-radius:14px;padding:16px}
+.guide-group{display:grid;gap:4px;padding-top:24px}
+.guide-group .links a{font-size:18px}
+.guide-group .links a small{display:block;font-family:var(--sans);font-weight:400;font-size:14px;color:var(--muted)}
+
+/* Floating story button */
+.fab{position:fixed;z-index:24;right:max(16px,calc(env(safe-area-inset-right,0px) + 12px));bottom:calc(72px + env(safe-area-inset-bottom,0px));appearance:none;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:38px;padding:6px 14px 6px 11px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.fab svg{width:17px;height:17px;color:var(--accent)}
+@media (min-width:720px){.fab{right:max(16px,calc((100vw - 640px)/2 - 160px))}}
+.sheet-wrap{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
+.sheet{width:100%;max-width:640px;max-height:90%;overflow:auto;background:var(--bg);color:var(--body);border-radius:20px 20px 0 0;padding:20px max(16px,env(safe-area-inset-left,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px));display:grid;gap:14px}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.sheet-body{display:grid;gap:14px}
+.okbox{width:22px;height:22px;accent-color:var(--ink)}
+
+.nudge-pop{position:fixed;z-index:26;left:50%;transform:translateX(-50%);bottom:calc(120px + env(safe-area-inset-bottom,0px));width:min(560px,calc(100% - 32px));background:var(--card);color:var(--body);border:1.5px solid var(--line);border-radius:16px;box-shadow:0 6px 24px rgba(0,0,0,.16);padding:14px 16px;display:grid;gap:10px}
+.nudge-pop .row{display:flex;align-items:center;gap:16px}
+.btn.sm{min-height:40px;padding:0 18px;font-size:13px}
+@media (prefers-reduced-motion:no-preference){.nudge-pop{animation:up .3s ease-out}@keyframes up{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}}
+
+/* Tab bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--tab);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.tabs a{display:grid;justify-items:center;gap:3px;padding:10px 0 8px;color:var(--muted);text-decoration:none;font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.tabs a svg{width:22px;height:22px}
+.tabs a[aria-current="page"]{color:var(--ink)}
+.tabs a[aria-current="page"] svg{color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){.view{animation:in .25s ease-out}@keyframes in{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}}
+</style>
+
+<header class="top"><div class="wrap">
+  <button class="back" id="backBtn" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span id="backLabel">Back</span></button>
+  <a class="brand" id="brand" href="#home" aria-label="Axiom Church home">
+    <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 4 86 21.3 95 60.3 70 92H30L5 60.3 14 21.3Z"/><path d="M27 92 50 40 73 92" fill="none" stroke="var(--hero)" stroke-width="11" stroke-linejoin="round"/></svg>
+    Axiom Church
+  </a>
+  <span class="count" id="topCount"></span>
+</div></header>
+
+<div id="app"></div>
+
+<button class="fab" id="storyBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Share a story</button>
+
+<div class="nudge-pop" id="storyNudge" role="status" hidden>
+  <p><strong>Have a story?</strong> If God's done something in the last few days, big or small, we'd love to hear it.</p>
+  <div class="row"><button class="btn ghost sm" type="button" id="nudgeShare">Share it</button><button class="linkbtn" type="button" id="nudgeLater">Not now</button></div>
+</div>
+
+<div class="sheet-wrap" id="storySheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="storyTitle">
+    <div class="sheet-head"><h2 class="h2" id="storyTitle">Share a story</h2><button class="linkbtn" type="button" id="storyClose">Close</button></div>
+    <div class="sheet-body">
+      <p>Did God answer a prayer? Did something change? Tell us. Big or small.</p>
+      <p class="saved">Heads up: this is different from your journal. What you send here goes to the Axiom team, and you choose whether we can share it.</p>
+      <div class="btn-row"><a class="btn" href="https://axiomchurch.churchcenter.com/people/forms/1357954" target="_blank" rel="noopener" id="storyLink">Share my story</a></div>
+      <p class="saved">Opens a short form. Takes about 2 minutes.</p>
+    </div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Sections"><div class="wrap">
+  <a href="#home" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Today</a>
+  <a href="#days" data-tab="days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Days</a>
+  <a href="#journal" data-tab="journal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h12a2 2 0 0 1 2 2v16l-4-2-4 2-4-2-2 1V5a2 2 0 0 1 0-2z"/><path d="M9 8h6M9 12h6"/></svg>Journal</a>
+  <a href="#guide" data-tab="guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>Extras</a>
+</div></nav>
+
+<script>
+const DATA = {"guide": [{"id": "a-note-from-josiah", "title": "A Note From Josiah", "html": "<p>Can I just be honest with you for a second?<\/p><p>I'm going to ask you to do something we've never done as a church. For the next 21 days, I want you to pray and fast.<\/p><p>Now I know what some of you are thinking. Bro, I've never prayed or fasted for a single day in my life. 21 days is crazy. I get it. This is going to be difficult, but I believe if we take the time to make space and talk to God, he will actually talk back.<\/p><p>I believe we are in a unique moment in the life of our church and in the history of the church at large. I believe God is about to do something in big in our city. I believe He's about to do something crazy in your life. I don't know exactly what that is for you. Maybe it's freedom from something you've carried for years. Maybe it's your one, the person close to you but far from God, finally finding Him. I don't know. Here's what I do know. God has called us to get ready, for whatever it is. And before we get our church ready, we have to make sure you're ready.<\/p><p>So every day, you're going to read something short. Three times a day, you're going to get on your knees, if you're able, and pray. I know that's weird for some of you. There's nothing magical about it. We just believe that when your physical posture changes, so does your spiritual posture.<\/p><p>And every time you crave what you gave up, you're going to pray one question. Then watch as God begins to answer.<\/p><p>Some of you have done this a dozen times. Some of you have never fasted a single meal in your life. Either way, I cannot wait to hear what God does in your life.<\/p><p>Let's dig some ditches and prepare for the rain.<\/p><p>Let's go.<\/p><p>— Josiah<\/p>"}, {"id": "the-question", "title": "The Two Questions", "html": "<p>For the next 21 days, we're going to pray one question. Every single day.<\/p><blockquote><p><strong>God, what do you want to do in me?<\/strong><\/p><p><strong>God, what do you want to do through me?<\/strong><\/p><\/blockquote><p>Have it on repeat.<\/p><p>You'll get two cards with this question on them. One for your mirror. One for your car. Pray it while you brush your teeth. Pray it on the drive to work. And every time you crave what you're fasting from, pray it again. Then just be still and listen. Because we believe this crazy thing: when we talk to God, He actually talks back.<\/p><ul><li>Week 1 — we ask what God wants to do in us.<\/li><li><strong>Week 2<\/strong> — we ask for the <strong>Holy Spirit<\/strong> to dwell within us.<\/li><li>Week 3 — we ask what God wants to do through us. Our time. Our abilities. Our money.<\/li><\/ul><p>By Day 21, our hope is that you are going to have an answer to write down. Maybe not the whole answer. But enough to take the next step, whatever it is.<\/p>"}, {"id": "new-to-the-bible", "title": "New to the Bible?", "html": "<p>If you've never read the Bible, you're not behind. A lot of people at Axiom are reading it for the first time. Here's what you need to know.<\/p><p><strong>The Bible is a collection.<\/strong> It's 66 books, written over about 1,500 years by dozens of writers. Some books are history. Some are poems and songs. Some are letters. It's split into two parts. The Old Testament is everything before Jesus. The New Testament is the life of Jesus and the early church.<\/p><p><strong>How to read a reference.<\/strong> When you see something like <em>Luke 11:13<\/em>, that means the book of Luke, chapter 11, verse 13. <em>Psalm 139:23–24<\/em> means Psalm 139, verses 23 through 24. Every day in this guide has a link that takes you straight to the passage. You don't have to find it yourself.<\/p><p><strong>You'll meet a few people over and over.<\/strong> You don't need to know their stories. We'll tell you what you need each day. But here are the main ones:<\/p><ul><li><strong>Moses.<\/strong> Led God's people, the Israelites, out of slavery in Egypt.<\/li><li><strong>David.<\/strong> A shepherd who became king of Israel. He wrote many of the Psalms, which are songs and prayers.<\/li><li><strong>Daniel.<\/strong> A young man taken from his home to a foreign country, who stayed faithful to God there.<\/li><li><strong>Peter.<\/strong> One of Jesus's closest friends and followers.<\/li><li><strong>Paul.<\/strong> Used to arrest and kill Christians. Then he met Jesus and became one of the most important leaders in the early church. He wrote many of the letters in the New Testament.<\/li><\/ul><p><strong>You're allowed to have questions.<\/strong> If something you read doesn't make sense, write it down. Ask someone. Ask us. God isn't threatened by your questions.<\/p>"}, {"id": "the-daily-rhythm", "title": "The Daily Rhythm", "html": "<p>Every day follows the same rhythm:<\/p><p><strong>Scripture · Kneeling Prayer · Challenge · Fasting · Journal<\/strong><\/p><p>It takes about 15–20 minutes a day, total.<\/p><p><strong>1. Scripture.<\/strong> Each day has one short passage and a theme: Praise, Repent, Ask, or Yield (more on P.R.A.Y. next). Read it, answer the prompt, and pray through it.<\/p><p><strong>How to read the passage.<\/strong> Read it twice. The first time, just read it straight through. The second time, slow down and ask three questions:<\/p><ol><li><em>What does this say about God?<\/em><\/li><li><em>What does this say about me?<\/em><\/li><li><em>What do I do about it?<\/em><\/li><\/ol><p>That's it. If a word or a line stands out, stop there. Read it again. Ask God why that one. Some days you'll get through the whole passage. Some days you'll sit on one line for ten minutes. Both are fine.<\/p><p><strong>2. Kneeling Prayer.<\/strong> Three times a day. Morning, midday, evening. Check the box each time. (If you are unable do something else to change your posture, raise your hands, pray out loud, whatever makes it feel different than normal.)<\/p><p><strong>3. Challenge.<\/strong> Jesus said the wise person hears His words and puts them into practice (Matthew 7:24). So every day, do one small thing to live out what you're reading. There are lists in the back.<\/p><p><strong>4. Fasting.<\/strong> Whatever you decided to fast from. There's a box to check every day.<\/p><p><strong>5. Journal.<\/strong> Use the journal in the Axiom app. It saves every entry, so you can scroll back through all 21 days. (Rather write by hand? Grab a notebook.) Write down what stood out, what you sensed in prayer, and where you saw God move. One line is enough. These become markers of His faithfulness you can come back to long after the 21 days are over.<\/p><p>That's it. You don't need a theology degree. You don't need to be good at praying. Just attempt it every day.<\/p><p><strong>Lastly, we want to encourage you, don't do it alone.<\/strong> Invite a friend, your spouse, your group. Check in on each other. Ask how the fast is going. This is designed to be done together.<\/p>"}, {"id": "how-to-p-r-a-y", "title": "How to P.R.A.Y.", "html": "<p>If you've ever sat down to pray and had no idea what to say, welcome to the club. Here is a quick how to guide if you need it. Four parts and it spells pray. You can do all four in five minutes.<\/p><p>Before you start, just slow down. Take a breath. Then start as you would any other conversation. \"Hey God\", \"Good morning\", or just start talking. Praying doesn't have to be difficult.<\/p><p><strong>Praise.<\/strong> Start with who God is. Not what you need. Like this, repeat it if you need to. <em>\"God, you are good. You are patient. You were faithful last week when I didn't think you'd show up.\"<\/em> If that feels hard, start with one thing that's still good in your life. Then thank Him for it.<\/p><p><strong>Repent.<\/strong> Be honest. Tell God what you have done that you feel guilty for, or what you've been carrying, or what you've been hiding. You're not telling Him anything He doesn't already know. You're just agreeing with Him about it. Repent means to turn around and go back in his direction. If you start feeling shame, that is not God, that is the enemy trying to keep you from talking to God. Be bold. He will meet you with Grace and Truth.<\/p><p><strong>Ask.<\/strong> Because of Jesus, you can come to God with confidence (Hebrews 4:16). So bring your requests. Tell God what you need, he wants to hear it. However big or small, he wants to hear it. Then take some time to ask for the Holy Spirit. Every day. Jesus said God loves to give the Spirit to anyone who asks (Luke 11:13). So ask.<\/p><p><strong>Yield.<\/strong> This is the part most of us skip. Stop talking. Pray, <em>\"Your will, not mine.\"<\/em> Then sit there for a minute and listen. God may bring a verse to mind. Or a person. Or a nudge to do something. Or nothing at all. That's okay. You're learning to listen.<\/p><p>Here's the truth. Most of us are good at one side of prayer and terrible at the other. Some of you talk to God all day and have never once stopped long enough to hear anything back. And some of you have been listening and waiting for years, but you've never actually told God the truth about how you're doing. P.R.A.Y. makes you do both.<\/p><p><strong>When your mind wanders.<\/strong> It will. You'll be halfway through praying and suddenly you're thinking about the email you forgot to send. That's normal. Just come back. Some people keep a notepad nearby, write the distraction down so they don't forget it, and keep praying. Others pray out loud, which makes it harder to drift. Or pray while you walk. Day 1 will feel clunky. Day 15 won't.<\/p>"}, {"id": "why-we-kneel", "title": "Why We Kneel", "html": "<p>Three times a day, we're going to get on our knees. Morning, midday, and evening.<\/p><p>We know. That sounds a little intense. Here's why we do it.<\/p><p>Kneeling doesn't make God hear you better. He cares more about the posture of your heart than the position of your body. But your body has a way of teaching your heart. When you kneel, you're saying something with your whole self: <em>You're God. I'm not.<\/em><\/p><p>People in the Bible did this. Daniel prayed on his knees three times a day, even when it was illegal (Daniel 6:10). Jesus fell to the ground and prayed in the garden before the cross (Matthew 26:39). The Psalms say, \"Come, let us worship and bow down\" (Psalm 95:6).<\/p><p><strong>How to do it:<\/strong><\/p><ul><li><strong>Morning.<\/strong> Before your phone. Kneel by your bed. Pray the Question.<\/li><li><strong>Midday.<\/strong> Thirty seconds. Your office, your car, the bathroom at work. Nobody's checking. Pray the Question again.<\/li><li><strong>Evening.<\/strong> Before bed. Look back on the day. Where did you see God?<\/li><\/ul><p><strong>If your knees don't work,<\/strong> sit, bow your head, and open your hands. The posture of your heart is what matters.<\/p>"}, {"id": "what-is-fasting", "title": "What Is Fasting?", "html": "<p>Fasting is giving up food, or something else you lean on, for a set amount of time, so you can focus on God.<\/p><p>It's not a diet. It's not a hunger strike to get God to do what you want. And it doesn't earn you anything. God's love isn't something you can earn by skipping meals.<\/p><p>Here's what fasting actually is. It's you saying, <em>\"God, I want you more than I want this.\"<\/em> And then you find out how true that is.<\/p><p>Jesus didn't say <em>if<\/em> you fast. He said <em>when<\/em> you fast (Matthew 6:16–18). He assumed His followers would do this. And He did it Himself. Forty days in the wilderness (Matthew 4:1–4).<\/p><p>If you fast from food, it will make you hungry. That's the point. Every time your stomach growls, it's a reminder. <em>I'm hungry for God, too.<\/em> So every craving becomes a prompt to pray.<\/p><p>You're not white-knuckling this, it is not just about discipline. It is about making space for expectation that the Holy Spirit will do the work. Because sometimes we just need to get out of the way.<\/p><p><strong>People in the Bible fasted when it mattered.<\/strong> Nehemiah was a Jewish man working for a foreign king. When he heard his home city, Jerusalem, was in ruins, he fasted and prayed for days (Nehemiah 1:4). Esther was a Jewish woman who became queen of Persia. Before she risked her life to ask the king to save her people, she asked them to fast for three days (Esther 4:16). In the early church, the leaders were worshiping and fasting when the Holy Spirit told them to send two men, Barnabas and Paul, to take the message of Jesus to other countries (Acts 13:2–3).<\/p><p>Notice the pattern. They fasted when they needed to hear from God, or when something big was on the line. Fasting was how they got serious about listening.<\/p><p><strong>What to do with the time.<\/strong> If you skip lunch, you just got back 30 minutes. Don't fill it with your phone. Read the day's passage again. Pray for the person God put on your mind. Take a walk and pray the Question. The time you would have spent eating is the time you give to God.<\/p>"}, {"id": "pick-your-fast", "title": "Pick Your Fast", "html": "<p>There's no \"lite\" version here. Whatever you pick, if you're doing it to make room for God, it counts. Pick something that will hurt a bit.<\/p><p><strong>If this is your first time, start with Option 1.<\/strong> Seriously. You can always add more next year.<\/p><p><strong>Option 1: Skip a Meal.<\/strong> Pick one meal a day and give it up. Most people pick lunch. Use that time to pray instead. Drink water. This is where most first-timers should start.<\/p><p><strong>Option 2: The Daniel Fast.<\/strong> Eat only fruits, vegetables, whole grains, nuts, beans, and water. No meat, no sweets, no bread, no caffeine. It's based on Daniel 1 and Daniel 10. It's harder than it sounds. Plan your meals ahead.<\/p><p><strong>Option 3: Sunup to Sundown.<\/strong> No food from the time you wake up until dinner. Water only. Eat a normal, healthy dinner. This one is for people who have fasted before.<\/p><p><strong>Option 4: Something That Isn't Food.<\/strong> If fasting from food isn't safe or wise for you, fast from something else you lean on. Social media. Streaming. Video games. Caffeine. Your phone after 8 p.m. Spending money on anything that isn't a need. This isn't a cop-out. It's a real fast.<\/p><p><strong>You can also combine them.<\/strong> Skip lunch <em>and<\/em> delete Instagram for 21 days. Just don't overcommit on Day 1 and quit on Day 3.<\/p><h3>What are you fasting from?<\/h3><p>Be specific. Which meal, which app, which thing? Starting when?<\/p><label class=\"field\" for=\"fast-from\"><span>I'm fasting from<\/span><input id=\"fast-from\" data-store=\"fast-from\" data-btn=\"Write what you're fasting from\" type=\"text\" autocomplete=\"off\" placeholder=\"Lunch every day / Instagram / streaming\"><\/label><p class=\"saved\">This shows up on every day page as a reminder.<\/p>"}, {"id": "before-you-begin", "title": "Before You Start", "html": "<p><strong>Get the app.<\/strong> Go to axiomchurch.com/save and save the Axiom app to your home screen. Every day for 21 days, tap the button at the bottom of the screen and it walks you through that day.<\/p><p>Most people who quit a fast quit before it ever starts. They never decided anything. So decide now.<\/p><p><strong>1. Write down your why.<\/strong> Why are you doing this? What do you want God to do? Be specific. <em>\"I want to hear from God about my marriage.\"<\/em> <em>\"I want to stop numbing out on my phone.\"<\/em> <em>\"I want to know if God is even real.\"<\/em> All good answers.<\/p><label class=\"field\" for=\"commit-why\"><span>My why<\/span><textarea id=\"commit-why\" data-store=\"commit-why\" data-btn=\"Write your why\" placeholder=\"I want God to…\"><\/textarea><\/label><p class=\"private\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 11V7a4 4 0 0 1 8 0v4\"/><\/svg><span>Private. Only you can see what you write here. No one at the church can read it.<\/span><\/p><p><strong>2. Pick your fast.<\/strong> Which option? Which meal, or which thing? Starting when and ending when? Write it down.<\/p><p><a href=\"#guide-pick-your-fast\">Pick your fast<\/a><\/p><p><strong>3. Make your allowed list.<\/strong> If you're fasting food, write down exactly what you <em>can<\/em> eat. If it's on the list, eat it. If it's not, don't. Decide now so you're not making game-time decisions at 3 p.m. in the breakroom.<\/p><p><strong>4. Prep your space.<\/strong> Clean out the pantry if you need to. Delete the social media app. Put the remote in a drawer. Set three alarms on your phone for morning, midday, and evening.<\/p><p><strong>5. Tell one person.<\/strong> Not so they'll be impressed. So they'll ask how it's going.  A lone wolf is a dead one. Don't do this alone.<\/p><label class=\"field\" for=\"commit-person\"><span>The person I told<\/span><input id=\"commit-person\" data-store=\"commit-person\" data-btn=\"Add the person you told\" type=\"text\" autocomplete=\"off\" placeholder=\"Their name\"><\/label><p><strong>My commitment:<\/strong><\/p><p>For the next 21 days, I will pray these two Questions every day.<\/p><p>God, What do you want to do in me?<\/p><p>God, What do you want to do through me<\/p><p>I will kneel three times a day. (If I can)<\/p><label class=\"field\" for=\"commit-sign\"><span>Sign here<\/span><input id=\"commit-sign\" data-store=\"commit-sign\" data-btn=\"Sign your name\" type=\"text\" autocomplete=\"off\" placeholder=\"Type your name\"><\/label>"}, {"id": "the-holy-spirit", "title": "The Holy Spirit", "html": "<p>This is the most important page in this guide. So don't skip it.<\/p><p><strong>You are not doing this alone.<\/strong><\/p><p>If you follow Jesus, the Holy Spirit lives in you. Not as a feeling. As a person. God Himself, with you, in you, every second of every day. Jesus said it was actually better for Him to leave so the Spirit could come (John 16:7). Think about that. Better than having Jesus standing next to you.<\/p><p>If you follow Jesus then you received the Spirit when you put your faith in Jesus. But the Bible tells us to keep being filled by the Holy Spirit (Ephesians 5:18). It's not a one-time thing. His power is constantly available to you and over the next 21 days you are going to see it at work in your life.<\/p><p><strong>The Holy Spirit is the power to do what you can't do on your own.<\/strong> To keep going when you want to quit. To forgive when you don't want to. To stop the thing you've tried to stop a hundred times. To pray when you don't know the words (Romans 8:26). Not by willpower. By His power.<\/p><h3>How to Ask<\/h3><p>Jesus put it about as simply as it can be put. If an imperfect parent, knew how to give good gifts to their kids, how much more will your Father in heaven give the Holy Spirit to those who ask Him? (Luke 11:13)<\/p><p>So ask. Here's a prayer if you need one:<\/p><blockquote><p><em>Holy Spirit, I need you. I can't do this on my own, and I'm tired of trying. Fill me. Again. Give me power to follow Jesus. Give me a hunger for God I don't have yet. Speak, and help me to hear you. I am available, I am listening, I am ready for what comes next. God if there is more, than I want it.<\/em> <em>Amen.<\/em><\/p><\/blockquote><p>Pray that every day for 21 days. Mean it a little more each day.<\/p><h3>What It Might Feel Like<\/h3><p>Sometimes the Spirit shows up loud. Tears you didn't see coming. A peace that makes no sense. Boldness you didn't have yesterday. A miraculous moment.<\/p><p>But more times than not, He shows up quiet. Elijah waited on the mountain and God wasn't in the wind or the earthquake or the fire. He was in a whisper (1 Kings 19:11–13). And you only whisper to someone when you're close.<\/p><p>So if you ask and you don't feel anything, don't panic. The Spirit isn't a feeling. He's a promise. Keep asking. Keep listening. Watch what changes over three weeks.<\/p>"}, {"id": "how-do-i-know-it-s-god", "title": "How Do I Know It's God?", "html": "<p>When you start asking God to speak, you're going to start noticing things. A thought out of nowhere. A person who won't leave your mind. A verse that jumps off the page. A nudge to go do something.<\/p><p>So how do you know if that's the Holy Spirit, or it is just you? Or last night's tacos?<\/p><p>Here's our seatbelt. Ask four questions.<\/p><p><strong>1. Does it line up with Scripture?<\/strong> The Spirit of God will never contradict the Word of God. Ever. If it does, it's not Him.<\/p><p><strong>2. Does it point to Jesus?<\/strong> The Spirit's job is to make much of Jesus (John 16:14). Not you. Not your agenda.<\/p><p><strong>3. Does it sound like Him?<\/strong> The fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, and self-control (Galatians 5:22–23). God convicts. He doesn't condemn. Shame that crushes you is not His voice.<\/p><p><strong>4. What do people you trust say?<\/strong> Run it by a pastor, a group leader, or a friend who follows Jesus. \"Test everything,\" Paul says (1 Thessalonians 5:21). Humility is part of hearing God.<\/p><p>If it passes all four, take the next step. Usually it's small. Text the person. Apologize. Give the thing. Go.<\/p><p><strong>What if I don't hear anything?<\/strong> Then you're in good company. A lot of people who love Jesus go long stretches where God feels quiet. Here's what we'd tell you.<\/p><p>Keep reading. God speaks most clearly through the Bible. If you're reading it every day, you're hearing from Him, even when it doesn't feel like it.<\/p><p>Keep showing up. Sometimes you won't notice what God said until you look back. That's one of the biggest reasons we journal.<\/p><p>And watch what changes. Sometimes God answers in the moment. More often, you notice on Day 18 that you're more patient than you were on Day 1. That's Him too.<\/p>"}, {"id": "a-word-about-the-enemy", "title": "A Word About the Enemy", "html": "<p>As followers of Jesus, we believe the enemy is real. He's doing everything he can to pull you away from God (1 Peter 5:8). And when you start pressing into God, don't be surprised if things get harder. That's real.<\/p><p>But the devil's not behind every bush. Maybe every other one.<\/p><p>So if you've got a pounding headache on Day 2, it might be probably your lack of coffee. If you're snapping at your kids on Day 4, you might just need a snack. If you feel dizzy, that could be your body, not a demon.<\/p><p>Check your body. Check your choices. Then check if the enemy's in it. And if he is, remember: greater is He who is in you than he who is in the world (1 John 4:4). You don't fight him with willpower. You fight him with prayer, with Scripture, and with the people around you.<\/p>"}, {"id": "fasting-safely", "title": "Fasting Safely", "html": "<p>Please read this. We mean it.<\/p><p><strong>Talk to your doctor before fasting from food if you:<\/strong><\/p><ul><li>Are pregnant or nursing<\/li><li>Have diabetes, low blood sugar, or a heart condition<\/li><li>Take medication that needs to be taken with food<\/li><li>Have any ongoing medical condition<\/li><\/ul><p><strong>If you have a history of disordered eating,<\/strong> please don't fast from food. Choose Option 4. That's not second best. It's wisdom. And if this season stirs anything up, talk to someone you trust.<\/p><p><strong>Students under 18:<\/strong> talk to your parents first. Fasting from screens or sweets is a great place to start.<\/p><p><strong>Practical tips:<\/strong><\/p><ul><li><strong>Cut back on caffeine a few days before.<\/strong> Day 2 headaches are real.<\/li><li><strong>Drink a lot of water.<\/strong> More than you think<\/li><li><strong>Expect to be hungry, tired, or cranky the first few days.<\/strong> It usually gets easier.<\/li><li><strong>Don't feast to end your fast.<\/strong> Ease back into regular food.<\/li><li><strong>If you feel faint, sick, or something seems off, stop and eat.<\/strong> God is not mad at you. Your body is a gift. Take care of it.<\/li><li>Then Drink more water<\/li><\/ul>"}, {"id": "when-you-blow-it", "title": "When You Blow It", "html": "<p>You're going to blow it. Probably on Day 4. Somebody's going to bring donuts to work. Or you'll open Instagram without thinking. Or you'll be halfway through an episode before you remember.<\/p><p>You are not a failure. Sometimes we just forget, just get back up and pick up where you left.<\/p><p>Fasting doesn't earn you anything. So breaking it doesn't cost you anything with God. He's not keeping score. He's just glad you're here.<\/p><p>So don't quit. Don't decide the whole thing is ruined. Just say, <em>\"God, I'm still here,\"<\/em> and pick right back up. The 21 days aren't about being perfect. They're about pursuing God. And you can't pursue Him by giving up.<\/p>"}, {"id": "key-dates", "title": "Key Dates", "html": "<ul><li><strong>Saturday, Nov 7 · Day 7<\/strong> — Food Packing with Mission of Hope. 9:00 a.m.–12:30 p.m., Northpoint Center, 10860 E Crystal Falls Pkwy, Building 10.<\/li><li><strong>Sunday, Nov 15 · Day 15<\/strong> — Baptism Sunday.<\/li><li><strong>Sunday, Nov 22<\/strong> — The fast ends.<\/li><li><strong>December<\/strong> 16— Pledge cards come back. (See the last page.)<\/li><\/ul>"}, {"id": "with-your-kids", "title": "With Your Kids", "html": "<p>Some days have a short <strong>With Your Kids<\/strong> idea. Do it at dinner, in the car, or at bedtime. It takes two minutes.<\/p><p>Kids should not fast from food. But they can fast from sweets, screens, or a favorite show. And they can kneel and pray with you. Let them see you do it. More is caught than taught.<\/p>"}], "weeks": [{"num": 1, "name": "In Me", "tag": "<em>God, what do you want to do in me?<\/em>", "days": [{"num": 1, "theme": "Praise", "body": ["Right before this, Moses asked God to show up... In person. And this is what God does. He tells Moses who He is. In His own words.", "Here's some background. God had just rescued His people, the Israelites, from slavery in Egypt. He made a promise to them, and they promised to follow Him. But while Moses was up on the mountain with God, the people made a statue of a golden calf and started worshiping it instead (Exodus 32). They broke their promise almost right away.", "And when God shows up in today's passage, the first words out of His mouth are <em>compassion<\/em>, <em>mercy<\/em>, <em>slow to anger<\/em>, <em>unfailing love<\/em>. That's how He describes Himself to people who just failed Him.", "So if you're starting these 21 days feeling like you've already blown it with God, start here. This is who He is.", "That's where we start. Not with what we want from God. With who God says He is. Read it again, slowly. What words stand out? Which one do you need to believe about Him today?", "Then write the Question at the top of your journal. <em>God, what do you want to do in me? God, what do you want to do through me?<\/em> You're going to come back to it every day for 21 days."], "prompt": "<strong>Write your own words of praise in your journal or below.<\/strong>", "challenge": "Pick one from the Challenges in the back. Ask Jesus which one, then make a plan to do it. Got an idea that's not on the list? Great. Go for it.", "journal": "Take a few minutes to look back on your day. Where did you see God move in Scripture, prayer, your challenge, or your fast? What surprised you? What was hard? Write down what He's teaching you.", "kids": "Ask, \"What's one word that describes God?\" Then thank Him for it together.", "question": null, "date": "Sunday, November 1", "event": "", "ref": "Exodus 34:4–6", "url": "https://www.biblegateway.com/passage/?search=Exodus+34:4-6&version=NLT"}, {"num": 2, "theme": "Repent", "body": ["Have you ever actually asked God to search your soul? Sounds scary. But not just the version of you that shows up on Sundays. The real you.", "That's scary. We get it. But here's the thing. He already knows. Asking Him to search you isn't giving Him information. It's giving Him permission.", "This was written by David, a king of Israel. Read the rest of Psalm 139 if you have time. David starts by saying God knows when he sits down and when he stands up. God knows what he's going to say before he says it. God made him before he was born. <em>Then<\/em> David asks God to search him. He can ask because he already knows God sees all of him and still loves him.", "<strong>Try this:<\/strong> Set a timer for three minutes. Pray, <em>\"Search me, God.\"<\/em> Then sit quietly. Write down whatever comes to mind, even if it seems small.", "So take a minute right now. Get quiet. Ask Him to show you anything that's offensive to Him. A thought pattern. A habit. A secret. Don't argue with what comes up. Just agree with Him about it."], "prompt": "<strong>Write down what God is asking you to turn from, and lay it before Him. (Our church won't see any of this)<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Monday, November 2", "event": "", "ref": "Psalm 139:23–24", "url": "https://www.biblegateway.com/passage/?search=Psalm+139:23-24&version=NLT"}, {"num": 3, "theme": "Ask", "body": ["No good parent hands their kid a snake when they ask for a fish. That's Jesus's point. If imperfect parents know how to give good gifts, how much more will God give the Holy Spirit to anyone who asks?", "Look at what comes right before this. Jesus's followers asked Him, <em>\"Teach us to pray\"<\/em> (Luke 11:1). He gives them the Lord's Prayer, the prayer that starts \"Our Father in heaven.\" Then He tells a story about a man who keeps knocking on his friend's door at midnight until the friend finally gets up. Then He says, <em>keep on asking, keep on seeking, keep on knocking<\/em> (Luke 11:9).", "So when Jesus says God gives the Spirit to those who ask, He doesn't mean asking once. He means people who keep coming back. That's what these 21 days are.", "So when's the last time you asked? Not for stuff. Not for a parking spot. For Him. For the Spirit to fill you. Maybe for the first time, maybe for the 1000th time.", "Do it now. Use the prayer from the Holy Spirit page if you need words. Then ask again tomorrow. And the next day."], "prompt": "<strong>Write down what you asked for, and anything you sensed.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Tuesday, November 3", "event": "", "ref": "Luke 11:11–13", "url": "https://www.biblegateway.com/passage/?search=Luke+11:11-13&version=NLT"}, {"num": 4, "theme": "Yield", "body": ["Some translations say we \"keep in step with the Spirit.\" It's not a one-time decision. It's a thousand little steps.", "This is from a letter Paul wrote to churches in a region called Galatia. Read the verses right before today's passage (Galatians 5:19–23). Paul gives two lists side by side. One is what comes out of us when we run our own lives. The other is what the Holy Spirit grows in us when we let Him lead.", "Notice he calls it the <em>fruit<\/em> of the Spirit. Fruit grows. You don't make patience happen by trying really hard. Patience is a result of God working in your life. Don't be surprised if he puts you in positions to be patient before he produces that in you.", "<strong>Try this:<\/strong> Pick one thing from verses 22–23 that you're short on right now. Love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, or self-control. Ask the Spirit for it by name today.", "So picture the places you take steps in a normal day. Your house. Your job. Your car. Your phone. Your group chat. Is there one place where you're walking your own way instead of His?", "Here's the truth. Your strongest desire is not always your deepest desire. Whatever you gave up is going to remind you of that a lot this week. You want the burger. Or the scroll. Or the show. But you want God more. Every time you feel that pull, let it point you back to Him."], "prompt": "<strong>Write down where He's asking you to follow His lead.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you? (write at least one sentence everyday)", "kids": "", "question": null, "date": "Wednesday, November 4", "event": "", "ref": "Galatians 5:24–25", "url": "https://www.biblegateway.com/passage/?search=Galatians+5:24-25&version=NLT"}, {"num": 5, "theme": "Praise", "body": ["This whole psalm is David looking up at the night sky and being blown away. By how big God is. And how small we are. And then by the fact that God still pays attention to us anyway.", "Verse 4 is the center of the whole psalm. <em>What are mere mortals that you should think about them?<\/em> David isn't sad about being small. He's amazed that God cares. Both things are true. You are small, and you are seen.", "And here's the best part. Later in the Bible, the book of Hebrews connects this psalm to Jesus (Hebrews 2:6–9). The God who made the stars became a human being. He became small on purpose, to get close to us, so that sometime we could be close to him.", "Go outside tonight if you can. Look up. Then read it again.", "What part of creation leaves you in awe? Mountains? Thunderstorms? Your kid's face? Note what stands out in the psalm, and praise Him for it."], "prompt": "<strong>Write your own words of praise in your journal. \"God you are...\"<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "Go outside after dark. Each person names one thing God made that they love.", "question": null, "date": "Thursday, November 5", "event": "", "ref": "Psalm 8", "url": "https://www.biblegateway.com/passage/?search=Psalm+8&version=NLT"}, {"num": 6, "theme": "Repent", "body": ["All of us have something lurking. And Paul doesn't say manage it. He says put it to death. Kill what is killing you.", "This is from a letter Paul wrote to a church in a city called Colossae. Look at the verses right before this (Colossians 3:1–3). Paul tells them that because they belong to Jesus, they've been given a new life. Their real life is with Him now. <em>Then<\/em> he tells them to put to death what belongs to the old way of living.", "The order matters. You don't fight sin so God will accept you. You fight it because He already has. You're not trying to earn a new life. You're learning to live the one Jesus has already given you.", "A lot of us try to beat something in secret. Filters. Discipline. Promises. Everything short of telling someone. But you can't hide and heal at the same time. Things usually start to change the moment you tell someone.", "So take a minute. Is there something in this verse that's taken root in you? Lust. Greed. Envy. Speculation. Something you love more than God? Money, Work, Drink. Repent of whatever comes to mind. And then tell one trusted friend. \"God I am sorry for... Because I know... Instead I want to... God, help me...\""], "prompt": "<strong>Write down your next step.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Friday, November 6", "event": "", "ref": "Colossians 3:5", "url": "https://www.biblegateway.com/passage/?search=Colossians+3:5&version=NLT"}, {"num": 7, "theme": "Ask", "body": ["God's people were fasting. And complaining that God wasn't noticing. So God told them what kind of fast He actually wants. One that sets people free. Feeds the hungry. Shows up for people.", "Isaiah was a prophet, a person God used to deliver messages to His people. Read verse 3. The people were saying, <em>\"We have fasted before you! Why aren't you impressed?\"<\/em> And God tells them why. They were fasting while they treated their workers badly and fought with each other. Their fasting had nothing to do with how they treated people.", "Now look at verse 9. When they live the way God wants, He says, <em>then when you call, the Lord will answer.<\/em> Fasting and loving people are two separate things but God wants both.", "You've been hungry for a week now or hungering for something for a week now. Some of you, for the first time in your life, on purpose. Today, we get to feed people who are hungry without a choice.", "Ask God to make your fast about more than you. Ask Him to show you who's hungry around you. And then come pack some meals with us."], "prompt": "<strong>Write down who God brings to mind.<\/strong>", "challenge": "Join us for Food Packing today with Mission of Hope. 9:00 a.m.–12:30 p.m. at Northpoint Center (Leander Union Buildings), 10860 E Crystal Falls Pkwy, Building 10. Ages 6 and up. Childcare available. Register in the Axiom app.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "Bring them to Food Packing. Talk on the way home about what it's like to be hungry.", "question": null, "date": "Saturday, November 7", "event": "Food Packing Day", "ref": "Isaiah 58:6–9", "url": "https://www.biblegateway.com/passage/?search=Isaiah+58:6-9&version=NLT"}], "intro": "This week is about the inside. Before God does anything <em>through<\/em> you, He wants to do something <em>in<\/em> you. So we start with who God is, then we get honest about who we are. Expect this week to be the hardest physically. Your body is adjusting to the fast. Drink water. Go easy on yourself. Keep showing up."}, {"num": 2, "name": "Fill Me", "tag": "<em>Holy Spirit, I need you. Again.<\/em>", "days": [{"num": 8, "theme": "Yield", "body": ["These verses describe how Jesus followers are called to live. Because of what Jesus did for us, we don't live for ourselves anymore. We're new. And now we carry a message to everyone else.", "Read it again. Notice how it connects God, us, and other people. There's a kind of broken-hearted boldness in it. Like someone who knows what they've been saved from, and can't keep quiet about it. Reckless surrender and radical abandon.", "What phrases stand out? Where is God asking you to give Him more of your life?", "This is from a letter Paul wrote to a church in the city of Corinth. Three phrases to slow down on:", "<ul><li><strong>\"Christ's love controls us\"<\/strong> (v. 14). Not guilt. Not pressure. Love.<\/li><li><strong>\"Anyone who belongs to Christ has become a new person\"<\/strong> (v. 17). Not a better version of the old you. New.<\/li><li><strong>\"We are Christ's ambassadors\"<\/strong> (v. 20). An ambassador is someone who lives in one country and officially speaks for another. You live here. You speak for Jesus.<\/li><\/ul>", "<strong>Try this:<\/strong> Think about where you'll be tomorrow. Work, school, the gym, the store. Pray, <em>\"God, I'm there for you. Help me act like it.\"<\/em>"], "prompt": "<strong>Write down how He's asking you to yield.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Sunday, November 8", "event": "", "ref": "2 Corinthians 5:14–20", "url": "https://www.biblegateway.com/passage/?search=2+Corinthians+5:14-20&version=NLT"}, {"num": 9, "theme": "Praise", "body": ["Not long before this, these guys were hiding behind locked doors because they were scared (John 20:19). And then the Spirit came upon them. Wind. Fire. Power. And the same people who were hiding are suddenly out in the street preaching to thousands.", "Some background. After Jesus rose from the dead, He told His followers to wait in Jerusalem until the Holy Spirit came. This passage is that day. It happened during Pentecost, a Jewish holiday. Jerusalem was packed with people from all over the world. That's why everyone heard the message in their own language (Acts 2:5–11).", "And look who's preaching. Peter. A few weeks earlier, when Jesus was arrested, Peter was so scared that he said he didn't even know Jesus. Three times. Now he stands up in front of the same city and tells them Jesus is alive. About 3,000 people believed in Jesus that day (Acts 2:41).", "Peter tells the crowd that God promised He would pour out His Spirit on <em>all<\/em> people. Sons and daughters. Young and old. Not just leaders. Everyone (Acts 2:17–18). That includes you.", "That's what the Holy Spirit does. He takes scared people and makes them bold. He flips the world, your world upside down. Without him, there is more that you are missing out on.", "Praise God that the same Spirit is available to you. Not a smaller version. The same one. Thank Him that He didn't leave us on our own."], "prompt": "<strong>Write your own words of praise in your journal.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "Read the story together. Ask, \"What would you do if you weren't scared?\"", "question": null, "date": "Monday, November 9", "event": "", "ref": "Acts 2:1–4", "url": "https://www.biblegateway.com/passage/?search=Acts+2:1-4&version=NLT"}, {"num": 10, "theme": "Repent", "body": ["Bitterness is sneaky. It doesn't feel like sin. It feels like justice. But left alone, it leaks out everywhere. Into how you talk to your spouse. How you drive. How you scroll. And if you are bold, how you comment from behind a screen.", "Pause and ask God to show you any bitterness in your heart. Is there a name that tightens your chest? Repent of anything keeping you from being kind and forgiving. And if you need to, reach out to someone you've wronged.", "Forgiving someone doesn't mean what they did was okay. It doesn't mean you have to trust them again right away. It doesn't always mean you have to be close to them. It means you stop trying to make them pay. You hand it to God and let Him deal with it. It is saying I am no longer going to let what they did, control how I live.", "Look at the last line of verse 32. <em>Forgive one another, just as God through Christ has forgiven you.<\/em> That's the standard. Not how much they deserve it. How much God has forgiven you. But this is hard.", "<strong>Try this:<\/strong> If a name came to mind, pray this out loud: <em>\"God, I forgive ___ for ___. I'm not going to make them pay. I'm giving it to you.\"<\/em> You may have to pray it more than once. That's normal.", "Paul says it right before this: don't grieve the Holy Spirit (Ephesians 4:30). Bitterness does. You can't hold onto it and be full of Him at the same time. So let it go."], "prompt": "<strong>Write down any next steps.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Tuesday, November 10", "event": "", "ref": "Ephesians 4:30–32", "url": "https://www.biblegateway.com/passage/?search=Ephesians+4:30-32&version=NLT"}, {"num": 11, "theme": "Ask", "body": ["Imagine if this passage was actually true of your home. Your friendships. Your church. That's the vision God has for His family. And you are a part of it for a reason.", "Read the start of verse 12. <em>Since God chose you to be the holy people He loves.<\/em> Paul tells them who they are before he tells them what to do. You're chosen. You're loved. <em>So<\/em> live with mercy, kindness, humility, gentleness and patience.", "The night before He died, Jesus prayed for everyone who would ever believe in Him. That includes us. He prayed that we would be united, so the world would believe in Him (John 17:20–21). How we treat each other is part of how people find Jesus.", "Ask God to grow each of these in you. Not by trying harder. But by and through His Spirit. Then ask Him to grow them in Axiom. Pray for unity in our church, and in His church all over the world."], "prompt": "<strong>As God brings things to mind, write them down.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Wednesday, November 11", "event": "", "ref": "Colossians 3:12–14", "url": "https://www.biblegateway.com/passage/?search=Colossians+3:12-14&version=NLT"}, {"num": 12, "theme": "Yield", "body": ["These two verses have three things for us to do, and one promise from God. Find them.", "Proverbs is a book of short, practical wisdom. Most of it is credited to Solomon, David's son, who was known as one of the wisest kings who ever lived.", "Here are the three things, if you want to check yourself: <em>trust<\/em> the Lord with all your heart, <em>don't depend<\/em> on your own understanding, and <em>seek His will<\/em> in all you do. And the promise: He will show you which path to take.", "Notice the promise isn't that you'll get the whole plan. It's that He'll show you the path. Usually that means the next step, not every step. That's what following God usually looks like. You find out the next step, and you take it.", "Then look at your own life. Where are you trusting Him? Where are you leaning on your own understanding?", "Here's a simple prayer for today. <em>God, if there's something you're trying to teach me, let me be a fast learner.<\/em> Pray that today. Then sit quiet for a minute and listen. Ask the Spirit to show you the path. Again, God what do you want to do in me? God what do you want to do through me?"], "prompt": "<strong>Write down what He's asking you to yield.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Thursday, November 12", "event": "", "ref": "Proverbs 3:5–6", "url": "https://www.biblegateway.com/passage/?search=Proverbs+3:5-6&version=NLT"}, {"num": 13, "theme": "Praise", "body": ["Daniel's life was on the line. The king wanted a dream explained, and if Daniel couldn't do it, he was dead. So he prayed. And God answered. And the very first thing Daniel does is praise. He thanked God for who he was and what he did.", "Don't miss what Daniel did before he prayed. He went home and told his three friends, and asked them to pray with him (Daniel 2:17–18). He didn't carry it alone. And when God answered, Daniel said <em>\"you have told <strong>us<\/strong> what the king demanded\"<\/em> (v. 23). He shared the answer with the people who prayed with him.", "Who are you praying with during these 21 days? If no one, text someone today and tell them one thing you're asking God for.", "God is in control throughout everything. Good and bad Kings, easy and hard seasons, all of it. Where in your life do you need to be reminded of that?", "Have you seen any answers to prayer in the last two weeks? Even small ones? Write them down. Then praise Him for them. \"God thank you for...\""], "prompt": "<strong>Write your own words of praise in your journal.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Friday, November 13", "event": "", "ref": "Daniel 2:19–23", "url": "https://www.biblegateway.com/passage/?search=Daniel+2:19-23&version=NLT"}, {"num": 14, "theme": "Repent", "body": ["David wrote this after he got caught. Adultery. A cover-up. A man dead. And all through the psalm you see this back-and-forth between how broken David's heart is, and how good God is.", "You can read the whole story in 2 Samuel 11–12. David slept with another man's wife, Bathsheba. When she got pregnant, he tried to cover it up, and then had her husband killed. He hid it for months. Then God sent a prophet named Nathan to confront him. David could have gotten defensive. He was the king. Instead he said, <em>\"I have sinned against the Lord\"<\/em> (2 Samuel 12:13).", "Look at what David asks for in this psalm. Not just <em>forgive me<\/em>. <em>Create in me a clean heart<\/em> (v. 10). <em>Restore to me the joy of your salvation<\/em> (v. 12). He wants more than the guilt gone. He wants his joy back. God offers both.", "Here's what you need to know. If there's something you've done that you can't stop thinking about, that little part of you that wants to come clean? That's not shame trying to hold you down. That's the Holy Spirit trying to wake you up.", "So bring it to Him. Let Him wash you clean of the guilt that you feel. You can live free of this."], "prompt": "<strong>Write any thoughts in your journal.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Saturday, November 14", "event": "", "ref": "Psalm 51", "url": "https://www.biblegateway.com/passage/?search=Psalm+51&version=NLT"}], "intro": "This week we ask for the Holy Spirit. Every day. If you're not sure who the Holy Spirit is, go back and read the Holy Spirit page near the front. You'll read about what He did in the first Christians, what He does in people now, and what gets in His way. Pray the Holy Spirit prayer every morning this week. If you've never asked to be filled, this is your week. If you've asked a thousand times, ask again (Ephesians 5:18)."}, {"num": 3, "name": "Through Me", "tag": "<em>God, what do you want to do through me?<\/em>", "days": [{"num": 15, "theme": "Ask", "body": ["Jesus's last words before He left. You will receive <strong>power<\/strong> when the Holy Spirit comes on you. And you'll be my witnesses. Here. Then everywhere. Power for the purpose of witness (telling people about Jesus).", "Notice the order. Power first. Then go. God never sends you without filling you first.", "Look at the list of places in this verse. Jerusalem was the city where they were standing. Judea was the region around it. Samaria was where the Samaritans lived. Jews and Samaritans had hated each other for hundreds of years. And Jesus says, go there too. Then everywhere else.", "So think about your own list. Your home. Your city. The people you'd naturally avoid. And beyond. A witness is just someone who tells what they've seen. You don't need all the answers. You just need to tell what Jesus has done for you.", "Today is Baptism Sunday. If you've been following Jesus and have never been baptized, today might be your day. To publicly say, Count me in. I am bending my knee to Jesus.", "And for all of us, ask God for power. To be His witness at your job. In your neighborhood. In your family."], "prompt": "<strong>Write down where God is sending you.<\/strong>", "challenge": "Come celebrate at Baptism Sunday. Or get baptized yourself. Register in the Axiom app and our team will follow up with you.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "Talk about what baptism means. Going under is like the old you dying. Coming up is new life.", "question": null, "date": "Sunday, November 15", "event": "Baptism Sunday", "ref": "Acts 1:8", "url": "https://www.biblegateway.com/passage/?search=Acts+1:8&version=NLT"}, {"num": 16, "theme": "Yield", "body": ["Jesus doesn't sell this as easy. Take up your cross. Lose your life to find it. Following Jesus costs something. Come and Die.", "Right before this, Jesus asks His followers, <em>\"Who do you say I am?\"<\/em> Peter answers, <em>\"You are the Messiah sent from God\"<\/em> (Luke 9:20). The Messiah is the rescuer God had been promising for hundreds of years. As soon as they understand who Jesus is, He tells them what following Him will cost.", "In Jesus's day, the cross wasn't jewelry. It was how the Romans executed people. So \"take up your cross\" meant being willing to give up everything. And notice one word: <em>daily<\/em> (v. 23). It's not one big moment. It's a decision you make every morning. That's part of why we pray first thing every day.", "If you're His, what do you need to pick up? What do you need to let go of?", "Be honest. Are you really following Jesus? Or following the world, and calling it Jesus? Following Him isn't just working hard enough. It's waving the white flag of surrender."], "prompt": "<strong>Write down what He's asking you to give up.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Monday, November 16", "event": "", "ref": "Luke 9:21–27", "url": "https://www.biblegateway.com/passage/?search=Luke+9:21-27&version=NLT"}, {"num": 17, "theme": "Praise", "body": ["The people just gave a huge offering to build God's temple. And David's response isn't, \"Look what we did.\" It's, \"Everything we have came from you. We're just giving you back what's already yours.\"", "Some background. King David wanted to build a temple for God, a central place for the people to worship. God told him his son Solomon would build it instead (1 Chronicles 28:2–6). So David spent the end of his life gathering everything Solomon would need. He gave from his own money (29:3). Then the leaders gave. Then the people gave.", "Read verse 9. The people were <em>happy<\/em> because they gave freely and with their whole heart. And verse 17: God looks at our hearts and is glad when He finds integrity there. God isn't after an amount. He's after your heart.", "That's stewardship. We're not owners. We're managers.", "So here's the question. When you think about your money, your stuff, your paycheck, what are you thankful for? What are you holding on to as if it is yours but it is actually his?Note what David asks God for in this prayer. Then let God search your heart.", "This is where the Question gets personal. <em>God, what do you want to do through my (your) money?<\/em>"], "prompt": "<strong>Write it down what you hear.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Tuesday, November 17", "event": "", "ref": "1 Chronicles 29:10–20", "url": "https://www.biblegateway.com/passage/?search=1+Chronicles+29:10-20&version=NLT"}, {"num": 18, "theme": "Repent", "body": ["The church in Laodicea thought they were fine. Rich. Comfortable. Didn't need anything. And Jesus says, you're lukewarm, you are not hot, you are not cold. And you have no idea how poor you actually are.", "Revelation is the last book of the Bible. It starts with short letters from Jesus to seven churches in what's now Turkey. This one is to the church in a city called Laodicea.", "Laodicea was a wealthy city. Historians say it was known for banking, a medical school that made an eye ointment, and black wool. Look at what Jesus offers them in verse 18: gold, white clothes, and ointment for their eyes. He's talking right to the things they were proud of. What they thought they had, they didn't actually have.", "And read verse 19. <em>I correct and discipline everyone I love.<\/em> This isn't Jesus giving up on them. It's Jesus caring enough to tell them the truth.", "Comfort is dangerous. It makes us feel like we don't need God.", "Look for the phrases that describe this church. Then ask God if any of them describe you. Write a prayer of repentance. And ask Him to stir up a real fire in you again.", "And don't miss verse 20. Jesus is still knocking."], "prompt": "<strong>Write your prayer of repentance in your journal.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Wednesday, November 18", "event": "", "ref": "Revelation 3:14–22", "url": "https://www.biblegateway.com/passage/?search=Revelation+3:14-22&version=NLT"}, {"num": 19, "theme": "Ask", "body": ["People who don't know Jesus aren't just uninterested. Paul says they're blinded. But those of us who've seen the light get to help others see it too.", "Read verse 5. <em>We don't go around preaching about ourselves. We preach that Jesus Christ is Lord.<\/em> Sharing your faith isn't about having a great story or winning an argument. It's pointing people to Jesus.", "And verse 6. At the very beginning of the Bible, God says, <em>\"Let there be light\"<\/em> (Genesis 1:3). Paul says that same God is the one who makes the light come on in a person's heart. You can't make anyone believe. That's God's job. Your job is to pray, show up, and tell the truth. So pray like it depends on God, because it does.", "\"A while back our staff prayed, <em>\"Holy Spirit, give me one person I can talk to about you.\"<\/em> That week, a dad walked into the splash pad covered in tattoos, wearing a shirt that said \"Satan is King.\" And I felt the Spirit say, <em>There he is.<\/em> And I said, <em>Ehhh, no.<\/em> But we talked anyway. Weeks later, he texted me that he wanted to learn about Jesus.\" - Josiah (Pastor)", "Think of the one person closest to you but furthest from God. Pray for them by name. Ask God to take the blinders off. And ask Him to use you."], "prompt": "<strong>Write down who God brings to mind.<\/strong>", "challenge": "Pray that same prayer today. <em>Holy Spirit, give me one person.<\/em> Then pay attention.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Thursday, November 19", "event": "", "ref": "2 Corinthians 4:3–6", "url": "https://www.biblegateway.com/passage/?search=2+Corinthians+4:3-6&version=NLT"}, {"num": 20, "theme": "Yield", "body": ["Jesus says your heart follows your treasure. Not the other way around. Where you put your money is where your heart ends up.", "And then He says it plainly. You can't serve God and money. Something always gets cheated.", "This is part of the Sermon on the Mount, the longest teaching of Jesus we have (Matthew 5–7). Just before this, He talked about giving, praying and fasting (Matthew 6:1–18). Those are the same three things you've been doing for 20 days. Then He goes right into money and what we treasure. Jesus put them together.", "Right after this, Jesus tells us not to worry about what we'll eat or wear, because God knows what we need (Matthew 6:25–34). Giving and trusting go together. It's hard to give when you're afraid there won't be enough.", "When I was raising support to go help plant a church, I met with a millionaire who wrote us a check for fifty dollars. The next day, a schoolteacher with three boys wrote us a check for ten thousand. I tried to give it back. He wouldn't let me. He said his family had been saving and praying for ten years about who it was for. The difference was never how much they had. It was how much they chose to give.", "So what is God asking you to yield? Not just what you give. What you hold on to."], "prompt": "<strong>Write down what you sense, and keep it. You'll need it tomorrow.<\/strong>", "challenge": "Pick one from the Challenges in the back.", "journal": "Where did you see God move today? What surprised you? What was hard? What is He teaching you?", "kids": "", "question": null, "date": "Friday, November 20", "event": "", "ref": "Matthew 6:19–24", "url": "https://www.biblegateway.com/passage/?search=Matthew+6:19-24&version=NLT"}, {"num": 21, "theme": "Praise", "body": ["This passage covers everything God has done. From before the world was made, to the day everything gets made right. And it shows the whole Trinity at work. The Father chose you. The Son bought you. The Spirit sealed you.", "The New Testament was first written in Greek. And in Greek, verses 3–14 are one long sentence. Paul starts praising God and doesn't stop to take a breath. Three times he says it's all <em>for the praise of His glory<\/em> (vv. 6, 12, 14).", "Look at verses 13–14. When you believed in Jesus, God marked you with the Holy Spirit. Paul calls the Spirit a <em>guarantee<\/em>, like a down payment on everything God has promised. The Spirit you've been asking for these 21 days is God's promise that He's going to finish what He started in you.", "Look for each one. Then look for where you fit. Because you're in this story.", "Praise God for redeeming you. For including you. For the last 21 days. Review the last several weeks of prompts and see what God has done."], "prompt": "<strong>Write your own words of praise in your journal.<\/strong>", "challenge": "[Last-day event details]", "journal": "", "kids": "", "question": {"intro": ["For 21 days, you've been praying one question. Now it's time to write down what you've heard. Before you do, scroll back through your journal in the app.", "Get somewhere quiet. Kneel if you can. Pray the Question one more time. Then ask the Holy Spirit to help you hear. Don't rush it."], "qs": ["God, what do you want to do in me?", "God, what do you want to do through me?", "God, what do you want to do through my money?"], "after": "Hang onto this page. In December, you're going to come back to it."}, "date": "Saturday, November 21", "event": "", "ref": "Ephesians 1:3–14", "url": "https://www.biblegateway.com/passage/?search=Ephesians+1:3-14&version=NLT"}], "intro": "This week we look outward. Your time. Your words. Your money. The people around you. God doesn't fill you up just so you feel good. He fills you so He can send you. This is also the week we talk honestly about money. Don't skip it. Jesus talked about money a lot, because He knew it's one of the main things that competes with God for our hearts."}], "day22": {"html": "<p>You made it. 21 days.<\/p><p>And this isn't the finish line. It's the starting line.<\/p><p>It's easy to forget what God did. That's why you wrote it down.<\/p><p>Open your journal in the app and read it from Day 1. Every answer to prayer. Every nudge. Every time He showed up.<\/p><p>Then keep going. Keep kneeling. Keep praying the Question. Keep asking the Spirit to fill you. Again.<\/p><p>God's been stirring something in you. Don't let it stop here.<\/p><p><strong>Your next step:<\/strong> If you've never been to Rally Point, today's the day. Right after service, 11:30 a.m. We'll feed you, help you find your people, and talk about your purpose. Register in the Axiom app.<\/p>"}, "challenges": [{"intro": "These are small, practical ways to live out what you're reading and praying. Ask the Holy Spirit to help you choose one each day."}, {"title": "Personal Challenges", "items": ["<strong>Silent Walk.<\/strong> Walk outside for 20 minutes with no headphones. Ask God to speak. Notice what He brings to mind.", "<strong>Thank-You Note.<\/strong> Write a note to someone who shaped your faith. Tell them what they mean to you.", "<strong>One Verse.<\/strong> Pick one verse from this week and memorize it. Repeat it all day.", "<strong>Screen-Free Night.<\/strong> Put away every screen for one evening. Read, rest, pray, or call someone.", "<strong>Five Texts.<\/strong> Send one encouraging text a day for five days.", "<strong>Forgive.<\/strong> Is there someone you've been holding back forgiveness from? Forgive them today. Tell God first. Then them, if it's wise.", "<strong>Hunger Prayer.<\/strong> Every time you crave what you're fasting from, stop and pray instead.", "<strong>The Conversation.<\/strong> Have the hard conversation you've been avoiding. The one that would bring healing.", "<strong>Give Something Away.<\/strong> Go through one closet or drawer. Give away what you don't need. Pray for contentment as you do it.", "<strong>Ten Things.<\/strong> Write down ten things you're thankful for. Turn each into a one-sentence prayer."]}, {"title": "Family or Group Challenges", "items": ["<strong>Highs and Lows.<\/strong> At dinner, everyone shares their high and low from the day. Thank God for both.", "<strong>Game Night.<\/strong> Play a favorite game. Afterward, everyone shares one way they've seen God this week.", "<strong>Ice Cream Night.<\/strong> Make sundaes. While you eat, each person shares something they love about someone else at the table.", "<strong>Sticky Notes.<\/strong> Everyone writes something kind about every other person on a sticky note. Read them out loud.", "<strong>Top Ten.<\/strong> Make a list of the ten best things about your family or group. Pray and thank God for each one.", "<strong>Pray Out Loud.<\/strong> Each person prays one sentence out loud. <em>\"God, thank you for... God, help me with...\"<\/em> That's all it takes.", "<strong>Morning and Night.<\/strong> End tonight and start tomorrow by praying together.", "<strong>Memory Verse.<\/strong> Pick one verse to memorize together this week. Luke 11:13 is a great one.", "<strong>Bless a Neighbor.<\/strong> Make cookies or a meal and drop it off with a note.", "<strong>Prayer Walk.<\/strong> Walk your street together and pray for every house you pass."]}, {"title": "Outreach Challenges", "items": ["<strong>Bring a Meal.<\/strong> Take dinner to someone going through a hard season.", "<strong>The One.<\/strong> Pray for the person closest to you but furthest from God. Then send them a text.", "<strong>Invite.<\/strong> Invite someone to church, Rally Point, or Baptism Sunday.", "<strong>Food Packing.<\/strong> Serve at Food Packing on November 7. Bring a friend who doesn't go to church.", "<strong>First Responders.<\/strong> Pray for your local fire station, police department, or hospital. Drop off a thank-you note.", "<strong>Bless a Teacher.<\/strong> Leave a note or small gift for a teacher or school staff member.", "<strong>Learn a Story.<\/strong> Take a coworker or neighbor from a different background to coffee and learn their story.", "<strong>Serve.<\/strong> Sign up for a team at Axiom.", "<strong>Pay It Forward.<\/strong> Pay for the order behind you. Pray for them as you drive away.", "<strong>Ask and Listen.<\/strong> Ask someone, \"How can I pray for you?\" Then pray for them right there."]}], "credits": ["<em>Unless otherwise noted, Scripture references are from the Holy Bible, New Living Translation, copyright © 1996, 2004, 2015 by Tyndale House Foundation. Used by permission of Tyndale House Publishers, Carol Stream, Illinois 60188. All rights reserved.<\/em>", "<em>Daily rhythm and structure adapted with gratitude from Traders Point Christian Church's 21 Days of Prayer and Fasting guide.<\/em>"]};
+const START = new Date(2026, 10, 1); // Nov 1, 2026
+const DAYS = DATA.weeks.flatMap(w => w.days.map(d => Object.assign({week: w}, d)));
+const $app = document.getElementById('app');
+
+/* ---- storage (this browser only) ---- */
+let S = {};
+try { S = JSON.parse(localStorage.getItem('axiom21') || '{}') || {}; } catch (e) { S = {}; }
+function save() { try { localStorage.setItem('axiom21', JSON.stringify(S)); } catch (e) {} }
+const get = k => S[k];
+function set(k, v) { S[k] = v; save(); }
+
+/* ---- dates ---- */
+function dayIndex() {
+  const now = new Date(); now.setHours(0,0,0,0);
+  return Math.floor((now - START) / 86400000) + 1; // 1 = Nov 1
+}
+const pad = n => String(n).padStart(2, '0');
+function todayNum() { const i = dayIndex(); return Math.min(Math.max(i, 1), 21); }
+function isDone(n) { return !!get('fast-' + n) || !!(get('j-' + n) || '').trim(); }
+function kneels(n) { return ['m','d','e'].filter(k => get('kneel-' + n + '-' + k)).length; }
+
+/* ---- views ---- */
+const LOCKH = `<p class="private"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Private. Only you can see what you write here. No one at the church can read it.</span></p>`;
+const IC = {"read": "<path d=\"M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z\"/><path d=\"M4 21V5\"/>", "pray": "<path d=\"M12 3v3M5.6 6.6l2.1 2.1M18.4 6.6l-2.1 2.1M3 14h18M7 14a5 5 0 0 1 10 0M5 18h14\"/>", "do": "<path d=\"M5 12l4 4 10-10\"/>", "fast": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M10 9v6M14 9v6\"/>", "write": "<path d=\"M4 20h4L19 9l-4-4L4 16z\"/><path d=\"M13 7l4 4\"/>", "kids": "<circle cx=\"9\" cy=\"7\" r=\"3\"/><circle cx=\"17\" cy=\"9\" r=\"2\"/><path d=\"M3 20a6 6 0 0 1 12 0M14 20a4 4 0 0 1 7 0\"/>"};
+const svg = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[k]}</svg>`;
+function stepHead(k, small, title) { return `<div class="step-head"><span class="step-icon">${svg(k)}</span><div>${small ? `<small>${small}</small>` : ''}<h2 class="h2">${title}</h2></div></div>`; }
+
+function heroQuestion() {
+  return `<div class="question"><span class="label">The Question</span><q>God, what do you want to do in me?</q><q>God, what do you want to do through me?</q></div>`;
+}
+
+const PREP = [
+  ['fast', 'Pick what you\'re fasting from', 'Food or something else. Takes 2 minutes.', '#guide-pick-your-fast'],
+  ['why', 'Write down why you\'re doing this', 'One sentence, plus the name of one person you\'ll tell.', '#guide-before-you-begin'],
+  ['pray', 'Learn how to pray', 'Four simple steps. Takes 5 minutes to read.', '#guide-how-to-p-r-a-y'],
+  ['spirit', 'Read about the Holy Spirit', 'Who He is and how to ask for help.', '#guide-the-holy-spirit'],
+];
+function prepDone(k) {
+  if (get('prep-' + k) !== undefined) return !!get('prep-' + k);
+  if (k === 'fast') return !!(get('fast-from') || '').trim();
+  if (k === 'why') return !!(get('commit-why') || '').trim();
+  return false;
+}
+function viewHome() {
+  const i = dayIndex(), t = todayNum();
+  let lead, sub;
+  if (i < 1) {
+    const left = 1 - i;
+    lead = `<h1 class="mega">Two questions.<br><span class="hl">21 days.</span></h1>`;
+    sub = `<p>21 days of prayer and fasting starts Sunday, November 1. ${left === 1 ? 'Tomorrow.' : left + ' days to go.'}</p>`;
+  } else if (i > 21) {
+    lead = `<h1 class="mega">You made <span class="hl">it.</span></h1>`;
+    sub = `<p>21 days. This isn't the finish line. It's the starting line.</p>`;
+  } else {
+    const d = DAYS[t - 1];
+    lead = `<span class="label">Today · Week ${d.week.num} · ${d.week.name}</span><h1 class="mega">Day ${pad(t)}<br><span class="hl">${d.theme}</span></h1>`;
+    sub = `<p>${d.date}${d.event ? ' · ' + d.event : ''} · ${d.ref}</p>`;
+  }
+  const startN = i > 21 ? 22 : t;
+  const strip = DAYS.map(d => `<a href="#day-${d.num}" class="${isDone(d.num) ? 'done' : ''} ${d.num === t && i >= 1 && i <= 21 ? 'today' : ''}" aria-label="Day ${d.num}${isDone(d.num) ? ', done' : ''}">${d.num}</a>`).join('');
+  const kd = [
+    ['Sat, Nov 7','Food Packing with Mission of Hope. 9:00 a.m.–12:30 p.m.'],
+    ['Sun, Nov 15','Baptism Sunday.'],
+    ['Sun, Nov 22','The fast ends.'],
+  ].map(([a,b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('');
+  return `
+  <div class="hero"><div class="wrap">
+    ${i < 1 ? '<span class="label">21 Days of Prayer and Fasting · Nov 1–21</span>' : ''}
+    ${lead}${sub}
+    <div class="btn-row"><a class="btn" href="#day-${startN}">${i > 21 ? 'Open Day 22' : i < 1 ? 'Preview Day 1' : 'Start Day ' + t}</a></div>
+  </div></div>
+  <div class="band"><div class="wrap"><span class="label">Pray this every day</span><q>God, what do you want to do in me?</q><q>God, what do you want to do through me?</q></div></div>
+  <main class="wrap">
+    ${i < 1 ? `<section class="block"><span class="label">Before you start</span><h2 class="h2">Do these first.</h2>
+      <div class="checklist">${PREP.map(([k, label, sub, href]) => `
+        <div class="check">
+          <button class="cbox" type="button" data-toggle="prep-${k}" aria-pressed="${prepDone(k)}" aria-label="Mark done: ${label}"></button>
+          <a href="${href}"><b>${label}</b><span>${sub}</span></a>
+        </div>`).join('')}</div>
+      <p class="saved">Tap a box when you're done. Tap the words to open that step.</p></section>` : ''}
+    <section class="block"><span class="label">Your 21 days</span><div class="strip">${strip}</div>
+      <p class="saved">A day fills in when you check off your fast or write in your journal. Try to write at least one sentence every day.</p></section>
+    <section class="block"><span class="label">Key dates</span><div class="dates">${kd}</div></section>
+  </main>`;
+}
+
+function toggle(id, label, wide) {
+  const on = !!get(id);
+  return `<button class="tog${wide ? ' wide' : ''}" type="button" data-toggle="${id}" aria-pressed="${on}"><span class="box"></span>${label}</button>`;
+}
+
+
+/* ---- Listen: reads the day out loud with the phone's built-in voice. Prefers a British woman's voice. ---- */
+const TTS = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+const ICON_STOP = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 6h12v12H6z"/></svg>';
+const tts = { parts: [], i: 0, playing: false, voice: null };
+function pickVoice() {
+  if (!TTS) return null;
+  const vs = speechSynthesis.getVoices();
+  const gb = vs.filter(v => /^en[-_]GB/i.test(v.lang));
+  const women = /kate|serena|stephanie|martha|libby|sonia|hazel|mia|maisie|susan|amy|emma|female|flo|shelley|sandy/i;
+  const men = /daniel|arthur|oliver|george|ryan|thomas|harry|jamie|male|rocko|reed|grandpa|eddy/i;
+  return gb.find(v => women.test(v.name)) || gb.find(v => !men.test(v.name)) || gb[0]
+    || vs.find(v => /^en/i.test(v.lang) && women.test(v.name)) || vs.find(v => /^en/i.test(v.lang)) || null;
+}
+if (TTS) { tts.voice = pickVoice(); speechSynthesis.addEventListener && speechSynthesis.addEventListener('voiceschanged', () => { tts.voice = pickVoice(); }); }
+function speakable(t) {
+  return t.replace(/\s*\((?:see |read )?(?:[1-3] )?[A-Z][a-z]+(?: [A-Z][a-z]+)? \d+[^)]*\)/g, '')   // drop (John 20:19)-style references
+    .replace(/(\d+):(\d+)\s*[–-]\s*(\d+)/g, '$1, verses $2 to $3')
+    .replace(/(\d+):(\d+)/g, '$1, verse $2')
+    .replace(/\bvv?\.\s*/g, 'verse ')
+    .replace(/…/g, '.').replace(/\s+/g, ' ').trim();
+}
+function dayScript(n) {
+  const d = DAYS[n - 1], out = [`Day ${n}. ${d.theme}.`, `Today's reading is ${d.ref}.`];
+  const box = document.getElementById('s-read');
+  if (box) box.querySelectorAll('.prose p, .prompt').forEach(p => out.push(p.textContent));
+  out.push('When you’re ready, pray the two questions. God, what do you want to do in me? God, what do you want to do through me?');
+  // short pieces keep some phones from cutting off mid-way
+  return out.map(speakable).flatMap(t => t.match(/[^.!?]+[.!?]+["”’]*|[^.!?]+$/g) || []).map(s => s.trim()).filter(Boolean);
+}
+function ttsButtons() {
+  const p = document.getElementById('ttsPlay'), s = document.getElementById('ttsStop'); if (!p) return;
+  const started = tts.i > 0 || tts.playing;
+  p.setAttribute('aria-pressed', tts.playing);
+  p.innerHTML = tts.playing ? ICON_PAUSE + '<span>Pause</span>' : ICON_PLAY + `<span>${started ? 'Keep listening' : 'Listen to today'}</span>`;
+  s.hidden = !started;
+}
+function ttsNext() {
+  if (!tts.playing) return;
+  if (tts.i >= tts.parts.length) { ttsStop(); return; }
+  const u = new SpeechSynthesisUtterance(tts.parts[tts.i]);
+  if (tts.voice) { u.voice = tts.voice; u.lang = tts.voice.lang; } else u.lang = 'en-GB';
+  u.rate = 0.95;
+  u.onend = () => { if (!tts.playing) return; tts.i++; ttsNext(); };
+  u.onerror = () => { if (!tts.playing) return; tts.i++; ttsNext(); };
+  speechSynthesis.speak(u);
+}
+function ttsPlayPause(n) {
+  if (tts.playing) { tts.playing = false; speechSynthesis.cancel(); ttsButtons(); return; }  // pause = stop where we are, pick up at the same sentence
+  if (!tts.parts.length) { tts.parts = dayScript(n); tts.i = 0; }
+  if (!tts.voice) tts.voice = pickVoice();
+  tts.playing = true; speechSynthesis.cancel(); ttsNext(); ttsButtons();
+}
+function ttsStop() { tts.playing = false; tts.parts = []; tts.i = 0; if (TTS) speechSynthesis.cancel(); ttsButtons(); }
+document.addEventListener('click', e => {
+  const t = e.target.closest('#ttsPlay, #ttsStop'); if (!t) return;
+  if (t.id === 'ttsStop') return ttsStop();
+  const m = (location.hash || '').match(/^#day-(\d+)$/); if (m) ttsPlayPause(+m[1]);
+});
+window.addEventListener('hashchange', () => { if (TTS) ttsStop(); });
+
+function viewDay(n) {
+  if (n === 22) return viewDay22();
+  const d = DAYS[n - 1]; if (!d) return viewHome();
+  const prev = n > 1 ? `<a class="btn ghost" href="#day-${n-1}">← Day ${n-1}</a>` : '<span></span>';
+  const next = `<a class="btn ghost" href="#day-${n+1}">Day ${n+1} →</a>`;
+  const q = d.question ? `
+    <section class="step tinted">${stepHead('write','Day 21','Your answer')}
+      <div class="prose">${d.question.intro.map(p => `<p>${p}</p>`).join('')}</div>
+      <p class="private"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Private. Only you can see what you write here. No one at the church can read it.</span></p>
+      ${d.question.qs.map((t, k) => `<label class="field" for="q21-${k}"><span>${t}</span><textarea id="q21-${k}" data-store="q21-${k}" data-btn="${t}" placeholder="What did you hear?"></textarea></label>`).join('')}
+      <p class="prompt">${d.question.after}</p>
+    </section>` : '';
+  const p = (get('p-' + n) || '').trim(), j = (get('j-' + n) || '').trim(), k3 = kneels(n), f = !!get('fast-' + n);
+  const chips = [['read','Read',!!p],['pray','Pray',k3===3],['fast','Fast',f],['write','Write',!!j]]
+    .map(([k,l,done]) => `<button class="chip${done?' done':''}" type="button" data-jump="s-${k}">${svg(k)}${l}</button>`).join('');
+  return `
+  <div class="hero light"><div class="wrap">
+    <span class="label">Week ${d.week.num} · ${d.week.name}</span>
+    <h1 class="mega">Day ${pad(n)}<br><span class="hl">${d.theme}</span></h1>
+    <div class="meta"><span>${d.date}</span>${d.event ? `<span class="pill">${d.event}</span>` : ''}</div>
+    ${TTS ? `<div class="listen" id="listen"><button class="btn ghost" type="button" id="ttsPlay" aria-pressed="false">${ICON_PLAY}<span>Listen to today</span></button><button class="btn ghost" type="button" id="ttsStop" hidden>${ICON_STOP}<span>Stop</span></button></div>` : ''}
+  </div></div>
+  <main class="wrap">
+    <div class="chips" aria-label="Today's steps">${chips}</div>
+    <div class="steps">
+    <section class="step" id="s-read">
+      ${stepHead('read','','Read')}
+      <div class="scripture"><span class="ref">${d.ref}</span>
+        <div class="slot">NLT text for ${d.ref} goes here.</div>
+        <a href="${d.url}" target="_blank" rel="noopener">Read ${d.ref} in the NLT</a></div>
+      <div class="prose">${d.body.map(p => p.startsWith('<ul>') ? p : `<p>${p}</p>`).join('')}</div>
+      <p class="prompt">${d.prompt}</p>
+      ${LOCKH}
+      <textarea id="p-${n}" data-store="p-${n}" data-btn="Write your response" aria-label="Your response" placeholder="Write it here."></textarea>
+      <span class="saved" data-saved="p-${n}"></span>
+      <p class="or" data-or="p-${n}|v-${n}">or</p>
+      <div class="voice" data-voice="v-${n}" data-label="Record your response"></div>
+    </section>
+    <section class="step tinted" id="s-pray">
+      ${stepHead('pray','','Pray three times')}
+      <p>Morning, midday, and evening. Get on your knees if you can. Ask the Question, then be quiet for a minute and listen. Tap each one when you're done.</p>
+      <div class="toggles">${toggle(`kneel-${n}-m`,'Morning')}${toggle(`kneel-${n}-d`,'Midday')}${toggle(`kneel-${n}-e`,'Evening')}</div>
+    </section>
+    <section class="step" id="s-fast">
+      ${stepHead('fast','','Fast')}
+      ${(get('fast-from') || '').trim()
+        ? `<p>You're fasting from: <strong data-n="fast-from"></strong> <a href="#guide-pick-your-fast">Change</a></p>`
+        : `<p>Food, social media, streaming, caffeine, your phone after 8 p.m. You pick. <a href="#guide-pick-your-fast">Pick your fast</a></p>`}
+      <div class="toggles">${toggle(`fast-${n}`,'I fasted from what I said I would today.', true)}</div>
+      <p class="saved">Missed today? That's okay. Start again right now. <a href="#guide-when-you-blow-it">What to do if you slip</a></p>
+    </section>
+    <section class="step" id="s-write">
+      ${stepHead('write','','Journal')}
+      <p class="nudge"><strong>Write at least one sentence today.</strong> It doesn't have to be good. Just honest. On Day 21 you'll be glad you did.</p>
+      <p>${d.journal}</p>
+      ${LOCKH}
+      <textarea id="j-${n}" data-store="j-${n}" data-btn="Write your thoughts" aria-label="Journal for Day ${n}" placeholder="Today I noticed…"></textarea>
+      <span class="saved" data-saved="j-${n}"></span>
+      <p class="or" data-or="j-${n}|vj-${n}">or</p>
+      <div class="voice" data-voice="vj-${n}" data-label="Record your thoughts"></div>
+    </section>
+    <section class="step" id="s-do">
+      ${stepHead('do','Optional','Today\'s challenge')}
+      <div class="prose"><p>${d.challenge}</p></div>
+      ${/Challenges in the back/.test(d.challenge) ? '<a href="#challenges">See the challenge list</a>' : ''}
+    </section>
+    ${d.kids ? `<section class="step tinted">${stepHead('kids','Optional','With your kids')}<p>${d.kids}</p></section>` : ''}
+    ${q}
+    </div>
+    <div class="pager">${prev}${next}</div>
+  </main>`;
+}
+
+function viewDay22() {
+  return `
+  <div class="hero light"><div class="wrap">
+    <span class="label">Sunday, November 22</span>
+    <h1 class="mega">Day 22<br><span class="hl">What now?</span></h1>
+  </div></div>
+  <main class="wrap"><section class="block"><div class="prose">${DATA.day22.html}</div>
+    <div class="btn-row"><a class="btn" href="#journal">Open your journal</a></div></section>
+    <div class="pager"><a class="btn ghost" href="#day-21">← Day 21</a><span></span></div></main>`;
+}
+
+function viewDays() {
+  const t = todayNum(), live = dayIndex() >= 1 && dayIndex() <= 21;
+  const weeks = DATA.weeks.map(w => `
+    <div class="week-head"><span class="label">Week ${w.num}</span><h2 class="h2">${w.name}</h2><span class="tag">${w.tag}</span>${w.intro ? `<p class="intro">${w.intro}</p>` : ''}</div>
+    ${w.days.map(d => {
+      const k = kneels(d.num), f = !!get('fast-' + d.num);
+      return `<a class="dayrow${live && d.num === t ? ' today' : ''}" href="#day-${d.num}">
+        <span class="n">${pad(d.num)}</span>
+        <span class="t"><b>${d.theme} · ${d.ref}</b><span>${d.date}${d.event ? ' · ' + d.event : ''}</span></span>
+        <span class="dots" aria-label="${k} of 3 prayer times${f ? ', fasted' : ''}"><i class="${k>0?'on':''}"></i><i class="${k>1?'on':''}"></i><i class="${k>2?'on':''}"></i><i class="${f?'on':''}" style="border-radius:3px"></i></span>
+      </a>`; }).join('')}`).join('');
+  return `
+  <div class="hero light"><div class="wrap"><span class="label">November 1–21</span><h1 class="big">21 Days</h1>
+    <p>Each day has four dots. The three circles are your three prayer times. The square is your fast.</p></div></div>
+  <main class="wrap">${weeks}
+    <div class="week-head"><span class="label">After</span></div>
+    <a class="dayrow" href="#day-22"><span class="n">22</span><span class="t"><b>What now?</b><span>Sunday, November 22 · Rally Point at 11:30 a.m.</span></span><span></span></a>
+  </main>`;
+}
+
+function viewJournal() {
+  const answers = [0,1,2].map(k => (get('q21-' + k) || '').trim());
+  const qs = DAYS[20].question.qs;
+  const top = answers.some(Boolean) ? `<section class="block"><span class="label">Your Day 21 answers</span>${answers.map((a,k) => a ? `<div class="entry"><span class="q">${qs[k]}</span><p></p></div>` : '').join('')}</section>` : '';
+  const entries = DAYS.map(d => {
+    const p = (get('p-' + d.num) || '').trim(), j = (get('j-' + d.num) || '').trim();
+    if (!p && !j) return '';
+    return `<a class="entry" href="#day-${d.num}" style="color:inherit;text-decoration:none;font-weight:400">
+      <span class="eh"><b>Day ${pad(d.num)}</b><span class="stamp">${d.theme}</span><span class="q">${d.date}</span></span>
+      ${p ? `<p data-n="p-${d.num}"></p>` : ''}${j ? `<p data-n="j-${d.num}"></p>` : ''}</a>`;
+  }).join('');
+  const body = entries.trim() ? entries : `<div class="empty"><h2 class="h2">Nothing here yet.</h2><p>Open a day and write something in the journal box. It will show up here. On Day 21, you'll read back through it before you answer the Question.</p><div><a class="btn" href="#day-${todayNum()}">Write today's entry</a></div></div>`;
+  return `
+  <div class="hero light"><div class="wrap"><span class="label">Your journal</span><h1 class="big">Journal</h1>
+    <p>Everything you write on a day page shows up here, in order.</p><p class="private"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Private. Only you can see what you write here. No one at the church can read it.</span></p></div></div>
+  <main class="wrap">${top}<div id="voiceList"></div><section class="block">${body}</section></main>`;
+}
+
+const GROUPS = [
+  ['Start here', ['a-note-from-josiah','the-question','new-to-the-bible','the-daily-rhythm']],
+  ['How to do it', ['how-to-p-r-a-y','why-we-kneel','what-is-fasting','pick-your-fast','before-you-begin']],
+  ['Going deeper', ['the-holy-spirit','how-do-i-know-it-s-god','a-word-about-the-enemy']],
+  ['Help', ['fasting-safely','when-you-blow-it','key-dates','with-your-kids','challenges']],
+];
+const BLURB = {
+  'a-note-from-josiah':'Why we\'re doing this', 'the-question':'What we pray every day', 'new-to-the-bible':'How to find a verse, and who\'s who', 'the-daily-rhythm':'What each day looks like, 15–20 minutes',
+  'how-to-p-r-a-y':'Four simple steps', 'why-we-kneel':'And what to do if you can\'t', 'what-is-fasting':'What it is and what it isn\'t',
+  'pick-your-fast':'Food or something else', 'before-you-begin':'Your why and who you\'ll tell', 'the-holy-spirit':'Who He is and how to ask',
+  'how-do-i-know-it-s-god':'Four questions to check', 'a-word-about-the-enemy':'Not every bad day is spiritual',
+  'fasting-safely':'Read this before fasting from food', 'when-you-blow-it':'What to do if you slip', 'key-dates':'Events during the 21 days',
+  'with-your-kids':'How kids can join in',
+};
+function viewGuide() {
+  return `
+  <div class="hero light"><div class="wrap"><span class="label">Extras</span><h1 class="big">Never done this before? Start here.</h1>
+    <p>Everything you need to pray and fast for 21 days. Read it once before Day 1.</p></div></div>
+  <main class="wrap">${GROUPS.map(([name, ids]) => `<section class="guide-group"><span class="label">${name}</span><div class="links">
+    ${ids.map(id => id === 'challenges' ? `<a href="#challenges"><span>Challenges<small>Small ways to live it out each day</small></span></a>` : (g => g ? `<a href="#guide-${g.id}"><span>${g.title}${BLURB[g.id] ? `<small>${BLURB[g.id]}</small>` : ''}</span></a>` : '')(DATA.guide.find(x => x.id === id))).join('')}
+  </div></section>`).join('')}
+  <div class="credits">${DATA.credits.map(c => `<p>${c}</p>`).join('')}</div></main>`;
+}
+
+function viewGuidePage(id) {
+  const i = DATA.guide.findIndex(g => g.id === id); if (i < 0) return viewGuide();
+  const g = DATA.guide[i], nx = DATA.guide[i + 1];
+  return `
+  <div class="hero light"><div class="wrap"><span class="label">Extras</span><h1 class="big">${g.title}</h1></div></div>
+  <main class="wrap"><section class="block"><div class="prose">${g.html}</div></section>
+    ${nx ? `<div class="pager"><span></span><a class="btn ghost" href="#guide-${nx.id}">${nx.title} →</a></div>` : ''}</main>`;
+}
+
+function field(key, btn, ph, area) {
+  return area
+    ? `<textarea id="${key}" data-store="${key}" data-btn="${btn}" placeholder="${ph}"></textarea>`
+    : `<input id="${key}" data-store="${key}" data-btn="${btn}" type="text" autocomplete="off" placeholder="${ph}">`;
+}
+function tick(key, text) {
+  return `<button class="tick" type="button" data-toggle="${key}" aria-pressed="${!!get(key)}"><span class="cbox" aria-hidden="true"></span><span>${text}</span></button>`;
+}
+function viewBeforeBegin() {
+  const has = k => !!(get(k) || '').trim();
+  const done = [has('commit-why'), has('fast-from'), has('commit-allowed') || !!get('bb-nofood'), null, null, has('commit-person')];
+  const count = done.filter(Boolean).length;
+  const badge = i => `<span class="num${done[i] ? ' on' : ''}" aria-label="${done[i] ? 'Done' : 'Step ' + (i+1)}">${done[i] ? '' : i + 1}</span>`;
+  const ff = (get('fast-from') || '').trim();
+  return `
+  <div class="hero light"><div class="wrap"><span class="label">Extras</span><h1 class="big">Before you start</h1>
+    <p>Six steps. About 10 minutes. Most people who quit a fast quit before it ever starts, because they never decided anything. So decide now.</p>
+    <div class="meter" role="img" aria-label="${count} of 4 to fill in"><i style="width:${count*25}%"></i></div>
+    <span class="meter-label">${count} of 4 filled in</span></div></div>
+  <main class="wrap"><div class="steps">
+    <section class="step"><div class="bb-head">${badge(0)}<div><h2 class="h2">Write down your why</h2><p>What do you want God to do in these 21 days? Be specific.</p></div></div>
+      <details><summary>See examples</summary><ul><li>"I want to hear from God about my marriage."</li><li>"I want to stop numbing out on my phone."</li><li>"I want to know if God is even real."</li></ul></details>
+      ${LOCKH}${field('commit-why', 'Write your why', 'I want God to…', true)}
+    </section>
+    <section class="step"><div class="bb-head">${badge(1)}<div><h2 class="h2">Pick your fast</h2><p>Food or something else. Which one, and starting when?</p></div></div>
+      ${ff ? `<p>You're fasting from: <strong data-n="fast-from"></strong></p><div><a class="btn ghost" href="#guide-pick-your-fast">Change</a></div>`
+           : `<div><a class="btn ghost" href="#guide-pick-your-fast">See the options</a></div>`}
+    </section>
+    <section class="step"><div class="bb-head">${badge(2)}<div><h2 class="h2">Make your allowed list</h2><p>Fasting from food? List exactly what you can eat. If it's on the list, eat it. If not, don't. Decide now, not at 3 p.m. in the breakroom.</p></div></div>
+      ${field('commit-allowed', 'Write your allowed list', 'Fruit, vegetables, water…', true)}
+      ${tick('bb-nofood', 'I\'m not fasting from food')}
+    </section>
+    <section class="step"><div class="bb-head">${badge(3)}<div><h2 class="h2">Prep your space</h2><p>Make it easy to keep your fast. Clean out the pantry if you need to. Delete the social media app. Put the remote in a drawer.</p></div></div>
+    </section>
+    <section class="step"><div class="bb-head">${badge(4)}<div><h2 class="h2">Set your alarms</h2><p>Set three alarms on your phone: morning, midday, and evening. Those are your three times to pray. Name each alarm "God, what do you want to do in me?" so you see the Question when it goes off.</p></div></div>
+    </section>
+    <section class="step"><div class="bb-head">${badge(5)}<div><h2 class="h2">Tell one person</h2><p>Not so they'll be impressed. So they'll ask how it's going. Don't do this alone.</p></div></div>
+      ${field('commit-person', 'Add the person you told', 'Their name')}
+    </section>
+    <section class="step tinted"><div class="bb-head"><span class="num on star" aria-hidden="true"></span><div><small class="kicker">My commitment</small><h2 class="h2">For the next 21 days, I will…</h2></div></div>
+      <div class="ticks">
+        ${tick('bb-c-pray','Pray these two questions every day: <em>God, what do you want to do in me? God, what do you want to do through me?</em>')}
+        ${tick('bb-c-kneel','Pray three times a day')}
+        ${tick('bb-c-fast', 'Fast from what I said, when I said I would')}
+      </div>
+      ${field('commit-sign', 'Sign your name', 'Type your name')}
+    </section>
+  </div></main>`;
+}
+function viewChallenges() {
+  const [intro, ...groups] = DATA.challenges;
+  return `
+  <div class="hero light"><div class="wrap"><span class="label">Extras</span><h1 class="big">Challenges</h1><p>${intro.intro}</p></div></div>
+  <main class="wrap">${groups.map(gr => `<section class="block"><h2 class="h2">${gr.title}</h2><div class="prose"><ol>${gr.items.map(x => `<li>${x}</li>`).join('')}</ol></div></section>`).join('')}</main>`;
+}
+
+/* ---- voice prayers (stored on this device only, in IndexedDB) ---- */
+let _idb;
+function idb() {
+  if (_idb) return _idb;
+  _idb = new Promise((res, rej) => {
+    try { const r = indexedDB.open('axiom21', 1); r.onupgradeneeded = () => r.result.createObjectStore('audio'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }
+    catch (e) { rej(e); }
+  });
+  return _idb;
+}
+async function store(mode, fn) {
+  const db = await idb();
+  return new Promise((res, rej) => { const tx = db.transaction('audio', mode); const q = fn(tx.objectStore('audio')); tx.oncomplete = () => res(q && q.result); tx.onerror = () => rej(tx.error); });
+}
+const aGet = k => store('readonly', s => s.get(k)).catch(() => null);
+const aSet = (k, b) => store('readwrite', s => s.put(b, k)).catch(() => null);
+const aDel = k => store('readwrite', s => s.delete(k)).catch(() => null);
+const aKeys = () => store('readonly', s => s.getAllKeys()).catch(() => []);
+const MIC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>';
+let rec = null;
+async function hydrateVoice(box) {
+  const key = box.dataset.voice, blob = await aGet(key);
+  box.textContent = '';
+  const orEl = box.previousElementSibling; if (orEl && orEl.classList.contains('or')) orEl.hidden = !!blob || !!(get(orEl.dataset.or.split('|')[0]) || '').trim();
+  if (blob) {
+    const a = document.createElement('audio'); a.controls = true; a.preload = 'metadata'; a.src = URL.createObjectURL(blob);
+    const lab = document.createElement('p'); lab.className = 'saved'; lab.textContent = 'Your recording. Only you can hear it.';
+    const del = document.createElement('button'); del.type = 'button'; del.className = 'linkbtn'; del.textContent = 'Delete recording';
+    del.addEventListener('click', async () => { await aDel(key); hydrateVoice(box); });
+    const row = document.createElement('div'); row.className = 'row'; row.append(del);
+    box.append(lab, a, row); return;
+  }
+  const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'recbtn'; btn.innerHTML = MIC + `<span>${box.dataset.label || 'Record your response'}</span>`;
+  const file = document.createElement('input'); file.type = 'file'; file.accept = 'audio/*'; file.setAttribute('capture', ''); file.hidden = true;
+  const hint = document.createElement('p'); hint.className = 'saved'; hint.textContent = "Rather talk than type? Say it out loud and save it here.";
+  if (key.startsWith('vj-')) hint.hidden = true;
+  file.addEventListener('change', async () => { const fl = file.files && file.files[0]; if (fl) { await aSet(key, fl); hydrateVoice(box); } });
+  btn.addEventListener('click', async () => {
+    if (rec && rec.key === key) { rec.mr.stop(); return; }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mr = new MediaRecorder(stream), parts = [], t0 = Date.now();
+      rec = { key, mr };
+      mr.ondataavailable = e => e.data.size && parts.push(e.data);
+      mr.onstop = async () => { clearInterval(tick); stream.getTracks().forEach(tr => tr.stop()); rec = null; await aSet(key, new Blob(parts, { type: mr.mimeType || 'audio/webm' })); hydrateVoice(box); };
+      mr.start();
+      btn.classList.add('on');
+      const tick = setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); btn.innerHTML = `<span class="dot"></span><span>Recording ${Math.floor(s/60)}:${String(s%60).padStart(2,'0')} · Tap to stop</span>`; }, 250);
+      btn.innerHTML = '<span class="dot"></span><span>Recording 0:00 · Tap to stop</span>';
+    } catch (e) { file.click(); }
+  });
+  box.append(btn, file, hint);
+}
+async function hydrateVoiceList(el) {
+  const num = k => +k.replace(/\D/g, '');
+  const keys = (await aKeys()).filter(k => /^vj?-\d+$/.test(k)).sort((a, b) => num(a) - num(b) || a.localeCompare(b));
+  if (!keys.length) return;
+  const sec = document.createElement('section'); sec.className = 'block';
+  const h = document.createElement('span'); h.className = 'label'; h.textContent = 'Recordings'; sec.append(h);
+  for (const k of keys) {
+    const n = num(k), d = DAYS[n - 1], blob = await aGet(k); if (!d || !blob) continue;
+    const row = document.createElement('div'); row.className = 'entry';
+    const eh = document.createElement('a'); eh.className = 'eh'; eh.href = '#day-' + n; eh.style.cssText = 'color:inherit;text-decoration:none;font-weight:400';
+    eh.innerHTML = `<b>Day ${pad(n)}</b><span class="stamp">${k.startsWith('vj-') ? 'Thoughts' : 'Response'}</span><span class="q">${d.date}</span>`;
+    const a = document.createElement('audio'); a.controls = true; a.preload = 'metadata'; a.src = URL.createObjectURL(blob); a.style.width = '100%';
+    row.append(eh, a); sec.append(row);
+  }
+  el.append(sec);
+}
+
+/* ---- back navigation ---- */
+const ROOTS = ['home', 'days', 'journal', 'guide'];
+const trail = [];
+function parentOf(h) {
+  if (/^day-\d+$/.test(h)) return ['days', 'Days'];
+  if (/^guide-/.test(h) || h === 'challenges') return ['guide', 'Extras'];
+  return ['home', 'Today'];
+}
+const LABELS = { home: 'Today', days: 'Days', journal: 'Journal', guide: 'Extras', challenges: 'Challenges' };
+function labelFor(h) {
+  if (LABELS[h]) return LABELS[h];
+  let m;
+  if ((m = h.match(/^day-(\d+)$/))) return 'Day ' + m[1];
+  if ((m = h.match(/^guide-(.+)$/))) { const g = DATA.guide.find(x => x.id === m[1]); return g ? 'Extras' : 'Back'; }
+  return 'Back';
+}
+document.getElementById('backBtn').addEventListener('click', () => {
+  const h = (location.hash || '#home').slice(1);
+  trail.pop();
+  const prev = trail.pop();
+  location.hash = prev || parentOf(h)[0];
+});
+
+/* ---- router ---- */
+function render(keep) {
+  const y = window.scrollY;
+  const h = (location.hash || '#home').slice(1);
+  if (trail[trail.length - 1] !== h) trail.push(h);
+  if (trail.length > 50) trail.shift();
+  const isRoot = ROOTS.includes(h);
+  const bb = document.getElementById('backBtn'), br = document.getElementById('brand');
+  bb.hidden = isRoot; br.hidden = !isRoot;
+  if (!isRoot) {
+    const prev = trail[trail.length - 2];
+    document.getElementById('backLabel').textContent = prev ? labelFor(prev) : parentOf(h)[1];
+  }
+  let html, tab = 'home', m;
+  if ((m = h.match(/^day-(\d+)$/))) { html = viewDay(+m[1]); tab = 'days'; }
+  else if (h === 'days') { html = viewDays(); tab = 'days'; }
+  else if (h === 'journal') { html = viewJournal(); tab = 'journal'; }
+  else if (h === 'guide') { html = viewGuide(); tab = 'guide'; }
+  else if (h === 'guide-before-you-begin') { html = viewBeforeBegin(); tab = 'guide'; }
+  else if ((m = h.match(/^guide-([a-z0-9-]+)$/))) { html = viewGuidePage(m[1]); tab = 'guide'; }
+  else if (h === 'challenges') { html = viewChallenges(); tab = 'guide'; }
+  else html = viewHome();
+  $app.innerHTML = `<div class="view">${html}</div>`;
+  document.querySelectorAll('.tabs a').forEach(a => a.setAttribute('aria-current', a.dataset.tab === tab ? 'page' : 'false'));
+  const i = dayIndex();
+  document.getElementById('topCount').textContent = i < 1 ? 'Starts Nov 1' : i > 21 ? '21 of 21' : 'Day ' + Math.min(i, 21) + ' of 21';
+  // fill stored values safely (as text)
+  $app.querySelectorAll('[data-store]').forEach(el => { el.value = get(el.dataset.store) || ''; });
+  $app.querySelectorAll('[data-n]').forEach(el => { el.textContent = get(el.dataset.n) || ''; });
+  const ans = $app.querySelectorAll('.entry p:empty');
+  if (h === 'journal') { let k = 0; [0,1,2].forEach(j => { const a = (get('q21-' + j) || '').trim(); if (a && ans[k]) ans[k++].textContent = a; }); }
+  // fields start as buttons until they have something in them
+  $app.querySelectorAll('[data-btn]').forEach(el => {
+    if ((el.value || '').trim()) return;
+    const wrap = el.closest('.field') || el;
+    wrap.hidden = true;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'addbtn';
+    b.innerHTML = '<span aria-hidden="true">+</span>';
+    b.append(document.createTextNode(el.dataset.btn));
+    wrap.before(b);
+    b.addEventListener('click', () => { wrap.hidden = false; b.remove(); el.focus(); });
+  });
+  $app.querySelectorAll('[data-voice]').forEach(hydrateVoice);
+  const vl = document.getElementById('voiceList'); if (vl) hydrateVoiceList(vl);
+  // guide: paragraphs that open with a bold label become cards
+  $app.querySelectorAll('.prose > p').forEach(p => {
+    const f = p.firstElementChild;
+    if (f && f.tagName === 'STRONG' && p.firstChild === f && p.textContent.trim().length > f.textContent.trim().length + 10) p.classList.add('card');
+  });
+  window.scrollTo(0, keep ? y : 0);
+}
+const live = () => location.hash === '#guide-before-you-begin';
+
+$app.addEventListener('click', e => {
+  const jmp = e.target.closest('[data-jump]');
+  if (jmp) { const s = document.getElementById(jmp.dataset.jump); if (s) s.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'}); return; }
+  const b = e.target.closest('[data-toggle]'); if (!b) return;
+  const k = b.dataset.toggle, on = b.getAttribute('aria-pressed') !== 'true';
+  set(k, on); b.setAttribute('aria-pressed', on);
+  if (live()) render(true);
+});
+let timers = {};
+$app.addEventListener('input', e => {
+  const el = e.target.closest('[data-store]'); if (!el) return;
+  set(el.dataset.store, el.value);
+  const s = $app.querySelector(`[data-saved="${el.dataset.store}"]`);
+  if (s) { s.textContent = 'Saved'; clearTimeout(timers[el.id]); timers[el.id] = setTimeout(() => s.textContent = '', 1500); }
+});
+$app.addEventListener('change', e => { if (live() && e.target.closest('[data-store]')) render(true); });
+window.addEventListener('hashchange', () => render());
+(() => {
+  const sheet = document.getElementById('storySheet'), fab = document.getElementById('storyBtn');
+  const nudge = document.getElementById('storyNudge');
+  const open = () => { nudge.hidden = true; sheet.hidden = false; fab.hidden = true; document.getElementById('storyLink').focus(); };
+  const close = () => { sheet.hidden = true; fab.hidden = false; fab.focus(); };
+  fab.addEventListener('click', open);
+  document.getElementById('storyClose').addEventListener('click', close);
+  sheet.addEventListener('click', e => { if (e.target === sheet) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sheet.hidden) close(); });
+  document.getElementById('nudgeShare').addEventListener('click', open);
+  document.getElementById('nudgeLater').addEventListener('click', () => { nudge.hidden = true; });
+  // every 4th day (4, 8, 12, 16, 20), ask once
+  const check = () => {
+    const m = location.hash.match(/^#day-(\d+)$/);
+    const n = m ? +m[1] : (dayIndex() >= 1 && dayIndex() <= 21 ? dayIndex() : 0);
+    nudge.hidden = true;
+    if (!n || n % 4 || get('story-ask-' + n)) return;
+    setTimeout(() => { if (sheet.hidden) { nudge.hidden = false; set('story-ask-' + n, true); } }, 2500);
+  };
+  window.addEventListener('hashchange', check); check();
+  document.getElementById('storyLink').addEventListener('click', () => setTimeout(close, 300));
+})();
+render();
+</script>
+
+</body>
+</html>
