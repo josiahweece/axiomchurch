@@ -165,9 +165,12 @@ textarea:focus,input:focus{border-color:var(--ink)}
 .check a{display:grid;gap:2px;color:var(--ink);text-decoration:none;font-weight:400;min-width:0}
 .check a b{font-family:var(--display);font-weight:800;font-size:18px}
 .check a span{font-size:14px;color:var(--muted)}
-.dates{display:grid;gap:0}
-.dates div{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
-.dates b{font-family:var(--display);font-weight:800;color:var(--ink)}
+.dates{display:grid;gap:10px}
+.kdate{background:#FFFFFF;color:#101010;border:1.5px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:6px;justify-items:start}
+.kdate .when{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C51C11}
+.kdate b{font-family:var(--display);font-weight:800;font-size:20px;color:#101010}
+.kdate p{color:#3A3A3A;font-size:15px}
+.kdate .btn.ghost{margin-top:6px;min-height:42px;padding:0 18px;font-size:13px;color:#101010;border-color:#101010}
 
 /* Journal */
 .entry{padding:18px 0;border-bottom:1px solid var(--line);display:grid;gap:8px}
@@ -389,10 +392,10 @@ function viewHome() {
   const startN = i > 21 ? 22 : t;
   const strip = DAYS.map(d => `<a href="#day-${d.num}" class="${isDone(d.num) ? 'done' : ''} ${(d.num === t && i >= 1 && i <= 21) || (i < 1 && d.num === 1) ? 'today' : ''}" aria-label="Day ${d.num}${isDone(d.num) ? ', done' : ''}">${d.num}</a>`).join('');
   const kd = [
-    ['Sat, Nov 7','Food Packing with Mission of Hope. 9:00 a.m.–12:30 p.m.'],
-    ['Sun, Nov 15','Baptism Sunday.'],
-    ['Sun, Nov 22','Last day. Rally Point after service, 11:30 a.m.'],
-  ].map(([a,b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('');
+    ['Sat, Nov 7','Food Packing','With Mission of Hope. 9:00 a.m.–12:30 p.m. Ages 6 and up.','https://axiomchurch.churchcenter.com/registrations/events/3924767/reservations/new','Sign up to serve'],
+    ['Sun, Nov 15','Baptism Sunday','Ready to get baptized? Sign up and we\'ll walk you through it.','https://axiomchurch.churchcenter.com/registrations/events/3900240/reservations/new','Sign up to get baptized'],
+    ['Sun, Nov 22','Rally Point','Last day of the fast. Right after service, 11:30 a.m. Free food and childcare.','https://axiomchurch.churchcenter.com/registrations/events/3952767/reservations/new','Sign up for Rally Point'],
+  ].map(([a,t,b,u,c]) => `<div class="kdate"><span class="when">${a}</span><b>${t}</b><p>${b}</p><a class="btn ghost" href="${u}" target="_blank" rel="noopener">${c}</a></div>`).join('');
   return `
   <div class="hero"><div class="wrap">
     ${i < 1 ? '<span class="label">21 Days of Prayer and Fasting</span>' : ''}
@@ -426,7 +429,7 @@ function toggle(id, label, wide) {
 const TTS = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
 /* Recorded audio (ElevenLabs, voice: Lily). Days listed here play the recording; the rest fall back to the phone's voice. */
 const AUDIO_DAYS = new Set(Array.from({length: 21}, (_, i) => i + 1));
-const audioSrc = n => `audio/day-${String(n).padStart(2, '0')}.mp3`;
+const audioSrc = (n, abs) => (abs ? 'https://www.axiomchurch.com/21days/' : '') + `audio/day-${String(n).padStart(2, '0')}.mp3`;
 let dayAudio = null;
 const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
 const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
@@ -480,7 +483,7 @@ function ttsPlayPause(n) {
       if (dayAudio) dayAudio.pause();
       dayAudio = new Audio(audioSrc(n)); dayAudio.dataset.day = n; dayAudio.preload = 'auto';
       dayAudio.onended = () => { tts.playing = false; dayAudio.currentTime = 0; dayAudio = null; ttsButtons(); };
-      dayAudio.onerror = () => { dayAudio = null; AUDIO_DAYS.delete(n); tts.playing = false; ttsPlayPause(n); };  // file missing: use the phone's voice
+      dayAudio.onerror = () => { if (!dayAudio.dataset.abs) { dayAudio.dataset.abs = 1; dayAudio.src = audioSrc(n, true); if (tts.playing) dayAudio.play().catch(() => {}); return; } dayAudio = null; AUDIO_DAYS.delete(n); tts.playing = false; ttsPlayPause(n); };  // try the website copy, then the phone's voice
     }
     if (tts.playing) { dayAudio.pause(); tts.playing = false; } else { dayAudio.play().catch(() => {}); tts.playing = true; }
     ttsButtons(); return;
