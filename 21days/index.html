@@ -142,7 +142,8 @@ textarea:focus,input:focus{border-color:var(--ink)}
 .prep{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 14px;align-items:start;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px}
 .prep .num{margin-top:2px}
 .prep.on{background:var(--soft);border-color:var(--soft)}
-.prep-body{display:grid;gap:4px;min-width:0}
+.prep-body{display:grid;gap:4px;min-width:0;text-decoration:none;font-weight:400}
+.btn.go{background:var(--ink);color:var(--bg);text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:15px}
 .prep-body b{font-family:var(--display);font-weight:800;font-size:18px;color:var(--ink)}
 .prep-body span{font-size:14px;color:var(--muted)}
 .prep-actions{grid-column:2;display:flex;flex-wrap:wrap;gap:8px}
@@ -354,10 +355,10 @@ function heroQuestion() {
 }
 
 const PREP = [
-  ['fast', 'Pick what you\'re fasting from', 'Food or something else. Takes 2 minutes.', '#guide-pick-your-fast'],
-  ['why', 'Write down why you\'re doing this', 'One sentence, plus the name of one person you\'ll tell.', '#guide-before-you-begin'],
-  ['pray', 'Learn how to pray', 'Four simple steps. Takes 5 minutes to read.', '#guide-how-to-p-r-a-y'],
-  ['spirit', 'Read about the Holy Spirit', 'Who He is and how to ask for help.', '#guide-the-holy-spirit'],
+  ['fast', 'Pick what you\'re fasting from', 'Food or something else. Takes 2 minutes.', '#guide-pick-your-fast', 'Pick my fast'],
+  ['why', 'Write down why you\'re doing this', 'One sentence, plus the name of one person you\'ll tell.', '#guide-before-you-begin', 'Write my why'],
+  ['pray', 'Learn how to pray', 'Four simple steps. Takes 5 minutes to read.', '#guide-how-to-p-r-a-y', 'Read how to pray'],
+  ['spirit', 'Read about the Holy Spirit', 'Who He is and how to ask for help.', '#guide-the-holy-spirit', 'Read about Him'],
 ];
 function prepDone(k) {
   if (get('prep-' + k) !== undefined) return !!get('prep-' + k);
@@ -396,13 +397,13 @@ function viewHome() {
   <div class="band"><div class="wrap"><span class="label">Pray this every day</span><q>God, what do you want to do in me?</q><q>God, what do you want to do through me?</q></div></div>
   <main class="wrap">
     ${i < 1 ? (() => { const n = PREP.filter(([k]) => prepDone(k)).length; return `<section class="block"><span class="label">Before you start</span><h2 class="h2">Do these 4 things before Nov 1.</h2>
-      <p>Open each one, do it, then tap <strong>Mark done</strong>.</p>
+      <p>Tap the black button to open each step. When you've done it, come back and tap <strong>Mark done</strong>.</p>
       <p class="meter-label" id="prepCount">${n} of 4 done</p><div class="meter"><i style="width:${n*25}%"></i></div>
-      <div class="preplist">${PREP.map(([k, label, sub, href], j) => { const on = prepDone(k); return `
+      <div class="preplist">${PREP.map(([k, label, sub, href, cta], j) => { const on = prepDone(k); return `
         <div class="prep${on ? ' on' : ''}">
           <span class="num${on ? ' on' : ''}">${on ? '' : j + 1}</span>
-          <div class="prep-body"><b>${label}</b><span>${sub}</span></div>
-          <div class="prep-actions"><a class="btn ghost" href="${href}">Open</a><button class="markdone" type="button" data-toggle="prep-${k}" aria-pressed="${on}"><span class="bx"></span><span class="t-off">Mark done</span><span class="t-on">Done</span></button></div>
+          <a class="prep-body" href="${href}"><b>${label}</b><span>${sub}</span></a>
+          <div class="prep-actions"><a class="btn go" href="${href}">${cta} →</a><button class="markdone" type="button" data-toggle="prep-${k}" aria-pressed="${on}"><span class="bx"></span><span class="t-off">Mark done</span><span class="t-on">Done</span></button></div>
         </div>`; }).join('')}</div></section>`; })() : ''}
     <section class="block"><span class="label">Your 21 days</span><div class="strip">${strip}</div>
       <p class="saved">A day fills in when you check off your fast or write in your journal. Try to write at least one sentence every day.</p></section>
