@@ -424,6 +424,10 @@ function toggle(id, label, wide) {
 
 /* ---- Listen: reads the day out loud with the phone's built-in voice. Prefers a British woman's voice. ---- */
 const TTS = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+/* Recorded audio (ElevenLabs, voice: Lily). Days listed here play the recording; the rest fall back to the phone's voice. */
+const AUDIO_DAYS = new Set(Array.from({length: 21}, (_, i) => i + 1));
+const audioSrc = n => `audio/day-${String(n).padStart(2, '0')}.mp3`;
+let dayAudio = null;
 const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
 const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
 const ICON_STOP = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 6h12v12H6z"/></svg>';
@@ -455,7 +459,7 @@ function dayScript(n) {
 }
 function ttsButtons() {
   const p = document.getElementById('ttsPlay'), s = document.getElementById('ttsStop'); if (!p) return;
-  const started = tts.i > 0 || tts.playing;
+  const started = tts.i > 0 || tts.playing || (dayAudio && dayAudio.currentTime > 0);
   p.setAttribute('aria-pressed', tts.playing);
   p.innerHTML = tts.playing ? ICON_PAUSE + '<span>Pause</span>' : ICON_PLAY + `<span>${started ? 'Keep listening' : 'Listen to today'}</span>`;
   s.hidden = !started;
@@ -471,18 +475,29 @@ function ttsNext() {
   speechSynthesis.speak(u);
 }
 function ttsPlayPause(n) {
+  if (AUDIO_DAYS.has(n)) {
+    if (!dayAudio || dayAudio.dataset.day != n) {
+      if (dayAudio) dayAudio.pause();
+      dayAudio = new Audio(audioSrc(n)); dayAudio.dataset.day = n; dayAudio.preload = 'auto';
+      dayAudio.onended = () => { tts.playing = false; dayAudio.currentTime = 0; dayAudio = null; ttsButtons(); };
+      dayAudio.onerror = () => { dayAudio = null; AUDIO_DAYS.delete(n); tts.playing = false; ttsPlayPause(n); };  // file missing: use the phone's voice
+    }
+    if (tts.playing) { dayAudio.pause(); tts.playing = false; } else { dayAudio.play().catch(() => {}); tts.playing = true; }
+    ttsButtons(); return;
+  }
+  if (!TTS) return;
   if (tts.playing) { tts.playing = false; speechSynthesis.cancel(); ttsButtons(); return; }  // pause = stop where we are, pick up at the same sentence
   if (!tts.parts.length) { tts.parts = dayScript(n); tts.i = 0; }
   if (!tts.voice) tts.voice = pickVoice();
   tts.playing = true; speechSynthesis.cancel(); ttsNext(); ttsButtons();
 }
-function ttsStop() { tts.playing = false; tts.parts = []; tts.i = 0; if (TTS) speechSynthesis.cancel(); ttsButtons(); }
+function ttsStop() { tts.playing = false; tts.parts = []; tts.i = 0; if (dayAudio) { dayAudio.pause(); dayAudio = null; } if (TTS) speechSynthesis.cancel(); ttsButtons(); }
 document.addEventListener('click', e => {
   const t = e.target.closest('#ttsPlay, #ttsStop'); if (!t) return;
   if (t.id === 'ttsStop') return ttsStop();
   const m = (location.hash || '').match(/^#day-(\d+)$/); if (m) ttsPlayPause(+m[1]);
 });
-window.addEventListener('hashchange', () => { if (TTS) ttsStop(); });
+window.addEventListener('hashchange', () => ttsStop());
 
 function viewDay(n) {
   if (n === 22) return viewDay22();
@@ -504,7 +519,7 @@ function viewDay(n) {
     <span class="label">Week ${d.week.num} · ${d.week.name}</span>
     <h1 class="mega">Day ${pad(n)}<br><span class="hl">${d.theme}</span></h1>
     <div class="meta"><span>${d.date}</span>${d.event ? `<span class="pill">${d.event}</span>` : ''}</div>
-    ${TTS ? `<div class="listen" id="listen"><button class="btn ghost" type="button" id="ttsPlay" aria-pressed="false">${ICON_PLAY}<span>Listen to today</span></button><button class="btn ghost" type="button" id="ttsStop" hidden>${ICON_STOP}<span>Stop</span></button></div>` : ''}
+    ${(TTS || AUDIO_DAYS.has(n)) ? `<div class="listen" id="listen"><button class="btn ghost" type="button" id="ttsPlay" aria-pressed="false">${ICON_PLAY}<span>Listen to today</span></button><button class="btn ghost" type="button" id="ttsStop" hidden>${ICON_STOP}<span>Stop</span></button></div>` : ''}
   </div></div>
   <main class="wrap">
     <div class="chips" aria-label="Today's steps">${chips}</div>
