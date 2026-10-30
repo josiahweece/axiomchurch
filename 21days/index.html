@@ -397,12 +397,12 @@ function viewHome() {
   <div class="hero"><div class="wrap">
     ${i < 1 ? '<span class="label">21 Days of Prayer and Fasting</span>' : ''}
     ${lead}${sub}
-    <div class="btn-row"><a class="btn" href="#day-${startN}">${i > 21 ? 'Open Day 22' : i < 1 ? 'Preview Day 1' : 'Start Day ' + t}</a></div>
+    <div class="btn-row"><a class="btn" href="${i < 1 ? '#guide-pick-your-fast' : '#day-' + startN}">${i > 21 ? 'Open Day 22' : i < 1 ? 'Start here' : 'Start Day ' + t}</a></div>
   </div></div>
   <div class="band"><div class="wrap"><span class="label">Pray this every day</span><q>God, what do you want to do in me?</q><q>God, what do you want to do through me?</q></div></div>
   <main class="wrap">
     ${i < 1 ? (() => { const n = PREP.filter(([k]) => prepDone(k)).length; return `<section class="block"><span class="label">Before you start</span><h2 class="h2">Do these 4 things before Nov 2.</h2>
-      <p>Tap the black button to open each step. It checks itself off when you've done it.</p>
+      <p>Start with step one. It checks itself off when you are done.</p>
       <p class="meter-label" id="prepCount">${n} of 4 done</p><div class="meter"><i style="width:${n*25}%"></i></div>
       <div class="preplist">${PREP.map(([k, label, sub, href, cta], j) => { const on = prepDone(k); return `
         <div class="prep${on ? ' on' : ''}">
