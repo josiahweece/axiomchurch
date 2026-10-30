@@ -394,7 +394,7 @@ function viewHome() {
   ].map(([a,b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('');
   return `
   <div class="hero"><div class="wrap">
-    ${i < 1 ? '<span class="label">21 Days of Prayer and Fasting · Nov 1–21</span>' : ''}
+    ${i < 1 ? '<span class="label">21 Days of Prayer and Fasting</span>' : ''}
     ${lead}${sub}
     <div class="btn-row"><a class="btn" href="#day-${startN}">${i > 21 ? 'Open Day 22' : i < 1 ? 'Preview Day 1' : 'Start Day ' + t}</a></div>
   </div></div>
