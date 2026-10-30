@@ -397,13 +397,13 @@ function viewHome() {
   <div class="band"><div class="wrap"><span class="label">Pray this every day</span><q>God, what do you want to do in me?</q><q>God, what do you want to do through me?</q></div></div>
   <main class="wrap">
     ${i < 1 ? (() => { const n = PREP.filter(([k]) => prepDone(k)).length; return `<section class="block"><span class="label">Before you start</span><h2 class="h2">Do these 4 things before Nov 1.</h2>
-      <p>Tap the black button to open each step. When you've done it, come back and tap <strong>Mark done</strong>.</p>
+      <p>Tap the black button to open each step. It checks itself off when you've done it.</p>
       <p class="meter-label" id="prepCount">${n} of 4 done</p><div class="meter"><i style="width:${n*25}%"></i></div>
       <div class="preplist">${PREP.map(([k, label, sub, href, cta], j) => { const on = prepDone(k); return `
         <div class="prep${on ? ' on' : ''}">
           <span class="num${on ? ' on' : ''}">${on ? '' : j + 1}</span>
           <a class="prep-body" href="${href}"><b>${label}</b><span>${sub}</span></a>
-          <div class="prep-actions"><a class="btn go" href="${href}">${cta} →</a><button class="markdone" type="button" data-toggle="prep-${k}" aria-pressed="${on}"><span class="bx"></span><span class="t-off">Mark done</span><span class="t-on">Done</span></button></div>
+          <div class="prep-actions"><a class="btn go" href="${href}">${cta} →</a></div>
         </div>`; }).join('')}</div></section>`; })() : ''}
     <section class="block"><span class="label">Your 21 days</span><div class="strip">${strip}</div>
       <p class="saved">A day fills in when you check off your fast or write in your journal. Try to write at least one sentence every day.</p></section>
@@ -796,6 +796,8 @@ function render(keep) {
     const prev = trail[trail.length - 2];
     document.getElementById('backLabel').textContent = prev ? labelFor(prev) : parentOf(h)[1];
   }
+  if (h === 'guide-how-to-p-r-a-y') set('prep-pray', true);
+  if (h === 'guide-the-holy-spirit') set('prep-spirit', true);
   let html, tab = 'home', m;
   if ((m = h.match(/^day-(\d+)$/))) { html = viewDay(+m[1]); tab = 'days'; }
   else if (h === 'days') { html = viewDays(); tab = 'days'; }
