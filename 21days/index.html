@@ -138,6 +138,20 @@ textarea:focus,input:focus{border-color:var(--ink)}
 .links a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px}
 .links a::after{content:"→";color:var(--accent);font-family:var(--sans)}
 .checklist{display:grid}
+.preplist{display:grid;gap:10px}
+.prep{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 14px;align-items:start;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px}
+.prep .num{margin-top:2px}
+.prep.on{background:var(--soft);border-color:var(--soft)}
+.prep-body{display:grid;gap:4px;min-width:0}
+.prep-body b{font-family:var(--display);font-weight:800;font-size:18px;color:var(--ink)}
+.prep-body span{font-size:14px;color:var(--muted)}
+.prep-actions{grid-column:2;display:flex;flex-wrap:wrap;gap:8px}
+.prep-actions .btn{min-height:42px;padding:0 16px;font-size:13px}
+.markdone{appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.markdone .bx{width:18px;height:18px;border-radius:5px;border:2px solid currentColor;display:grid;place-items:center}
+.markdone[aria-pressed="true"]{background:var(--done);border-color:var(--done);color:var(--done-ink)}
+.markdone[aria-pressed="true"] .bx::after{content:"";width:9px;height:5px;border-left:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-45deg) translate(1px,-1px)}
+.markdone .t-on{display:none}.markdone[aria-pressed="true"] .t-on{display:inline}.markdone[aria-pressed="true"] .t-off{display:none}
 .check{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
 .cbox{appearance:none;cursor:pointer;width:30px;height:30px;border-radius:8px;border:2px solid var(--ink);background:var(--bg);display:grid;place-items:center;padding:0}
 .cbox[aria-pressed="true"]{background:var(--done);border-color:var(--done);color:var(--done-ink)}
@@ -381,13 +395,15 @@ function viewHome() {
   </div></div>
   <div class="band"><div class="wrap"><span class="label">Pray this every day</span><q>God, what do you want to do in me?</q><q>God, what do you want to do through me?</q></div></div>
   <main class="wrap">
-    ${i < 1 ? `<section class="block"><span class="label">Before you start</span><h2 class="h2">Do these first.</h2>
-      <div class="checklist">${PREP.map(([k, label, sub, href]) => `
-        <div class="check">
-          <button class="cbox" type="button" data-toggle="prep-${k}" aria-pressed="${prepDone(k)}" aria-label="Mark done: ${label}"></button>
-          <a href="${href}"><b>${label}</b><span>${sub}</span></a>
-        </div>`).join('')}</div>
-      <p class="saved">Tap a box when you're done. Tap the words to open that step.</p></section>` : ''}
+    ${i < 1 ? (() => { const n = PREP.filter(([k]) => prepDone(k)).length; return `<section class="block"><span class="label">Before you start</span><h2 class="h2">Do these 4 things before Nov 1.</h2>
+      <p>Open each one, do it, then tap <strong>Mark done</strong>.</p>
+      <p class="meter-label" id="prepCount">${n} of 4 done</p><div class="meter"><i style="width:${n*25}%"></i></div>
+      <div class="preplist">${PREP.map(([k, label, sub, href], j) => { const on = prepDone(k); return `
+        <div class="prep${on ? ' on' : ''}">
+          <span class="num${on ? ' on' : ''}">${on ? '' : j + 1}</span>
+          <div class="prep-body"><b>${label}</b><span>${sub}</span></div>
+          <div class="prep-actions"><a class="btn ghost" href="${href}">Open</a><button class="markdone" type="button" data-toggle="prep-${k}" aria-pressed="${on}"><span class="bx"></span><span class="t-off">Mark done</span><span class="t-on">Done</span></button></div>
+        </div>`; }).join('')}</div></section>`; })() : ''}
     <section class="block"><span class="label">Your 21 days</span><div class="strip">${strip}</div>
       <p class="saved">A day fills in when you check off your fast or write in your journal. Try to write at least one sentence every day.</p></section>
     <section class="block"><span class="label">Key dates</span><div class="dates">${kd}</div></section>
@@ -818,7 +834,7 @@ function render(keep) {
   });
   window.scrollTo(0, keep ? y : 0);
 }
-const live = () => location.hash === '#guide-before-you-begin';
+const live = () => location.hash === '#guide-before-you-begin' || location.hash === '' || location.hash === '#home';
 
 $app.addEventListener('click', e => {
   const jmp = e.target.closest('[data-jump]');
