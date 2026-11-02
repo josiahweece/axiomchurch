@@ -65,21 +65,6 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.axiomchurch.com/church-near-round-rock</loc>
-    <lastmod>2026-10-26</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.axiomchurch.com/church-near-cedar-park</loc>
-    <lastmod>2026-10-26</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.axiomchurch.com/church-near-liberty-hill</loc>
-    <lastmod>2026-10-26</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.axiomchurch.com/privacy.html</loc>
     <lastmod>2026-10-27</lastmod>
     <priority>0.3</priority>
@@ -94,5 +79,30 @@
     <loc>https://www.axiomchurch.com/messages/in-the-world-not-of-it</loc>
     <lastmod>2026-10-25</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.axiomchurch.com/church-near-round-rock</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.axiomchurch.com/church-near-cedar-park</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.axiomchurch.com/church-near-liberty-hill</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.axiomchurch.com/church-near-georgetown</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.axiomchurch.com/church-near-north-austin</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.7</priority>
   </url>
 </urlset>

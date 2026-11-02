@@ -14,6 +14,12 @@ const TOWNS = [
   { slug: 'liberty-hill', town: 'Liberty Hill', head: '15 minutes down 29.',
     intro: 'Axiom Church is a non-denominational church in Leander, about 15 minutes from Liberty Hill.',
     route: 'Take 29 east into Leander.' },
+  { slug: 'georgetown', town: 'Georgetown', head: '25 minutes across 29.',
+    intro: 'Axiom Church is a non-denominational church in Leander, about 25 minutes from Georgetown.',
+    route: 'Take SH 29 west, then US 183 south.' },
+  { slug: 'north-austin', town: 'North Austin', head: '25 minutes up 183.',
+    intro: 'Axiom Church is a non-denominational church in Leander, about 25 minutes from North Austin.',
+    route: 'Take US 183 or MoPac north to the 183A Toll.' },
 ];
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const shell = fs.readFileSync(path.join(root, '404.html'), 'utf8');
