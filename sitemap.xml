@@ -64,12 +64,6 @@
     <loc>https://www.axiomchurch.com/recent-messages</loc>
     <changefreq>weekly</changefreq>
   </url>
-
-  <url>
-    <loc>https://www.axiomchurch.com/messages/in-the-world-not-of-it</loc>
-    <lastmod>2026-10-25</lastmod>
-    <priority>0.6</priority>
-  </url>
   <url>
     <loc>https://www.axiomchurch.com/church-near-round-rock</loc>
     <lastmod>2026-10-26</lastmod>
@@ -89,5 +83,16 @@
     <loc>https://www.axiomchurch.com/privacy.html</loc>
     <lastmod>2026-10-27</lastmod>
     <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axiomchurch.com/messages/help-people-up</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.axiomchurch.com/messages/in-the-world-not-of-it</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>
