@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1PBV7QDMYQ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1PBV7QDMYQ',{page_title:'21 Days'});</script>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#101010">
 <link rel="manifest" href="/manifest.webmanifest">
@@ -397,7 +399,7 @@ function viewHome() {
     ['Sat, Nov 7','Food Packing','With Mission of Hope. 9:00 a.m.–12:30 p.m. Ages 6 and up.','https://axiomchurch.churchcenter.com/registrations/events/3924767/reservations/new','Sign up to serve'],
     ['Sun, Nov 15','Baptism Sunday','Ready to get baptized? Sign up and we\'ll walk you through it.','https://axiomchurch.churchcenter.com/registrations/events/3900240/reservations/new','Sign up to get baptized'],
     ['Sun, Nov 22','Rally Point','Last day of the fast. Right after service, 11:30 a.m. Free food and childcare.','https://axiomchurch.churchcenter.com/registrations/events/3952767/reservations/new','Sign up for Rally Point'],
-  ].map(([a,t,b,u,c]) => `<div class="kdate"><span class="when">${a}</span><b>${t}</b><p>${b}</p><a class="btn ghost" href="${u}" target="_blank" rel="noopener">${c}</a></div>`).join('');
+  ].map(([a,t,b,u,c]) => `<div class="kdate"><span class="when">${a}</span><b>${t}</b><p>${b}</p><a class="btn ghost" href="${u}" target="_blank" rel="noopener" onclick="track('signup_click',{event:'${t}'})">${c}</a></div>`).join('');
   return `
   <div class="hero"><div class="wrap">
     ${i < 1 ? '<span class="label">21 Days of Prayer and Fasting</span>' : ''}
@@ -500,6 +502,7 @@ function ttsStop() { tts.playing = false; tts.parts = []; tts.i = 0; if (dayAudi
 document.addEventListener('click', e => {
   const t = e.target.closest('#ttsPlay, #ttsStop'); if (!t) return;
   if (t.id === 'ttsStop') return ttsStop();
+  { const m = (location.hash || '').match(/^#day-(\d+)$/); if (m && !tts.playing) track('listen_start', { day: +m[1] }); }
   const m = (location.hash || '').match(/^#day-(\d+)$/); if (m) ttsPlayPause(+m[1]);
 });
 window.addEventListener('hashchange', () => ttsStop());
@@ -809,7 +812,12 @@ document.getElementById('backBtn').addEventListener('click', () => {
 });
 
 /* ---- router ---- */
+/* Analytics: counts taps only. Never sends anything someone writes or records. */
+function track(name, params) { try { if (window.gtag) gtag('event', name, params || {}); } catch (e) {} }
+let lastScreen = '';
 function render(keep) {
+  { const h = (location.hash || '#home').slice(1); if (h !== lastScreen) { lastScreen = h; const m = h.match(/^day-(\d+)$/);
+    if (m) track('day_open', { day: +m[1] }); else track('screen_open', { screen: h.replace(/^guide-/, '') }); } }
   const y = window.scrollY;
   const h = (location.hash || '#home').slice(1);
   if (trail[trail.length - 1] !== h) trail.push(h);
@@ -870,6 +878,8 @@ $app.addEventListener('click', e => {
   const b = e.target.closest('[data-toggle]'); if (!b) return;
   const k = b.dataset.toggle, on = b.getAttribute('aria-pressed') !== 'true';
   set(k, on); b.setAttribute('aria-pressed', on);
+  if (on) { let m; if ((m = k.match(/^kneel-(\d+)-([mde])$/))) track('pray_check', { day: +m[1], time: {m:'morning',d:'midday',e:'evening'}[m[2]] });
+    else if ((m = k.match(/^fast-(\d+)$/))) track('fast_check', { day: +m[1] }); }
   if (live()) render(true);
 });
 let timers = {};
@@ -884,7 +894,7 @@ window.addEventListener('hashchange', () => render());
 (() => {
   const sheet = document.getElementById('storySheet'), fab = document.getElementById('storyBtn');
   const nudge = document.getElementById('storyNudge');
-  const open = () => { nudge.hidden = true; sheet.hidden = false; fab.hidden = true; document.getElementById('storyLink').focus(); };
+  const open = () => { track('story_open'); nudge.hidden = true; sheet.hidden = false; fab.hidden = true; document.getElementById('storyLink').focus(); };
   const close = () => { sheet.hidden = true; fab.hidden = false; fab.focus(); };
   fab.addEventListener('click', open);
   document.getElementById('storyClose').addEventListener('click', close);
@@ -901,7 +911,7 @@ window.addEventListener('hashchange', () => render());
     setTimeout(() => { if (sheet.hidden) { nudge.hidden = false; set('story-ask-' + n, true); } }, 2500);
   };
   window.addEventListener('hashchange', check); check();
-  document.getElementById('storyLink').addEventListener('click', () => setTimeout(close, 300));
+  document.getElementById('storyLink').addEventListener('click', () => { track('story_form'); setTimeout(close, 300); });
 })();
 render();
 </script>
