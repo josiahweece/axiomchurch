@@ -88,3 +88,12 @@ if(reel&&track&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const n
  window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};
  const s=document.createElement('script');s.defer=true;s.src='/_vercel/insights/script.js';document.head.appendChild(s);
 })();
+
+/* Register the service worker. This is what makes Chrome on Android offer "Install app"
+   instead of only the manual menu steps. It caches nothing but the offline card. */
+(function(){
+  if(!('serviceWorker' in navigator))return;
+  addEventListener('load',function(){
+    navigator.serviceWorker.register('/sw.js',{scope:'/'}).catch(function(){});
+  });
+})();

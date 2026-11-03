@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Axiom Church</title>
+    <meta name="theme-color" content="#101010" />
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100svh; background: #101010; color: #fff;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+        display: grid; place-content: center; text-align: center;
+        padding: 32px 24px calc(32px + env(safe-area-inset-bottom, 0px));
+        line-height: 1.5;
+      }
+      img { width: 64px; height: 64px; border-radius: 14px; margin: 0 auto 26px; display: block; }
+      h1 {
+        font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 900; font-size: clamp(1.75rem, 8vw, 2.4rem);
+        letter-spacing: -0.035em; line-height: 1.05; margin: 0 0 12px;
+      }
+      p { color: rgba(255,255,255,.66); margin: 0 auto 28px; max-width: 30ch; }
+      .when { border-top: 1px solid rgba(255,255,255,.14); padding-top: 22px; margin-top: 4px; }
+      .when b { display: block; font-family: 'Archivo', Arial, sans-serif; font-weight: 800; font-size: 1.05rem; }
+      .when span { color: rgba(255,255,255,.55); font-size: .95rem; }
+      button {
+        appearance: none; border: 0; cursor: pointer; margin-top: 26px;
+        background: #C51C11; color: #fff; font: inherit; font-weight: 700;
+        padding: 14px 30px; border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="/assets/icons/apple-touch-icon.png" alt="" />
+    <h1>You&rsquo;re offline.</h1>
+    <p>No signal right now. This page will load again as soon as you&rsquo;re back.</p>
+    <div class="when">
+      <b>Sundays at 10am</b>
+      <span>Camacho Elementary &middot; Leander</span>
+    </div>
+    <button type="button" onclick="location.reload()">Try again</button>
+  </body>
+</html>
