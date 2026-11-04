@@ -20,6 +20,7 @@
 //   VISIT_FROM                 the reminder's sender, e.g. Axiom Church <hello@axiomchurch.com>.
 //                              Must be on a domain verified in Resend. Until it's set,
 //                              no reminders go out (Resend's test sender can't email visitors).
+//   VISIT_REPLY_TO             optional, where replies to the reminder go (a real inbox).
 //   VISIT_ALERT_TO             optional, where the backup email goes. Defaults to prayer@axiomchurch.com.
 //   VISIT_FORM_ID              optional, defaults to 1302721
 //
@@ -34,6 +35,7 @@ const SECRET = process.env.PCO_SECRET || '';
 const RESEND = process.env.RESEND_API_KEY || '';
 const FROM = process.env.VISIT_FROM || '';
 const ALERT_TO = process.env.VISIT_ALERT_TO || 'prayer@axiomchurch.com';
+const REPLY_TO = process.env.VISIT_REPLY_TO || '';
 const ALERT_FROM = FROM || 'Axiom Church <onboarding@resend.dev>';
 const TZ = 'America/Chicago';
 const PLACE = 'Camacho Elementary, 501 Municipal Dr, Leander, TX 78641';
@@ -145,6 +147,7 @@ module.exports = async (req, res) => {
         planningCenter: APP_ID && SECRET ? 'set' : 'missing',
         reminderSender: FROM ? 'set' : 'missing (no reminders until VISIT_FROM is set)',
         resend: RESEND ? 'set' : 'missing',
+        replyTo: REPLY_TO ? 'set' : 'missing (replies go to the from address)',
         formId: FORM_ID,
       });
     }
@@ -200,6 +203,7 @@ module.exports = async (req, res) => {
         await resend({
           from: FROM, to: [v.email], subject: at.getUTCDay() === 0 ? 'See you this morning at Axiom' : 'See you tomorrow at Axiom',
           html: reminderEmail(v, at.getUTCDay() === 0), scheduled_at: at.toISOString(),
+          ...(REPLY_TO ? { reply_to: REPLY_TO } : {}),
         });
         reminder = true;
       } catch (e) { console.error('reminder:', e.message); }
