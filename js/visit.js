@@ -152,6 +152,7 @@
       .then(function (j) {
         data.reminder = !!j.reminder;
         track('generate_lead', { form_name: 'plan_a_visit', method: 'popup' });
+        try { localStorage.setItem('axVisitDone', '1'); } catch (e) {}
         step = 4; screen();
       })
       .catch(function () {
@@ -210,4 +211,11 @@
 
   window.axPlanVisit = open;
   if (/[?&]visit=1/.test(location.search)) open();
+  // Plan a Visit page: open on its own after a beat. Once per visit to the site, and never
+  // again for someone who already signed up on this device.
+  else if (/^\/(visit|plan-a-visit)(\.html)?\/?$/.test(location.pathname)) {
+    var seen = false;
+    try { seen = !!(sessionStorage.getItem('axVisitAuto') || localStorage.getItem('axVisitDone')); sessionStorage.setItem('axVisitAuto', '1'); } catch (e) {}
+    if (!seen) setTimeout(function () { if (!el) open(); }, 1200);
+  }
 })();
