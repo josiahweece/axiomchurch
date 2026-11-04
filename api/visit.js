@@ -125,14 +125,13 @@ function reminderTime(ymd) {
 }
 
 function reminderEmail(v, sameDay) {
-    const kids = v.kids
-    ? `<p style="margin:0 0 14px">We've got your kids down too, so you can skip the check-in line. Look for the Axiom Kids table when you walk in.</p>`
-    : '';
+  const p = (t) => `<p style="margin:0 0 14px">${t}</p>`;
   return `<div style="font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;color:#1a1a1a;max-width:520px">
-<p style="margin:0 0 14px">Hey ${esc(v.first)},</p>
-<p style="margin:0 0 14px">Just a heads-up: we'll see you ${sameDay ? 'this morning' : 'tomorrow'}. Sunday at 10:00 AM.</p>
-<p style="margin:0 0 14px"><b>${esc(PLACE)}</b><br><a href="${MAPS}" style="color:#C51C11">Get directions</a></p>
-${kids}<p style="margin:0 0 14px">Come as you are. Someone will be out front to say hi and point you in the right direction.</p>
+${p(`Hey ${esc(v.first)},`)}
+${p(`Just a heads-up: we'll see you ${sameDay ? 'this morning' : 'tomorrow'}. Sunday at 10:00 AM.`)}
+${p(`<b>${esc(PLACE)}</b><br><a href="${MAPS}" style="color:#C51C11">Get directions</a>`)}
+${p(`It's casual, so dress however you like. We'll have coffee ready if you want it.`)}
+${p(`Someone will be out front to point you in the right direction. And if you make it inside without anyone stopping to say hi, find the New Here area. They'll take care of you.`)}
 <p style="margin:0">See you soon,<br>Axiom Church</p></div>`;
 }
 
