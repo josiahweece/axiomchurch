@@ -138,7 +138,7 @@ async function alert(post, isPrivate) {
     '',
     post.text,
     '',
-    'Review it: https://' + (process.env.VERCEL_PROJECT_PRODUCTION_URL || 'axiomchurch-lac.vercel.app') + '/prayer-team.html',
+    'Review it: https://www.axiomchurch.com/prayer-team.html',
   ];
   try {
     await fetch('https://api.resend.com/emails', {
