@@ -1,4 +1,6 @@
 /* Plan a Visit pop-up.
+   Google Analytics events, read by the Scoreboard's Plan a Visit funnel:
+   visit_popup_open > visit_step_sunday > visit_step_name > visit_step_email > generate_lead.
    Every "Let us know you're coming" link (the Church Center form 1302721) opens this
    instead: one question at a time, then it goes to /api/visit, which files it in
    Planning Center and schedules a reminder email. If this script fails to load, the
@@ -6,7 +8,7 @@
    Add ?visit=1 to any page address to open it right away. */
 (function () {
   var FORM = 'forms/1302721', CC = 'https://axiomchurch.churchcenter.com/people/forms/1302721';
-  var el, step = 0, opened = 0, lastFocus = null;
+  var el, step = 0, opened = 0, lastFocus = null, autoOpen = false;
   var data = { sunday: '', first: '', last: '', email: '', phone: '', kids: '' };
   var track = function (name, p) { try { window.gtag && gtag('event', name, p || {}); } catch (e) {} };
 
@@ -107,7 +109,7 @@
 
   function wire() {
     el.querySelectorAll('[data-day]').forEach(function (b) {
-      b.addEventListener('click', function () { data.sunday = b.getAttribute('data-day'); step = 1; screen(); });
+      b.addEventListener('click', function () { data.sunday = b.getAttribute('data-day'); track('visit_step_sunday', { sunday: data.sunday || 'not_sure' }); step = 1; screen(); });
     });
     var next = el.querySelector('[data-next]');
     if (next) next.addEventListener('click', advance);
@@ -134,11 +136,11 @@
     if (step === 1) {
       data.first = val('axv-first'); data.last = val('axv-last');
       if (!data.first || !data.last) return err('First and last name, please.');
-      step = 2; screen();
+      track('visit_step_name'); step = 2; screen();
     } else if (step === 2) {
       data.email = val('axv-email'); data.phone = val('axv-phone'); data.hp = val('axv-hp');
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) return err('That email doesn&rsquo;t look right.');
-      step = 3; screen();
+      track('visit_step_email'); step = 3; screen();
     }
   }
 
@@ -189,7 +191,7 @@
     document.addEventListener('keydown', onKey);
     step = data.first && step === 4 ? 4 : 0;
     screen();
-    track('visit_popup_open');
+    track('visit_popup_open', { auto: autoOpen ? 'yes' : 'no' }); autoOpen = false;
   }
 
   function close() {
@@ -216,6 +218,6 @@
   else if (/^\/(visit|plan-a-visit)(\.html)?\/?$/.test(location.pathname)) {
     var seen = false;
     try { seen = !!(sessionStorage.getItem('axVisitAuto') || localStorage.getItem('axVisitDone')); sessionStorage.setItem('axVisitAuto', '1'); } catch (e) {}
-    if (!seen) setTimeout(function () { if (!el) open(); }, 1200);
+    if (!seen) setTimeout(function () { if (!el) { autoOpen = true; open(); } }, 1200);
   }
 })();
