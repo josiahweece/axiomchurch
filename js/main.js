@@ -97,3 +97,6 @@ if(reel&&track&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const n
     navigator.serviceWorker.register('/sw.js',{scope:'/'}).catch(function(){});
   });
 })();
+
+/* Plan a Visit pop-up: every "Let us know you're coming" link opens it (see js/visit.js). */
+(function(){var s=document.createElement('script');s.src='/js/visit.js';s.defer=true;document.head.appendChild(s);})();
