@@ -3265,3 +3265,13 @@ h1 {
 .nextpage .inwords p{margin:0 0 10px;line-height:1.55}
 .nextpage .inwords a{font-weight:700;color:inherit;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:4px}
 .footer .footer-bottom a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+/* Home: "Why we started" sits on light gray with Josiah and Jessica's faces, between the dark band
+   above and the white kids section below, so it reads as its own section. */
+.home .guide{background:#F5F5F5;border-top:0;padding-block:clamp(56px,10vw,110px)}
+.home .guide-in{display:grid;gap:clamp(28px,5vw,64px);align-items:center}
+.home .guide-faces{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:440px}
+.home .guide-faces img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;border-radius:18px;display:block;box-shadow:0 14px 30px rgba(16,16,16,.12)}
+.home .guide-faces img:nth-child(2){margin-top:36px}
+@media (max-width:759px){.home .guide-faces{max-width:280px}.home .guide-faces img:nth-child(2){margin-top:24px}}
+@media (min-width:760px){.home .guide-in{grid-template-columns:minmax(260px,0.8fr) 1.2fr}}
