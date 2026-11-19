@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <base href="/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Google Analytics -->
+    <script>
+      /* Analytics loads after the page has finished loading, so it never slows the first view. */
+      window.addEventListener('load', function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1PBV7QDMYQ';
+        document.head.appendChild(s);
+        var f = document.createElement('script');
+        f.async = true;
+        f.src = 'https://connect.facebook.net/en_US/fbevents.js';
+        document.head.appendChild(f);
+      });
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1PBV7QDMYQ');
+      // Meta Pixel ("Axiom Pixel" in Events Manager). Queues calls until fbevents.js loads.
+      !function(w){if(w.fbq)return;var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);
+      fbq('init', '726396056685457');
+      fbq('track', 'PageView');
+      // Church Center forms open off-site, so count the click that sends someone there.
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href*="churchcenter.com"]');
+        if (!a) return;
+        var m = a.href.match(/forms\/(\d+)/);
+        var forms = { '1302721': 'plan_a_visit', '810097': 'join_a_team', '1335299': 'join_a_team', '882949': 'baptism', '1308752': 'contact' };
+        var name = m && forms[m[1]];
+        if (name === 'plan_a_visit') { gtag('event', 'generate_lead', { form_name: name, transport_type: 'beacon' }); fbq('track', 'Lead', { content_name: 'plan_a_visit' }); }
+        else gtag('event', 'church_center_click', { form_name: name || 'other', link_url: a.href, transport_type: 'beacon' });
+      });
+    </script>
+    <title>Christmas Eve in Leander | Axiom Church</title>
+    <link rel="canonical" href="https://www.axiomchurch.com/christmas" />
+    <meta property="og:url" content="https://www.axiomchurch.com/christmas" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Christmas Eve at Axiom Church (3:00 PM)", "startDate": "2026-12-24T15:00:00-06:00", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "location": {"@type": "Place", "name": "Camacho Elementary", "address": {"@type": "PostalAddress", "streetAddress": "501 Municipal Dr", "addressLocality": "Leander", "addressRegion": "TX", "postalCode": "78641", "addressCountry": "US"}}, "image": ["https://www.axiomchurch.com/assets/images/xmas-hero.jpg"], "description": "Christmas Eve at Axiom Church in Leander. Thursday, December 24 at 3:00 and 4:30 PM at Camacho Elementary. Candles, music, a short service, and Axiom Kids for birth through 5th grade.", "isAccessibleForFree": true, "organizer": {"@type": "Church", "name": "Axiom Church", "url": "https://www.axiomchurch.com/"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Christmas Eve at Axiom Church (4:30 PM)", "startDate": "2026-12-24T16:30:00-06:00", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "location": {"@type": "Place", "name": "Camacho Elementary", "address": {"@type": "PostalAddress", "streetAddress": "501 Municipal Dr", "addressLocality": "Leander", "addressRegion": "TX", "postalCode": "78641", "addressCountry": "US"}}, "image": ["https://www.axiomchurch.com/assets/images/xmas-hero.jpg"], "description": "Christmas Eve at Axiom Church in Leander. Thursday, December 24 at 3:00 and 4:30 PM at Camacho Elementary. Candles, music, a short service, and Axiom Kids for birth through 5th grade.", "isAccessibleForFree": true, "organizer": {"@type": "Church", "name": "Axiom Church", "url": "https://www.axiomchurch.com/"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need to sign up?", "acceptedAnswer": {"@type": "Answer", "text": "No. Just show up. If you let us know you’re coming, we’ll send you what to expect and a reminder the day before."}}, {"@type": "Question", "name": "Where do I go when I get there?", "acceptedAnswer": {"@type": "Answer", "text": "Someone will be out front to point you in the right direction. And if you make it inside without anyone stopping to say hi, find the New Here area. They’ll take care of you."}}, {"@type": "Question", "name": "Is there something for my kids?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Axiom Kids is open for birth through 5th grade. Every serve team member is background checked, and only the person with the matching tag picks your kid up. Or keep them with you for the candles."}}, {"@type": "Question", "name": "How long is it?", "acceptedAnswer": {"@type": "Answer", "text": "Short. It’s Christmas Eve. We know you have somewhere to be after."}}, {"@type": "Question", "name": "What should I wear?", "acceptedAnswer": {"@type": "Answer", "text": "Whatever you’d wear to see family. Ugly sweaters welcome."}}, {"@type": "Question", "name": "Do I need to give?", "acceptedAnswer": {"@type": "Answer", "text": "If this is your first time here, there’s no obligation whatsoever. We’re just glad you’re here."}}, {"@type": "Question", "name": "Which time should I pick?", "acceptedAnswer": {"@type": "Answer", "text": "Both services are the same. Pick the one that fits your day."}}]}</script>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96.png" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+    <meta name="theme-color" content="#101010" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Axiom" />
+    <meta property="og:site_name" content="Axiom Church" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Christmas Eve at Axiom Church" />
+    <meta property="og:description" content="Christmas Eve at Axiom Church in Leander. Thursday, December 24 at 3:00 and 4:30 PM at Camacho Elementary. Candles, music, a short service, and Axiom Kids for birth through 5th grade." />
+    <meta property="og:image" content="https://www.axiomchurch.com/assets/images/xmas-share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="description" content="Christmas Eve at Axiom Church in Leander. Thursday, December 24 at 3:00 and 4:30 PM at Camacho Elementary. Candles, music, a short service, and Axiom Kids for birth through 5th grade." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Archivo is loaded with its width axis here: the tall condensed headings on this page use it. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:wght@400;500;600;700&display=swap" /></noscript>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .xm{--gold:#e9b86b;background:#0d0d0d;color:#fff}
+      .xm-hero{position:relative;display:grid;grid-template-columns:1fr;min-height:min(86vh,760px);overflow:hidden}
+      .xm-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%;filter:brightness(.7)}
+      .xm-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,13,13,.85) 0%,rgba(13,13,13,.35) 60%,rgba(13,13,13,.1)),linear-gradient(180deg,transparent 55%,#0d0d0d 100%)}
+      @media(max-width:700px){.xm-hero:after{background:linear-gradient(180deg,rgba(13,13,13,.25) 0%,rgba(13,13,13,.55) 45%,#0d0d0d 100%)}.xm-bg{object-position:50% 40%}}
+      .xm-hero .in{position:relative;z-index:1;align-self:end;max-width:1100px;width:100%;margin:0 auto;padding:clamp(64px,10vw,120px) 20px clamp(40px,7vw,84px)}
+      .xm-k{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;color:var(--gold);margin:0 0 14px}
+      .xm h1{font-family:var(--display);font-weight:900;font-stretch:80%;font-size:clamp(3rem,11vw,7.2rem);line-height:.88;letter-spacing:-.03em;margin:0 0 20px;text-transform:uppercase}
+      .xm h1 em{font-style:normal;color:var(--red)}
+      .xm-lede{font-size:clamp(1.08rem,2.6vw,1.3rem);line-height:1.6;max-width:44ch;color:#eee;margin:0 0 26px}
+      .xm-btn{display:inline-block;background:var(--red-deep);color:#fff;font-family:var(--display);font-weight:800;padding:15px 24px;border-radius:4px;text-decoration:none;border:0;font-size:1rem;cursor:pointer}
+      .xm-btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.5)}
+      .xm-cta{display:flex;flex-wrap:wrap;gap:12px}
+      .xm-wrap{max-width:1100px;margin:0 auto;padding:clamp(56px,9vw,110px) 20px}
+      .xm-times{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:0 0 18px}
+      .xm-time{border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:26px 24px}
+      .xm-time b{display:block;font-family:var(--display);font-weight:900;font-size:clamp(2.6rem,7vw,3.6rem);letter-spacing:-.03em;line-height:1}
+      .xm-time span{display:block;color:#bbb;margin-top:8px}
+      .xm-where{color:#ccc;font-size:1.05rem;line-height:1.6}
+      .xm-where a{color:#fff;text-decoration-color:var(--red);text-underline-offset:4px}
+      .xm h2{font-family:var(--display);font-weight:900;font-size:clamp(2rem,5.5vw,3.2rem);letter-spacing:-.03em;line-height:1;margin:0 0 18px;text-transform:uppercase}
+      .xm-split{display:grid;gap:clamp(28px,5vw,64px);align-items:center}
+      @media(min-width:820px){.xm-split{grid-template-columns:1fr 1fr}.xm-split.flip .ph{order:2}}
+      .xm-split .ph img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:10px;display:block}
+      .xm-split p{font-size:1.1rem;line-height:1.65;color:#ddd;margin:0 0 14px;max-width:52ch}
+      .xm-list{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:12px}
+      .xm-list li{padding-left:28px;position:relative;font-size:1.06rem;color:#eee}
+      .xm-list li:before{content:"";position:absolute;left:4px;top:.45em;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px 3px rgba(233,184,107,.55)}
+      .xm-band{background:#151515}
+      .xm-faq{max-width:760px}
+      .xm-faq details{border-top:1px solid rgba(255,255,255,.14);padding:16px 0}
+      .xm-faq details:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
+      .xm-faq summary{font-weight:700;cursor:pointer;font-size:1.08rem}
+      .xm-faq p{margin:10px 0 0;color:#ccc;line-height:1.6}
+      .xm-end{text-align:center}
+      .xm-end p{color:#ccc;font-size:1.1rem;margin:0 auto 26px;max-width:46ch}
+      .xm-end .xm-cta{justify-content:center}
+    </style>
+  </head>
+  <body>
+    <div data-header><header class="header"><nav class="nav wrap" aria-label="Primary"><a class="logo" href="index.html"><span class="logo-image"><img src="assets/images/axiom-logo-dark.png" alt="Axiom Church logo"></span><b>Axiom Church</b></a><div class="menu" id="menu"><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-new">I'm New<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-new"><a href="visit.html">Plan a visit</a><a href="kids.html">Kids</a></div></div><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-about">About<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-about"><a href="about.html">Who we are</a><a href="beliefs.html">What we believe</a></div></div><a class="link" href="messages.html">Messages</a><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-next">Next Steps<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-next"><a href="next-steps.html">What is my Next Step?</a><a href="baptism.html">Get Baptized</a><a href="teams.html">Join a Team</a><a href="prayer.html">Need Prayer?</a><a href="https://axiomchurch.churchcenter.com/registrations/events" target="_blank" rel="noopener">Events</a></div></div><a class="link" href="give.html">Give</a><a class="pill fill menu-cta" href="visit.html">Plan a Visit</a></div><a class="pill fill" href="visit.html">Plan a Visit</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button></nav></header></div>
+    <main class="xm">
+      <section class="xm-hero">
+        <img class="xm-bg" src="assets/images/xmas-hero.jpg" alt="A couple sitting together at Axiom with a lit Christmas tree beside them" fetchpriority="high">
+        <div class="in">
+          <p class="xm-k">Thursday, December 24 &middot; Leander</p>
+          <h1>Christmas Eve<br>at <em>Axiom</em></h1>
+          <p class="xm-lede">Candles, music, and a short service. Bring your kids. Bring your parents. Bring the grandparents who are in town and keep asking if you&rsquo;ve found a church yet. We want you here.</p>
+          <div class="xm-cta"><a class="xm-btn" href="https://axiomchurch.churchcenter.com/people/forms/1302721" data-xmas>Let us know you&rsquo;re coming</a><a class="xm-btn ghost" href="#times">See times</a></div>
+        </div>
+      </section>
+
+      <section class="xm-wrap" id="times">
+        <div class="xm-times">
+          <div class="xm-time"><b>3:00 PM</b><span>Thursday, December 24</span></div>
+          <div class="xm-time"><b>4:30 PM</b><span>Thursday, December 24</span></div>
+        </div>
+        <p class="xm-where">Same service, both times. <a href="https://www.google.com/maps/dir/?api=1&amp;destination=501+Municipal+Dr%2C+Leander%2C+TX+78641" target="_blank" rel="noopener">Camacho Elementary, 501 Municipal Dr, Leander</a>. Axiom Kids for birth through 5th grade.</p>
+      </section>
+
+      <section class="xm-band"><div class="xm-wrap xm-split">
+        <div class="ph"><img src="assets/images/xmas-family.jpg" alt="A mom and dad on stage at Axiom with their son and newborn" loading="lazy"></div>
+        <div>
+          <h2>Bring everyone</h2>
+          <p>Christmas Eve is one of the few nights the whole family is in the same room. So we built the night around that. A place where your family can meet Jesus, for generations to come.</p>
+          <ul class="xm-list">
+            <li>Candles at the end.</li>
+            <li>Music, and a short message about why Jesus came.</li>
+            <li>Time with your family. Out in time for dinner.</li>
+          </ul>
+        </div>
+      </div></section>
+
+      <section class="xm-wrap xm-split flip">
+        <div class="ph"><img src="assets/images/xmas-kids.jpg" alt="Axiom Kids on stage on a Sunday" loading="lazy"></div>
+        <div>
+          <h2>Kids are covered</h2>
+          <p>Axiom Kids is open for birth through 5th grade. Not childcare. People teaching your kids about Jesus, at their level. Every serve team member is background checked, and only the person with the matching tag picks your kid up.</p>
+          <p>Or keep them with you for the candles. Your call.</p>
+        </div>
+      </section>
+
+      <section class="xm-band"><div class="xm-wrap xm-faq">
+        <h2>Questions</h2>
+        <details><summary>Do I need to sign up?</summary><p>No. Just show up. If you let us know you’re coming, we’ll send you what to expect and a reminder the day before.</p></details><details><summary>Where do I go when I get there?</summary><p>Someone will be out front to point you in the right direction. And if you make it inside without anyone stopping to say hi, find the New Here area. They’ll take care of you.</p></details><details><summary>Is there something for my kids?</summary><p>Yes. Axiom Kids is open for birth through 5th grade. Every serve team member is background checked, and only the person with the matching tag picks your kid up. Or keep them with you for the candles.</p></details><details><summary>How long is it?</summary><p>Short. It’s Christmas Eve. We know you have somewhere to be after.</p></details><details><summary>What should I wear?</summary><p>Whatever you’d wear to see family. Ugly sweaters welcome.</p></details><details><summary>Do I need to give?</summary><p>If this is your first time here, there’s no obligation whatsoever. We’re just glad you’re here.</p></details><details><summary>Which time should I pick?</summary><p>Both services are the same. Pick the one that fits your day.</p></details>
+      </div></section>
+
+      <section class="xm-wrap xm-end">
+        <h2>See you Christmas Eve</h2>
+        <p>Thursday, December 24 at 3:00 or 4:30 PM. Camacho Elementary in Leander. A place you can stop pretending, even on Christmas.</p>
+        <div class="xm-cta"><a class="xm-btn" href="https://axiomchurch.churchcenter.com/people/forms/1302721" data-xmas>Let us know you&rsquo;re coming</a><a class="xm-btn ghost" href="visit.html">First time at Axiom?</a></div>
+      </section>
+    </main>
+    <div data-footer><footer class="footer"><div class="wrap"><div class="footer-main"><div><h3>A place you can<br>stop pretending.</h3><p>A brand new church for people who thought they would never step foot in one.</p></div><div><h4>I&rsquo;m New</h4><ul><li><a href="visit.html">Plan a visit</a></li><li><a href="kids.html">Kids</a></li><li><a href="messages.html">Messages</a></li></ul></div><div><h4>About</h4><ul><li><a href="about.html">Who we are</a></li><li><a href="beliefs.html">What we believe</a></li><li><a href="give.html">Give</a></li><li><a href="contact.html">Contact</a></li></ul></div><div><h4>Next Steps</h4><ul><li><a href="next-steps.html">What is my Next Step?</a></li><li><a href="baptism.html">Get Baptized</a></li><li><a href="teams.html">Join a Team</a></li><li><a href="prayer.html">Need Prayer?</a></li><li><a href="https://axiomchurch.churchcenter.com/registrations/events" target="_blank" rel="noopener">Events</a></li></ul></div><div><h4>Sunday</h4><p>10:00 AM<br>Camacho Elementary<br>501 Municipal Dr<br>Leander, TX 78641</p><a href="tel:5122655718">512-265-5718</a><p class="towns">Driving in from <a href="church-near-round-rock">Round Rock</a>, <a href="church-near-cedar-park">Cedar Park</a>, <a href="church-near-liberty-hill">Liberty Hill</a>, <a href="church-near-georgetown">Georgetown</a> or <a href="church-near-north-austin">North Austin</a>?</p><div class="social"><a href="https://www.instagram.com/axiomchurchaustin/" target="_blank" rel="noopener" aria-label="Axiom on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.facebook.com/axiomchurchaustin/" target="_blank" rel="noopener" aria-label="Axiom on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a><a href="https://www.youtube.com/@AxiomChurchTX" target="_blank" rel="noopener" aria-label="Axiom on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></a></div></div></div><div class="footer-bottom"><span>© 2026 Axiom Church, a 501(c)(3) nonprofit · EIN 99-2996628 · <a href="privacy.html">Privacy</a></span><span>Leander, Texas</span></div></div></footer></div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
