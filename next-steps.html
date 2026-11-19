@@ -95,13 +95,13 @@
       </defs></svg>
       <span class="grid-tag tl">AXIOM // NEXT STEPS</span><span class="grid-tag br">LEANDER, TX</span>
       <span class="front" id="mission"><b>Step 3</b> Live on mission</span>
-      <button class="node" type="button" id="sunday" data-id="sunday" style="--x:10;--y:80;--px:15;--py:7" aria-pressed="false"><span class="mk">1</span><span class="lbl">Sunday</span></button>
-      <button class="node" type="button" id="rally-point" data-id="rally-point" style="--x:24;--y:48;--px:15;--py:24" aria-pressed="false"><span class="mk">2</span><span class="lbl">Rally Point</span></button>
+      <button class="node" type="button" id="sunday" data-id="sunday" style="--x:10;--y:84;--px:15;--py:7" aria-pressed="false"><span class="mk">1</span><span class="lbl">Sunday</span></button>
+      <button class="node" type="button" id="rally-point" data-id="rally-point" style="--x:20;--y:60;--px:15;--py:24" aria-pressed="false"><span class="mk">2</span><span class="lbl">Rally Point</span></button>
       <button class="node obj" type="button" id="baptism" data-id="baptism" style="--x:62;--y:12;--px:41;--py:50" aria-pressed="false"><span class="mk">3</span><span class="lbl">Get baptized</span></button>
-      <button class="node way" type="button" id="base-camp" data-id="base-camp" style="--x:34;--y:86;--px:15;--py:80" aria-pressed="false"><span class="mk"></span><span class="lbl">Base Camp</span></button>
-      <button class="node obj" type="button" id="serve" data-id="serve" style="--x:62;--y:68;--px:41;--py:89" aria-pressed="false"><span class="mk">3</span><span class="lbl">Find a team</span></button>
-      <button class="node obj" type="button" id="groups" data-id="groups" style="--x:62;--y:30;--px:41;--py:60" aria-pressed="false"><span class="mk">3</span><span class="lbl">Find a group</span></button>
-      <button class="node obj" type="button" id="give" data-id="give" style="--x:62;--y:48;--px:41;--py:70" aria-pressed="false"><span class="mk">3</span><span class="lbl">Give to the mission</span></button>
+      <button class="node way" type="button" id="base-camp" data-id="base-camp" style="--x:44;--y:34;--px:16;--py:61" aria-pressed="false"><span class="mk"></span><span class="lbl">Base Camp</span></button>
+      <button class="node obj" type="button" id="serve" data-id="serve" style="--x:62;--y:34;--px:41;--py:62" aria-pressed="false"><span class="mk">3</span><span class="lbl">Find a team</span></button>
+      <button class="node obj" type="button" id="groups" data-id="groups" style="--x:62;--y:58;--px:41;--py:76" aria-pressed="false"><span class="mk">3</span><span class="lbl">Find a group</span></button>
+      <button class="node obj" type="button" id="give" data-id="give" style="--x:62;--y:82;--px:41;--py:89" aria-pressed="false"><span class="mk">3</span><span class="lbl">Give to the mission</span></button>
       <span class="here" id="here" hidden>You are here</span>
     </div>
     <div class="brief" id="brief" aria-live="polite">
@@ -192,8 +192,8 @@
       var cls='adv'+(mine>=0&&ORDER.indexOf(b)<mine?' taken':'')+(ORDER.indexOf(b)===mine?' live':'');
       path('M'+s[0].toFixed(1)+' '+s[1].toFixed(1)+' Q'+c[0].toFixed(1)+' '+c[1].toFixed(1)+' '+e[0].toFixed(1)+' '+e[1].toFixed(1),cls,true);}
     adv('sunday','rally-point',-1);
-    ['baptism','groups','give'].forEach(function(id,i){adv('rally-point',id,i);});
-    adv('rally-point','base-camp',-1); adv('base-camp','serve',-1);
+    adv('rally-point','baptism',0); adv('rally-point','base-camp',1); adv('base-camp','serve',1);
+    adv('rally-point','groups',2); adv('rally-point','give',3);
     if(mine>=0&&mine<ORDER.length){var p=pt(ORDER[mine]);here.style.left=p[0]+'px';here.style.top=p[1]+'px';here.classList.toggle('side',mine>1);here.hidden=false;}else here.hidden=true;
   }
   function select(id){

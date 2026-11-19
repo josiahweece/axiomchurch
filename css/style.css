@@ -3278,4 +3278,11 @@ h1 {
 
 /* Next Steps: footnote under the map */
 .pathway .pnote{margin:22px 0 0;font-size:.95rem;font-style:italic;opacity:.75;max-width:75ch}
+/* Base Camp: a waypoint between Rally Point and Find a team. Label sits under it on phones, to its left on wide screens. */
+.nextpage .node.way{flex-direction:column;gap:4px;transform:translate(-50%,-22px)}
 .nextpage .node.way .mk{width:30px;height:30px;margin:7px;border-width:3px}
+.nextpage .node.way .lbl{font-size:1rem;text-align:center}
+@media (min-width:900px){
+  .nextpage .node.way{flex-direction:row-reverse;gap:8px;transform:translate(calc(-100% + 22px),-22px)}
+  .nextpage .node.way .lbl{font-size:1.25rem;text-align:right}
+}
