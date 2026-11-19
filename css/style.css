@@ -3282,7 +3282,7 @@ h1 {
 /* Rooted (rooted.html) reuses the baptism page layout; these are its few extras. */
 .rootedpage .hsteps p{max-width:36ch}
 .rootedpage .bshot img{object-position:46% 12%}
-.rootedpage .rphoto{aspect-ratio:3/2;object-position:50% 35%}
+.rootedpage .rphoto{aspect-ratio:4/3;object-position:50% 50%}
 .rootedpage .rcount{min-width:0}
 .rootedpage .rcount>p{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,4.4vw,2.4rem);line-height:1.1;letter-spacing:-.03em}
 .rootedpage .rdrop{margin-top:18px;border-top:2px solid var(--ink-deep)}
