@@ -3278,3 +3278,4 @@ h1 {
 
 /* Next Steps: footnote under the map */
 .pathway .pnote{margin:22px 0 0;font-size:.95rem;font-style:italic;opacity:.75;max-width:75ch}
+.nextpage .node.way .mk{width:30px;height:30px;margin:7px;border-width:3px}
