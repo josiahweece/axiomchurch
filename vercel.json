@@ -168,6 +168,10 @@
     {
       "source": "/christmas",
       "destination": "/christmas.html"
+    },
+    {
+      "source": "/rooted/signup",
+      "destination": "/api/steps?go=rooted"
     }
   ]
 }

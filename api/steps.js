@@ -11,6 +11,8 @@
 const SITE = 'https://axiomchurch.churchcenter.com';
 const API = 'https://api.churchcenter.com/registrations/v2/events';
 const WANT = { rally: /rally\s*point/i, base: /base\s*camp/i, rooted: /rooted/i, baptism: /baptis/i };
+// Where a ?go= link lands if Church Center has nothing open or can't be reached.
+const FALLBACK = { rooted: SITE + '/registrations/events/3899485' };
 
 module.exports = async (req, res) => {
   try {
@@ -55,10 +57,19 @@ module.exports = async (req, res) => {
         : null;
     });
 
+    // /rooted/signup (and /api/steps?go=rooted): straight to the next sign-up page.
+    const go = req.query && req.query.go;
+    if (go && FALLBACK[go]) {
+      res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400');
+      res.setHeader('Location', (steps[go] && steps[go].url) || FALLBACK[go]);
+      return res.status(302).end();
+    }
     res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400');
     res.status(200).json({ steps });
   } catch (err) {
     console.error('steps:', err && err.message);
+    const go = req.query && req.query.go;
+    if (go && FALLBACK[go]) { res.setHeader('Location', FALLBACK[go]); return res.status(302).end(); }
     res.setHeader('Cache-Control', 's-maxage=300');
     res.status(502).json({ error: 'unavailable' });
   }
