@@ -124,7 +124,7 @@
       <h3>Step 3. Live on mission</h3>
       <p><a href="baptism.html">Get baptized.</a> Go public with your faith in Jesus.</p>
       <p><a href="#serve">Find a team.</a> Don&rsquo;t fill a spot. Find a purpose. It starts at Base Camp: a quick online assessment on how you&rsquo;re wired, then a night talking through it and finding where you fit.</p>
-      <p><a href="rooted.html">Find a group.</a> Find the people you would actually call. It starts with Rooted.</p>
+      <p><a href="https://axiomchurch.churchcenter.com/registrations/events/3899485" data-rooted>Find a group.</a> Find the people you would actually call. It starts with <a href="rooted.html">Rooted</a>.</p>
       <p><a href="give.html">Give to the mission.</a> Help remove the next obstacle for someone.</p>
     </div>
   </details>
@@ -166,7 +166,7 @@
     c.appendChild(a);c.appendChild(again);body.appendChild(t);body.appendChild(d);body.appendChild(c);
   }
   /* the battle plan */
-  var INFO={"sunday": {"k": "Step 1", "t": "Come on a Sunday", "g": "Change starts here.", "d": "Sundays at 10am at Camacho Elementary.", "b": "Plan a Visit", "h": "visit.html", "n": 0}, "rally-point": {"k": "Step 2", "t": "Rally Point", "g": "The step after Sunday.", "d": "We feed you. We watch your kids. You meet some people. Find your people, find your purpose.", "b": "Sign up for Rally Point", "h": "https://axiomchurch.churchcenter.com/registrations/events", "n": 0}, "baptism": {"k": "Step 3 · Live on mission", "t": "Get baptized", "g": "", "d": "Go public with your faith in Jesus.", "b": "How baptism works", "h": "baptism.html", "n": 0}, "serve": {"k": "Step 3 · Live on mission", "t": "Find a team", "g": "Base Camp gets you there.", "d": "Don’t fill a spot. Find a purpose. It starts at Base Camp: a quick assessment, then one night finding where you fit.", "b": "Sign up for Base Camp", "h": "https://axiomchurch.churchcenter.com/people/forms/1308752", "n": 0}, "groups": {"k": "Step 3 · Live on mission", "t": "Find a group", "g": "Rooted gets you there.", "d": "Find the people you would actually call. Groups at Axiom start with Rooted: ten weeks with a group, built around seven rhythms of following Jesus.", "b": "See Rooted", "h": "rooted.html", "n": 0}, "give": {"k": "Step 3 · Live on mission", "t": "Give to the mission", "g": "", "d": "Help remove the next obstacle for someone.", "b": "Give", "h": "give.html", "n": 0}, "base-camp": {"k": "Step 2", "t": "Base Camp", "g": "Find your fit.", "d": "The step after Rally Point. You take a quick online assessment on how you’re wired. Then we spend a night talking through it, sharing real stories, and helping you find where you fit.", "b": "Sign up for Base Camp", "h": "https://axiomchurch.churchcenter.com/people/forms/1308752", "n": 0}},ORDER=['sunday','rally-point','baptism','serve','groups','give'];
+  var INFO={"sunday": {"k": "Step 1", "t": "Come on a Sunday", "g": "Change starts here.", "d": "Sundays at 10am at Camacho Elementary.", "b": "Plan a Visit", "h": "visit.html", "n": 0}, "rally-point": {"k": "Step 2", "t": "Rally Point", "g": "The step after Sunday.", "d": "We feed you. We watch your kids. You meet some people. Find your people, find your purpose.", "b": "Sign up for Rally Point", "h": "https://axiomchurch.churchcenter.com/registrations/events", "n": 0}, "baptism": {"k": "Step 3 · Live on mission", "t": "Get baptized", "g": "", "d": "Go public with your faith in Jesus.", "b": "How baptism works", "h": "baptism.html", "n": 0}, "serve": {"k": "Step 3 · Live on mission", "t": "Find a team", "g": "Base Camp gets you there.", "d": "Don’t fill a spot. Find a purpose. It starts at Base Camp: a quick assessment, then one night finding where you fit.", "b": "Sign up for Base Camp", "h": "https://axiomchurch.churchcenter.com/people/forms/1308752", "n": 0}, "groups": {"k": "Step 3 · Live on mission", "t": "Find a group", "g": "Rooted gets you there.", "d": "Find the people you would actually call. Groups at Axiom start with Rooted: ten weeks with a group, built around seven rhythms of following Jesus.", "b": "Sign up for Rooted", "h": "https://axiomchurch.churchcenter.com/registrations/events/3899485", "n": 0}, "give": {"k": "Step 3 · Live on mission", "t": "Give to the mission", "g": "", "d": "Help remove the next obstacle for someone.", "b": "Give", "h": "give.html", "n": 0}, "base-camp": {"k": "Step 2", "t": "Base Camp", "g": "Find your fit.", "d": "The step after Rally Point. You take a quick online assessment on how you’re wired. Then we spend a night talking through it, sharing real stories, and helping you find where you fit.", "b": "Sign up for Base Camp", "h": "https://axiomchurch.churchcenter.com/people/forms/1308752", "n": 0}},ORDER=['sunday','rally-point','baptism','serve','groups','give'];
   var map=document.getElementById('map'),svg=document.getElementById('lines'),here=document.getElementById('here'),
       nodes={};[].forEach.call(document.querySelectorAll('.node'),function(n){nodes[n.dataset.id]=n;});
   var wideQ=matchMedia('(min-width:900px)'),sel='rally-point',mine=-1;
@@ -219,7 +219,7 @@
      If this fails for any reason, the links already on the page stay as they are. */
   if(window.fetch)fetch('/api/steps').then(function(r){return r.ok?r.json():null;}).then(function(d){
     if(!d||!d.steps)return;
-    [['rally','rally-point',null],['base','base-camp',null]].forEach(function(m){
+    [['rally','rally-point',null],['base','base-camp',null],['rooted','groups',null]].forEach(function(m){
       var e=d.steps[m[0]],o=INFO[m[1]];
       if(!e||!o||!/^https:\/\/axiomchurch\.churchcenter\.com\/registrations\/events\/\d+$/.test(e.url))return;
       o.h=e.url; if(m[2])o.b=m[2];
@@ -227,6 +227,7 @@
       var t=e.starts_at&&new Date(e.starts_at);
       if(t&&!isNaN(t))try{o.w='Next one: '+t.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',timeZone:'America/Chicago'});}catch(_){}
     });
+    var rr=d.steps.rooted;if(rr&&/^https:\/\/axiomchurch\.churchcenter\.com\/registrations\/events\/\d+$/.test(rr.url))[].forEach.call(document.querySelectorAll('[data-rooted]'),function(x){x.href=rr.url;});
     select(sel);
   }).catch(function(){});
   document.addEventListener('click',function(e){var a2=e.target.closest('a[href^="#"]');if(a2&&a2.getAttribute('href').length>1)reveal(a2.getAttribute('href').slice(1));});
