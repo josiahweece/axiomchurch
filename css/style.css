@@ -2380,7 +2380,7 @@ h1 {
 .nextpage .pathway-in{padding-block:clamp(48px,7vw,96px)}
 .nextpage .pathway .n-kicker{color:var(--red)}
 .nextpage .war{display:grid;grid-template-columns:1fr;gap:18px;margin-top:clamp(10px,2vw,22px)}
-.nextpage .map{position:relative;aspect-ratio:4/6;border:2px solid var(--on-dark);border-radius:4px;overflow:hidden;scroll-margin-top:90px;
+.nextpage .map{position:relative;aspect-ratio:4/7.5;border:2px solid var(--on-dark);border-radius:4px;overflow:hidden;scroll-margin-top:90px;
   background:
     linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px) 0 0/100% 12.5%,
     linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px) 0 0/12.5% 100%,
