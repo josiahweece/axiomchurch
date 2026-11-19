@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Google Analytics -->
+    <script>
+      /* Analytics loads after the page has finished loading, so it never slows the first view. */
+      window.addEventListener('load', function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1PBV7QDMYQ';
+        document.head.appendChild(s);
+        var f = document.createElement('script');
+        f.async = true;
+        f.src = 'https://connect.facebook.net/en_US/fbevents.js';
+        document.head.appendChild(f);
+      });
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1PBV7QDMYQ');
+      // Meta Pixel ("Axiom Pixel" in Events Manager). Queues calls until fbevents.js loads.
+      !function(w){if(w.fbq)return;var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);
+      fbq('init', '726396056685457');
+      fbq('track', 'PageView');
+      // Church Center forms open off-site, so count the click that sends someone there.
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href*="churchcenter.com"]');
+        if (!a) return;
+        var m = a.href.match(/forms\/(\d+)/);
+        var forms = { '1302721': 'plan_a_visit', '810097': 'join_a_team', '1335299': 'join_a_team', '882949': 'baptism', '1308752': 'contact' };
+        var name = m && forms[m[1]];
+        if (name === 'plan_a_visit') { gtag('event', 'generate_lead', { form_name: name, transport_type: 'beacon' }); fbq('track', 'Lead', { content_name: 'plan_a_visit' }); }
+        else gtag('event', 'church_center_click', { form_name: name || 'other', link_url: a.href, transport_type: 'beacon' });
+      });
+    </script>
+    <title>Rooted | Axiom Church</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96.png" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+    <meta name="theme-color" content="#101010" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Axiom" />
+    <meta property="og:site_name" content="Axiom Church" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Rooted | Axiom Church" />
+    <meta property="og:description" content="Rooted is a 10-week discipleship experience in a small group at Axiom Church in Leander, TX. Connect with God, the church and your purpose." />
+    <meta property="og:image" content="https://www.axiomchurch.com/assets/images/share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="description"
+      content="Rooted is a 10-week discipleship experience in a small group at Axiom Church in Leander, TX. Connect with God, the church and your purpose."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Archivo is loaded with its width axis here: the tall condensed headings on this page use it. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=DM+Sans:wght@400;500;600;700&display=swap" /></noscript>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="canonical" href="https://www.axiomchurch.com/rooted.html" />
+    <meta property="og:url" content="https://www.axiomchurch.com/rooted.html" />
+  </head>
+  <body>
+    <div data-header><header class="header"><nav class="nav wrap" aria-label="Primary"><a class="logo" href="index.html"><span class="logo-image"><img src="assets/images/axiom-logo-dark.png" alt="Axiom Church logo"></span><b>Axiom Church</b></a><div class="menu" id="menu"><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-new">I'm New<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-new"><a href="visit.html">Plan a visit</a><a href="kids.html">Kids</a></div></div><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-about">About<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-about"><a href="about.html">Who we are</a><a href="beliefs.html">What we believe</a></div></div><a class="link" href="messages.html">Messages</a><div class="group"><button class="trigger" type="button" aria-expanded="false" aria-controls="nav-next">Next Steps<span class="chev" aria-hidden="true"></span></button><div class="panel" id="nav-next"><a href="next-steps.html">What is my Next Step?</a><a href="baptism.html">Get Baptized</a><a href="teams.html">Find a Team</a><a href="prayer.html">Need Prayer?</a><a href="https://axiomchurch.churchcenter.com/registrations/events" target="_blank" rel="noopener">Events</a></div></div><a class="link" href="give.html">Give</a><a class="pill fill menu-cta" href="visit.html">Plan a Visit</a></div><a class="pill fill" href="visit.html">Plan a Visit</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button></nav></header></div>
+    <main class="baptpage rootedpage">
+<section class="bhero">
+  <picture class="bshot"><img src="assets/images/rooted-hero.jpg" alt="Friends laughing together in the hallway after a Sunday at Axiom" width="1600" height="1066" fetchpriority="high"></picture>
+  <div class="bhero-in bp-wrap"><div class="bhero-copy">
+    <p class="bp-kicker">A 10-week experience</p>
+    <h1 class="tee">Rooted<em>.</em></h1>
+    <p class="blede">You&rsquo;re not your best self by yourself. Rooted is 10 weeks with a group of people, built around seven rhythms of following Jesus.</p>
+    <div class="bp-cta">
+      <a class="btn" data-rooted href="https://axiomchurch.churchcenter.com/registrations/events/3899485">Sign up for Rooted</a>
+      <a class="textlink" href="#faq">I have questions first &darr;</a>
+    </div>
+    <!-- Next session date. Updates itself from Church Center when the next Rooted is posted. -->
+    <p class="rnext" id="rNext">Next session begins January 26.</p>
+  </div></div>
+</section>
+
+<section class="count"><div class="count-in bp-wrap">
+  <b>10</b>
+  <div class="rcount">
+    <p>weeks with the same group.</p>
+    <details class="rdrop">
+      <summary>Built around seven rhythms of following Jesus</summary>
+      <ol class="rlist">
+        <li>Reading your Bible</li>
+        <li>Prayer</li>
+        <li>Confession and repentance</li>
+        <li>Giving</li>
+        <li>Serving</li>
+        <li>Sharing your story</li>
+        <li>Celebration</li>
+      </ol>
+      <p class="rnote">Along the way, your group serves together, prays together and practices sharing your stories.</p>
+    </details>
+  </div>
+</div></section>
+
+<section class="how"><div class="how-in bp-wrap">
+  <p class="bp-kicker">How it works</p>
+  <h2 class="sec">Your best friends are just 10 weeks away.</h2>
+  <ol class="hsteps">
+    <li><span class="hn">1</span><div><h3>Find friends.</h3><p>Your group meets once a week for about an hour and a half to talk about life and hang out.</p></div></li>
+    <li><span class="hn">2</span><div><h3>Meet Jesus.</h3><p>Whether this is your first time meeting Jesus or your first time in a long time, discover what he&rsquo;s all about. And ask honest questions while you&rsquo;re at it.</p></div></li>
+    <li><span class="hn">3</span><div><h3>Break the cycle.</h3><p>Maybe you feel stuck right now. It&rsquo;s time to get unstuck.</p></div></li>
+    <li><span class="hn">4</span><div><h3>Make a difference.</h3><p>Along the way, there&rsquo;s a prayer night, a serve night, and a huge party at the end.</p></div></li>
+  </ol>
+</div></section>
+
+<section class="bfaq" id="faq"><div class="bfaq-in bp-wrap">
+  <details class="allq" id="allq">
+    <summary><span class="tee">I have questions.</span></summary>
+    <div class="allq-in">
+  <details class="qa"><summary>Who is Rooted for?</summary><div class="ans"><p>Anyone ready for their next step with Jesus. Maybe you just started following him. Maybe you&rsquo;ve followed him for years. Either way, Rooted is where groups start at Axiom.</p><p>Maybe you feel stuck right now. It&rsquo;s time to get unstuck.</p></div></details>
+  <details class="qa"><summary>Can I sign up with my spouse or a friend?</summary><div class="ans"><p>Yes. Pick the two-person registration when you sign up. It&rsquo;s $70 for both of you.</p></div></details>
+  <details class="qa"><summary>When does my group meet?</summary><div class="ans"><p>Once a week, Tuesday or Thursday evening, whichever works for you. You pick when you sign up. Each time is about an hour and a half.</p><p>Along the way there are two extra nights: a prayer night and a serve night.</p></div></details>
+  <details class="qa"><summary>What does the cost cover?</summary><div class="ans"><p>Your Rooted workbook and the celebration party at the end.</p></div></details>
+  <details class="qa"><summary>What about my kids?</summary><div class="ans"><p>Axiom Kids isn&rsquo;t available on Rooted nights. Talk to your group about it. Odds are they&rsquo;re trying to figure out a plan too.</p></div></details>
+  <p class="more">Something else? Email Keren, our Rooted Director, at <a class="textlink" href="mailto:keren@axiomchurch.com?subject=Rooted">keren@axiomchurch.com</a></p>
+    </div>
+  </details>
+</div></section>
+
+<section class="ready"><div class="ready-in bp-wrap">
+  <img class="rphoto" src="assets/images/rooted-ready.jpg" alt="A man laughing with friends in front of the neon Axiom Church sign" loading="lazy" width="1200" height="800">
+  <div>
+  <h2 class="tee">Find your people.</h2>
+  <!-- Sign-up deadline: the only date on this page. Change it here each session. -->
+  <p id="rReady">Sign up by January 18 and we&rsquo;ll put you in a group.</p>
+  <a class="btn" data-rooted href="https://axiomchurch.churchcenter.com/registrations/events/3899485">Sign up for Rooted</a>
+  </div>
+</div></section>
+    </main>
+    <div data-footer><footer class="footer"><div class="wrap"><div class="footer-main"><div><h3>A place you can<br>stop pretending.</h3><p>A brand new church for people who thought they would never step foot in one.</p></div><div><h4>I&rsquo;m New</h4><ul><li><a href="visit.html">Plan a visit</a></li><li><a href="kids.html">Kids</a></li><li><a href="messages.html">Messages</a></li></ul></div><div><h4>About</h4><ul><li><a href="about.html">Who we are</a></li><li><a href="beliefs.html">What we believe</a></li><li><a href="give.html">Give</a></li><li><a href="contact.html">Contact</a></li></ul></div><div><h4>Next Steps</h4><ul><li><a href="next-steps.html">What is my Next Step?</a></li><li><a href="baptism.html">Get Baptized</a></li><li><a href="teams.html">Find a Team</a></li><li><a href="prayer.html">Need Prayer?</a></li><li><a href="https://axiomchurch.churchcenter.com/registrations/events" target="_blank" rel="noopener">Events</a></li></ul></div><div><h4>Sunday</h4><p>10:00 AM<br>Camacho Elementary<br>501 Municipal Dr<br>Leander, TX 78641</p><a href="tel:5122655718">512-265-5718</a><p class="towns">Driving in from <a href="church-near-round-rock">Round Rock</a>, <a href="church-near-cedar-park">Cedar Park</a>, <a href="church-near-liberty-hill">Liberty Hill</a>, <a href="church-near-georgetown">Georgetown</a> or <a href="church-near-north-austin">North Austin</a>?</p><div class="social"><a href="https://www.instagram.com/axiomchurchaustin/" target="_blank" rel="noopener" aria-label="Axiom on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.facebook.com/axiomchurchaustin/" target="_blank" rel="noopener" aria-label="Axiom on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a><a href="https://www.youtube.com/@AxiomChurchTX" target="_blank" rel="noopener" aria-label="Axiom on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></a></div></div></div><div class="footer-bottom"><span>© 2026 Axiom Church, a 501(c)(3) nonprofit · EIN 99-2996628 · <a href="privacy.html">Privacy</a></span><span>Leander, Texas</span></div></div></footer></div>
+    <script src="js/main.js"></script>
+    <script>
+/* "I have questions" opens the question list. */
+(function(){
+  var allq=document.getElementById('allq');
+  function openQ(){if(allq)allq.open=true;}
+  if(location.hash==='#faq')openQ();
+  document.addEventListener('click',function(e){var a=e.target.closest('a[href="#faq"]');if(a)openQ();});
+})();
+</script>
+
+    <script>
+/* Point the sign-up buttons at the next Rooted on the Church Center events page.
+   If that fails, they keep the Spring 2027 link. The dates on the page are typed in:
+   update them each session. */
+(function(){
+  if(!window.fetch)return;
+  fetch('/api/steps').then(function(r){return r.ok?r.json():null;}).then(function(d){
+    var e=d&&d.steps&&d.steps.rooted;
+    if(!e||!/^https:\/\/axiomchurch\.churchcenter\.com\/registrations\/events\/\d+$/.test(e.url))return;
+    [].forEach.call(document.querySelectorAll('[data-rooted]'),function(a){a.href=e.url;});
+    var t=e.starts_at&&new Date(e.starts_at);
+    if(t&&!isNaN(t))try{document.getElementById('rNext').textContent='Next session begins '+t.toLocaleDateString('en-US',{month:'long',day:'numeric',timeZone:'America/Chicago'})+'.';}catch(_){}
+  }).catch(function(){});
+})();
+    </script>
+  </body>
+</html>

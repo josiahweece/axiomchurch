@@ -3278,3 +3278,31 @@ h1 {
 
 /* Next Steps: footnote under the map */
 .pathway .pnote{margin:22px 0 0;font-size:.95rem;font-style:italic;opacity:.75;max-width:75ch}
+
+/* Rooted (rooted.html) reuses the baptism page layout; these are its few extras. */
+.rootedpage .hsteps p{max-width:36ch}
+.rootedpage .bshot img{object-position:46% 12%}
+.rootedpage .rphoto{object-position:52% 40%}
+.rootedpage .rcount{min-width:0}
+.rootedpage .rcount>p{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,4.4vw,2.4rem);line-height:1.1;letter-spacing:-.03em}
+.rootedpage .rdrop{margin-top:18px;border-top:2px solid var(--ink-deep)}
+.rootedpage .rdrop summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;font-family:var(--display);font-weight:800;font-size:clamp(1rem,2.4vw,1.2rem)}
+.rootedpage .rdrop summary::-webkit-details-marker{display:none}
+.rootedpage .rdrop summary::after{content:"+";font-size:1.7rem;line-height:1;flex:none}
+.rootedpage .rdrop[open] summary::after{content:"\2212"}
+.rootedpage .rdrop summary:focus-visible{outline:3px solid var(--ink-deep);outline-offset:4px}
+.rootedpage .rlist{list-style:none;counter-reset:r;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:0}
+.rootedpage .rlist li{counter-increment:r;display:flex;align-items:baseline;gap:14px;padding:10px 0;border-top:1px solid rgba(16,16,16,.25);font-family:var(--display);font-weight:800;font-size:clamp(1.1rem,3vw,1.4rem);letter-spacing:-.02em}
+.rootedpage .rlist li::before{content:counter(r);font-weight:900;min-width:1.2em;opacity:.6}
+.rootedpage .count .rnote{margin:14px 0 4px;max-width:48ch;font-family:"DM Sans",system-ui,sans-serif;font-weight:500;font-size:1rem;line-height:1.5;letter-spacing:0}
+@media (min-width:900px){.rootedpage .rlist{grid-template-columns:1fr 1fr;column-gap:40px}.rootedpage .count-in{align-items:start}}
+/* Rooted: four steps (the Axiom model), and the questions band in deep red so it reads as something to open */
+@media (min-width:900px){.rootedpage .hsteps{grid-template-columns:repeat(4,1fr)}}
+.rootedpage .bfaq{background:var(--red-deep);color:#fff}
+.rootedpage .bfaq .qa{border-color:#fff}
+.rootedpage .bfaq .qa summary::after{color:#fff}
+.rootedpage .bfaq .qa .ans{color:#fff}
+.rootedpage .allq>summary::after{background-color:#fff;filter:none}
+.rootedpage .bfaq .more .textlink{color:#fff;text-decoration-color:#fff}
+.rootedpage .bfaq .qa summary:focus-visible,.rootedpage .allq>summary:focus-visible{outline-color:#fff}
+.rootedpage .rnext{margin:16px 0 0;font-size:.95rem;color:var(--on-dark-soft)}
