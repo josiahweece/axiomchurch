@@ -211,11 +211,14 @@
     open();
   }, true);
 
+  var AUTO_OPEN = false;
   window.axPlanVisit = open;
   if (/[?&]visit=1/.test(location.search)) open();
   // Plan a Visit page: open on its own after a beat. Once per visit to the site, and never
   // again for someone who already signed up on this device.
-  else if (/^\/(visit|plan-a-visit)(\.html)?\/?$/.test(location.pathname)) {
+  // Auto-open is OFF while Google Ad Grants reviews the site (pop-ups that cover a page can fail
+  // the review). Flip AUTO_OPEN back to true once Ad Grants is approved.
+  else if (AUTO_OPEN && /^\/(visit|plan-a-visit)(\.html)?\/?$/.test(location.pathname)) {
     var seen = false;
     try { seen = !!(sessionStorage.getItem('axVisitAuto') || localStorage.getItem('axVisitDone')); sessionStorage.setItem('axVisitAuto', '1'); } catch (e) {}
     if (!seen) setTimeout(function () { if (!el) { autoOpen = true; open(); } }, 1200);
