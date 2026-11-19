@@ -2380,7 +2380,7 @@ h1 {
 .nextpage .pathway-in{padding-block:clamp(48px,7vw,96px)}
 .nextpage .pathway .n-kicker{color:var(--red)}
 .nextpage .war{display:grid;grid-template-columns:1fr;gap:18px;margin-top:clamp(10px,2vw,22px)}
-.nextpage .map{position:relative;aspect-ratio:4/7.5;border:2px solid var(--on-dark);border-radius:4px;overflow:hidden;scroll-margin-top:90px;
+.nextpage .map{position:relative;aspect-ratio:4/6;border:2px solid var(--on-dark);border-radius:4px;overflow:hidden;scroll-margin-top:90px;
   background:
     linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px) 0 0/100% 12.5%,
     linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px) 0 0/12.5% 100%,
@@ -3278,11 +3278,3 @@ h1 {
 
 /* Next Steps: footnote under the map */
 .pathway .pnote{margin:22px 0 0;font-size:.95rem;font-style:italic;opacity:.75;max-width:75ch}
-/* Base Camp: a waypoint between Rally Point and Find a team. Label sits under it on phones, to its left on wide screens. */
-.nextpage .node.way{flex-direction:column;gap:4px;transform:translate(-50%,-22px)}
-.nextpage .node.way .mk{width:30px;height:30px;margin:7px;border-width:3px}
-.nextpage .node.way .lbl{font-size:1rem;text-align:center}
-@media (min-width:900px){
-  .nextpage .node.way{flex-direction:row-reverse;gap:8px;transform:translate(calc(-100% + 22px),-22px)}
-  .nextpage .node.way .lbl{font-size:1.25rem;text-align:right}
-}
