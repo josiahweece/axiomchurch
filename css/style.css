@@ -3275,3 +3275,6 @@ h1 {
 .home .guide-faces img:nth-child(2){margin-top:36px}
 @media (max-width:759px){.home .guide-faces{max-width:280px}.home .guide-faces img:nth-child(2){margin-top:24px}}
 @media (min-width:760px){.home .guide-in{grid-template-columns:minmax(260px,0.8fr) 1.2fr}}
+
+/* Next Steps: footnote under the map */
+.pathway .pnote{margin:22px 0 0;font-size:.95rem;font-style:italic;opacity:.75;max-width:75ch}
