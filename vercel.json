@@ -135,6 +135,21 @@
       "source": "/prayer",
       "destination": "/prayer.html",
       "permanent": true
+    },
+    {
+      "source": "/christmas-eve",
+      "destination": "/christmas",
+      "permanent": false
+    },
+    {
+      "source": "/christmaseve",
+      "destination": "/christmas",
+      "permanent": false
+    },
+    {
+      "source": "/xmas",
+      "destination": "/christmas",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -149,6 +164,10 @@
     {
       "source": "/recent-messages",
       "destination": "/api/recent-messages"
+    },
+    {
+      "source": "/christmas",
+      "destination": "/christmas.html"
     }
   ]
 }

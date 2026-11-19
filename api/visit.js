@@ -53,6 +53,8 @@ function centralTime(ymd, hh, mm) {
   return new Date(guess.getTime() - h * 3600 * 1000);
 }
 const prettyDay = (ymd) => new Date(`${ymd}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' });
+// Christmas Eve: Thursday, December 24, 2026. Two services, same service at both times.
+const XMAS = { date: '2026-12-24', times: { '15:00': '3:00 PM', '16:30': '4:30 PM' } };
 const validSunday = (ymd) => /^\d{4}-\d{2}-\d{2}$/.test(ymd) && new Date(`${ymd}T12:00:00Z`).getUTCDay() === 0;
 
 async function pco(path, opts = {}) {
@@ -126,6 +128,23 @@ function reminderTime(ymd) {
   return null;
 }
 
+function xmasReminderTime() {
+  const soon = Date.now() + 15 * 60 * 1000;
+  for (const t of [centralTime('2026-12-23', 10, 0), centralTime(XMAS.date, 9, 0)]) if (t.getTime() > soon) return t;
+  return null;
+}
+
+function xmasReminderEmail(v, sameDay) {
+  const p = (t) => `<p style="margin:0 0 14px">${t}</p>`;
+  return `<div style="font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;color:#1a1a1a;max-width:520px">
+${p(`Hey ${esc(v.first)},`)}
+${p(`We'll see you ${sameDay ? 'today' : 'tomorrow'} for Christmas Eve at Axiom. ${esc(XMAS.times[v.xmas])} on Thursday, December 24.`)}
+${p(`<b>${esc(PLACE)}</b><br><a href="${MAPS}" style="color:#1f6b47">Get directions</a>`)}
+${p(`Candles, music, and a short service. Axiom Kids is open for birth through 5th grade, or keep the kids with you for the candles.`)}
+${p(`Someone will be out front to point you in the right direction. And if you make it inside without anyone stopping to say hi, find the New Here area. They'll take care of you.`)}
+<p style="margin:0">Merry Christmas,<br>Axiom Church</p></div>`;
+}
+
 function reminderEmail(v, sameDay) {
   const p = (t) => `<p style="margin:0 0 14px">${t}</p>`;
   return `<div style="font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;color:#1a1a1a;max-width:520px">
@@ -150,6 +169,25 @@ module.exports = async (req, res) => {
         replyTo: REPLY_TO ? 'set' : 'missing (replies go to the from address)',
         formId: FORM_ID,
       });
+    }
+    const xm = /^xmas-(1500|1630)$/.exec(String(q.ics || ''));
+    if (xm) {
+      const fmt = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+      const hh = xm[1] === '1500' ? 15 : 16, mm = xm[1] === '1500' ? 0 : 30;
+      const start = centralTime(XMAS.date, hh, mm);
+      const end = new Date(start.getTime() + 60 * 60 * 1000);
+      const ics = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Axiom Church//Christmas Eve//EN', 'METHOD:PUBLISH',
+        'BEGIN:VEVENT', `UID:xmas-${xm[1]}-2026@axiomchurch.com`, `DTSTAMP:${fmt(new Date())}`,
+        `DTSTART:${fmt(start)}`, `DTEND:${fmt(end)}`, 'SUMMARY:Christmas Eve at Axiom',
+        `LOCATION:${PLACE.replace(/,/g, '\\,')}`, 'DESCRIPTION:Candles\\, music\\, and a short service. Someone will be out front to say hi.',
+        'URL:https://www.axiomchurch.com/christmas',
+        'BEGIN:VALARM', 'TRIGGER:-PT60M', 'ACTION:DISPLAY', 'DESCRIPTION:Christmas Eve at Axiom', 'END:VALARM',
+        'END:VEVENT', 'END:VCALENDAR', '',
+      ].join('\r\n');
+      res.setHeader('Content-Type', 'text/calendar; charset=utf-8');
+      res.setHeader('Content-Disposition', 'inline; filename="axiom-christmas-eve.ics"');
+      return res.status(200).send(ics);
     }
     if (q.ics && validSunday(String(q.ics))) {
       const ymd = String(q.ics);
@@ -178,14 +216,19 @@ module.exports = async (req, res) => {
   // Bots fill the hidden field and submit instantly. Pretend it worked.
   if (b.hp || (Number(b.ms) && Number(b.ms) < 2500)) return res.status(200).json({ ok: true });
 
+  const xmas = Object.prototype.hasOwnProperty.call(XMAS.times, String(b.xmas || '')) ? String(b.xmas) : '';
   const v = {
-    sunday: validSunday(String(b.sunday || '')) ? String(b.sunday) : '',
+    xmas,
+    sunday: xmas ? XMAS.date : validSunday(String(b.sunday || '')) ? String(b.sunday) : '',
     first: clean(b.first, 60),
     last: clean(b.last, 60),
     email: clean(b.email, 120).toLowerCase(),
     phone: clean(b.phone, 30),
     kids: clean(b.kids, 300),
   };
+  // Christmas Eve sign-ups go on the same Plan a Visit form, dated Dec 24. The service time
+  // rides in the kids answer so the team sees it in Planning Center.
+  if (v.xmas) v.kids = `Christmas Eve ${XMAS.times[v.xmas]} service.` + (v.kids ? ` Kids: ${v.kids}` : ' No kids listed.');
   if (!v.first || !v.last || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email)) {
     return res.status(400).json({ error: 'Need a first name, last name and email.' });
   }
@@ -196,7 +239,20 @@ module.exports = async (req, res) => {
   } else pcoErr = 'Planning Center keys are not set in Vercel.';
 
   let reminder = false;
-  if (v.sunday && RESEND && FROM) {
+  if (v.xmas && RESEND && FROM) {
+    const at = xmasReminderTime();
+    if (at) {
+      try {
+        const sameDay = at.getTime() >= centralTime(XMAS.date, 0, 0).getTime();
+        await resend({
+          from: FROM, to: [v.email], subject: sameDay ? 'See you today at Axiom' : 'See you tomorrow for Christmas Eve at Axiom',
+          html: xmasReminderEmail(v, sameDay), scheduled_at: at.toISOString(),
+          ...(REPLY_TO ? { reply_to: REPLY_TO } : {}),
+        });
+        reminder = true;
+      } catch (e) { console.error('reminder:', e.message); }
+    }
+  } else if (v.sunday && RESEND && FROM) {
     const at = reminderTime(v.sunday);
     if (at) {
       try {
@@ -215,10 +271,10 @@ module.exports = async (req, res) => {
   if (!pcoOk && RESEND) {
     try {
       await resend({
-        from: ALERT_FROM, to: [ALERT_TO], subject: `Plan a Visit: ${v.first} ${v.last}`,
+        from: ALERT_FROM, to: [ALERT_TO], subject: `${v.xmas ? 'Christmas Eve' : 'Plan a Visit'}: ${v.first} ${v.last}`,
         html: `<p>Someone planned a visit, but it didn't make it into Planning Center. Please add them by hand.</p>
 <p><b>${esc(v.first)} ${esc(v.last)}</b><br>${esc(v.email)}${v.phone ? '<br>' + esc(v.phone) : ''}<br>
-Sunday: ${v.sunday ? esc(prettyDay(v.sunday)) : 'Not sure yet'}<br>Kids: ${esc(v.kids || 'None')}</p>
+${v.xmas ? 'Christmas Eve' : 'Sunday'}: ${v.xmas ? esc(XMAS.times[v.xmas]) : v.sunday ? esc(prettyDay(v.sunday)) : 'Not sure yet'}<br>Kids: ${esc(v.kids || 'None')}</p>
 <p style="color:#888">Planning Center said: ${esc(pcoErr)}</p>`,
       });
       backup = true;

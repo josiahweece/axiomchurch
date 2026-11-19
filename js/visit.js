@@ -9,7 +9,10 @@
 (function () {
   var FORM = 'forms/1302721', CC = 'https://axiomchurch.churchcenter.com/people/forms/1302721';
   var el, step = 0, opened = 0, lastFocus = null, autoOpen = false;
-  var data = { sunday: '', first: '', last: '', email: '', phone: '', kids: '' };
+  var data = { sunday: '', first: '', last: '', email: '', phone: '', kids: '', xmas: '' };
+  // Christmas Eve page: same pop-up, but step one picks a Christmas Eve service instead of a Sunday.
+  var XMAS = /^\/christmas(\.html)?\/?$/.test(location.pathname);
+  var XT = { '15:00': '3:00 PM', '16:30': '4:30 PM' };
   var track = function (name, p) { try { window.gtag && gtag('event', name, p || {}); } catch (e) {} };
 
   // Next four Sundays in Leander time. This Sunday counts until 10am.
@@ -66,7 +69,11 @@
   var STEPS = 4;
   function screen() {
     var s = '';
-    if (step === 0) {
+    if (step === 0 && XMAS) {
+      s = '<h2>Which service?</h2><p class="sub">Thursday, December 24 at Camacho Elementary in Leander.</p><div class="axv-days">' +
+        Object.keys(XT).map(function (k) { return '<button type="button" class="axv-day' + (data.xmas === k ? ' sel' : '') + '" data-xmas="' + k + '"><span>Christmas Eve</span><b>' + XT[k] + '</b></button>'; }).join('') +
+        '</div>';
+    } else if (step === 0) {
       s = '<h2>Which Sunday?</h2><p class="sub">10:00 AM at Camacho Elementary in Leander.</p><div class="axv-days">' +
         sundays().map(function (d) { return '<button type="button" class="axv-day' + (data.sunday === d.ymd ? ' sel' : '') + '" data-day="' + d.ymd + '"><span>' + d.tag + '</span><b>' + d.label + '</b></button>'; }).join('') +
         '<button type="button" class="axv-day axv-unsure" data-day="">Not sure yet</button></div>';
@@ -76,7 +83,7 @@
         '<div><label for="axv-last">Last name</label><input id="axv-last" autocomplete="family-name" value="' + esc(data.last) + '"></div></div>' +
         '<div class="axv-err" role="alert"></div><button type="button" class="axv-go" data-next>Next</button>';
     } else if (step === 2) {
-      s = '<h2>Where should we<br>send a reminder?</h2><p class="sub">' + (data.sunday ? 'One email the day before. That&rsquo;s it.' : 'Just so we can say hi. No spam.') + '</p>' +
+      s = '<h2>Where should we<br>send a reminder?</h2><p class="sub">' + (data.xmas ? 'One email the day before Christmas Eve. That&rsquo;s it.' : data.sunday ? 'One email the day before. That&rsquo;s it.' : 'Just so we can say hi. No spam.') + '</p>' +
         '<label for="axv-email">Email</label><input id="axv-email" type="email" inputmode="email" autocomplete="email" value="' + esc(data.email) + '">' +
         '<label for="axv-phone">Phone <small>(optional)</small></label><input id="axv-phone" type="tel" inputmode="tel" autocomplete="tel" value="' + esc(data.phone) + '">' +
         '<input class="axv-hp" id="axv-hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
@@ -90,8 +97,8 @@
     } else if (step === 4) {
       s = '<div class="axv-done"><div class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>' +
         '<h2>You&rsquo;re all set, ' + esc(data.first) + '.</h2>' +
-        '<p class="sub">' + (data.sunday ? 'See you ' + nice(data.sunday) + ' at 10:00 AM.' + (data.reminder ? ' We&rsquo;ll email you a reminder the day before.' : '') : 'We can&rsquo;t wait to meet you. Sundays at 10:00 AM.') + '</p>' +
-        (data.sunday ? '<div class="axv-two"><a class="axv-go ghost" href="/api/visit?ics=' + data.sunday + '">Add to calendar</a><a class="axv-go" href="https://www.google.com/maps/dir/?api=1&amp;destination=501+Municipal+Dr%2C+Leander%2C+TX+78641" target="_blank" rel="noopener">Directions</a></div>'
+        '<p class="sub">' + (data.xmas ? 'See you Christmas Eve at ' + XT[data.xmas] + '.' + (data.reminder ? ' We&rsquo;ll email you a reminder the day before.' : '') : data.sunday ? 'See you ' + nice(data.sunday) + ' at 10:00 AM.' + (data.reminder ? ' We&rsquo;ll email you a reminder the day before.' : '') : 'We can&rsquo;t wait to meet you. Sundays at 10:00 AM.') + '</p>' +
+        (data.sunday ? '<div class="axv-two"><a class="axv-go ghost" href="/api/visit?ics=' + (data.xmas ? 'xmas-' + data.xmas.replace(':', '') : data.sunday) + '">Add to calendar</a><a class="axv-go" href="https://www.google.com/maps/dir/?api=1&amp;destination=501+Municipal+Dr%2C+Leander%2C+TX+78641" target="_blank" rel="noopener">Directions</a></div>'
           : '<a class="axv-go" href="/visit.html">What to expect</a>') + '</div>';
     }
     var dots = '';
@@ -108,6 +115,9 @@
   function val(id) { var x = el.querySelector('#' + id); return x ? x.value.trim() : ''; }
 
   function wire() {
+    el.querySelectorAll('[data-xmas]').forEach(function (b) {
+      b.addEventListener('click', function () { data.xmas = b.getAttribute('data-xmas'); data.sunday = '2026-12-24'; track('visit_step_sunday', { sunday: 'xmas_' + data.xmas }); step = 1; screen(); });
+    });
     el.querySelectorAll('[data-day]').forEach(function (b) {
       b.addEventListener('click', function () { data.sunday = b.getAttribute('data-day'); track('visit_step_sunday', { sunday: data.sunday || 'not_sure' }); step = 1; screen(); });
     });
@@ -149,11 +159,11 @@
     var box = el.querySelector('#axv-kidbox:not([hidden]) .axv-err') || el.querySelector('#axv-err2');
     fetch('/api/visit', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sunday: data.sunday, first: data.first, last: data.last, email: data.email, phone: data.phone, kids: data.kids, hp: data.hp || '', ms: Date.now() - opened }),
+      body: JSON.stringify({ xmas: data.xmas, sunday: data.sunday, first: data.first, last: data.last, email: data.email, phone: data.phone, kids: data.kids, hp: data.hp || '', ms: Date.now() - opened }),
     }).then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || 'error'); return j; }); })
       .then(function (j) {
         data.reminder = !!j.reminder;
-        track('generate_lead', { form_name: 'plan_a_visit', method: 'popup' });
+        track('generate_lead', { form_name: XMAS ? 'christmas_eve' : 'plan_a_visit', method: 'popup' });
         try { localStorage.setItem('axVisitDone', '1'); } catch (e) {}
         step = 4; screen();
       })
@@ -179,7 +189,7 @@
     if (!document.getElementById('axv-css')) { var c = document.createElement('style'); c.id = 'axv-css'; c.textContent = CSS; document.head.appendChild(c); }
     el = document.createElement('div');
     el.className = 'axv-bg';
-    el.innerHTML = '<div class="axv" role="dialog" aria-modal="true" aria-label="Plan a visit"><div class="axv-top">' +
+    el.innerHTML = '<div class="axv" role="dialog" aria-modal="true" aria-label="' + (XMAS ? 'Christmas Eve' : 'Plan a visit') + '"><div class="axv-top">' +
       '<button type="button" class="axv-ic" data-back aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>' +
       '<div class="axv-dots"></div>' +
       '<button type="button" class="axv-ic" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="axv-body"></div></div>';
@@ -199,7 +209,7 @@
     el.remove(); el = null;
     document.documentElement.style.overflow = '';
     document.removeEventListener('keydown', onKey);
-    if (step === 4) { step = 0; data = { sunday: '', first: '', last: '', email: '', phone: '', kids: '' }; }
+    if (step === 4) { step = 0; data = { sunday: '', first: '', last: '', email: '', phone: '', kids: '', xmas: '' }; }
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
